@@ -1,1 +1,46 @@
-//
+.input-base {
+  border-radius: 8px;
+  border: 1px solid $gray-300;
+  background: $white;
+  width: 32rem;
+  font-family: $font-main;
+  color: $gray-500;
+  font-size: $font-size-16;
+  font-weight: 400;
+  line-height: 2.6rem;
+  letter-spacing: -0.016rem;
+
+  &:focus {
+    color: $gray-900;
+  }
+  &:active {
+    color: $gray-900;
+    border: 0.2rem solid $gray-700;
+  }
+  &:hover {
+    border: 0.1rem solid $gray-500;
+  }
+  &:disabled {
+    border: 0.1rem solid $gray-300;
+    background: $gray-100;
+    color: $gray-400;
+  }
+}
+
+.input-status {
+  &-error {
+    color: $system-error;
+  }
+}
+.message {
+  margin-top: 0.4rem;
+  color: $system-error;
+  font-size: $font-size-12;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.8rem;
+  letter-spacing: -0.006px;
+}
+.message-hidden {
+  display: none;
+}
