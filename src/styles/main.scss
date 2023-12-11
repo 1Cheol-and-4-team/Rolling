@@ -1,13 +1,13 @@
-@import './base/globals';
-@import './base/icon-fonts';
-@import './base/normalize';
-@import './base/reset';
-
 @import './constants/color';
 @import './constants/box-shadow';
 @import './constants/breakpoint';
 @import './constants/typography';
 @import './constants/z-index';
+
+@import './base/globals';
+@import './base/icon-fonts';
+@import './base/normalize';
+@import './base/reset';
 
 @import './layouts/grid';
 
