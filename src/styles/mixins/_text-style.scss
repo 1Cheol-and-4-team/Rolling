@@ -1,0 +1,81 @@
+@mixin text-style-12() {
+  font-size: $font-size-12;
+  font-weight: 400;
+  line-height: 1.8rem;
+  letter-spacing: -0.006rem;
+}
+
+@mixin text-style-14() {
+  font-size: $font-size-14;
+  font-weight: 400;
+  line-height: 2rem;
+  letter-spacing: -0.007rem;
+}
+
+@mixin text-style-15() {
+  font-size: $font-size-15;
+  font-weight: 400;
+  line-height: 2.2rem;
+  letter-spacing: -0.015rem;
+}
+
+@mixin text-style-16() {
+  font-size: $font-size-16;
+  font-weight: 400;
+  line-height: 2.6rem;
+  letter-spacing: -0.016rem;
+}
+
+@mixin text-style-18() {
+  font-size: $font-size-18;
+  font-weight: 400;
+  line-height: 2.8rem;
+  letter-spacing: -0.018rem;
+}
+
+@mixin text-style-20() {
+  font-size: $font-size-20;
+  font-weight: 400;
+  line-height: 3rem;
+  letter-spacing: -0.02rem;
+}
+
+@mixin text-style-24() {
+  font-size: $font-size-24;
+  font-weight: 400;
+  line-height: 3.6rem;
+  letter-spacing: -0.024rem;
+}
+
+// 🚧 폰트별 굵기 이슈 $weight 추가
+@mixin text-style($size, $weight, $color: false) {
+  if($size == 12) {
+    @include text-style-12;
+  }
+  if($size == 14) {
+    @include text-style-14;
+  }
+  if($size == 15) {
+    @include text-style-15;
+  }
+  if($size == 16) {
+    @include text-style-16;
+  }
+  if($size == 18) {
+    @include text-style-18;
+  }
+  if($size == 20) {
+    @include text-style-20;
+  }
+  if($size == 24) {
+    @include text-style-24;
+  }
+
+  if($weight == 'bold') {
+    font-weight: 700;
+  }
+
+  if(type-of($color) == color) {
+    color: $color;
+  }
+}

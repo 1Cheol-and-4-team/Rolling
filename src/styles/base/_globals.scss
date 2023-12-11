@@ -1,0 +1,39 @@
+.visually-hidden {
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+
+  &:not(caption) {
+    position: absolute !important;
+  }
+}
+
+#skip_nav {
+  position: relative;
+  z-index: $skip-menu-level;
+
+  a {
+    position: absolute;
+    top: -30px;
+    left: 0;
+    background: $black;
+    height: 30px;
+    line-height: 30px;
+    color: $white;
+    font-size: 12px;
+    padding: 0 6px;
+    opacity: 0;
+
+    &:focus,
+    &:active {
+      top: 0;
+      z-index: $skip-menu-level;
+      opacity: 1;
+    }
+  }
+}
