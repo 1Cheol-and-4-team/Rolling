@@ -1,11 +1,9 @@
-import { useState } from 'react';
+import { Header } from '@/components/common/Header';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <h1 className='title-24'>Rolling</h1>
+      <Header />
     </>
   );
 }
