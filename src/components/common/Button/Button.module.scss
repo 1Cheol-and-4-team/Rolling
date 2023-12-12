@@ -1,9 +1,9 @@
 %btn-base {
   @include inline-flexbox();
 
-  padding: 0 8px;
+  padding: 0 0.8rem;
   font-weight: 700;
-  border-radius: 6px;
+  border-radius: 0.6rem;
 
   &:disabled {
     cursor: not-allowed;
@@ -28,7 +28,7 @@
   @extend %btn-base;
 
   color: $purple-700;
-  border: 1px solid $purple-600;
+  border: 0.1rem solid $purple-600;
   background-color: $white;
   transition: all ease-in-out 0.2s;
 
@@ -41,7 +41,7 @@
   @extend %btn-base;
 
   color: $gray-900;
-  border: 1px solid $gray-300;
+  border: 0.1rem solid $gray-300;
   background-color: $white;
   transition: all ease-in-out 0.2s;
 
@@ -127,6 +127,9 @@
   &-gray900 {
     color: $gray-900;
   }
+  &-black {
+    color: $black;
+  }
 }
 
 /* ------- Icon Button Style ------- */
@@ -134,8 +137,8 @@
 }
 
 .ic-btn-add-card {
-  width: 56px;
-  height: 56px;
+  width: 5.6rem;
+  height: 5.6rem;
   border-radius: 50%;
   background-color: $gray-500;
   transition: all ease-in-out 0.2s;
@@ -146,33 +149,33 @@
 }
 
 .ic-btn-arrow {
-  width: 40px;
-  height: 40px;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
   box-shadow: $arrow-drop-shadow;
   backdrop-filter: blur(2px);
 }
 
 .ic-btn-square {
-  padding: 6px;
-  border-radius: 6px;
+  padding: 0.6rem;
+  border-radius: 0.6rem;
 }
 
 /* ------- Mix Button ------- */
 .mix-btn {
   div {
     @include flexbox();
-    padding: 0 8px;
+    padding: 0 0.8rem;
 
     span {
       width: 100%;
 
       &.mg-left {
-        margin-left: 8px;
+        margin-left: 0.8rem;
       }
 
       &.mg-right {
-        margin-right: 8px;
+        margin-right: 0.8rem;
       }
     }
   }
