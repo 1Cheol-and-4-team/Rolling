@@ -1,0 +1,105 @@
+.overlay {
+  @include flexbox();
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.modal {
+  width: 60rem;
+  height: 47.6rem;
+  padding: 4rem 4rem;
+  border-radius: 1.6rem;
+  background-color: $white;
+}
+
+.modal-header {
+  @include flexbox(between);
+
+  padding-bottom: 2rem;
+
+  &-profile {
+    @include flexbox();
+    gap: 1.6rem;
+
+    &-img {
+      @include flexbox();
+      width: 5.6rem;
+      height: 5.6rem;
+      border-radius: 50%;
+      border: 1px solid $gray-200;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    &-info {
+      @include column-flexbox(center, start);
+      gap: 0.6rem;
+
+      h1 {
+        @include flexbox();
+        gap: 0.6rem;
+        @include text-style(20);
+        line-height: 2.4rem;
+
+        span {
+          @include text-style(20, $black, bold);
+        }
+      }
+    }
+  }
+
+  &-date {
+    @include text-style(14, $gray-400);
+  }
+}
+
+hr {
+  width: 52rem;
+  height: 0.1rem;
+  border: 0;
+  background: $gray-200;
+}
+
+.modal-main {
+  @include flexbox();
+  width: 52rem;
+
+  &-content {
+    @include text-style(18);
+    line-height: 2.8rem;
+    letter-spacing: -0.18px;
+    width: 50rem;
+    height: 24rem;
+    margin: 1.6rem 0 3.1rem;
+    word-break: break-all;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: 2rem;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-image: url('@/assets/images/icons/scroll.svg');
+      max-height: 1rem;
+    }
+
+    &-NotoSans {
+      font-family: $font-NotoSans;
+    }
+    &-Pretendard {
+      font-family: $font-main;
+    }
+    &-NanumMyeongjo {
+      font-family: $font-NanumMyeongjo;
+    }
+    &-NanumPenScript {
+      font-family: $font-NanumPenScript;
+    }
+  }
+}

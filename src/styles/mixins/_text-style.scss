@@ -48,7 +48,7 @@
 }
 
 // 🚧 폰트별 굵기 이슈 $weight 추가
-@mixin text-style($size, $weight: false, $color: false) {
+@mixin text-style($size, $color: false, $weight: '') {
   @if ($size == 12) {
     @include text-style-12;
   }
