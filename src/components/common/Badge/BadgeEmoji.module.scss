@@ -1,0 +1,8 @@
+.badge-emoji {
+  @include inline-flexbox();
+  gap: 0.2rem;
+  @include text-style(16, 400, $white);
+  padding: 0.8rem 1.2rem;
+  border-radius: 3.2rem;
+  background: rgba(0, 0, 0, 0.54);
+}
