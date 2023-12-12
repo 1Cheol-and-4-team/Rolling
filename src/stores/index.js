@@ -1,2 +1,2 @@
 export * from './mock';
-export * from './colorChips';
+export * from './constants';

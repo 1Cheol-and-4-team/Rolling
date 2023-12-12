@@ -1,0 +1,23 @@
+.badge {
+  @include inline-flexbox();
+  @include text-style(14);
+  padding: 0px 8px;
+  border-radius: 4px;
+
+  &-acquaintance {
+    color: $orange-500;
+    background-color: $orange-100;
+  }
+  &-colleague {
+    color: $purple-600;
+    background-color: $purple-100;
+  }
+  &-family {
+    color: $green-500;
+    background-color: $green-100;
+  }
+  &-friend {
+    color: $blue-500;
+    background-color: $blue-100;
+  }
+}
