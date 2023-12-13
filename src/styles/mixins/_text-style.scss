@@ -48,34 +48,34 @@
 }
 
 // 🚧 폰트별 굵기 이슈 $weight 추가
-@mixin text-style($size, $weight, $color: false) {
-  if($size == 12) {
+@mixin text-style($size, $weight: 'normal', $color: false) {
+  @if ($size == 12) {
     @include text-style-12;
   }
-  if($size == 14) {
+  @if ($size == 14) {
     @include text-style-14;
   }
-  if($size == 15) {
+  @if ($size == 15) {
     @include text-style-15;
   }
-  if($size == 16) {
+  @if ($size == 16) {
     @include text-style-16;
   }
-  if($size == 18) {
+  @if ($size == 18) {
     @include text-style-18;
   }
-  if($size == 20) {
+  @if ($size == 20) {
     @include text-style-20;
   }
-  if($size == 24) {
+  @if ($size == 24) {
     @include text-style-24;
   }
 
-  if($weight == 'bold') {
+  @if ($weight == 'bold') {
     font-weight: 700;
   }
 
-  if(type-of($color) == color) {
+  @if (type-of($color) == color) {
     color: $color;
   }
 }
