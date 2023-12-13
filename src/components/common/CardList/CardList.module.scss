@@ -1,0 +1,45 @@
+.card-list {
+  @include column-flexbox(between, start);
+  position: relative;
+
+  width: 27.5rem;
+  height: 26rem;
+  padding: 3rem 2.4rem 2rem;
+  border: 0.1rem solid rgba(0, 0, 0, 0.1);
+  border-radius: 1.6rem;
+  box-shadow: $drop-shadow;
+
+  &-title {
+    @include text-style(24, bold, $gray-900);
+  }
+
+  &-count {
+    @include text-style(16, 'nomarl', $gray-700);
+    span {
+      @include text-style(16, bold);
+    }
+  }
+  &-reaction {
+    @include flexbox(start, center);
+    padding-top: 1.6rem;
+    width: 100%;
+    border-top: 0.1rem solid rgba(0, 0, 0, 0.12);
+    gap: 0.8rem;
+  }
+
+  // background-color
+  background-repeat: no-repeat;
+  background-size: cover;
+  &-purple {
+    background-image: url('@/assets/images/background-purple.svg');
+  }
+  &-green {
+    background-image: url('@/assets/images/background-green.svg');
+  }
+  &-orange {
+    background-image: url('@/assets/images/background-orange.svg');
+  }
+  &-blue {
+    background-image: url('@/assets/images/background-blue.svg');
+  }
+}
