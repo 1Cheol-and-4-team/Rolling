@@ -14,16 +14,9 @@ import { Card } from '@/components/common/Card';
 
 import logo from '@/assets/images/icons/logo-light.svg';
 
-import { useStoredData } from '@/hooks/useStoredData';
-import { RecipientContext } from '@/contexts/RecipientProvider';
-
 const cx = classNames.bind(styles);
 
 export const StyleGuide = () => {
-  const { storedData } = useStoredData(RecipientContext);
-
-  console.log(storedData);
-
   return (
     <div className={cx('style-guide')}>
       <div className={cx('style-guide-container')}>
