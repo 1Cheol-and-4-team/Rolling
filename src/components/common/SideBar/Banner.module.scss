@@ -1,0 +1,43 @@
+.sidebar-banner {
+  @include flexbox(start, start);
+  position: relative;
+
+  width: 100%; //25.6rem;
+  height: 8.5rem;
+  padding: 1.4rem 2.4rem;
+  border-radius: 1.6rem;
+  background-color: #191a1e;
+  background-image: url(../../../assets/images/banner-gardient.svg);
+  background-position: bottom;
+  background-repeat: no-repeat;
+
+  &-text {
+    @include pos-center-y();
+
+    p {
+      @include flexbox(start, center);
+      gap: 0.4rem;
+
+      img {
+        width: 1.4rem;
+        height: 1.4rem;
+      }
+
+      span {
+        @include text-style(14, nomarl, #a64eff);
+      }
+    }
+
+    h1 {
+      @include text-style(18, bold, #e0e0e0);
+    }
+  }
+
+  .handImg {
+    position: absolute;
+    width: 7.7rem;
+    height: 8.5rem;
+    bottom: 2.4rem;
+    right: 2.6rem;
+  }
+}

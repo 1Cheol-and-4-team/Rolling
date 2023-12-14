@@ -1,22 +1,18 @@
-@import './base/globals';
-@import './base/icon-fonts';
-@import './base/normalize';
-@import './base/reset';
+@import '@/styles/constants/color';
+@import '@/styles/constants/box-shadow';
+@import '@/styles/constants/breakpoint';
+@import '@/styles/constants/typography';
+@import '@/styles/constants/z-index';
 
-@import './constants/color';
-@import './constants/box-shadow';
-@import './constants/breakpoint';
-@import './constants/typography';
-@import './constants/z-index';
+@import '@/styles/base/globals';
+@import '@/styles/base/icon-fonts';
+@import '@/styles/base/normalize';
+@import '@/styles/base/reset';
 
-@import './layouts/grid';
+@import '@/styles/mixins/flexbox';
+@import '@/styles/mixins/position';
+@import '@/styles/mixins/responsive';
+@import '@/styles/mixins/scrollbar';
+@import '@/styles/mixins/text-style';
 
-@import './mixins/flexbox';
-@import './mixins/position';
-@import './mixins/responsive';
-@import './mixins/scrollbar';
-@import './mixins/text-style';
-
-@import './modules/badge';
-@import './modules/button';
-@import './modules/forms';
+@import '@/styles/layouts/grid';

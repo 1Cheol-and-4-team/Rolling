@@ -1,0 +1,7 @@
+.tab-list {
+  @include flexbox();
+  width: 100%;
+  height: 40px;
+  border-radius: 6px;
+  background-color: $gray-100;
+}

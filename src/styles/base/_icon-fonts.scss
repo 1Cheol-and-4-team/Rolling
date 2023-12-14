@@ -1,1 +1,68 @@
-// 🚧 버튼용 icon은 svg로 추출하여 <i></i>로 만들어 사용합니다.
+/* stylelint-disable */
+@font-face {
+  font-family: 'rolling';
+  src: url('@/assets/icon-fonts/rolling.eot');
+  src: url('@/assets/icon-fonts/rolling.eot#iefix') format('embedded-opentype'),
+    url('@/assets/icon-fonts/rolling.ttf') format('truetype'),
+    url('@/assets/icon-fonts/rolling.woff') format('woff'),
+    url('@/assets/icon-fonts/rolling.svg#rolling') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+i {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'rolling' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ic-add-emoji:before {
+  content: '\e900';
+}
+.ic-arrow-down:before {
+  content: '\e901';
+}
+.ic-arrow-left:before {
+  content: '\e902';
+}
+.ic-arrow-right:before {
+  content: '\e903';
+}
+.ic-arrow-up:before {
+  content: '\e904';
+}
+.ic-check:before {
+  content: '\e905';
+}
+.ic-close:before {
+  content: '\e906';
+}
+.ic-complete:before {
+  content: '\e907';
+  color: #2ba600;
+}
+.ic-delete:before {
+  content: '\e908';
+}
+.ic-edit:before {
+  content: '\e909';
+}
+.ic-profile:before {
+  content: '\e90a';
+}
+.ic-plus:before {
+  content: '\e90b';
+}
+.ic-share:before {
+  content: '\e90c';
+}

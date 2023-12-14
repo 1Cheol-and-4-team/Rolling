@@ -1,0 +1,24 @@
+.member {
+  @include flexbox(between);
+
+  &-profile {
+    @include flexbox();
+    gap: 1.2rem;
+
+    &-img {
+      @include flexbox();
+      width: 3.2rem;
+      height: 3.2rem;
+      border-radius: 50%;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    &-name {
+      @include text-style(14, 'normal', #e0e0e0);
+    }
+  }
+}

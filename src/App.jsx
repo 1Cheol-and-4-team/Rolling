@@ -1,11 +1,9 @@
-import { useState } from 'react';
+import { StyleGuide } from '@/pages/StyleGuide';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <h1>Rolling</h1>
+      <StyleGuide />
     </>
   );
 }

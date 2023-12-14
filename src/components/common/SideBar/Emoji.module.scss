@@ -1,0 +1,35 @@
+.emoji {
+  @include column-flexbox(center, stretch);
+  gap: 1.6rem;
+  width: 100%;
+  padding: 0 3.2rem;
+}
+
+.emoji-header {
+  @include flexbox(between);
+
+  &-title {
+    @include text-style(16, #e0e0e0);
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: -0.16px;
+  }
+  &-icon {
+    @include flexbox();
+    padding: 0.8rem;
+    border-radius: 0.6rem;
+    border: 1px solid #24262b;
+
+    i {
+      // @include text-style(24, #e0e0e0);
+      font-size: 2.4rem;
+    }
+  }
+}
+
+.emoji-content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0.6rem;
+}

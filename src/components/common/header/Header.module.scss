@@ -1,1 +1,10 @@
-//
+.main-header {
+  .header-container {
+    @include flexbox(between);
+    height: 6.4rem;
+    width: 100%;
+  }
+  width: 100%;
+  padding: 0 3.2rem;
+  background-color: #131418;
+}

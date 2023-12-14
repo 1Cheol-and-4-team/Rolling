@@ -1,0 +1,88 @@
+.card {
+  width: 38.4rem;
+  height: 28rem;
+  padding: 2.8rem 2.4rem 2.4rem;
+  border-radius: 1.6rem;
+  background-color: $white;
+  box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+  @include flexbox(between);
+  padding-bottom: 1.5rem;
+
+  &-profile {
+    @include flexbox();
+    gap: 1.4rem;
+
+    &-img {
+      @include flexbox();
+      width: 5.6rem;
+      height: 5.6rem;
+      border-radius: 50%;
+      border: 1px solid $gray-200;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    &-info {
+      @include column-flexbox(center, start);
+      gap: 0.6rem;
+
+      h1 {
+        @include flexbox();
+        gap: 0.6rem;
+        @include text-style(20);
+        line-height: 2.4rem;
+
+        span {
+          @include text-style(20, bold);
+        }
+      }
+    }
+  }
+}
+
+hr {
+  width: 33.6rem;
+  height: 0.1rem;
+  border: 0;
+  background: $gray-200;
+}
+
+.card-main {
+  min-height: 10.6rem;
+  margin: 1.6rem 0;
+
+  &-content {
+    @include text-style(18, 'normal', $gray-600);
+    line-height: 2.8rem;
+    letter-spacing: -0.18px;
+    width: 33.6rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+
+    &-NotoSans {
+      font-family: $font-NotoSans;
+    }
+    &-Pretendard {
+      font-family: $font-main;
+    }
+    &-NanumMyeongjo {
+      font-family: $font-NanumMyeongjo;
+    }
+    &-NanumPenScript {
+      font-family: $font-NanumPenScript;
+    }
+  }
+}
+
+.card-date {
+  @include text-style(12, 'normal', $gray-400);
+}

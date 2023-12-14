@@ -1,1 +1,218 @@
-//
+%btn-base {
+  @include inline-flexbox();
+
+  padding: 0 0.8rem;
+  // font-weight: 700;
+  border-radius: 0.6rem;
+
+  &:disabled {
+    cursor: not-allowed;
+    color: $white;
+    background-color: $gray-300;
+    border: none;
+
+    i {
+      color: $white;
+    }
+  }
+}
+
+/* ------- Button: fill(primary/secondary), outlined ------- */
+.btn-primary {
+  @extend %btn-base;
+
+  color: $white;
+  background-color: $purple-600;
+  transition: all ease-in-out 0.2s;
+
+  &:not(:disabled):hover {
+    background-color: $purple-700;
+  }
+}
+
+.btn-secondary {
+  @extend %btn-base;
+
+  color: $purple-700;
+  border: 0.1rem solid $purple-600;
+  background-color: $white;
+  transition: all ease-in-out 0.2s;
+
+  &:not(:disabled):hover {
+    background-color: $purple-100;
+  }
+}
+
+.btn-outlined {
+  @extend %btn-base;
+
+  color: $gray-900;
+  border: 0.1rem solid $gray-300;
+  background-color: $white;
+  transition: all ease-in-out 0.2s;
+
+  &:not(:disabled):hover {
+    background-color: $gray-100;
+  }
+}
+
+// tab(off)
+.btn-tab-off {
+  @extend %btn-base;
+  @include text-style(16, normal, $gray-900);
+
+  border: 1px solid $gray-100;
+  background-color: $gray-100;
+}
+
+/* ------- Button Size ------- */
+.btn--size {
+  &-56 {
+    height: 5.6rem;
+
+    span {
+      @include text-style(18, bold);
+      width: 16rem;
+    }
+  }
+
+  &-42 {
+    height: 4.2rem;
+
+    span {
+      @include text-style(16, bold);
+    }
+  }
+
+  &-40 {
+    height: 4rem;
+
+    span {
+      @include text-style(16, bold);
+      width: 9rem;
+    }
+  }
+
+  &-36 {
+    height: 3.6rem;
+
+    span {
+      @include text-style(16, bold);
+      width: 9rem;
+    }
+  }
+
+  &-28 {
+    height: 2.8rem;
+
+    span {
+      @include text-style(14, bold);
+      width: 9rem;
+    }
+  }
+}
+
+/* ------- Icon------- */
+.ic--size {
+  &-16 {
+    @include icon-style(16);
+  }
+
+  &-20 {
+    @include icon-style(20);
+  }
+
+  &-24 {
+    @include icon-style(24);
+  }
+
+  &-32 {
+    @include icon-style(32);
+  }
+}
+
+.ic--color {
+  &-white {
+    color: $white;
+  }
+  &-gray300 {
+    color: $gray-300;
+  }
+  &-gray400 {
+    color: $gray-400;
+  }
+  &-gray500 {
+    color: $gray-500;
+  }
+  &-gray900 {
+    color: $gray-900;
+  }
+  &-black {
+    color: $black;
+  }
+}
+
+/* ------- Icon Button Style ------- */
+%icon-btn-base {
+  &:disabled {
+    cursor: not-allowed;
+    color: $white;
+    background-color: $gray-300;
+    border: none;
+
+    i {
+      color: $white;
+    }
+  }
+}
+
+.ic-btn-normal {
+}
+
+.ic-btn-add-card {
+  @extend %icon-btn-base;
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 50%;
+  background-color: $gray-500;
+  transition: all ease-in-out 0.2s;
+
+  &:not(:disabled):hover {
+    background-color: $gray-600;
+  }
+}
+
+.ic-btn-arrow {
+  @extend %icon-btn-base;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  box-shadow: $arrow-drop-shadow;
+  backdrop-filter: blur(2px);
+}
+
+.ic-btn-square {
+  @extend %icon-btn-base;
+  padding: 0.6rem;
+  border-radius: 0.6rem;
+}
+
+/* ------- Mix Button ------- */
+.mix-btn {
+  div {
+    @include flexbox();
+    padding: 0 0.8rem;
+
+    span {
+      width: 100%;
+
+      &.mg-left {
+        margin-left: 0.8rem;
+      }
+
+      &.mg-right {
+        margin-right: 0.8rem;
+      }
+    }
+  }
+}
