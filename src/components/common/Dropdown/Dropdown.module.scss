@@ -1,0 +1,82 @@
+.dropdown-layout {
+  button {
+    @include text-style(16, 'normal', $gray-500);
+    @include flexbox(between);
+
+    width: 32rem;
+    padding: 1.2rem 1.6rem;
+    border-radius: 0.8rem;
+    border: 0.1rem solid $gray-300;
+    background-color: $white;
+    box-sizing: border-box;
+
+    &:focus:not(:focus-visible) {
+      outline: none;
+    }
+
+    &:focus,
+    &:focus-visible {
+      color: $gray-900;
+      border: 0.2rem solid $gray-500;
+    }
+
+    &:not(:disabled):active {
+      color: $gray-900;
+      border: 0.2rem solid $gray-500;
+    }
+
+    &:not(:disabled):hover {
+      border: 0.1rem solid $gray-500;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      color: $gray-400;
+      background: $gray-100;
+    }
+
+    i {
+      @include icon-style(16, $gray-900);
+    }
+
+    &.error {
+      border: 0.1rem solid $system-error;
+    }
+  }
+  .message {
+    @include text-style(12, 'normal', $system-error);
+    width: 32rem;
+    height: 1.8rem;
+    margin-top: 0.4rem;
+  }
+  .message-hidden {
+    display: none;
+  }
+}
+.dropdown-menu {
+  @include column-flexbox(center, start);
+
+  width: 32rem;
+  border-radius: 0.8rem;
+  border: 1px solid $gray-300;
+  background: $white;
+  box-shadow: $drop-shadow;
+  padding: 0.8rem;
+  margin-top: 0.8rem;
+
+  li {
+    width: 100%;
+
+    a {
+      @include text-style(16, 'normal', $gray-900);
+
+      display: block;
+      width: 100%;
+      padding: 1.2rem 1.6rem;
+
+      &:hover {
+        background: $gray-100;
+      }
+    }
+  }
+}

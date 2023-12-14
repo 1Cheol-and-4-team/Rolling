@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 
 export const Header = ({ isLanding }) => {
   return (
-    <header>
+    <header className={cx('main-header')}>
       <div className={cx('header-container')}>
         <h1 className={cx('logo')}>
           <a href='#none'>
@@ -16,7 +16,7 @@ export const Header = ({ isLanding }) => {
         </h1>
         {isLanding && (
           <Button variant='primary' size={42}>
-            롤링 페이퍼 만들기
+            Create paper
           </Button>
         )}
       </div>

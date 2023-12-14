@@ -1,0 +1,23 @@
+.count {
+  @include flexbox();
+  gap: 4.4rem;
+  width: 100%;
+  padding: 0 3.2rem;
+
+  &-element {
+    @include column-flexbox();
+
+    h1 {
+      // 40px이 적용되지 않음
+      @include text-style(40, #e0e0e0, bold);
+      line-height: 150%;
+      letter-spacing: -0.4px;
+    }
+
+    span {
+      @include text-style(14, #707070);
+      line-height: 150%;
+      letter-spacing: -0.14px;
+    }
+  }
+}

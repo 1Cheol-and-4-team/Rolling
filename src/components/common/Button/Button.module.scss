@@ -2,12 +2,18 @@
   @include inline-flexbox();
 
   padding: 0 0.8rem;
-  font-weight: 700;
+  // font-weight: 700;
   border-radius: 0.6rem;
 
   &:disabled {
     cursor: not-allowed;
-    opacity: 0.4;
+    color: $white;
+    background-color: $gray-300;
+    border: none;
+
+    i {
+      color: $white;
+    }
   }
 }
 
@@ -50,6 +56,15 @@
   }
 }
 
+// tab(off)
+.btn-tab-off {
+  @extend %btn-base;
+  @include text-style(16, normal, $gray-900);
+
+  border: 1px solid $gray-100;
+  background-color: $gray-100;
+}
+
 /* ------- Button Size ------- */
 .btn--size {
   &-56 {
@@ -60,20 +75,21 @@
       width: 16rem;
     }
   }
-  &-40 {
-    height: 4rem;
-
-    span {
-      @include text-style(16, bold);
-      width: 9rem;
-    }
-  }
 
   &-42 {
     height: 4.2rem;
 
     span {
       @include text-style(16, bold);
+    }
+  }
+
+  &-40 {
+    height: 4rem;
+
+    span {
+      @include text-style(16, bold);
+      width: 9rem;
     }
   }
 
@@ -100,6 +116,10 @@
 .ic--size {
   &-16 {
     @include icon-style(16);
+  }
+
+  &-20 {
+    @include icon-style(20);
   }
 
   &-24 {
@@ -133,22 +153,37 @@
 }
 
 /* ------- Icon Button Style ------- */
+%icon-btn-base {
+  &:disabled {
+    cursor: not-allowed;
+    color: $white;
+    background-color: $gray-300;
+    border: none;
+
+    i {
+      color: $white;
+    }
+  }
+}
+
 .ic-btn-normal {
 }
 
 .ic-btn-add-card {
+  @extend %icon-btn-base;
   width: 5.6rem;
   height: 5.6rem;
   border-radius: 50%;
   background-color: $gray-500;
   transition: all ease-in-out 0.2s;
 
-  &:hover {
+  &:not(:disabled):hover {
     background-color: $gray-600;
   }
 }
 
 .ic-btn-arrow {
+  @extend %icon-btn-base;
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
@@ -157,6 +192,7 @@
 }
 
 .ic-btn-square {
+  @extend %icon-btn-base;
   padding: 0.6rem;
   border-radius: 0.6rem;
 }

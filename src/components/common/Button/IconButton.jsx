@@ -9,16 +9,22 @@ export const IconButton = ({
   icon,
   iconSize,
   iconColor,
+  type = 'button',
+  disabled = false,
   ...props
 }) => {
+  const buttonProps = { type, disabled, ...props };
   const className = cx(
     `${icon}`,
     `ic--size-${iconSize}`,
     `ic--color-${iconColor}`
   );
   return (
-    <button className={cx(variant && `btn-${variant}`, `ic-btn-${style}`)}>
-      <i className={className} {...props}></i>
+    <button
+      className={cx(variant && `btn-${variant}`, `ic-btn-${style}`)}
+      {...buttonProps}
+    >
+      <i className={className}></i>
     </button>
   );
 };

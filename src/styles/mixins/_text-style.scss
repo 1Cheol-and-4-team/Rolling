@@ -47,6 +47,20 @@
   letter-spacing: -0.024rem;
 }
 
+@mixin text-style-28() {
+  font-size: $font-size-28;
+  font-weight: 400;
+  line-height: 4.8rem;
+  letter-spacing: -0.032rem;
+}
+
+@mixin text-style-32() {
+  font-size: $font-size-32;
+  font-weight: 400;
+  line-height: 4.2rem;
+  letter-spacing: -0.028rem;
+}
+
 @mixin text-style($size, $weight: 'normal', $color: false) {
   @if ($size == 12) {
     @include text-style-12;
@@ -69,22 +83,53 @@
   @if ($size == 24) {
     @include text-style-24;
   }
+  @if ($size == 28) {
+    @include text-style-28;
+  }
+  @if ($size == 32) {
+    @include text-style-32;
+  }
 
-  @if (type-of($color) == color) {
-    color: $color;
+  @if ($weight == 'normal') {
+    font-weight: 400;
   }
 
   @if ($weight == 'bold') {
     font-weight: 700;
   }
+
+  @if (type-of($color) == color) {
+    color: $color;
+  }
 }
 
 @mixin icon-style($size, $color: false) {
+  @if ($size == 12) {
+    font-size: $font-size-12;
+  }
+  @if ($size == 14) {
+    font-size: $font-size-14;
+  }
+  @if ($size == 15) {
+    font-size: $font-size-15;
+  }
   @if ($size == 16) {
     font-size: $font-size-16;
   }
+  @if ($size == 18) {
+    font-size: $font-size-18;
+  }
+  @if ($size == 20) {
+    font-size: $font-size-20;
+  }
   @if ($size == 24) {
     font-size: $font-size-24;
+  }
+  @if ($size == 28) {
+    font-size: $font-size-28;
+  }
+  @if ($size == 32) {
+    font-size: $font-size-32;
   }
   @if ($size == 36) {
     font-size: $font-size-36;

@@ -1,1 +1,53 @@
-//
+.input-base {
+  @include text-style(16, normal, $gray-500);
+
+  width: 32rem;
+  padding: 1.2rem 1.6rem;
+  color: $gray-900;
+  border: 0.1rem solid $gray-300;
+  border-radius: 0.8rem;
+  background: $white;
+
+  &::placeholder {
+    color: $gray-500;
+  }
+
+  &:focus {
+    color: $gray-900;
+    border: 0.1rem solid $gray-500;
+  }
+
+  &:active {
+    color: $gray-900;
+    border: 0.1rem solid $gray-700;
+  }
+
+  &:not(:disabled):hover {
+    border: 0.1rem solid $gray-500;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    border: 0.1rem solid $gray-300;
+    background: $gray-100;
+
+    &::placeholder {
+      color: $gray-400;
+    }
+  }
+}
+
+.input-state {
+  &-error {
+    border: 1px solid $system-error;
+  }
+}
+
+.error-message {
+  @include text-style(12, normal, $system-error);
+  margin-top: 0.4rem;
+}
+
+.error-message-hidden {
+  display: none;
+}
