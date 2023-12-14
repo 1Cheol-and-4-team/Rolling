@@ -1,5 +1,4 @@
 import propTypes from 'prop-types';
-import { response } from '@/stores';
 import { BadgeEmoji } from '@/components/common/Badge';
 import styles from './CardList.module.scss';
 import classNames from 'classnames/bind';
@@ -11,12 +10,13 @@ CardList.propTypes = {
   response: propTypes.object,
 };
 
-export function CardList() {
+export function CardList(data) {
   // response 데이터는 prop으로 받아와야 함
-  const { results } = response;
+  // const { results } = response;
+  console.log(data.data);
   const { name, backgroundColor, messageCount, recentMessages, topReactions } =
-    results[1];
-
+    data.data;
+  console.log(backgroundColor);
   return (
     <div className={cx('card-list', `card-list-${backgroundColor}`)}>
       <article>
@@ -31,11 +31,12 @@ export function CardList() {
         </div>
       </article>
       <div className={cx('card-list-reaction')}>
-        {topReactions.slice(0, 3).map((reaction) => (
-          <BadgeEmoji key={reaction.id} num={reaction.count}>
-            {reaction.emoji}
-          </BadgeEmoji>
-        ))}
+        {topReactions &&
+          topReactions.slice(0, 3).map((reaction) => (
+            <BadgeEmoji key={reaction.id} num={reaction.count}>
+              {reaction.emoji}
+            </BadgeEmoji>
+          ))}
       </div>
     </div>
   );

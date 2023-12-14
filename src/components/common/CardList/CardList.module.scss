@@ -28,18 +28,25 @@
   }
 
   // background-color
-  background-repeat: no-repeat;
-  background-size: cover;
+
   &-purple {
     background-image: url('@/assets/images/background-purple.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   &-green {
     background-image: url('@/assets/images/background-green.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
   }
-  &-orange {
+  &-beige {
     background-image: url('@/assets/images/background-orange.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   &-blue {
     background-image: url('@/assets/images/background-blue.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 }
