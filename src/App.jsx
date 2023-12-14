@@ -1,9 +1,9 @@
-import { StyleGuide } from '@/pages/StyleGuide';
+import { MyRouter } from '@/MyRouter';
 
 function App() {
   return (
     <>
-      <StyleGuide />
+      <MyRouter />
     </>
   );
 }
