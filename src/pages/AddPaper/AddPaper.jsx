@@ -25,7 +25,7 @@ export function AddPaper() {
   const inputRef = useRef(null);
   const navigate = useNavigate();
   const postApi = () =>
-    api.post(`${ENDPOINT.RECIPIENTS}${values.recipientId}/messages/`, values);
+    api.post(`${ENDPOINT.RECIPIENTS}${id}/messages/`, values);
   const { isLoading, isError, execute } = useAsync(
     postApi,
     INITIAL_POST_MESSAGE_TYPE

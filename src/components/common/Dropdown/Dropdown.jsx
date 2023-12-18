@@ -32,7 +32,7 @@ export const Dropdown = ({ sortList, size, state, setSortOption, onClick }) => {
   const handleOptionClick = (e, selectedOption) => {
     setCurrentValue(selectedOption);
     handleClose();
-    setSortOption(selectedOption);
+    // setSortOption(selectedOption);
     onClick(e);
   };
 

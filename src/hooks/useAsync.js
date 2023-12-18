@@ -26,5 +26,5 @@ export const useAsync = (asyncFunction, initialData) => {
     execute();
   }, []);
 
-  return { isLoading, isError, data, error };
+  return { isLoading, isError, data, error, execute };
 };
