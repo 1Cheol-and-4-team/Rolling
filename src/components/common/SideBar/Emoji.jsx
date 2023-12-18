@@ -1,30 +1,113 @@
-import { response } from '@/stores';
-import { BadgeEmoji } from '@/components/common/Badge';
-import styles from './Emoji.module.scss';
+import { useState, useRef, useEffect } from 'react';
+import { api, ENDPOINT } from '@/api';
+import { useAsync } from '@/hooks/useAsync';
+import { INITIAL_EMOJI_TYPE } from '@/stores';
+
 import classNames from 'classnames/bind';
+import styles from '@/components/common/SideBar/Emoji.module.scss';
+
+import { Empty } from '@/components/common/Empty';
+import { BadgeEmoji } from '@/components/common/Badge';
+import { IconButton } from '@/components/common/Button';
+import { onClickOutside } from '@/utils';
+import { IMPORT_IMAGES } from '@/stores';
+
+import EmojiPicker from 'emoji-picker-react';
 
 const cx = classNames.bind(styles);
+const { EMPTY } = IMPORT_IMAGES;
 
-// 현재는 mock 데이터를 이용함
-// 추후에 아래 데이터들은 prop으로 받아와야 함
-const mockEmoji = response.results[1].topReactions.slice(0, 8);
+export function Emoji({ id }) {
+  const emojiRef = useRef();
+  const [isOpen, setOpen] = useState(false);
 
-export function Emoji() {
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      onClickOutside(e, emojiRef, handleClose);
+    };
+    window.addEventListener('mousedown', handleOutsideClick);
+    return () => window.removeEventListener('mousedown', handleOutsideClick);
+  }, []);
+
+  const {
+    data: { results },
+  } = useAsync(
+    () => api.get(`${ENDPOINT.RECIPIENTS}${id}/reactions/`),
+    INITIAL_EMOJI_TYPE
+  );
+
+  const isReactionsEmpty = results.every((item) => item.emoji === '');
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleToggleEmoji = () => {
+    setOpen((prev) => !prev);
+  };
+
+  const onEmojiClick = async (e) => {
+    try {
+      const res = await api.post(`${ENDPOINT.RECIPIENTS}${id}/reactions/`, {
+        emoji: e.emoji,
+        type: 'increase',
+      });
+
+      if (!res.status) return console.error('[SERVER ERROR]', res);
+    } catch (e) {
+      console.error('[API ERROR]', e);
+    }
+
+    setOpen(false);
+  };
+
   return (
     <div className={cx('emoji')}>
       <div className={cx('emoji-header')}>
-        <h1 className={cx('emoji-header-title')}>Emotions</h1>
-        <button className={cx('emoji-header-icon')}>
-          <i className={cx('ic-add-emoji')}></i>
-        </button>
+        <h1 className={cx('emoji-header-title')}>Reactions</h1>
+        <IconButton
+          variant='outlined'
+          style='square'
+          icon='ic-add-emoji'
+          iconSize='24'
+          iconColor='white'
+          active={isOpen}
+          onClick={handleToggleEmoji}
+        />
+        <div
+          className={cx('emoji-picker', {
+            'emoji-picker-block': isOpen,
+          })}
+          ref={emojiRef}
+        >
+          <EmojiPicker
+            width={280}
+            height={360}
+            searchPlaceHolder='Search...'
+            emojiStyle='apple'
+            searchDisabled={false}
+            lazyLoadEmojis={false}
+            theme='dark'
+            onEmojiClick={onEmojiClick}
+            previewConfig={{
+              showPreview: true,
+              defaultCaption: '[Rolling]Add your reaction!',
+            }}
+          />
+        </div>
       </div>
-      <ul className={cx('emoji-content')}>
-        {mockEmoji.map((item) => (
-          <li key={item.id}>
-            <BadgeEmoji emoji={item.emoji} count={item.count} />
-          </li>
-        ))}
-      </ul>
+
+      {isReactionsEmpty ? (
+        <Empty importImg={EMPTY} message={'No Reactions'} />
+      ) : (
+        <ul className={cx('emoji-content')}>
+          {results.map((item) => (
+            <li key={item.id}>
+              <BadgeEmoji emoji={item.emoji} count={item.count} />
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

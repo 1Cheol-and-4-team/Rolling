@@ -1,18 +1,17 @@
 %btn-base {
   @include inline-flexbox();
 
-  padding: 0 0.8rem;
-  // font-weight: 700;
+  padding: 0 1.6rem;
   border-radius: 0.6rem;
 
   &:disabled {
     cursor: not-allowed;
-    color: $white;
+    color: $text-gray;
     background-color: $gray-300;
-    border: none;
+    opacity: 0.4;
 
     i {
-      color: $white;
+      color: $gray-300;
     }
   }
 }
@@ -21,48 +20,72 @@
 .btn-primary {
   @extend %btn-base;
 
-  color: $white;
-  background-color: $purple-600;
+  color: $text-white;
+  background-color: $purple;
   transition: all ease-in-out 0.2s;
 
   &:not(:disabled):hover {
-    background-color: $purple-700;
+    background-color: $purple-600;
   }
 }
 
 .btn-secondary {
   @extend %btn-base;
 
-  color: $purple-700;
-  border: 0.1rem solid $purple-600;
-  background-color: $white;
+  color: $text-white;
+  background-color: $gray-300;
   transition: all ease-in-out 0.2s;
 
   &:not(:disabled):hover {
-    background-color: $purple-100;
+    background-color: $gray-200;
   }
 }
 
 .btn-outlined {
   @extend %btn-base;
 
-  color: $gray-900;
-  border: 0.1rem solid $gray-300;
-  background-color: $white;
+  color: $text-white;
+  border: 0.1rem solid $border;
+  background-color: transparent;
   transition: all ease-in-out 0.2s;
 
   &:not(:disabled):hover {
-    background-color: $gray-100;
+    border-color: $purple;
   }
+}
+
+.btn-transparent {
+  @include text-style(14, 500, $text-gray);
+  background-color: transparent;
+  transition: all ease-in-out 0.2s;
+
+  i {
+    @include icon-style(12, $text-gray);
+  }
+
+  &:hover {
+    color: $purple;
+
+    i {
+      color: $purple;
+    }
+  }
+}
+
+.btn-delete {
+  @include text-style(14, 500, $text-gray);
+  background-color: #ff233c;
 }
 
 // tab(off)
 .btn-tab-off {
   @extend %btn-base;
-  @include text-style(16, normal, $gray-900);
+  @include text-style(16, 400, $text-gray);
+  background-color: $card;
+}
 
-  border: 1px solid $gray-100;
-  background-color: $gray-100;
+.btn-active {
+  border: 0.1rem solid $purple;
 }
 
 /* ------- Button Size ------- */
@@ -71,7 +94,7 @@
     height: 5.6rem;
 
     span {
-      @include text-style(18, bold);
+      @include text-style(18, 500);
       width: 16rem;
     }
   }
@@ -80,7 +103,7 @@
     height: 4.2rem;
 
     span {
-      @include text-style(16, bold);
+      @include text-style(16, 500);
     }
   }
 
@@ -88,7 +111,7 @@
     height: 4rem;
 
     span {
-      @include text-style(16, bold);
+      @include text-style(16, 500);
       width: 9rem;
     }
   }
@@ -97,7 +120,7 @@
     height: 3.6rem;
 
     span {
-      @include text-style(16, bold);
+      @include text-style(16, 500);
       width: 9rem;
     }
   }
@@ -106,7 +129,7 @@
     height: 2.8rem;
 
     span {
-      @include text-style(14, bold);
+      @include text-style(14, 500);
       width: 9rem;
     }
   }
@@ -114,18 +137,24 @@
 
 /* ------- Icon------- */
 .ic--size {
+  &-12 {
+    @include icon-style(12);
+  }
+  &-14 {
+    @include icon-style(14);
+  }
   &-16 {
     @include icon-style(16);
   }
-
-  &-20 {
-    @include icon-style(20);
+  &-18 {
+    @include icon-style(18);
   }
-
   &-24 {
     @include icon-style(24);
   }
-
+  &-30 {
+    @include icon-style(30);
+  }
   &-32 {
     @include icon-style(32);
   }
@@ -133,7 +162,10 @@
 
 .ic--color {
   &-white {
-    color: $white;
+    color: $text-white;
+  }
+  &-gray200 {
+    color: $gray-200;
   }
   &-gray300 {
     color: $gray-300;
@@ -144,11 +176,14 @@
   &-gray500 {
     color: $gray-500;
   }
+  &-gray700 {
+    color: $gray-700;
+  }
   &-gray900 {
     color: $gray-900;
   }
-  &-black {
-    color: $black;
+  &-pruple {
+    color: $purple;
   }
 }
 
@@ -156,12 +191,13 @@
 %icon-btn-base {
   &:disabled {
     cursor: not-allowed;
-    color: $white;
+    color: $text-gray;
     background-color: $gray-300;
     border: none;
+    opacity: 0.4;
 
     i {
-      color: $white;
+      color: $gray-300;
     }
   }
 }
@@ -174,11 +210,11 @@
   width: 5.6rem;
   height: 5.6rem;
   border-radius: 50%;
-  background-color: $gray-500;
+  background-color: $gray-300;
   transition: all ease-in-out 0.2s;
 
   &:not(:disabled):hover {
-    background-color: $gray-600;
+    background-color: $gray-200;
   }
 }
 
@@ -187,7 +223,7 @@
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
-  box-shadow: $arrow-drop-shadow;
+  box-shadow: $arrow-button-shadow;
   backdrop-filter: blur(2px);
 }
 
@@ -207,11 +243,11 @@
       width: 100%;
 
       &.mg-left {
-        margin-left: 0.8rem;
+        margin-left: 0.4rem;
       }
 
       &.mg-right {
-        margin-right: 0.8rem;
+        margin-right: 0.4rem;
       }
     }
   }

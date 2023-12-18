@@ -1,23 +1,29 @@
 .badge {
   @include inline-flexbox();
-  @include text-style(14);
-  padding: 0 0.8rem;
-  border-radius: 0.4rem;
 
-  &-acquaintance {
-    color: $orange-500;
-    background-color: $orange-100;
+  padding: 0 1.2rem;
+  height: 2.4rem;
+  border-radius: 0.4rem;
+  background-color: $gray-200;
+
+  &-Neighbor {
+    color: $yellow;
   }
-  &-colleague {
-    color: $purple-600;
-    background-color: $purple-100;
+  &-Colleague {
+    color: $neon-blue;
   }
-  &-family {
-    color: $green-500;
-    background-color: $green-100;
+  &-Family {
+    color: $orange;
   }
-  &-friend {
-    color: $blue-500;
-    background-color: $blue-100;
+  &-Friend {
+    color: $green;
+  }
+
+  &-type-sidebar {
+    width: 6.4rem;
+  }
+
+  span {
+    @include text-style(12, 400);
   }
 }

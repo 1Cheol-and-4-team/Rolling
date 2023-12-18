@@ -4,13 +4,6 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
-// 현재는 mock 데이터를 이용함
-// 추후에 아래 데이터들은 prop으로 받아와야 함
-// const mockProfilImageURL =
-//   response.results[1].recentMessages[0].profileImageURL;
-// const mockSender = response.results[1].recentMessages[0].sender;
-// const mockRelationship = response.results[1].recentMessages[0].relationship;
-
 export function Member({ image, member, relationship }) {
   return (
     <div className={cx('member')}>
@@ -22,7 +15,7 @@ export function Member({ image, member, relationship }) {
           <span>{member}</span>
         </h1>
       </div>
-      <Badge relationship={relationship} />
+      <Badge relationship={relationship} type='sidebar' />
     </div>
   );
 }

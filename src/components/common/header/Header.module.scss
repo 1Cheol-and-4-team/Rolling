@@ -1,4 +1,9 @@
 .main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $header-level;
+
   .header-container {
     @include flexbox(between);
     height: 6.4rem;
@@ -7,4 +12,5 @@
   width: 100%;
   padding: 0 3.2rem;
   background-color: #131418;
+  border-bottom: 0.1rem solid $border;
 }

@@ -1,41 +1,24 @@
 .member-list {
-  @include column-flexbox(center, stretch);
-  gap: 1.6rem;
+  @include column-flexbox(start, between);
   width: 100%;
+  gap: 1.6rem;
 }
 
 .member-list-header {
   @include flexbox(between);
-  padding: 0 3.2rem;
 
   &-title {
-    @include text-style(16, 'normal', #e0e0e0);
-    font-weight: 500;
-    line-height: 150%;
-    letter-spacing: -0.16px;
-  }
-  &-icon {
-    @include flexbox();
-    @include text-style(12, 'normal', #666);
-
-    i {
-      font-size: 1.2rem;
-    }
+    @include text-style(16, 500, $text-white);
   }
 }
 
 .member-list-content {
-  @include column-flexbox(center, stretch);
+  @include column-flexbox(start, between);
   gap: 0.6rem;
 
   li {
-    @include text-style(14, 'normal', #e0e0e0);
-    padding: 0.8rem 3.2rem;
+    @include text-style(14, 600, $text-white);
     position: relative;
-    transition: all 0.2s ease-in-out;
-
-    &:hover {
-      background-color: #191a1e;
-    }
+    padding: 0.8rem 0;
   }
 }

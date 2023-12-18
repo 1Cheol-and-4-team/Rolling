@@ -1,48 +1,60 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames/bind';
 import styles from '@/components/common/Dropdown/Dropdown.module.scss';
+import { onClickOutside } from '@/utils';
 
 const cx = classNames.bind(styles);
 
-export const Dropdown = () => {
-  const [isOpen, setIsOpen] = useState(false);
+export const Dropdown = ({ sortList, setSortOption, size }) => {
+  const dropdownRef = useRef();
+  const [isOpen, setOpen] = useState(false);
+  const [currentValue, setCurrentValue] = useState('Latest');
   const [iconContent, setIconContent] = useState('ic-arrow-down');
-  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    const handleClick = (e) => {
+      onClickOutside(e, dropdownRef, handleClose);
+    };
+    window.addEventListener('mousedown', handleClick);
+    return () => window.removeEventListener('mousedown', handleClick);
+  }, []);
+
+  const handleClose = () => {
+    setOpen(false);
+    setIconContent('ic-arrow-down');
+  };
 
   const handleToggleDropdown = () => {
-    setIsOpen(!isOpen);
+    setOpen((prev) => !prev);
     setIconContent(isOpen ? 'ic-arrow-down' : 'ic-arrow-up');
-    setIsError(false);
+  };
+
+  const handleOptionClick = (selectedOption) => {
+    setCurrentValue(selectedOption);
+    handleClose();
+    setSortOption(selectedOption);
   };
 
   return (
-    <div className={cx('dropdown', { error: isError })}>
-      <div className={cx('dropdown-layout')}>
-        <button
-          className={cx('dropdown-toggle', { error: isError })}
-          onClick={handleToggleDropdown}
-        >
-          Dropdown
-          <i className={cx(iconContent)}></i>
+    <div className={cx('dropdown', `dropdown-size-${size}`)} ref={dropdownRef}>
+      <div className={cx(`dropdown-inner`)} onClick={handleToggleDropdown}>
+        <button className={cx('dropdown-inner-label', `label-${size}`)}>
+          {currentValue}
         </button>
-        <p className={cx('message', { 'message-hidden': !isError })}>
-          Error message
-        </p>
+        <i className={cx(iconContent)} aria-hidden></i>
       </div>
+
       {isOpen && (
-        <ul className={cx('dropdown-menu')}>
-          <li>
-            <a>Item 1</a>
-          </li>
-          <li>
-            <a>Item 2</a>
-          </li>
-          <li>
-            <a>Item 3</a>
-          </li>
-          <li>
-            <a>Item 4</a>
-          </li>
+        <ul className={cx('dropdown-option-list', `option-${size}`)}>
+          {sortList.map((item) => (
+            <li
+              key={item.id}
+              className={cx('dropdown-option-item')}
+              onClick={() => handleOptionClick(item.option)}
+            >
+              {item.option}
+            </li>
+          ))}
         </ul>
       )}
     </div>
