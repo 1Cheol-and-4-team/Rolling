@@ -1,0 +1,120 @@
+.detail {
+  width: 100%;
+
+  .content-wrapper {
+    min-height: calc(100vh - $header-height);
+
+    .sidebar {
+      @include no-scrollbar();
+      @include column-flexbox(between);
+      position: fixed;
+      top: $header-height;
+      overflow-y: auto;
+
+      width: 32rem;
+      height: calc(100vh - $header-height);
+      padding: 6.4rem 3.2rem 3.2rem 3.2rem;
+      border-right: 1px solid $border;
+      background-color: $background;
+
+      &-title {
+        @include text-style(32, 500, $text-white);
+        margin-bottom: 2.4rem;
+        padding-left: 3.6rem;
+        position: relative;
+
+        &::before {
+          @include pos-center-y();
+          left: 0;
+
+          content: '';
+          display: block;
+          width: 3.2rem;
+          height: 3.2rem;
+          background: url('@/assets/images/icons/ic-note.svg');
+        }
+      }
+
+      &-content {
+        @include column-flexbox(start, start);
+        width: 100%;
+        gap: 4rem;
+      }
+
+      &-header {
+        @include column-flexbox(start, between);
+        width: 100%;
+      }
+    }
+
+    .content {
+      height: 100%;
+      padding: 177px 0 112px;
+      margin-left: 320px;
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      &-header {
+        margin-bottom: 24px;
+
+        &-title {
+          @include inline-flexbox();
+          h3 {
+            @include text-style(24, 500, $text-white);
+            margin-right: 2.4rem;
+          }
+        }
+
+        &-filter {
+          @include flexbox(between);
+          width: 100%;
+          padding-top: 2.4rem;
+
+          .tab-list {
+            @include flexbox();
+            gap: 1.2rem;
+
+            &-item {
+              button {
+                @include text-style(16, 500, $text-gray);
+                min-width: 6.4rem;
+                padding: 0.8rem 1.6rem;
+                border: 0.1rem solid $border;
+                border-radius: 3rem;
+                transition: all ease-in-out 0.2s;
+              }
+
+              &:hover {
+                button {
+                  color: $text-white;
+                  border: 0.1rem solid $purple;
+                }
+              }
+            }
+            .tab-active {
+              button {
+                color: $text-white;
+                border-color: $purple;
+                background-color: $purple;
+              }
+            }
+          }
+        }
+
+        &-options {
+          @include inline-flexbox();
+          gap: 8px;
+        }
+      }
+
+      .grid-layout {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+    }
+  }
+}

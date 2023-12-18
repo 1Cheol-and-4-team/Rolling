@@ -9,6 +9,7 @@ export const IconButton = ({
   icon,
   iconSize,
   iconColor,
+  active,
   type = 'button',
   disabled = false,
   ...props
@@ -21,7 +22,9 @@ export const IconButton = ({
   );
   return (
     <button
-      className={cx(variant && `btn-${variant}`, `ic-btn-${style}`)}
+      className={cx({ [`btn-${variant}`]: variant }, `ic-btn-${style}`, {
+        'btn-active': active,
+      })}
       {...buttonProps}
     >
       <i className={className}></i>

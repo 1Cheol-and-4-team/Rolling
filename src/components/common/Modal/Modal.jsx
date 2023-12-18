@@ -1,52 +1,70 @@
-import { response } from '@/stores';
-import { formatDate, fontToEnglish } from '@/utils';
-import { Badge } from '@/components/common/Badge';
+import { useEffect, useRef } from 'react';
+
 import styles from './Modal.module.scss';
 import classNames from 'classnames/bind';
 
+import { Button } from '@/components/common/Button';
+import { fontToEnglish, onClickOutside } from '@/utils';
+
+import banner from '@/assets/images/modal-back.png';
+import profile from '@/assets/images/modal-profile.png';
+
 const cx = classNames.bind(styles);
 
-// 현재는 mock 데이터를 이용함
-// 추후에 relationship은 prop으로 받아와야 함
-const mockProfilImageURL =
-  response.results[1].recentMessages[0].profileImageURL;
-const mockSender = response.results[1].recentMessages[0].sender;
-const mockDate = response.results[1].recentMessages[0].createdAt;
-const mockContent = response.results[1].recentMessages[0].content;
-const mockFont = response.results[1].recentMessages[0].font;
-const mockRelationship = response.results[1].recentMessages[0].relationship;
-// 날짜와 폰트는 함수를 통해 형식을 변환한 후 사용해야함
-const formatedDate = formatDate(mockDate);
-const fontClassName = fontToEnglish(mockFont);
+export function Modal({ messageData, handleModalClose }) {
+  const modalRef = useRef();
 
-export function Modal() {
+  useEffect(() => {
+    document.body.style.cssText = `
+      position: fixed; 
+      top: -${window.scrollY}px;
+      overflow-y: scroll;
+      width: 100%;`;
+    return () => {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = '';
+      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleClick = (e) => {
+      onClickOutside(e, modalRef, handleModalClose);
+    };
+    window.addEventListener('mousedown', handleClick);
+    return () => window.removeEventListener('mousedown', handleClick);
+  }, [handleModalClose]);
+
+  function createMarkup(html) {
+    return { __html: html };
+  }
+
+  // const formatedDate = formatDate(messageData.createdAt);
+  const fontClassName = fontToEnglish(messageData.relationship);
+
   return (
-    <div className={cx('modal')}>
-      <header className={cx('modal-header')}>
-        <div className={cx('modal-header-profile')}>
-          <div className={cx('modal-header-profile-img')}>
-            <img src={mockProfilImageURL} alt='글쓴이 프로필 사진' />
-          </div>
-          <div className={cx('modal-header-profile-info')}>
-            <h1>
-              From.<span>{mockSender}</span>
-            </h1>
-            <Badge relationship={mockRelationship} />
-          </div>
+    <div className={cx('modal')} ref={modalRef}>
+      <div className={cx('modal-banner')}>
+        <img src={banner} alt='글쓴이 링크 이미지' />
+      </div>
+      <div className={cx('modal-content')}>
+        <div className={cx('modal-content-profile')}>
+          <img src={profile} alt='글쓴이 프로필 이미지' />
         </div>
-        <span className={cx('modal-header-date')}>{formatedDate}</span>
-      </header>
-      <hr />
-      <main className={cx('modal-main')}>
-        <div
-          className={cx(
-            'modal-main-content',
-            `modal-main-content-${fontClassName}`
-          )}
-        >
-          {mockContent}
+        <div className={cx('modal-content-textbox')}>
+          <strong>{messageData.sender}</strong>
+          <div
+            className={cx(
+              'modal-content-textArea',
+              `modal-content-textArea-${fontClassName}`
+            )}
+            dangerouslySetInnerHTML={createMarkup(messageData.content)}
+          ></div>
         </div>
-      </main>
+        <Button variant='secondary' size={40} onClick={handleModalClose}>
+          닫기
+        </Button>
+      </div>
     </div>
   );
 }

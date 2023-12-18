@@ -1,35 +1,57 @@
-import { response } from '@/stores';
-import { Member } from '@/components/common/SideBar/';
-import styles from './MemberList.module.scss';
+import { api, ENDPOINT } from '@/api';
+import { useAsync } from '@/hooks/useAsync';
+
 import classNames from 'classnames/bind';
+import styles from '@/components/common/SideBar/MemberList.module.scss';
+
+import { Member } from '@/components/common/SideBar/';
+import { Empty } from '@/components/common/Empty';
+import { MixButton } from '@/components/common/Button';
+
+import { INITIAL_MESSAGE_TYPE, IMPORT_IMAGES } from '@/stores';
 
 const cx = classNames.bind(styles);
+const { EMPTY } = IMPORT_IMAGES;
 
-// 현재는 mock 데이터를 이용함
-// 추후에 아래 데이터들은 prop으로 받아와야 함
-const mockMembers = response.results[1].recentMessages.slice(0, 5);
+export function MemberList({ id }) {
+  const {
+    data: { results },
+  } = useAsync(
+    () => api.get(`${ENDPOINT.RECIPIENTS}${id}/messages/`),
+    INITIAL_MESSAGE_TYPE
+  );
 
-export function MemberList() {
+  const latestMembers = results.slice(0, 4);
+  const isMembersEmpty = results.every((item) => item.id === null);
+
   return (
     <div className={cx('member-list')}>
       <div className={cx('member-list-header')}>
         <h1 className={cx('member-list-header-title')}>Members</h1>
-        <button className={cx('member-list-header-icon')}>
-          <span>see all</span>
-          <i className={cx('ic-arrow-right')}></i>
-        </button>
+        <MixButton
+          variant='transparent'
+          size={36}
+          endIcon='ic-arrow-right'
+          iconSize={12}
+          iconColor='white'
+          text='more'
+        />
       </div>
-      <ul className={cx('member-list-content')}>
-        {mockMembers.map((item) => (
-          <li key={item.id}>
-            <Member
-              image={item.profileImageURL}
-              member={item.sender}
-              relationship={item.relationship}
-            />
-          </li>
-        ))}
-      </ul>
+      {isMembersEmpty ? (
+        <Empty importImg={EMPTY} message={'No Members'} />
+      ) : (
+        <ul className={cx('member-list-content')}>
+          {latestMembers.map((item) => (
+            <li key={item.id}>
+              <Member
+                image={item.profileImageURL}
+                member={item.sender}
+                relationship={item.relationship}
+              />
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

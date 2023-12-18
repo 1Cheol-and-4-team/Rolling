@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import { Button } from '@/components/common/Button';
 import { ROLLING_LOGO } from '@/components/common/Header/constant';
@@ -10,9 +11,9 @@ export const Header = ({ isLanding }) => {
     <header className={cx('main-header')}>
       <div className={cx('header-container')}>
         <h1 className={cx('logo')}>
-          <a href='#none'>
+          <Link to={'/'}>
             <img src={ROLLING_LOGO.logo} alt={ROLLING_LOGO.alt} />
-          </a>
+          </Link>
         </h1>
         {isLanding && (
           <Button variant='primary' size={42}>

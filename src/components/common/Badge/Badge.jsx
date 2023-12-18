@@ -1,21 +1,19 @@
-// import { response } from '@/stores';
-import { relationshipToEnglish } from '@/utils';
 import styles from './Badge.module.scss';
 import classNames from 'classnames/bind';
+import { relationshipToEnglish } from '@/utils';
 
 const cx = classNames.bind(styles);
 
-export function Badge({ relationship }) {
-  // 현재는 mock 데이터를 이용함
-  // 추후에 relationship은 prop으로 받아와야 함
-  // const mockRelationship = response.results[1].recentMessages[0].relationship;
-  // const mockRelationship = '가족';
-
+export function Badge({ relationship, type = '' }) {
   return (
-    <span
-      className={cx('badge', `badge-${relationshipToEnglish(relationship)}`)}
+    <div
+      className={cx(
+        'badge',
+        `badge-${relationshipToEnglish(relationship)}`,
+        type && `badge-type-${type}`
+      )}
     >
-      {relationship}
-    </span>
+      <span>{relationshipToEnglish(relationship)}</span>
+    </div>
   );
 }

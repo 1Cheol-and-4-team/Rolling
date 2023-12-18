@@ -1,8 +1,16 @@
-.badge-emoji {
-  @include inline-flexbox();
-  @include text-style(16, 'normal', $white);
-  gap: 0.2rem;
-  padding: 0.6rem 1.2rem;
-  border-radius: 3.2rem;
-  background: rgba(0, 0, 0, 0.54);
+.tag-emoji {
+  @include flexbox();
+  gap: 0.4rem;
+  height: 3.6rem;
+  padding: 0rem 1.2rem;
+  border-radius: 3rem;
+  background-color: $card;
+
+  .emoji {
+    @include icon-style(16);
+
+    &-count {
+      @include text-style(14, 400, $text-white);
+    }
+  }
 }

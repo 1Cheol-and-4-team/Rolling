@@ -1,4 +1,4 @@
-export * from './colorOption';
-export * from './tab';
+export * from './selectOptions';
 export * from './dataType';
-export * from './mock';
+export * from './importImg';
+export * from './path';
