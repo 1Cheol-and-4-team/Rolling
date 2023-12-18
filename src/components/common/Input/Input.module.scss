@@ -1,7 +1,7 @@
 .input-base {
   @include text-style(16, normal, $gray-500);
 
-  width: 32rem;
+  width: 100%;
   padding: 1.2rem 1.6rem;
   color: $gray-900;
   border: 0.1rem solid $gray-300;
@@ -10,20 +10,6 @@
 
   &::placeholder {
     color: $gray-500;
-  }
-
-  &:focus {
-    color: $gray-900;
-    border: 0.1rem solid $gray-500;
-  }
-
-  &:active {
-    color: $gray-900;
-    border: 0.1rem solid $gray-700;
-  }
-
-  &:not(:disabled):hover {
-    border: 0.1rem solid $gray-500;
   }
 
   &:disabled {
@@ -35,11 +21,24 @@
       color: $gray-400;
     }
   }
+  &:not(.input-state-error):focus {
+    color: $gray-900;
+    border: 0.1rem solid $gray-500;
+  }
+
+  &:not(.input-state-error):active {
+    color: $gray-900;
+    border: 0.1rem solid $gray-700;
+  }
+  &:not(.input-state-error):not(:disabled):hover {
+    border: 0.1rem solid $gray-500;
+  }
 }
 
 .input-state {
   &-error {
     border: 1px solid $system-error;
+    outline: none;
   }
 }
 

@@ -5,9 +5,8 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
-export function ColorOption() {
+export function ColorOption({ onClick }) {
   const [selectedColor, setSelectedColor] = useState('orange');
-
   const handleColorClick = (color) => {
     setSelectedColor(color);
   };
@@ -16,7 +15,12 @@ export function ColorOption() {
     <ul className={cx('color-option')}>
       {colorChips.map((item) => {
         return (
-          <li key={item.id}>
+          <li
+            key={item.id}
+            name='backgroundColor'
+            value={item.color}
+            onClick={(e) => onClick(e)}
+          >
             <button
               className={cx(
                 'color-option-chip',

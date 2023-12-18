@@ -1,32 +1,30 @@
 import { useState, useEffect } from 'react';
 
-export const useAsync = (asyncFunction) => {
+export const useAsync = (asyncFunction, initialData) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(null);
-  const [data, setData] = useState({});
+  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState();
+  const [data, setData] = useState(initialData);
 
-  const excute = async () => {
+  const execute = async () => {
     setIsLoading(true);
-    setIsError(null);
-    setData(null);
+    setIsError(false);
 
     try {
       const res = await asyncFunction();
-      if (res) {
-        const initData = res.data.results;
-        setData(initData);
-      }
+      setData(res.data);
     } catch (e) {
       setIsError(true);
-      console.error('[API ERROR]NOT FOUND FETCH DATA', e);
+      setError(e);
+      console.error('[API ERROR] NOT FOUND FETCH DATA', e);
     } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    excute();
+    execute();
   }, []);
 
-  return { isLoading, isError, data };
+  return { isLoading, isError, data, error };
 };

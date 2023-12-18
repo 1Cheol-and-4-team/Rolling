@@ -17,7 +17,7 @@ export function Input({ state, type = 'text', ...props }) {
           state === 'error' || `error-message-hidden`
         )}
       >
-        Error Message
+        값을 입력해 주세요.
       </p>
     </>
   );

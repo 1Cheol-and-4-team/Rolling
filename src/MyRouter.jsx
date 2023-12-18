@@ -1,8 +1,13 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import CreatePage from '@/pages/CreatePage';
+
 const MyRouter = () => {
   return (
-    <div>
-      <h1>Router page</h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path={'/post'} element={<CreatePage />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
