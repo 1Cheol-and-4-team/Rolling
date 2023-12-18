@@ -1,5 +1,5 @@
 export const COLOR_CHIPS = [
-  { id: 1, option: 'orange' },
+  { id: 1, option: 'beige' },
   { id: 2, option: 'purple' },
   { id: 3, option: 'blue' },
   { id: 4, option: 'green' },

@@ -5,15 +5,15 @@ import { ColorOption } from '@/components/common/ColorOption';
 import { Option } from '@/components/common/Option';
 import { Button } from '@/components/common/Button';
 import { useState } from 'react';
-import { ENDPOINT } from '../api/endPoint';
+import { ENDPOINT } from '../../api/endPoint';
 import classNames from 'classnames/bind';
 import styles from './CreatePage.module.scss';
 import { api } from '@/api';
-import { INITIAL_POST_RECIPIENTS_TYPE } from '../stores/dataType';
+import { INITIAL_POST_RECIPIENTS_TYPE } from '../../stores/dataType';
 
 const cx = classNames.bind(styles);
 
-function CreatePage() {
+export function CreatePage() {
   const [values, setValues] = useState(INITIAL_POST_RECIPIENTS_TYPE);
   const [valid, setValid] = useState('');
   const [error, setError] = useState('');
@@ -102,4 +102,3 @@ function CreatePage() {
     </>
   );
 }
-export default CreatePage;

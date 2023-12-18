@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Landing from '@/pages/Landing';
 import { Detail } from '@/pages/Detail';
 import { Edit } from '@/pages/Edit';
-import CreatePage from '@/pages/CreatePage';
+import { CreatePage } from '@/pages/CreatePage';
 import { AddPaper } from '@/pages/AddPaper';
 import { NotFound } from '@/pages/NotFound';
 import { ROUTER_PATH } from '@/stores';
