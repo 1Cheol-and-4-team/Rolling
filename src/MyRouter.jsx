@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Landing from '@/pages/Landing';
+import HomePage from './pages/home/HomePage';
+import { PaperList } from '@/pages/PaperList';
 import { Detail } from '@/pages/Detail';
 import { Edit } from '@/pages/Edit';
 import { CreatePage } from '@/pages/CreatePage';
@@ -13,7 +14,8 @@ const MyRouter = () => {
   return (
     <Router>
       <Routes>
-        <Route path={LANDING_PATH} element={<Landing />} />
+        <Route path={LANDING_PATH} element={<HomePage />} />
+        <Route path='/list' element={<PaperList />} />
         <Route path={DETAIL_PATH} element={<Detail />} />
         <Route path={EDIT_PATH} element={<Edit />} />
         <Route path={'/post'} element={<CreatePage />} />

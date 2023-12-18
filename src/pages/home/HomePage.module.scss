@@ -1,0 +1,4 @@
+.home {
+  @include column-flexbox(between, center);
+  margin-top: 6rem;
+}

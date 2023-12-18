@@ -1,0 +1,21 @@
+.list-wrap {
+  @include column-flexbox(between, center);
+  width: 116rem;
+  margin: auto;
+
+  margin-top: 0;
+  margin-bottom: 13.7rem;
+
+  &-title {
+    @include text-style(24, bold, $gray-900);
+    width: 100%;
+    margin: 5rem 0 1.6rem 0rem;
+  }
+  &-btn {
+    width: 28rem;
+    position: fixed;
+    bottom: 4rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
