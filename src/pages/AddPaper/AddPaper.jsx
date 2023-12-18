@@ -79,7 +79,7 @@ export function AddPaper() {
     <>
       <Header />
       <div className={cx('add-paper')}>
-        <div className={cx('add-paper-sender')}>
+        <fieldset className={cx('add-paper-sender')}>
           <h1>From.</h1>
           <Input
             ref={inputRef}
@@ -88,7 +88,7 @@ export function AddPaper() {
             state={error.sender}
             onChange={handleValueChange}
           />
-        </div>
+        </fieldset>
         <div className={cx('add-paper-profile')}>
           <h1>프로필 이미지</h1>
           <div className={cx('add-paper-profile-img')}>

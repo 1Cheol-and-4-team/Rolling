@@ -1,3 +1,4 @@
+// import { useNavigate, useParams } from 'react-router-dom';
 import { Input } from '@/components/common/Input';
 import { Header } from '@/Components/common/Header';
 import { Tab } from '@/components/common/Tab';
@@ -45,7 +46,6 @@ export function CreatePage() {
     e.preventDefault();
     handleValueChange();
     console.log(values);
-    console.log('llllll');
 
     try {
       const response = await api.post(ENDPOINT.RECIPIENTS, values);
