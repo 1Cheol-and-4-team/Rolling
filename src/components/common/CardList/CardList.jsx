@@ -11,14 +11,10 @@ CardList.propTypes = {
 };
 
 export function CardList(data) {
-  // response 데이터는 prop으로 받아와야 함
-  // const { results } = response;
-  console.log(data.data);
   const { name, backgroundColor, messageCount, recentMessages, topReactions } =
     data.data;
-  console.log(backgroundColor);
   return (
-    <div className={cx('card-list', `card-list-${backgroundColor}`)}>
+    <li className={cx('card-list', `card-list-${backgroundColor}`)}>
       <article>
         <div className={cx('card-list-title')}>To. {name}</div>
         <ProfileImg
@@ -38,8 +34,6 @@ export function CardList(data) {
             </BadgeEmoji>
           ))}
       </div>
-    </div>
+    </li>
   );
 }
-
-export default CardList;

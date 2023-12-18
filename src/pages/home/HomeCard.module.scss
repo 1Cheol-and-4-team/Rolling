@@ -1,0 +1,39 @@
+:root {
+  --reverse: flex-start;
+}
+
+.home-card {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  flex-direction: var(--reverse);
+  width: 116rem;
+  padding: 6rem 0px;
+  margin-bottom: 3rem;
+  gap: 8.8rem;
+
+  border-radius: 1.6rem;
+  background: $surface;
+  &-point {
+    padding: 0.6rem 1.2rem;
+    display: inline-block;
+    border-radius: 5rem;
+    background: $purple-600;
+  }
+  &-text {
+    @include text-style(14, 'normal', $white);
+  }
+  &-title {
+    @include text-style(24, bold);
+    margin-top: 1.6rem;
+  }
+
+  &-des {
+    @include text-style(18, 'normal');
+    margin-top: 0.8rem;
+  }
+  img {
+    width: 72rem;
+    height: 20.4rem;
+  }
+}

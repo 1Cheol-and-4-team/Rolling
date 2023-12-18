@@ -67,6 +67,15 @@
 
 /* ------- Button Size ------- */
 .btn--size {
+  //추가
+  &-100 {
+    height: 5.6rem;
+    span {
+      @include text-style(18, bold);
+      width: 26.4rem;
+    }
+  }
+
   &-56 {
     height: 5.6rem;
 
@@ -189,6 +198,27 @@
   border-radius: 50%;
   box-shadow: $arrow-drop-shadow;
   backdrop-filter: blur(2px);
+  // 추가
+  z-index: 1;
+  position: absolute;
+  bottom: 9rem;
+  transform: translateY(-50%);
+  left: -2rem;
+}
+
+.ic-btn-arrowRight {
+  @extend %icon-btn-base;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  box-shadow: $arrow-drop-shadow;
+  backdrop-filter: blur(2px);
+  // 추가
+  z-index: 1;
+  position: absolute;
+  bottom: 9rem;
+  transform: translateY(-50%);
+  right: -2rem;
 }
 
 .ic-btn-square {

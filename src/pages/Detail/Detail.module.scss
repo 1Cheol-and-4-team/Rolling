@@ -1,0 +1,73 @@
+.detail {
+  width: 100%;
+  // height: 100%;
+  background-color: $background;
+
+  .content-wrapper {
+    @include flexbox(between, start);
+
+    .sidebar {
+      @include column-flexbox(start, start);
+      position: fixed;
+      top: $header-height;
+
+      width: 320px;
+      height: calc(100vh - $header-height);
+      padding: 112px 32px 32px;
+      border-right: 1px solid $border;
+      overflow: hidden;
+
+      &-content {
+        @include column-flexbox(start, between);
+        width: 100%;
+        height: 100%;
+        gap: 5.6rem;
+
+        &-header {
+          @include column-flexbox(start, start);
+        }
+      }
+
+      &-title {
+        @include text-style(32, 600, $text-white);
+        margin-bottom: 24px;
+      }
+    }
+
+    .content {
+      flex-grow: 1;
+      padding: 177px 0 112px;
+      margin-left: 320px;
+      height: 100%;
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      &-header {
+        @include flexbox(between);
+        margin-bottom: 24px;
+
+        &-title {
+          @include inline-flexbox();
+          h3 {
+            @include text-style(24, 500, $text-white);
+            margin-right: 24px;
+          }
+        }
+
+        &-options {
+          @include inline-flexbox();
+          gap: 8px;
+        }
+      }
+
+      .grid-layout {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+    }
+  }
+}
