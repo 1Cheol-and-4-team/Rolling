@@ -1,13 +1,8 @@
-export const INITIAL_RECIPIENTS_TYPE = {
-  id: null,
+export const INITIAL_POST_RECIPIENTS_TYPE = {
+  team: '2-4',
   name: '',
-  backgroundColor: '',
+  backgroundColor: 'orange',
   backgroundImageURL: null,
-  createdAt: '',
-  messageCount: null,
-  recentMessages: [],
-  reactionCount: null,
-  topReactions: [],
 };
 
 export const INITIAL_MESSAGE_TYPE = {

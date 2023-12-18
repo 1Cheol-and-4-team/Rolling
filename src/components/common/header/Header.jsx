@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import { Button } from '@/components/common/Button';
 import { ROLLING_LOGO } from '@/components/common/Header/constant';
 import styles from '@/components/common/Header/Header.module.scss';
-
+import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 export const Header = ({ isLanding }) => {

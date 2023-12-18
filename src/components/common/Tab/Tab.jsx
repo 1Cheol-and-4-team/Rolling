@@ -6,12 +6,12 @@ import { TAB } from '@/stores';
 
 const cx = classNames.bind(styles);
 
-export const Tab = () => {
-  const [isActiveTab, setIsActiveTab] = useState(1);
+export const Tab = ({ isActiveTab, handleActiveTab }) => {
+  // const [isActiveTab, setIsActiveTab] = useState(1);
 
-  const handleActiveTab = (targetId) => {
-    setIsActiveTab(targetId);
-  };
+  // const handleActiveTab = (targetId) => {
+  //   setIsActiveTab(targetId);
+  // };
 
   return (
     <ul className={cx('tab-list')}>
