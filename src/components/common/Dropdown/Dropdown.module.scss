@@ -15,7 +15,7 @@
       border-radius: 0.6rem;
       transition: all ease-in-out 0.2s;
 
-      &:focus:not(:focus-visible) {
+      &:focus:not(:focus-visible):not(:error) {
         outline: none;
       }
 
@@ -25,12 +25,12 @@
         border: 0.1rem solid $purple;
       }
 
-      &:not(:disabled):active {
+      &:not(:disabled):not(:error):active {
         color: $text-white;
         border: 0.1rem solid $purple;
       }
 
-      &:not(:disabled):hover {
+      &:not(:disabled):not(:error):hover {
         border: 0.1rem solid $purple;
       }
 
@@ -46,6 +46,10 @@
 
     .label-lg {
       height: 5rem;
+    }
+
+    .label-error {
+      border: 0.1rem solid $system-error;
     }
 
     i {

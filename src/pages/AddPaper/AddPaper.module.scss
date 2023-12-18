@@ -1,0 +1,60 @@
+.add-paper {
+  @include column-flexbox(center, start);
+  width: 72rem;
+  margin: 4.8rem auto 6rem;
+  gap: 5rem;
+
+  h1 {
+    @include text-style(24, bold, $gray-900);
+    margin-bottom: 1.2rem;
+  }
+
+  &-sender {
+    width: 100%;
+  }
+
+  &-profile {
+    img {
+      width: 8rem;
+      border-radius: 50%;
+    }
+
+    &-img {
+      @include flexbox();
+      gap: 3.2rem;
+
+      &-select {
+        @include column-flexbox(center, start);
+        gap: 1.2rem;
+
+        h2 {
+          @include text-style(16, 'normal', $gray-500);
+        }
+        .error {
+          @include text-style(16, 'normal', $system-error);
+        }
+
+        ul {
+          @include flexbox();
+          gap: 0.4rem;
+        }
+
+        li {
+          @include flexbox();
+          width: 5.6rem;
+          border-radius: 50%;
+          border: 1px solid $gray-200;
+
+          img {
+            @include flexbox();
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  &-button {
+    padding: 2.4rem 0;
+  }
+}

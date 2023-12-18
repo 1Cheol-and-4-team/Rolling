@@ -5,7 +5,7 @@ import { onClickOutside } from '@/utils';
 
 const cx = classNames.bind(styles);
 
-export const Dropdown = ({ sortList, setSortOption, size }) => {
+export const Dropdown = ({ sortList, size, state, setSortOption, onClick }) => {
   const dropdownRef = useRef();
   const [isOpen, setOpen] = useState(false);
   const [currentValue, setCurrentValue] = useState('Latest');
@@ -29,16 +29,23 @@ export const Dropdown = ({ sortList, setSortOption, size }) => {
     setIconContent(isOpen ? 'ic-arrow-down' : 'ic-arrow-up');
   };
 
-  const handleOptionClick = (selectedOption) => {
+  const handleOptionClick = (e, selectedOption) => {
     setCurrentValue(selectedOption);
     handleClose();
     setSortOption(selectedOption);
+    onClick(e);
   };
 
   return (
     <div className={cx('dropdown', `dropdown-size-${size}`)} ref={dropdownRef}>
       <div className={cx(`dropdown-inner`)} onClick={handleToggleDropdown}>
-        <button className={cx('dropdown-inner-label', `label-${size}`)}>
+        <button
+          className={cx(
+            'dropdown-inner-label',
+            `label-${size}`,
+            `label-${state}`
+          )}
+        >
           {currentValue}
         </button>
         <i className={cx(iconContent)} aria-hidden></i>
@@ -50,7 +57,11 @@ export const Dropdown = ({ sortList, setSortOption, size }) => {
             <li
               key={item.id}
               className={cx('dropdown-option-item')}
-              onClick={() => handleOptionClick(item.option)}
+              name='relationship'
+              value={item.option}
+              onClick={(e) => {
+                handleOptionClick(e, item.option);
+              }}
             >
               {item.option}
             </li>
