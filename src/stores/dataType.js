@@ -10,7 +10,7 @@ export const INITIAL_POST_MESSAGE_TYPE = {
   recipientId: 1030,
   sender: '',
   profileImageURL: '',
-  relationship: '',
+  relationship: '동료',
   content: '',
   font: 'Noto Sans',
 };
@@ -18,7 +18,6 @@ export const INITIAL_POST_MESSAGE_TYPE = {
 export const INITIAL_POST_MESSAGE_ERROR = {
   sender: '',
   profileImageURL: '',
-  relationship: '',
   content: '',
 };
 
