@@ -19,7 +19,7 @@
 .information {
   gap: 0.4rem;
   margin-bottom: 2.4rem;
-  margin h1 {
+  h1 {
     @include text-style(24, 'bold', $gray-900);
     font-weight: 700;
     margin-bottom: 0.4rem;
@@ -34,7 +34,11 @@
   display: flex;
   flex-direction: column;
   width: 244px;
-  align-items: flex-start;
+
+  Tab {
+    width: 100%;
+    align-items: flex-start;
+  }
 }
 .button {
   padding: 2.4rem 0;

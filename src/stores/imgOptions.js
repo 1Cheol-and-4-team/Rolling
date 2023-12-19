@@ -1,11 +1,6 @@
-import snowCoupleImg from '../assets/images/snowCouple-background.jpg';
-import sweetHomeImg from '../assets/images/sweetHome-background.jpg';
-import winterImg from '../assets/images/winter-background.jpg';
-import amusementParkImg from '../assets/images/amusementPark-background.jpg';
+// import ponyo from '../assets/images/ponyo.jpg';
+// import quokka from '../assets/images/quokka.jpg';
+// import rabbitAndChick from '../assets/images/rabbit and chick.jpg';
+// import raccon from '../assets/images/racoon.jpg';
 
-export const imgChips = [
-  snowCoupleImg,
-  sweetHomeImg,
-  winterImg,
-  amusementParkImg,
-];
+// export const imgChips = [ponyo, quokka, rabbitAndChick, raccon];
