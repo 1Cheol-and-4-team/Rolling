@@ -5,10 +5,12 @@ import { onClickOutside } from '@/utils';
 
 const cx = classNames.bind(styles);
 
-export const Dropdown = ({ sortList, size, state, setSortOption, onClick }) => {
+export const Dropdown = ({ sortList, size, setSortOption, onClick }) => {
+  const defaultOption = sortList[0].option;
   const dropdownRef = useRef();
+
   const [isOpen, setOpen] = useState(false);
-  const [currentValue, setCurrentValue] = useState('Latest');
+  const [currentValue, setCurrentValue] = useState(defaultOption);
   const [iconContent, setIconContent] = useState('ic-arrow-down');
 
   useEffect(() => {
@@ -24,7 +26,9 @@ export const Dropdown = ({ sortList, size, state, setSortOption, onClick }) => {
     setIconContent('ic-arrow-down');
   };
 
-  const handleToggleDropdown = () => {
+  const handleToggleDropdown = (e) => {
+    e.preventDefault();
+
     setOpen((prev) => !prev);
     setIconContent(isOpen ? 'ic-arrow-down' : 'ic-arrow-up');
   };
@@ -32,20 +36,13 @@ export const Dropdown = ({ sortList, size, state, setSortOption, onClick }) => {
   const handleOptionClick = (e, selectedOption) => {
     setCurrentValue(selectedOption);
     handleClose();
-    // setSortOption(selectedOption);
     onClick(e);
   };
 
   return (
     <div className={cx('dropdown', `dropdown-size-${size}`)} ref={dropdownRef}>
       <div className={cx(`dropdown-inner`)} onClick={handleToggleDropdown}>
-        <button
-          className={cx(
-            'dropdown-inner-label',
-            `label-${size}`,
-            `label-${state}`
-          )}
-        >
+        <button className={cx('dropdown-inner-label', `label-${size}`)}>
           {currentValue}
         </button>
         <i className={cx(iconContent)} aria-hidden></i>
