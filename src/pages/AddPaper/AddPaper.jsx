@@ -1,16 +1,21 @@
-import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-import { api, ENDPOINT } from '@/api';
-import { useAsync } from '@/hooks/useAsync';
-import { Header } from '@/Components/common/Header';
-import { Input } from '@/components/common/Input';
-import { Dropdown } from '@/components/common/Dropdown';
-import { PROFILE_EMOJI, SENDER_LIST } from '@/stores';
-import { Button } from '@/components/common/Button';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import styles from './AddPaper.module.scss';
 import classNames from 'classnames/bind';
 import ReactQuill, { contextType } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+
+import { api, ENDPOINT } from '@/api';
+import { useAsync } from '@/hooks/useAsync';
+
+import { Header } from '@/Components/common/Header';
+import { Input } from '@/components/common/Input';
+import { Dropdown } from '@/components/common/Dropdown';
+import { Button } from '@/components/common/Button';
+import { PROFILE_EMOJI, SENDER_LIST } from '@/stores';
+import { getRandomColor } from '@/utils';
+
 import {
   INITIAL_POST_MESSAGE_TYPE,
   INITIAL_POST_MESSAGE_ERROR,
@@ -20,10 +25,13 @@ const cx = classNames.bind(styles);
 
 export function AddPaper() {
   const { id } = useParams();
-  const [values, setValues] = useState(INITIAL_POST_MESSAGE_TYPE);
-  const [error, setError] = useState(INITIAL_POST_MESSAGE_ERROR);
   const inputRef = useRef(null);
   const navigate = useNavigate();
+
+  const [values, setValues] = useState(INITIAL_POST_MESSAGE_TYPE);
+  const [error, setError] = useState(INITIAL_POST_MESSAGE_ERROR);
+  const [randomColor, setRandomColor] = useState('#000000');
+
   const postApi = () =>
     api.post(`${ENDPOINT.RECIPIENTS}${id}/messages/`, values);
   const { isLoading, isError, execute } = useAsync(
@@ -75,6 +83,10 @@ export function AddPaper() {
     }
   }, [values]);
 
+  const handleRandomColor = () => {
+    setRandomColor(getRandomColor());
+  };
+
   return (
     <>
       <Header />
@@ -93,12 +105,19 @@ export function AddPaper() {
           <h1>프로필 이미지</h1>
           <div className={cx('add-paper-profile-img')}>
             {!values.profileImageURL ? (
-              <img
-                src='https://i.ibb.co/T0R4zhW/default-emoji.png'
-                alt='기본 프로필 이미지'
-              />
+              <div className={cx('add-paper-profile-default')}>
+                <img
+                  src='https://i.ibb.co/T0R4zhW/default-emoji.png'
+                  alt='기본 프로필 이미지'
+                />
+              </div>
             ) : (
-              <img src={values.profileImageURL} alt='선택한 프로필 이미지' />
+              <div
+                className={cx('add-paper-profile-img-wrapper')}
+                style={{ '--color': randomColor }}
+              >
+                <img src={values.profileImageURL} alt='선택한 프로필 이미지' />
+              </div>
             )}
             <div className={cx('add-paper-profile-img-select')}>
               <h2 className={cx(`${error.profileImageURL}`)}>
@@ -106,7 +125,7 @@ export function AddPaper() {
               </h2>
               <ul>
                 {PROFILE_EMOJI.map((item) => (
-                  <li key={item.id}>
+                  <li key={item.id} onClick={handleRandomColor}>
                     <button
                       name='profileImageURL'
                       value={item.imgUrl}

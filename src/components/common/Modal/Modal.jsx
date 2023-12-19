@@ -7,11 +7,11 @@ import { Button } from '@/components/common/Button';
 import { fontToEnglish, onClickOutside } from '@/utils';
 
 import banner from '@/assets/images/modal-back.png';
-import profile from '@/assets/images/modal-profile.png';
+// import profile from '@/assets/images/modal-profile.png';
 
 const cx = classNames.bind(styles);
 
-export function Modal({ messageData, handleModalClose }) {
+export function Modal({ profileImage, messageData, handleModalClose }) {
   const modalRef = useRef();
 
   useEffect(() => {
@@ -49,7 +49,7 @@ export function Modal({ messageData, handleModalClose }) {
       </div>
       <div className={cx('modal-content')}>
         <div className={cx('modal-content-profile')}>
-          <img src={profile} alt='글쓴이 프로필 이미지' />
+          <img src={profileImage} alt='글쓴이 프로필 이미지' />
         </div>
         <div className={cx('modal-content-textbox')}>
           <strong>{messageData.sender}</strong>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 // api
 import { api, ENDPOINT } from '@/api';
 import { useAsync } from '@/hooks/useAsync';
@@ -22,9 +22,10 @@ const cx = classNames.bind(styles);
 
 export const Edit = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   let url = window.location.href;
 
-  const { data } = useAsync(
+  const { data, execute } = useAsync(
     () => api.get(`${ENDPOINT.RECIPIENTS}${id}/`),
     INITIAL_RECIPIENTS_TYPE
   );
@@ -36,6 +37,19 @@ export const Edit = () => {
   const handleActiveTabClick = (tabId, tabName) => {
     setIsActive(tabId);
     setTagName(tabName);
+  };
+
+  const handleRemovePage = async () => {
+    try {
+      const res = await api.delete(`${ENDPOINT.RECIPIENTS}${id}/`);
+
+      if (!res.status) return console.error('[SERVER ERROR]', res);
+
+      execute();
+      navigate(`/list/`, { replace: true });
+    } catch (e) {
+      console.error('[API ERROR]', e);
+    }
   };
 
   const handleCopyClipBoard = async (text) => {
@@ -76,9 +90,14 @@ export const Edit = () => {
             <div className={cx('content-header')}>
               <div className={cx('content-header-title')}>
                 <h3>Rolling Paper</h3>
-                <Link to={`/post/${id}/message`}>
-                  <Button variant='delete' size={40} text='Delete' />
-                </Link>
+                <Button
+                  variant='outlined'
+                  size={40}
+                  isDelete={true}
+                  onClick={handleRemovePage}
+                >
+                  Delete
+                </Button>
               </div>
               <div className={cx('content-header-filter')}>
                 <ul className={cx('tab-list')}>

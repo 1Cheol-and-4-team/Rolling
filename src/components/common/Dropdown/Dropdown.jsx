@@ -5,10 +5,11 @@ import { onClickOutside } from '@/utils';
 
 const cx = classNames.bind(styles);
 
-export const Dropdown = ({ sortList, size, state, setSortOption, onClick }) => {
+export const Dropdown = ({ sortList, size, state, onClick }) => {
   const dropdownRef = useRef();
+  const defaultOption = sortList[0].option;
   const [isOpen, setOpen] = useState(false);
-  const [currentValue, setCurrentValue] = useState('Latest');
+  const [currentValue, setCurrentValue] = useState(defaultOption);
   const [iconContent, setIconContent] = useState('ic-arrow-down');
 
   useEffect(() => {
@@ -32,7 +33,6 @@ export const Dropdown = ({ sortList, size, state, setSortOption, onClick }) => {
   const handleOptionClick = (e, selectedOption) => {
     setCurrentValue(selectedOption);
     handleClose();
-    // setSortOption(selectedOption);
     onClick(e);
   };
 

@@ -3,7 +3,7 @@ import { useAsync } from '@/hooks/useAsync';
 import { INITIAL_MESSAGE_TYPE } from '@/stores';
 // lib
 import classNames from 'classnames/bind';
-import styles from '@/pages/Detail/Detail.module.scss';
+import styles from '@/pages/Edit/Edit.module.scss';
 // component
 import { EmptyCard } from '@/components/common/Empty';
 import { Card } from '@/components/common/Card';
@@ -16,6 +16,7 @@ const { EMPTY_CARD } = IMPORT_IMAGES;
 export const GridLayout = ({ id, tabName, sortOption }) => {
   const {
     data: { results },
+    execute,
   } = useAsync(
     () => api.get(`${ENDPOINT.RECIPIENTS}${id}/messages/`),
     INITIAL_MESSAGE_TYPE
@@ -60,6 +61,8 @@ export const GridLayout = ({ id, tabName, sortOption }) => {
                 profileImageURL={item.profileImageURL}
                 content={item.content}
                 createdAt={item.createdAt}
+                isDelete={true}
+                execute={execute}
               />
             </li>
           ))}

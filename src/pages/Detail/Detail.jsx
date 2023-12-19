@@ -47,6 +47,14 @@ export const Detail = () => {
     }
   };
 
+  const handleValueChange = (e) => {
+    const { value } = e.currentTarget;
+    const selectedValue = value || e.currentTarget.getAttribute('value');
+    setSortOption(selectedValue);
+  };
+
+  console.log(sortOption);
+
   return (
     <div className={cx('detail')}>
       <Header />
@@ -105,8 +113,9 @@ export const Detail = () => {
                 <div className={cx('content-header-options')}>
                   <Dropdown
                     sortList={SORT_LIST}
-                    setSortOption={setSortOption}
+                    // setSortOption={setSortOption}
                     size='sm'
+                    onClick={handleValueChange}
                   />
                   <IconButton
                     variant='outlined'
