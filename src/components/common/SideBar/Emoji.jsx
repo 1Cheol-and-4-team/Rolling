@@ -5,6 +5,7 @@ import { INITIAL_EMOJI_TYPE } from '@/stores';
 
 import classNames from 'classnames/bind';
 import styles from '@/components/common/SideBar/Emoji.module.scss';
+import EmojiPicker from 'emoji-picker-react';
 
 import { Empty } from '@/components/common/Empty';
 import { BadgeEmoji } from '@/components/common/Badge';
@@ -12,13 +13,15 @@ import { IconButton } from '@/components/common/Button';
 import { onClickOutside } from '@/utils';
 import { IMPORT_IMAGES } from '@/stores';
 
-import EmojiPicker from 'emoji-picker-react';
-
 const cx = classNames.bind(styles);
 const { EMPTY } = IMPORT_IMAGES;
 
 export function Emoji({ id }) {
   const emojiRef = useRef();
+  const [emoji, setEmoji] = useState({
+    emoji: '',
+    type: 'increase',
+  });
   const [isOpen, setOpen] = useState(false);
 
   useEffect(() => {
@@ -31,6 +34,7 @@ export function Emoji({ id }) {
 
   const {
     data: { results },
+    execute,
   } = useAsync(
     () => api.get(`${ENDPOINT.RECIPIENTS}${id}/reactions/`),
     INITIAL_EMOJI_TYPE
@@ -54,6 +58,8 @@ export function Emoji({ id }) {
       });
 
       if (!res.status) return console.error('[SERVER ERROR]', res);
+
+      execute();
     } catch (e) {
       console.error('[API ERROR]', e);
     }

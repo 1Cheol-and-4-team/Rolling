@@ -11,6 +11,7 @@ export const IconButton = ({
   iconColor,
   active,
   type = 'button',
+  isDelete = false,
   disabled = false,
   ...props
 }) => {
@@ -22,9 +23,14 @@ export const IconButton = ({
   );
   return (
     <button
-      className={cx({ [`btn-${variant}`]: variant }, `ic-btn-${style}`, {
-        'btn-active': active,
-      })}
+      className={cx(
+        { [`btn-${variant}`]: variant },
+        `ic-btn-${style}`,
+        {
+          'btn-active': active,
+        },
+        { 'ic-btn-delete': isDelete }
+      )}
       {...buttonProps}
     >
       <i className={className}></i>

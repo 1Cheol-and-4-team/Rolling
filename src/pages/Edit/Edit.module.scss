@@ -113,6 +113,7 @@
       .grid-layout {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: minmax(280, auto);
         gap: 24px;
       }
     }

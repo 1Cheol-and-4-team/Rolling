@@ -16,9 +16,13 @@ export const Header = ({ isLanding }) => {
           </Link>
         </h1>
         {isLanding && (
-          <Button variant='primary' size={42}>
-            Create paper
-          </Button>
+          <>
+            <Link to={'/post'}>
+              <Button variant='primary' size={42}>
+                Create paper
+              </Button>
+            </Link>
+          </>
         )}
       </div>
     </header>

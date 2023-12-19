@@ -9,6 +9,7 @@ import styles from './Card.module.scss';
 // component
 import { Badge } from '@/components/common/Badge';
 import { Overlay, Modal } from '@/components/common/Modal';
+import { IconButton } from '@/components/common/Button/IconButton';
 import { formatDate } from '@/utils';
 
 const cx = classNames.bind(styles);
@@ -20,6 +21,8 @@ export function Card({
   profileImageURL,
   content,
   createdAt,
+  isDelete,
+  execute,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data } = useAsync(
@@ -39,11 +42,38 @@ export function Card({
     setIsModalOpen(false);
   };
 
+  const handleRemoveItem = async (e) => {
+    e.stopPropagation();
+    try {
+      const res = await api.delete(`${ENDPOINT.MESSAGES}${id}/`);
+
+      if (!res.status) return console.error('[SERVER ERROR]', e);
+      execute();
+    } catch (e) {
+      console.error('[API ERROR]', e);
+    }
+  };
+
   return (
     <>
       <div className={cx('card')} onClick={handleModalOpen}>
         <header className={cx('card-header')}>
           <Badge relationship={relationship} />
+          <div
+            className={cx('card-header-btn-delete', {
+              ['card-header-btn-delete-active']: isDelete,
+            })}
+          >
+            <IconButton
+              variant='outlined'
+              style='square'
+              icon='ic-delete'
+              iconSize='24'
+              iconColor='gray900'
+              isDelete={isDelete}
+              onClick={handleRemoveItem}
+            />
+          </div>
         </header>
         <main className={cx('card-content')}>
           <div className={cx('sender-info')}>
@@ -63,7 +93,11 @@ export function Card({
       </div>
       {isModalOpen && (
         <Overlay>
-          <Modal messageData={data} handleModalClose={handleModalClose} />
+          <Modal
+            profileImage={profileImageURL}
+            messageData={data}
+            handleModalClose={handleModalClose}
+          />
         </Overlay>
       )}
     </>

@@ -8,11 +8,16 @@ export const Button = ({
   size,
   children,
   type = 'button',
+  isDelete = false,
   disabled = false,
   ...props
 }) => {
   const buttonProps = { type, disabled, ...props };
-  const className = cx(`btn-${variant}`, `btn--size-${size}`);
+  const className = cx(
+    `btn-${variant}`,
+    { 'btn-delete': isDelete },
+    `btn--size-${size}`
+  );
 
   return (
     <button className={className} {...buttonProps}>

@@ -58,11 +58,13 @@
       width: 12rem;
       height: 12rem;
       border-radius: 50%;
-      // background-color: #ffb885;
       background-color: $background;
+      overflow: hidden;
 
       img {
-        width: 10rem;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
     }
 
