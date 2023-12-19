@@ -10,13 +10,13 @@
   box-shadow: $drop-shadow;
 
   &-title {
-    @include text-style(24, bold, $gray-900);
+    @include text-style(24, 700, $gray-900);
   }
 
   &-count {
     @include text-style(16, 'nomarl', $gray-700);
     span {
-      @include text-style(16, bold);
+      @include text-style(16, 700);
     }
   }
   &-reaction {
@@ -33,20 +33,24 @@
     background-image: url('@/assets/images/background-purple.svg');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
   }
   &-green {
     background-image: url('@/assets/images/background-green.svg');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
   }
   &-beige {
     background-image: url('@/assets/images/background-orange.svg');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
   }
   &-blue {
     background-image: url('@/assets/images/background-blue.svg');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
   }
 }

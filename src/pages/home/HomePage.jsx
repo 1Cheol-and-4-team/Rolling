@@ -37,8 +37,12 @@ function HomePage() {
         </li>
       </ul>
       <div className={cx('home')}>
-        <HomeCarrd content={content1} />
-        <HomeCarrd content={content2} style={{ '--reverse': 'row-reverse' }} />
+        <HomeCarrd className={cx('home-card')} content={content1} />
+        <HomeCarrd
+          className={cx('home-card')}
+          content={content2}
+          style={{ '--reverse': 'row-reverse' }}
+        />
         <Link to={'/list'}>
           <Button variant='primary' size={100}>
             구경해보기

@@ -11,29 +11,53 @@ CardList.propTypes = {
 };
 
 export function CardList(data) {
-  const { name, backgroundColor, messageCount, recentMessages, topReactions } =
-    data.data;
+  const {
+    name,
+    backgroundColor,
+    backgroundImageURL,
+    messageCount,
+    recentMessages,
+    topReactions,
+  } = data.data;
+  console.log(backgroundColor);
   return (
-    <li className={cx('card-list', `card-list-${backgroundColor}`)}>
+    <li
+      style={{
+        backgroundImage: backgroundImageURL ? `url(${backgroundImageURL})` : '',
+      }}
+      className={cx('card-list', `card-list-${backgroundColor}`)}
+    >
       <article>
-        <div className={cx('card-list-title')}>To. {name}</div>
+        <div
+          style={{
+            color: backgroundImageURL ? '#ffffff' : '',
+          }}
+          className={cx('card-list-title')}
+        >
+          To. {name}
+        </div>
         <ProfileImg
           messageCount={messageCount}
           recentMessages={recentMessages}
         />
-        <div className={cx('card-list-count')}>
+        <div
+          style={{
+            color: backgroundImageURL ? '#ffffff' : '',
+          }}
+          className={cx('card-list-count')}
+        >
           <span>{messageCount < 1000 ? messageCount : '999+'}</span>
           명이 작성했어요!
         </div>
       </article>
-      <div className={cx('card-list-reaction')}>
+      <ul className={cx('card-list-reaction')}>
         {topReactions &&
-          topReactions.slice(0, 3).map((reaction) => (
-            <BadgeEmoji key={reaction.id} num={reaction.count}>
-              {reaction.emoji}
-            </BadgeEmoji>
+          topReactions.map((reaction) => (
+            <li key={reaction.id}>
+              <BadgeEmoji emoji={reaction.emoji} count={reaction.count} />
+            </li>
           ))}
-      </div>
+      </ul>
     </li>
   );
 }
