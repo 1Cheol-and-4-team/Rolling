@@ -1,0 +1,37 @@
+.color-option {
+  @include flexbox();
+  gap: 1.6rem;
+
+  &-chip {
+    @include flexbox();
+    width: 16.8rem;
+    height: 16.8rem;
+    border-radius: 1.6rem;
+
+    &-beige {
+      background-color: $orange-200;
+    }
+    &-purple {
+      background-color: $purple-200;
+    }
+    &-blue {
+      background-color: $blue-200;
+    }
+    &-green {
+      background-color: $green-200;
+    }
+
+    span {
+      @include flexbox();
+
+      padding: 1rem;
+      border-radius: 50%;
+      background-color: $gray-500;
+
+      i {
+        font-size: 2.4rem;
+        color: $white;
+      }
+    }
+  }
+}

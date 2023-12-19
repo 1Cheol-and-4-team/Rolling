@@ -1,28 +1,21 @@
 @mixin text-style-12() {
   font-size: $font-size-12;
   font-weight: 400;
-  line-height: 1.8rem;
+  line-height: 1.6rem;
   letter-spacing: -0.006rem;
 }
 
 @mixin text-style-14() {
   font-size: $font-size-14;
   font-weight: 400;
-  line-height: 2rem;
-  letter-spacing: -0.007rem;
-}
-
-@mixin text-style-15() {
-  font-size: $font-size-15;
-  font-weight: 400;
-  line-height: 2.2rem;
-  letter-spacing: -0.015rem;
+  line-height: 2.4rem;
+  letter-spacing: -0.014rem;
 }
 
 @mixin text-style-16() {
   font-size: $font-size-16;
   font-weight: 400;
-  line-height: 2.6rem;
+  line-height: 2.4rem;
   letter-spacing: -0.016rem;
 }
 
@@ -30,52 +23,92 @@
   font-size: $font-size-18;
   font-weight: 400;
   line-height: 2.8rem;
-  letter-spacing: -0.018rem;
-}
-
-@mixin text-style-20() {
-  font-size: $font-size-20;
-  font-weight: 400;
-  line-height: 3rem;
-  letter-spacing: -0.02rem;
+  letter-spacing: -0.036rem;
 }
 
 @mixin text-style-24() {
   font-size: $font-size-24;
   font-weight: 400;
-  line-height: 3.6rem;
+  line-height: 3.4rem;
   letter-spacing: -0.024rem;
 }
 
-// 🚧 폰트별 굵기 이슈 $weight 추가
-@mixin text-style($size, $weight, $color: false) {
-  if($size == 12) {
+@mixin text-style-30() {
+  font-size: $font-size-32;
+  font-weight: 400;
+  line-height: 4rem;
+  letter-spacing: -0.03rem;
+}
+
+@mixin text-style-32() {
+  font-size: $font-size-32;
+  font-weight: 400;
+  line-height: 4.6rem;
+  letter-spacing: -0.032rem;
+}
+
+@mixin text-style($size, $weight: 400, $color: false) {
+  @if ($size == 12) {
     @include text-style-12;
   }
-  if($size == 14) {
+  @if ($size == 14) {
     @include text-style-14;
   }
-  if($size == 15) {
-    @include text-style-15;
-  }
-  if($size == 16) {
+  @if ($size == 16) {
     @include text-style-16;
   }
-  if($size == 18) {
+  @if ($size == 18) {
     @include text-style-18;
   }
-  if($size == 20) {
-    @include text-style-20;
-  }
-  if($size == 24) {
+  @if ($size == 24) {
     @include text-style-24;
   }
+  @if ($size == 30) {
+    @include text-style-30;
+  }
+  @if ($size == 32) {
+    @include text-style-32;
+  }
 
-  if($weight == 'bold') {
+  @if ($weight == 400) {
+    font-weight: 400;
+  }
+  @if ($weight == 500) {
+    font-weight: 500;
+  }
+  @if ($weight == 700) {
     font-weight: 700;
   }
 
-  if(type-of($color) == color) {
+  @if (type-of($color) == color) {
+    color: $color;
+  }
+}
+
+@mixin icon-style($size, $color: false) {
+  @if ($size == 12) {
+    font-size: $font-size-12;
+  }
+  @if ($size == 14) {
+    font-size: $font-size-14;
+  }
+  @if ($size == 16) {
+    font-size: $font-size-16;
+  }
+  @if ($size == 18) {
+    font-size: $font-size-18;
+  }
+  @if ($size == 24) {
+    font-size: $font-size-24;
+  }
+  @if ($size == 30) {
+    font-size: $font-size-30;
+  }
+  @if ($size == 32) {
+    font-size: $font-size-32;
+  }
+
+  @if (type-of($color) == color) {
     color: $color;
   }
 }

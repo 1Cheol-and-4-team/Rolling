@@ -1,0 +1,49 @@
+.emoji {
+  @include column-flexbox();
+  gap: 1.6rem;
+  width: 100%;
+
+  &-header {
+    @include flexbox(between);
+    width: 100%;
+    position: relative;
+
+    &-title {
+      @include text-style(16, 500, $white);
+    }
+  }
+
+  .emoji-picker {
+    display: none;
+    position: absolute;
+    top: 54px;
+    right: -12px;
+    z-index: 10;
+  }
+
+  .emoji-picker-block {
+    display: block;
+  }
+
+  &-empty {
+    @include flexbox();
+    width: 100%;
+    border: 0.1rem solid $border;
+    border-radius: 0.6rem;
+    background-color: $card;
+    padding: 1.2rem;
+
+    span:last-child {
+      @include text-style(14, 500, $text-gray);
+      margin-left: 0.4rem;
+    }
+  }
+
+  &-content {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+}

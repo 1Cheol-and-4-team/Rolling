@@ -1,0 +1,24 @@
+.member-list {
+  @include column-flexbox(start, between);
+  width: 100%;
+  gap: 1.6rem;
+}
+
+.member-list-header {
+  @include flexbox(between);
+
+  &-title {
+    @include text-style(16, 500, $text-white);
+  }
+}
+
+.member-list-content {
+  @include column-flexbox(start, between);
+  gap: 0.6rem;
+
+  li {
+    @include text-style(14, 600, $text-white);
+    position: relative;
+    padding: 0.8rem 0;
+  }
+}

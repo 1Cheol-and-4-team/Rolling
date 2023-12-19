@@ -1,0 +1,16 @@
+.count {
+  @include flexbox(between);
+  width: 100%;
+
+  &-element {
+    @include column-flexbox();
+
+    h1 {
+      @include text-style(32, 700, $text-white);
+    }
+
+    span {
+      @include text-style(14, 500, $gray-700);
+    }
+  }
+}

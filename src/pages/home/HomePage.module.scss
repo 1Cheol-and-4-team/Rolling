@@ -1,0 +1,13 @@
+.home {
+  @include column-flexbox(between, center);
+  margin-top: 12.4rem;
+
+  &-card {
+    animation-name: my-animation;
+    animation-duration: 2s;
+    animation-timing-function: ease;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+}

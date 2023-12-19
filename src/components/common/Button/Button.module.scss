@@ -1,1 +1,284 @@
-//
+%btn-base {
+  @include inline-flexbox();
+
+  padding: 0 1.6rem;
+  border-radius: 0.6rem;
+
+  &:disabled {
+    cursor: not-allowed;
+    color: $text-gray;
+    background-color: $gray-300;
+    opacity: 0.4;
+
+    i {
+      color: $gray-300;
+    }
+  }
+}
+
+/* ------- Button: fill(primary/secondary), outlined ------- */
+.btn-primary {
+  @extend %btn-base;
+
+  color: $text-white;
+  background-color: $purple;
+  transition: all ease-in-out 0.2s;
+
+  &:not(:disabled):hover {
+    background-color: $purple-600;
+  }
+}
+
+.btn-secondary {
+  @extend %btn-base;
+
+  color: $text-white;
+  background-color: $gray-300;
+  transition: all ease-in-out 0.2s;
+
+  &:not(:disabled):hover {
+    background-color: $gray-200;
+  }
+}
+
+.btn-outlined {
+  @extend %btn-base;
+
+  color: $text-white;
+  border: 0.1rem solid $border;
+  background-color: transparent;
+  transition: all ease-in-out 0.2s;
+
+  &:not(:disabled):hover {
+    border-color: $purple;
+  }
+}
+
+.btn-transparent {
+  @include text-style(14, 500, $text-gray);
+  background-color: transparent;
+  transition: all ease-in-out 0.2s;
+
+  i {
+    @include icon-style(12, $text-gray);
+  }
+
+  &:hover {
+    color: $purple;
+
+    i {
+      color: $purple;
+    }
+  }
+}
+
+.btn-delete {
+  @include text-style(14, 500, $text-gray);
+  background-color: #ff233c;
+}
+
+// tab(off)
+.btn-tab-off {
+  @extend %btn-base;
+  @include text-style(16, 400, $text-gray);
+  background-color: $card;
+}
+
+.btn-active {
+  border: 0.1rem solid $purple;
+}
+
+/* ------- Button Size ------- */
+.btn--size {
+  //추가
+  &-100 {
+    height: 5.6rem;
+    span {
+      @include text-style(18, bold);
+      width: 26.4rem;
+    }
+  }
+
+  &-56 {
+    height: 5.6rem;
+
+    span {
+      @include text-style(18, 500);
+      width: 16rem;
+    }
+  }
+
+  &-42 {
+    height: 4.2rem;
+
+    span {
+      @include text-style(16, 500);
+    }
+  }
+
+  &-40 {
+    height: 4rem;
+
+    span {
+      @include text-style(16, 500);
+      width: 9rem;
+    }
+  }
+
+  &-36 {
+    height: 3.6rem;
+
+    span {
+      @include text-style(16, 500);
+      width: 9rem;
+    }
+  }
+
+  &-28 {
+    height: 2.8rem;
+
+    span {
+      @include text-style(14, 500);
+      width: 9rem;
+    }
+  }
+}
+
+/* ------- Icon------- */
+.ic--size {
+  &-12 {
+    @include icon-style(12);
+  }
+  &-14 {
+    @include icon-style(14);
+  }
+  &-16 {
+    @include icon-style(16);
+  }
+  &-18 {
+    @include icon-style(18);
+  }
+  &-24 {
+    @include icon-style(24);
+  }
+  &-30 {
+    @include icon-style(30);
+  }
+  &-32 {
+    @include icon-style(32);
+  }
+}
+
+.ic--color {
+  &-white {
+    color: $text-white;
+  }
+  &-gray200 {
+    color: $gray-200;
+  }
+  &-gray300 {
+    color: $gray-300;
+  }
+  &-gray400 {
+    color: $gray-400;
+  }
+  &-gray500 {
+    color: $gray-500;
+  }
+  &-gray700 {
+    color: $gray-700;
+  }
+  &-gray900 {
+    color: $gray-900;
+  }
+  &-pruple {
+    color: $purple;
+  }
+}
+
+/* ------- Icon Button Style ------- */
+%icon-btn-base {
+  &:disabled {
+    cursor: not-allowed;
+    color: $text-gray;
+    background-color: $gray-300;
+    border: none;
+    opacity: 0.4;
+
+    i {
+      color: $gray-300;
+    }
+  }
+}
+
+.ic-btn-normal {
+}
+
+.ic-btn-add-card {
+  @extend %icon-btn-base;
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 50%;
+  background-color: $gray-300;
+  transition: all ease-in-out 0.2s;
+
+  &:not(:disabled):hover {
+    background-color: $gray-200;
+  }
+}
+
+.ic-btn-arrow {
+  @extend %icon-btn-base;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  box-shadow: $arrow-button-shadow;
+  backdrop-filter: blur(2px);
+  // 추가
+  z-index: 1;
+  position: absolute;
+  bottom: 9rem;
+  transform: translateY(-50%);
+  left: -2rem;
+}
+
+.ic-btn-arrowRight {
+  @extend %icon-btn-base;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  box-shadow: $arrow-button-shadow;
+  backdrop-filter: blur(2px);
+  // 추가
+  z-index: 1;
+  position: absolute;
+  bottom: 9rem;
+  transform: translateY(-50%);
+  right: -2rem;
+}
+
+.ic-btn-square {
+  @extend %icon-btn-base;
+  padding: 0.6rem;
+  border-radius: 0.6rem;
+}
+
+/* ------- Mix Button ------- */
+.mix-btn {
+  div {
+    @include flexbox();
+    padding: 0 0.8rem;
+
+    span {
+      width: 100%;
+
+      &.mg-left {
+        margin-left: 0.4rem;
+      }
+
+      &.mg-right {
+        margin-right: 0.4rem;
+      }
+    }
+  }
+}

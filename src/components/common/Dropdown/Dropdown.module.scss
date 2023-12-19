@@ -1,0 +1,104 @@
+.dropdown {
+  position: relative;
+  z-index: $dropdown-level;
+
+  &-inner {
+    width: 100%;
+    cursor: pointer;
+
+    &-label {
+      @include text-style(16, 500, $text-white);
+      width: 100%;
+      padding: 0 4rem 0 1.6rem;
+      text-align: start;
+      border: 0.1rem solid $border;
+      border-radius: 0.6rem;
+      transition: all ease-in-out 0.2s;
+
+      &:focus:not(:focus-visible):not(:error) {
+        outline: none;
+      }
+
+      &:focus,
+      &:focus-visible {
+        color: $text-white;
+        border: 0.1rem solid $purple;
+      }
+
+      &:not(:disabled):not(:error):active {
+        color: $text-white;
+        border: 0.1rem solid $purple;
+      }
+
+      &:not(:disabled):not(:error):hover {
+        border: 0.1rem solid $purple;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.4;
+      }
+    }
+
+    .label-sm {
+      height: 4rem;
+    }
+
+    .label-lg {
+      height: 5rem;
+    }
+
+    .label-error {
+      border: 0.1rem solid $system-error;
+    }
+
+    i {
+      @include pos-center-y();
+      @include icon-style(16, $text-white);
+      right: 1.2rem;
+    }
+  }
+
+  &-option-list {
+    position: absolute;
+    width: 100%;
+    top: 4.8rem;
+    left: 0;
+    padding: 0.8rem;
+    border: 1px solid $border;
+    background-color: $card;
+    border-radius: 0.6rem;
+    box-shadow: $sort-shadow;
+    z-index: $dropdown-level;
+  }
+
+  &-option-item {
+    @include text-style(14, 500, $gray-500);
+    width: 100%;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+
+    &:hover {
+      color: $text-white;
+      background-color: $border;
+    }
+  }
+}
+
+.dropdown-size-sm {
+  min-width: 12.2rem;
+}
+
+.dropdown-size-lg {
+  min-width: 32rem;
+}
+
+.option-lg {
+  top: 5.8rem;
+
+  li {
+    @include text-style(16);
+    padding: 1.2rem 0.8rem;
+  }
+}
