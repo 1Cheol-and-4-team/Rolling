@@ -4,7 +4,7 @@
   height: 3.6rem;
   padding: 0rem 1.2rem;
   border-radius: 3rem;
-  background-color: $card;
+  background-color: rgba($color: #000000, $alpha: 0.6);
 
   .emoji {
     @include icon-style(16);

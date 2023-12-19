@@ -12,8 +12,6 @@ function PaperListCards({ data }) {
   const [currentCardIndex, setcurrentCardIndex] = useState(4);
 
   const dataCount = data.length;
-  console.log(data);
-
   const handleClick = () => {
     setScroll(scroll - 29.5);
     if (currentCardIndex <= dataCount - 1) {
@@ -26,8 +24,6 @@ function PaperListCards({ data }) {
       setcurrentCardIndex(currentCardIndex - 1);
     }
   };
-  console.log(dataCount);
-  console.log(currentCardIndex);
   return (
     <>
       <div className={cx('cardList')}>
@@ -37,7 +33,7 @@ function PaperListCards({ data }) {
               onClick={handleClickReverse}
               variant='outlined'
               style='arrow'
-              icon='ic-arrow-left'
+              icon='ic-arrow'
               iconSize='16'
               iconColor='gray900'
             />
