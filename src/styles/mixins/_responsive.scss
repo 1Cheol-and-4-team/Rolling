@@ -1,18 +1,19 @@
+// 🚧 회의 진행 후 작업
+$desktop-breakpoint: 1600px;
+$tablet-breakpoint: 1200px;
+$mobile-breakpoint: 768px;
+
 @mixin responsive($screen) {
-  if($screen == 'D') {
-    @media screen and (max-width: $lg-breakpoint) {
+  @if $screen == 'D' {
+    @media screen and (max-width: $desktop-breakpoint) {
       @content;
     }
-  }
-
-  if($screen == 'T') {
-    @media screen and (max-width: $md-breakpoint) {
+  } @else if $screen == 'T' {
+    @media screen and (max-width: $tablet-breakpoint) {
       @content;
     }
-  }
-
-  if($screen == 'M') {
-    @media screen and (max-width: $sm-breakpoint) {
+  } @else if $screen == 'M' {
+    @media screen and (max-width: $mobile-breakpoint) {
       @content;
     }
   }

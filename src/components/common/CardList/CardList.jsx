@@ -11,15 +11,16 @@ CardList.propTypes = {
 };
 
 export function CardList(data) {
+  const results = data.data;
   const {
+    id,
     name,
     backgroundColor,
     backgroundImageURL,
     messageCount,
     recentMessages,
     topReactions,
-  } = data.data;
-
+  } = results;
   return (
     <li
       style={{
@@ -36,10 +37,7 @@ export function CardList(data) {
         >
           To. {name}
         </div>
-        <ProfileImg
-          messageCount={messageCount}
-          recentMessages={recentMessages}
-        />
+        <ProfileImg id={id} recentMessages={recentMessages} />
         <div
           style={{
             color: backgroundImageURL ? '#ffffff' : '',
@@ -47,7 +45,7 @@ export function CardList(data) {
           className={cx('card-list-count')}
         >
           <span>{messageCount < 1000 ? messageCount : '999+'}</span>
-          명이 작성했어요!
+          개의 메시지가 작성됐어요!
         </div>
       </article>
       <ul className={cx('card-list-reaction')}>

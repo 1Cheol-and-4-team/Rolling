@@ -1,7 +1,7 @@
 import { Button } from '@/components/common/Button';
 import point1_img from '@/assets/images/point1-img.svg';
 import point2_img from '@/assets/images/point2-img.svg';
-import HomeCarrd from './HomeCard';
+import HomeCard from './HomeCard';
 import { Header } from '@/components/common/Header';
 import { Link } from 'react-router-dom';
 
@@ -37,8 +37,8 @@ function HomePage() {
         </li>
       </ul>
       <div className={cx('home')}>
-        <HomeCarrd content={content1} />
-        <HomeCarrd content={content2} style={{ '--reverse': 'row-reverse' }} />
+        <HomeCard content={content1} />
+        <HomeCard content={content2} style={{ '--reverse': 'row-reverse' }} />
         <Link to={'/list'} className={cx('home-button')}>
           <Button variant='primary' size={100}>
             구경해보기
