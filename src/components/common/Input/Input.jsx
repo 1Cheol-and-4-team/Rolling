@@ -5,7 +5,7 @@ import { forwardRef } from 'react';
 const cx = classNames.bind(styles);
 
 export const Input = forwardRef(function Input(
-  { state, type = 'text', ...props },
+  { state, type = 'text', placeholder, errorMessage, ...props },
   ref
 ) {
   return (
@@ -14,6 +14,7 @@ export const Input = forwardRef(function Input(
         ref={ref}
         type={type}
         className={cx('input-base', state && `input-state-${state}`)}
+        placeholder={placeholder}
         {...props}
       />
       <p
@@ -22,7 +23,7 @@ export const Input = forwardRef(function Input(
           state === 'error' || `error-message-hidden`
         )}
       >
-        값을 입력해 주세요.
+        {state === 'error' ? errorMessage : ''}
       </p>
     </>
   );
