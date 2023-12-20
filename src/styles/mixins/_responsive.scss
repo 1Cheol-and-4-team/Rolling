@@ -1,16 +1,18 @@
-// 🚧 회의 진행 후 작업
-
 @mixin responsive($screen) {
-  if($screen === 'T') {
-    @media screen and (min-width: $md-breakpoint) {
+  if($screen == 'D') {
+    @media screen and (max-width: $lg-breakpoint) {
       @content;
     }
   }
-}
 
-@mixin responsive($screen) {
-  if($screen === 'M') {
-    @media screen and (min-width: $sm-breakpoint) {
+  if($screen == 'T') {
+    @media screen and (max-width: $md-breakpoint) {
+      @content;
+    }
+  }
+
+  if($screen == 'M') {
+    @media screen and (max-width: $sm-breakpoint) {
       @content;
     }
   }

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, useNavigate, Navigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 // api
 import { api, ENDPOINT } from '@/api';
 import { useAsync } from '@/hooks/useAsync';
@@ -24,15 +24,14 @@ export const Edit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   let url = window.location.href;
+  const [isActive, setIsActive] = useState(1);
+  const [tabName, setTagName] = useState('All');
+  const [sortOption, setSortOption] = useState('Latest');
 
   const { data, execute } = useAsync(
     () => api.get(`${ENDPOINT.RECIPIENTS}${id}/`),
     INITIAL_RECIPIENTS_TYPE
   );
-
-  const [isActive, setIsActive] = useState(1);
-  const [tabName, setTagName] = useState('All');
-  const [sortOption, setSortOption] = useState('Latest');
 
   const handleActiveTabClick = (tabId, tabName) => {
     setIsActive(tabId);
@@ -77,9 +76,17 @@ export const Edit = () => {
           <div className={cx('sidebar-content')}>
             <div className={cx('sidebar-header')}>
               <h2 className={cx('sidebar-title')}>{data.name}</h2>
-              <Count id={id} reactionCount={data.reactionCount} />
+              <Count
+                id={id}
+                getReactionCount={data.reactionCount}
+                getMessageCount={data.messageCount}
+              />
             </div>
-            <Emoji id={id} />
+            <Emoji
+              id={id}
+              getEmojiApi={execute}
+              getReactionCount={data.reactionCount}
+            />
             <MemberList id={id} />
           </div>
           <Banner />

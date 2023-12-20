@@ -19,7 +19,7 @@ export function CardList(data) {
     recentMessages,
     topReactions,
   } = data.data;
-  console.log(backgroundColor);
+
   return (
     <li
       style={{

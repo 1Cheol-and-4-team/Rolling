@@ -28,15 +28,8 @@ export function CreatePage() {
     const name = e.currentTarget.getAttribute('name');
     const selectedValue = value || e.currentTarget.getAttribute('value');
     setValues((prevValues) => ({ ...prevValues, [name]: selectedValue }));
-    console.log(name, selectedValue);
   };
-  const handleButtonClick = () => {
-    if (!valid) {
-      setError('error');
-    } else {
-      setError('');
-    }
-  };
+
   const [isActiveTab, setIsActiveTab] = useState(1);
 
   const handleActiveTab = (targetId) => {
@@ -49,16 +42,13 @@ export function CreatePage() {
   const handleSubmitClick = async (e) => {
     e.preventDefault();
     handleValueChange();
-    // handleButtonClick();
-    console.log(values);
 
     if (Object.values(values).some((value) => value === '')) {
       return;
     } else {
       try {
         const response = await api.post(ENDPOINT.RECIPIENTS, values);
-        console.log(response.data);
-        navigate(`/post/id`, { replace: true });
+        navigate(`/post/${response.data.id}`, { replace: true });
       } catch (error) {
         if (error.response) {
           // 서버 응답이 있는 경우
