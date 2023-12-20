@@ -125,7 +125,6 @@ export const Detail = () => {
                 <div className={cx('content-header-options')}>
                   <Dropdown
                     sortList={SORT_LIST}
-                    // setSortOption={setSortOption}
                     size='sm'
                     onClick={handleValueChange}
                   />

@@ -36,7 +36,8 @@ export function Emoji({ id, getEmojiApi, getReactionCount }) {
     INITIAL_EMOJI_TYPE
   );
 
-  const isReactionsEmpty = getReactionCount === undefined;
+  const isReactionsEmpty =
+    getReactionCount === undefined || getReactionCount === 0;
 
   const handleClose = () => {
     setOpen(false);
