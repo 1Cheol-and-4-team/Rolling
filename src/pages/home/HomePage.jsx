@@ -39,7 +39,7 @@ function HomePage() {
       <div className={cx('home')}>
         <HomeCarrd content={content1} />
         <HomeCarrd content={content2} style={{ '--reverse': 'row-reverse' }} />
-        <Link to={'/list'}>
+        <Link to={'/list'} className={cx('home-button')}>
           <Button variant='primary' size={100}>
             구경해보기
           </Button>

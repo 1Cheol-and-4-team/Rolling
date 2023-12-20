@@ -31,10 +31,14 @@ export function PaperList() {
         </li>
       </ul>
       <div className={cx('list-wrap')}>
-        <p className={cx('list-wrap-title')}>인기 롤링 페이퍼 🔥</p>
-        <PaperListCards data={like} />
-        <p className={cx('list-wrap-title')}>최근에 만든 롤링 페이퍼 ⭐️️</p>
-        <PaperListCards data={results} />
+        <div>
+          <p className={cx('list-wrap-title')}>인기 롤링 페이퍼 🔥</p>
+          <PaperListCards data={like} />
+        </div>
+        <div>
+          <p className={cx('list-wrap-title')}>최근에 만든 롤링 페이퍼 ⭐️️</p>
+          <PaperListCards data={results} />
+        </div>
         <Link to={`/post`} className={cx('list-wrap-btn')}>
           <Button variant='primary' size={100}>
             나도 만들어보기
