@@ -1,16 +1,19 @@
 // 🚧 회의 진행 후 작업
+$desktop-breakpoint: 1600px;
+$tablet-breakpoint: 1200px;
+$mobile-breakpoint: 768px;
 
 @mixin responsive($screen) {
-  if($screen === 'T') {
-    @media screen and (min-width: $md-breakpoint) {
+  @if $screen == 'D' {
+    @media screen and (max-width: $desktop-breakpoint) {
       @content;
     }
-  }
-}
-
-@mixin responsive($screen) {
-  if($screen === 'M') {
-    @media screen and (min-width: $sm-breakpoint) {
+  } @else if $screen == 'T' {
+    @media screen and (max-width: $tablet-breakpoint) {
+      @content;
+    }
+  } @else if $screen == 'M' {
+    @media screen and (max-width: $mobile-breakpoint) {
       @content;
     }
   }
