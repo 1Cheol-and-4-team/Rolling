@@ -1,7 +1,7 @@
 %btn-base {
   @include inline-flexbox();
 
-  padding: 0 1.6rem;
+  padding: 0 0.8rem;
   border-radius: 0.6rem;
 
   &:disabled {
@@ -73,8 +73,13 @@
 }
 
 .btn-delete {
-  @include text-style(14, 500, $text-gray);
-  background-color: #ff233c;
+  color: $system-error;
+  border-color: $system-error;
+  &:not(:disabled):hover {
+    color: $text-white;
+    border-color: $system-error;
+    background-color: $system-error;
+  }
 }
 
 // tab(off)
@@ -261,6 +266,21 @@
   @extend %icon-btn-base;
   padding: 0.6rem;
   border-radius: 0.6rem;
+}
+
+.ic-btn-hide {
+  display: none;
+}
+
+.ic-btn-delete {
+  display: block;
+
+  &:not(:disabled):hover {
+    border: 1px solid $system-error;
+    i {
+      color: $system-error;
+    }
+  }
 }
 
 /* ------- Mix Button ------- */

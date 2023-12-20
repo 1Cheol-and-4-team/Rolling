@@ -48,10 +48,6 @@
       height: 5rem;
     }
 
-    .label-error {
-      border: 0.1rem solid $system-error;
-    }
-
     i {
       @include pos-center-y();
       @include icon-style(16, $text-white);

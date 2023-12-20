@@ -8,23 +8,40 @@
   border: 0.1rem solid rgba(0, 0, 0, 0.1);
   border-radius: 1.6rem;
   box-shadow: $drop-shadow;
-
+  @include responsive('M') {
+    width: 20.8rem;
+    height: 23.2rem;
+    padding: 3rem 2.2rem 2rem 2.4rem;
+  }
   &-title {
     @include text-style(24, 700, $gray-900);
+    @include responsive('M') {
+      @include text-style(18, 700, $gray-900);
+    }
   }
 
   &-count {
     @include text-style(16, 'nomarl', $gray-700);
+    @include responsive('M') {
+      @include text-style(14, 'nomarl', $gray-700);
+    }
     span {
       @include text-style(16, 700);
+      @include responsive('M') {
+        @include text-style(14, 700);
+      }
     }
   }
   &-reaction {
     @include flexbox(start, center);
     padding-top: 1.6rem;
+    min-height: 5.3rem;
     width: 100%;
     border-top: 0.1rem solid rgba(0, 0, 0, 0.12);
     gap: 0.8rem;
+    @include responsive('M') {
+      gap: 0.4rem;
+    }
   }
 
   // background-color

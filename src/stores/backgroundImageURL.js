@@ -1,22 +1,22 @@
 export const BACKGROUND_IMGURL = [
   {
     id: 1,
-    name: 'amusementParkImg',
-    imgUrl: 'https://i.ibb.co/pZfxG3d/amusement-Park-background.jpg',
+    name: 'ponyo',
+    imgUrl: 'https://i.ibb.co/6s2Wd5w/ponyo.jpg',
   },
   {
     id: 2,
-    name: 'winterImg',
-    imgUrl: `https://i.ibb.co/GHRZjHn/winter-background.jpg`,
+    name: 'pink',
+    imgUrl: `https://i.ibb.co/vYHJ3sF/pink.jpg `,
   },
   {
     id: 3,
-    name: 'snowCoupleImg',
-    imgUrl: 'https://i.ibb.co/PCz8fYW/snow-Couple-background.jpg',
+    name: 'rabbitAndChick',
+    imgUrl: ' https://i.ibb.co/gJys1P1/rabbit-and-chick.jpg',
   },
   {
     id: 4,
-    name: 'sweetHomeImg',
-    imgUrl: 'https://i.ibb.co/8KhNqYP/sweet-Home-background.jpg',
+    name: 'raccon',
+    imgUrl: 'https://i.ibb.co/Zz5H12h/raccon.jpg',
   },
 ];

@@ -23,7 +23,7 @@ export const POST_TAB_LIST = [
   { id: 2, option: '이미지' },
 ];
 
-export const SENDER_LIST = [
+export const RELATIONSHIP_LIST = [
   { id: 1, option: '동료' },
   { id: 2, option: '가족' },
   { id: 3, option: '친구' },

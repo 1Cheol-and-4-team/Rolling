@@ -1,7 +1,7 @@
 export const INITIAL_POST_RECIPIENTS_TYPE = {
   team: '2-4',
   name: '',
-  backgroundColor: null,
+  backgroundColor: 'beige',
   backgroundImageURL: null,
 };
 
@@ -10,7 +10,7 @@ export const INITIAL_POST_MESSAGE_TYPE = {
   recipientId: 1030,
   sender: '',
   profileImageURL: '',
-  relationship: '',
+  relationship: '동료',
   content: '',
   font: 'Noto Sans',
 };
@@ -18,7 +18,6 @@ export const INITIAL_POST_MESSAGE_TYPE = {
 export const INITIAL_POST_MESSAGE_ERROR = {
   sender: '',
   profileImageURL: '',
-  relationship: '',
   content: '',
 };
 
