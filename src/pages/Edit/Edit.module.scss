@@ -10,6 +10,7 @@
       position: fixed;
       top: $header-height;
       overflow-y: auto;
+      z-index: $sidebar-level;
 
       width: 32rem;
       height: calc(100vh - $header-height);

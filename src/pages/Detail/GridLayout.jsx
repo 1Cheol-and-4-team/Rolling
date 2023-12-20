@@ -17,9 +17,13 @@ export const GridLayout = ({ id, tabName, sortOption }) => {
   const {
     data: { results },
   } = useAsync(
-    () => api.get(`${ENDPOINT.RECIPIENTS}${id}/messages/`),
+    () =>
+      api.get(`${ENDPOINT.RECIPIENTS}${id}/messages/`, {
+        params: { limit: 100 },
+      }),
     INITIAL_MESSAGE_TYPE
   );
+
   const isRollingPaperEmpty = results.every((item) => item.id === null);
   const koreanTagName = relationshipToKorean(tabName);
 
