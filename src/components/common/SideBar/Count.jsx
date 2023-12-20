@@ -8,20 +8,22 @@ import { INITIAL_MESSAGE_TYPE } from '@/stores';
 
 const cx = classNames.bind(styles);
 
-export function Count({ id, reactionCount }) {
+export function Count({ id, getMessageCount, getReactionCount }) {
   const {
     data: { results },
   } = useAsync(
-    () => api.get(`${ENDPOINT.RECIPIENTS}${id}/messages/`),
+    () =>
+      api.get(`${ENDPOINT.RECIPIENTS}${id}/messages/`, {
+        params: { limit: 100 },
+      }),
     INITIAL_MESSAGE_TYPE
   );
 
   const initialCountInfo = () => {
-    const messageCount = results.length;
     const memberCount = new Set(results.map((item) => item.sender)).size;
-    return { messageCount, memberCount };
+    return { memberCount };
   };
-  const { messageCount, memberCount } = initialCountInfo();
+  const { memberCount } = initialCountInfo();
 
   const isEmpty = (array, key) => {
     if (key === 'sender') {
@@ -33,7 +35,7 @@ export function Count({ id, reactionCount }) {
   return (
     <div className={cx('count')}>
       <div className={cx('count-element')}>
-        {isEmpty(results, 'id') ? <h1>0</h1> : <h1>{messageCount}</h1>}
+        {isEmpty(results, 'id') ? <h1>0</h1> : <h1>{getMessageCount}</h1>}
         <span>Papers</span>
       </div>
       <div className={cx('count-element')}>
@@ -41,7 +43,11 @@ export function Count({ id, reactionCount }) {
         <span>Members</span>
       </div>
       <div className={cx('count-element')}>
-        {reactionCount === null ? <h1>0</h1> : <h1>{reactionCount}</h1>}
+        {getReactionCount === undefined ? (
+          <h1>0</h1>
+        ) : (
+          <h1>{getReactionCount}</h1>
+        )}
         <span>Reactions</span>
       </div>
     </div>

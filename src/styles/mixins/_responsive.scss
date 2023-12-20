@@ -1,14 +1,18 @@
 // 🚧 회의 진행 후 작업
 
 @mixin responsive($screen) {
+  if($screen === 'PC') {
+    @media screen and (min-width: $md-breakpoint) {
+      @content;
+    }
+  }
+
   if($screen === 'T') {
     @media screen and (min-width: $md-breakpoint) {
       @content;
     }
   }
-}
 
-@mixin responsive($screen) {
   if($screen === 'M') {
     @media screen and (min-width: $sm-breakpoint) {
       @content;

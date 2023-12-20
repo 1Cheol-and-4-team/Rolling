@@ -87,7 +87,8 @@
       text-align: start;
       margin-bottom: 3.2rem;
       overflow-y: auto;
-      word-break: keep-all;
+      white-space: pre-line;
+      word-break: break-all;
       padding-right: 1rem;
 
       &::-webkit-scrollbar {

@@ -58,18 +58,19 @@
   }
 
   &-textbox {
-    @include text-style(18, 400, #999999);
+    @include text-style(18, 400, $gray-900);
+    max-width: 33.6rem;
     height: 88px;
     overflow: hidden;
-    white-space: normal;
+    white-space: pre-line;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
-    word-break: keep-all;
+    word-break: break-all;
   }
 
   &-date {
-    @include text-style(12, 400, #444444);
+    @include text-style(12, 400, $gray-500);
   }
 }

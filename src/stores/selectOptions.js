@@ -14,8 +14,8 @@ export const SENDER_TAB_LIST = [
   { id: 1, option: 'All' },
   { id: 2, option: 'Colleague' },
   { id: 3, option: 'Family' },
-  { id: 4, option: 'Soulmate' },
-  { id: 5, option: 'Friend' },
+  { id: 4, option: 'Friend' },
+  { id: 5, option: 'Soulmate' },
 ];
 
 export const POST_TAB_LIST = [
