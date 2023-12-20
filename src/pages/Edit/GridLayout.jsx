@@ -13,14 +13,24 @@ import { IMPORT_IMAGES } from '@/stores';
 const cx = classNames.bind(styles);
 const { EMPTY_CARD } = IMPORT_IMAGES;
 
-export const GridLayout = ({ id, tabName, sortOption }) => {
+export const GridLayout = ({
+  id,
+  tabName,
+  sortOption,
+  backgroundUrl,
+  backgroundColor,
+  getMessagesApi,
+}) => {
   const {
     data: { results },
-    execute,
   } = useAsync(
-    () => api.get(`${ENDPOINT.RECIPIENTS}${id}/messages/`),
+    () =>
+      api.get(`${ENDPOINT.RECIPIENTS}${id}/messages/`, {
+        params: { limit: 100 },
+      }),
     INITIAL_MESSAGE_TYPE
   );
+
   const isRollingPaperEmpty = results.every((item) => item.id === null);
   const koreanTagName = relationshipToKorean(tabName);
 
@@ -59,10 +69,12 @@ export const GridLayout = ({ id, tabName, sortOption }) => {
                 relationship={item.relationship}
                 sender={item.sender}
                 profileImageURL={item.profileImageURL}
+                backgroundUrl={backgroundUrl}
+                backgroundColor={backgroundColor}
                 content={item.content}
                 createdAt={item.createdAt}
                 isDelete={true}
-                execute={execute}
+                getMessageApi={getMessagesApi}
               />
             </li>
           ))}

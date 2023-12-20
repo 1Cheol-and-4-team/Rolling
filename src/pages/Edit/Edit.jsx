@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 // api
 import { api, ENDPOINT } from '@/api';
 import { useAsync } from '@/hooks/useAsync';
-import { INITIAL_RECIPIENTS_TYPE } from '@/stores';
+import { INITIAL_RECIPIENTS_TYPE, INITIAL_MESSAGE_TYPE } from '@/stores';
 // lib
 import classNames from 'classnames/bind';
 import styles from '@/pages/Edit/Edit.module.scss';
@@ -28,10 +29,26 @@ export const Edit = () => {
   const [tabName, setTagName] = useState('All');
   const [sortOption, setSortOption] = useState('Latest');
 
-  const { data, execute } = useAsync(
+  // 현재 대시보드의 대상의 정보 (backgroundColor/backgroundImageURL/reactionCount)
+  const { data, execute: getRecipientApi } = useAsync(
     () => api.get(`${ENDPOINT.RECIPIENTS}${id}/`),
     INITIAL_RECIPIENTS_TYPE
   );
+
+  // 대시보드에 올린 총 메시지 (message.length/sender)
+  const {
+    data: { results },
+    execute: getMessagesApi,
+  } = useAsync(
+    () =>
+      api.get(`${ENDPOINT.RECIPIENTS}${id}/messages/`, {
+        params: { limit: 100 },
+      }),
+    INITIAL_MESSAGE_TYPE
+  );
+
+  const backgroundUrl = data?.backgroundImageURL;
+  const backgroundColor = data?.backgroundColor;
 
   const handleActiveTabClick = (tabId, tabName) => {
     setIsActive(tabId);
@@ -44,7 +61,7 @@ export const Edit = () => {
 
       if (!res.status) return console.error('[SERVER ERROR]', res);
 
-      execute();
+      await getMessagesApi();
       navigate(`/list/`, { replace: true });
     } catch (e) {
       console.error('[API ERROR]', e);
@@ -60,8 +77,18 @@ export const Edit = () => {
     }
   };
 
+  const handleValueChange = (e) => {
+    const { value } = e.currentTarget;
+    const selectedValue = value || e.currentTarget.getAttribute('value');
+    setSortOption(selectedValue);
+  };
+
   return (
     <div className={cx('edit')}>
+      <Helmet>
+        <title> {`메시지 편집하기 | Rolling`}</title>
+      </Helmet>
+
       <Header />
       <ToastContainer
         position='top-center'
@@ -76,15 +103,11 @@ export const Edit = () => {
           <div className={cx('sidebar-content')}>
             <div className={cx('sidebar-header')}>
               <h2 className={cx('sidebar-title')}>{data.name}</h2>
-              <Count
-                id={id}
-                getReactionCount={data.reactionCount}
-                getMessageCount={data.messageCount}
-              />
+              <Count id={id} countData={data} messageData={results} />
             </div>
             <Emoji
               id={id}
-              getEmojiApi={execute}
+              getEmojiApi={getRecipientApi}
               getReactionCount={data.reactionCount}
             />
             <MemberList id={id} />
@@ -124,8 +147,8 @@ export const Edit = () => {
                 <div className={cx('content-header-options')}>
                   <Dropdown
                     sortList={SORT_LIST}
-                    setSortOption={setSortOption}
                     size='sm'
+                    onClick={handleValueChange}
                   />
                   <IconButton
                     variant='outlined'
@@ -138,7 +161,14 @@ export const Edit = () => {
                 </div>
               </div>
             </div>
-            <GridLayout id={id} tabName={tabName} sortOption={sortOption} />
+            <GridLayout
+              id={id}
+              tabName={tabName}
+              sortOption={sortOption}
+              backgroundUrl={backgroundUrl}
+              backgroundColor={backgroundColor}
+              getMessagesApi={getMessagesApi}
+            />
           </div>
         </div>
       </main>
