@@ -1,21 +1,29 @@
-.list-wrap {
-  @include column-flexbox(between, center);
-  gap: 4rem;
-  max-width: 116rem;
-  min-height: calc(100vh - $header-height);
-  margin: $header-height auto 0;
-  padding: 4.8rem 0;
-
-  &-title {
-    @include text-style(24, bold, $white);
-    width: 100%;
-    padding-bottom: 1.6rem;
+.paper-list {
+  &-content {
+    min-height: calc(100vh - $header-height);
+    margin-top: $header-height;
   }
-  &-btn {
-    width: 28rem;
-    position: fixed;
-    bottom: 2.4rem;
-    left: 50%;
-    transform: translateX(-50%);
+  &-container {
+    max-width: 116rem;
+    margin: 0 auto;
+    padding: 4.8rem 0;
+
+    .list-wrap {
+      @include column-flexbox(between);
+      gap: 4rem;
+
+      &-title {
+        @include text-style(24, bold, $white);
+        width: 100%;
+        padding-bottom: 1.6rem;
+      }
+      &-btn {
+        width: 28rem;
+        position: fixed;
+        bottom: 2.4rem;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
   }
 }

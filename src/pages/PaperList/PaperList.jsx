@@ -22,29 +22,29 @@ export function PaperList() {
 
   const like = data.results;
   return (
-    <>
-      <ul className={cx('guideline-list', 'display-block')}>
-        <li className={cx('guideline-list-item')}>
-          <div>
-            <Header isLanding={true} />
+    <div className={cx('paper-list')}>
+      <Header isLanding={true} />
+      <main className={cx('paper-list-content')}>
+        <div className={cx('paper-list-container')}>
+          <div className={cx('list-wrap')}>
+            <div>
+              <p className={cx('list-wrap-title')}>인기 롤링 페이퍼 🔥</p>
+              <PaperListCards data={like} />
+            </div>
+            <div>
+              <p className={cx('list-wrap-title')}>
+                최근에 만든 롤링 페이퍼 ⭐️️
+              </p>
+              <PaperListCards data={results} />
+            </div>
+            <Link to={`/post`} className={cx('list-wrap-btn')}>
+              <Button variant='primary' size={100}>
+                나도 만들어보기
+              </Button>
+            </Link>
           </div>
-        </li>
-      </ul>
-      <div className={cx('list-wrap')}>
-        <div>
-          <p className={cx('list-wrap-title')}>인기 롤링 페이퍼 🔥</p>
-          <PaperListCards data={like} />
         </div>
-        <div>
-          <p className={cx('list-wrap-title')}>최근에 만든 롤링 페이퍼 ⭐️️</p>
-          <PaperListCards data={results} />
-        </div>
-        <Link to={`/post`} className={cx('list-wrap-btn')}>
-          <Button variant='primary' size={100}>
-            나도 만들어보기
-          </Button>
-        </Link>
-      </div>
-    </>
+      </main>
+    </div>
   );
 }
