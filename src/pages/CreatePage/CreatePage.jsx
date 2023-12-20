@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/common/Input';
 import { Header } from '@/Components/common/Header';
 import { Tab } from '@/components/common/Tab';
@@ -11,14 +11,14 @@ import classNames from 'classnames/bind';
 import styles from './CreatePage.module.scss';
 import { api } from '@/api';
 import { INITIAL_POST_RECIPIENTS_TYPE } from '../../stores/dataType';
-
+import { useRef } from 'react';
 const cx = classNames.bind(styles);
 
 export function CreatePage() {
   const [values, setValues] = useState(INITIAL_POST_RECIPIENTS_TYPE);
   const [valid, setValid] = useState('');
   const [error, setError] = useState('');
-
+  const inputRef = useRef(null);
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -28,6 +28,8 @@ export function CreatePage() {
     const name = e.currentTarget.getAttribute('name');
     const selectedValue = value || e.currentTarget.getAttribute('value');
     setValues((prevValues) => ({ ...prevValues, [name]: selectedValue }));
+    setError(!values.name ? 'error' : '');
+
   };
 
   const [isActiveTab, setIsActiveTab] = useState(1);
@@ -44,6 +46,7 @@ export function CreatePage() {
     handleValueChange();
 
     if (Object.values(values).some((value) => value === '')) {
+      inputRef.current.focus();
       return;
     } else {
       try {
@@ -51,13 +54,10 @@ export function CreatePage() {
         navigate(`/post/${response.data.id}`, { replace: true });
       } catch (error) {
         if (error.response) {
-          // 서버 응답이 있는 경우
           console.error('Server response:', error.response.data);
         } else if (error.request) {
-          // 서버로의 요청이 정상적으로 전달되지 않은 경우
           console.error('Request failed:', error.request);
         } else {
-          // 오류가 발생한 경우
           console.error('Error:', error.message);
         }
       }
@@ -75,11 +75,13 @@ export function CreatePage() {
           <span className={cx('To')}>To.</span>
 
           <Input
+            ref={inputRef}
             state={error}
             name='name'
             onChange={handleInputChange}
             onBlur={handleValueChange}
             placeholder='받는 사람 이름을 입력해 주세요'
+            errorMessage='값을 입력해 주세요.'
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 e.preventDefault();
