@@ -22,6 +22,10 @@
       height: 9rem;
       border-radius: 50%;
 
+      &.error {
+        border: 0.1rem solid $system-error;
+      }
+
       img {
         width: 100%;
         height: 100%;
@@ -55,9 +59,10 @@
 
         p {
           @include text-style(16, 'normal', $text-gray);
-        }
-        .error {
-          @include text-style(16, 'normal', $system-error);
+
+          &.error {
+            @include text-style(16, 'normal', $system-error);
+          }
         }
 
         ul {
@@ -88,7 +93,55 @@
     }
   }
 
+  &-quill {
+    &-title {
+      @include flexbox(start);
+      gap: 1rem;
+
+      p {
+        @include text-style(16, 'normal', $text-gray);
+      }
+
+      &-error {
+        p {
+          @include text-style(16, 'normal', $system-error);
+        }
+      }
+    }
+  }
+
   &-button {
     padding: 2.4rem 0;
   }
+}
+
+// Quill style
+:global(#toolbar) {
+  border-radius: 0.6rem 0.6rem 0 0;
+}
+
+:global(svg) {
+  filter: invert(16%) sepia(89%) saturate(6054%) hue-rotate(358deg)
+    brightness(97%) contrast(113%);
+}
+
+:global(.ql-picker-label)::before {
+  color: red;
+}
+
+:global(.ql-container) {
+  border-radius: 0 0 0.6rem 0.6rem;
+  color: $white;
+}
+
+:global(.add-paper-quill-error .ql-container.ql-snow) {
+  border-right: 0.1rem solid $system-error;
+  border-bottom: 0.1rem solid $system-error;
+  border-left: 0.1rem solid $system-error;
+}
+
+:global(.add-paper-quill-error .ql-toolbar.ql-snow) {
+  border-top: 0.1rem solid $system-error;
+  border-right: 0.1rem solid $system-error;
+  border-left: 0.1rem solid $system-error;
 }

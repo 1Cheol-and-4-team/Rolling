@@ -71,35 +71,36 @@ export function Emoji({ id }) {
     <div className={cx('emoji')}>
       <div className={cx('emoji-header')}>
         <h1 className={cx('emoji-header-title')}>Reactions</h1>
-        <IconButton
-          variant='outlined'
-          style='square'
-          icon='ic-add-emoji'
-          iconSize='24'
-          iconColor='white'
-          active={isOpen}
-          onClick={handleToggleEmoji}
-        />
-        <div
-          className={cx('emoji-picker', {
-            'emoji-picker-block': isOpen,
-          })}
-          ref={emojiRef}
-        >
-          <EmojiPicker
-            width={280}
-            height={360}
-            searchPlaceHolder='Search...'
-            emojiStyle='apple'
-            searchDisabled={false}
-            lazyLoadEmojis={false}
-            theme='dark'
-            onEmojiClick={onEmojiClick}
-            previewConfig={{
-              showPreview: true,
-              defaultCaption: '[Rolling]Add your reaction!',
-            }}
+        <div ref={emojiRef}>
+          <IconButton
+            variant='outlined'
+            style='square'
+            icon='ic-add-emoji'
+            iconSize='24'
+            iconColor='white'
+            active={isOpen}
+            onClick={handleToggleEmoji}
           />
+          <div
+            className={cx('emoji-picker', {
+              'emoji-picker-block': isOpen,
+            })}
+          >
+            <EmojiPicker
+              width={280}
+              height={360}
+              searchPlaceHolder='Search...'
+              emojiStyle='apple'
+              searchDisabled={false}
+              lazyLoadEmojis={false}
+              theme='dark'
+              onEmojiClick={onEmojiClick}
+              previewConfig={{
+                showPreview: true,
+                defaultCaption: '[Rolling]Add your reaction!',
+              }}
+            />
+          </div>
         </div>
       </div>
 

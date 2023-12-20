@@ -1,14 +1,14 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import styles from './AddPaper.module.scss';
 import classNames from 'classnames/bind';
-import ReactQuill, { Quill } from 'react-quill';
+import ReactQuill from 'react-quill';
+import { QuillToolbar, modules } from '@/components/QuillToolbar';
 import 'react-quill/dist/quill.snow.css';
-import './AddPaperQuill.scss';
 
 import { api, ENDPOINT } from '@/api';
-import { useAsync } from '@/hooks/useAsync';
+import { useMutateAsync } from '@/hooks';
 
 import { Header } from '@/Components/common/Header';
 import { Input } from '@/components/common/Input';
@@ -24,25 +24,11 @@ import {
 
 const cx = classNames.bind(styles);
 
-const Font = Quill.import('formats/font');
-Font.whitelist = ['Nanum Pen Script', ...Font.whitelist];
-Quill.register(Font, true);
-
-const modules = {
-  toolbar: [
-    ['bold', 'italic', 'underline', 'strike'],
-    [{ align: [] }],
-    [{ color: [] }, { background: [] }],
-    [{ font: ['Nanum Pen Script'] }],
-    [{ size: ['small', false, 'large', 'huge'] }],
-    [{ header: [1, 2, false] }],
-    ['clean'],
-  ],
-};
-
 export function AddPaper() {
   const { id } = useParams();
   const inputRef = useRef(null);
+  const profileRef = useRef(null);
+  const quillRef = useRef(null);
   const navigate = useNavigate();
 
   const [values, setValues] = useState(INITIAL_POST_MESSAGE_TYPE);
@@ -51,7 +37,7 @@ export function AddPaper() {
 
   const postApi = () =>
     api.post(`${ENDPOINT.RECIPIENTS}${id}/messages/`, values);
-  const { execute } = useAsync(postApi, INITIAL_POST_MESSAGE_TYPE);
+  const { execute } = useMutateAsync(postApi, INITIAL_POST_MESSAGE_TYPE);
 
   const handleValueChange = (e) => {
     e.preventDefault();
@@ -61,6 +47,10 @@ export function AddPaper() {
     const selectedValue = value || e.currentTarget.getAttribute('value');
 
     setValues((prevValues) => ({ ...prevValues, [name]: selectedValue }));
+    setError((prevValues) => ({
+      ...prevValues,
+      [name]: !selectedValue ? 'error' : '',
+    }));
   };
 
   const handleQuillChange = (content) => {
@@ -68,35 +58,42 @@ export function AddPaper() {
       ...prevValues,
       content: content,
     }));
-    8;
-  };
-
-  const handleValueValid = () => {
     setError((prevValues) => ({
       ...prevValues,
-      sender: !values.sender ? 'error' : '',
-      profileImageURL: !values.profileImageURL ? 'error' : '',
+      content: !content ? 'error' : '',
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleValueValid();
-
-    if (Object.values(values).some((value) => value === '')) {
-      inputRef.current.focus();
-      return;
+  const handleValueValid = (name) => {
+    if (name === 'submit') {
+      setError((prevValues) => ({
+        ...prevValues,
+        sender: !values.sender ? 'error' : '',
+        profileImageURL: !values.profileImageURL ? 'error' : '',
+        content: !values.content ? 'error' : '',
+      }));
     } else {
-      execute();
-      navigate(`/post/${id}/`, { replace: true });
+      setError((prevValues) => ({
+        ...prevValues,
+        [name]: !values[name] ? 'error' : '',
+      }));
     }
   };
 
-  useEffect(() => {
-    if (Object.values(error).some((err) => err === 'error')) {
-      handleValueValid();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    handleValueValid('submit');
+
+    if (Object.values(values).some((value) => value === '')) {
+      !values.content && quillRef.current.focus();
+      !values.profileImageURL && profileRef.current.focus();
+      !values.sender && inputRef.current.focus();
+      return;
+    } else {
+      await execute();
+      navigate(`/post/${id}/`, { replace: true });
     }
-  }, [values]);
+  };
 
   const handleRandomColor = () => {
     setRandomColor(getRandomColor());
@@ -113,7 +110,9 @@ export function AddPaper() {
             placeholder='이름을 입력해 주세요.'
             name='sender'
             state={error.sender}
+            errorMessage='이름을 입력해 주세요.'
             onChange={handleValueChange}
+            onBlur={() => handleValueValid('sender')}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 e.preventDefault();
@@ -125,7 +124,12 @@ export function AddPaper() {
           <label>프로필 이미지</label>
           <div className={cx('add-paper-profile-img')}>
             {!values.profileImageURL ? (
-              <div className={cx('add-paper-profile-default')}>
+              <div
+                className={cx(
+                  'add-paper-profile-default',
+                  `${error.profileImageURL}`
+                )}
+              >
                 <img
                   src='https://i.ibb.co/T0R4zhW/default-emoji.png'
                   alt='기본 프로필 이미지'
@@ -147,6 +151,7 @@ export function AddPaper() {
                 {PROFILE_EMOJI.map((item) => (
                   <li key={item.id} onClick={handleRandomColor}>
                     <button
+                      ref={profileRef}
                       name='profileImageURL'
                       value={item.imgUrl}
                       onClick={handleValueChange}
@@ -164,16 +169,32 @@ export function AddPaper() {
           <Dropdown
             sortList={RELATIONSHIP_LIST}
             size='lg'
-            onClick={handleValueChange}
+            onClick={(e) => {
+              handleValueChange(e);
+              handleValueValid('profileImageURL');
+            }}
           />
         </fieldset>
-        <fieldset>
-          <label>내용을 입력해 주세요</label>
+        <fieldset
+          className={cx('add-paper-quill', `add-paper-quill-${error.content}`)}
+        >
+          <div
+            className={cx(
+              'add-paper-quill-title',
+              `add-paper-quill-title-${error.content}`
+            )}
+          >
+            <label>마음을 전달해 주세요</label>
+            <p>내용을 입력해 주세요</p>
+          </div>
+          <QuillToolbar />
           <ReactQuill
-            className={cx('add-paper-quill')}
+            className={cx('add-paper-quill-content')}
             theme='snow'
+            ref={quillRef}
             value={values.content}
             onChange={handleQuillChange}
+            onBlur={() => handleValueValid('content')}
             modules={{ toolbar: modules.toolbar }}
             style={{ width: '72rem', height: '26rem' }}
           />
@@ -183,6 +204,7 @@ export function AddPaper() {
             variant='primary'
             size={56}
             type='submit'
+            name='submit'
             onClick={handleSubmit}
           >
             생성하기
