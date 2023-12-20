@@ -16,7 +16,6 @@ const cx = classNames.bind(styles);
 
 export function CreatePage() {
   const [values, setValues] = useState(INITIAL_POST_RECIPIENTS_TYPE);
-  const [valid, setValid] = useState('');
   const [error, setError] = useState('');
   const inputRef = useRef(null);
   const navigate = useNavigate();
@@ -29,7 +28,6 @@ export function CreatePage() {
     const selectedValue = value || e.currentTarget.getAttribute('value');
     setValues((prevValues) => ({ ...prevValues, [name]: selectedValue }));
     setError(!values.name ? 'error' : '');
-
   };
 
   const [isActiveTab, setIsActiveTab] = useState(1);
