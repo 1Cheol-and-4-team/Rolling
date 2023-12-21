@@ -5,7 +5,7 @@ import { forwardRef } from 'react';
 const cx = classNames.bind(styles);
 
 export const Input = forwardRef(function Input(
-  { state, type = 'text', placeholder, errorMessage, ...props },
+  { state, type = 'text', placeholder, ...props },
   ref
 ) {
   return (
@@ -17,14 +17,6 @@ export const Input = forwardRef(function Input(
         placeholder={placeholder}
         {...props}
       />
-      <p
-        className={cx(
-          'error-message',
-          state === 'error' || `error-message-hidden`
-        )}
-      >
-        {state === 'error' ? errorMessage : ''}
-      </p>
     </>
   );
 });

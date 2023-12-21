@@ -1,19 +1,54 @@
+.header {
+  @include responsive('M') {
+    display: none;
+  }
+}
+
 .add-paper {
-  @include column-flexbox(center, start);
   width: 72rem;
   min-height: calc(100vh - $header-height);
   margin: $header-height auto 0;
   padding: 4.8rem 0;
-  gap: 5rem;
+
+  @include responsive('T') {
+    width: calc(100vw - 4.8rem);
+  }
+
+  @include responsive('M') {
+    width: calc(100vw - 4rem);
+    min-height: calc(100vh);
+    margin: 0 auto;
+  }
+
+  &-wrapper {
+    @include column-flexbox(center, start);
+    gap: 5rem;
+    width: 100%;
+  }
 
   label {
-    @include text-style(24, bold, $gray-900);
+    @include text-style(24, 700, $text-white);
     display: block;
     margin-bottom: 1.2rem;
   }
 
   &-sender {
     width: 100%;
+
+    &-title {
+      @include flexbox(start);
+      gap: 1rem;
+
+      p {
+        @include text-style(16, 'normal', $gray-500);
+      }
+
+      &-error {
+        p {
+          @include text-style(16, 'normal', $system-error);
+        }
+      }
+    }
   }
 
   &-profile {
@@ -23,7 +58,7 @@
       border-radius: 50%;
 
       &.error {
-        border: 0.1rem solid $system-error;
+        border: 0.3rem solid $system-error;
       }
 
       img {
@@ -58,7 +93,7 @@
         gap: 1.6rem;
 
         p {
-          @include text-style(16, 'normal', $text-gray);
+          @include text-style(16, 'normal', $gray-500);
 
           &.error {
             @include text-style(16, 'normal', $system-error);
@@ -68,6 +103,11 @@
         ul {
           @include flexbox();
           gap: 0.4rem;
+
+          @include responsive('M') {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+          }
         }
 
         li {
@@ -76,7 +116,11 @@
           height: 5.6rem;
           border-radius: 50%;
           overflow: hidden;
-          background-color: $gray-200;
+          background-color: $border;
+          @include responsive('M') {
+            width: 4rem;
+            height: 4rem;
+          }
 
           button {
             width: 5.6rem;
@@ -93,13 +137,32 @@
     }
   }
 
+  &-relationship {
+    @include responsive('M') {
+      width: calc(100vw - 4rem);
+    }
+  }
+
   &-quill {
     &-title {
       @include flexbox(start);
       gap: 1rem;
 
+      @include responsive('M') {
+        @include column-flexbox(center, start);
+        gap: 0;
+
+        label {
+          margin: 0;
+        }
+
+        p {
+          margin-bottom: 1.2rem;
+        }
+      }
+
       p {
-        @include text-style(16, 'normal', $text-gray);
+        @include text-style(16, 'normal', $gray-500);
       }
 
       &-error {
@@ -111,37 +174,88 @@
   }
 
   &-button {
-    padding: 2.4rem 0;
+    width: 72rem;
+    padding: 1.4rem 0;
+
+    @include responsive('T') {
+      width: calc(100vw - 4.8rem);
+    }
+
+    @include responsive('M') {
+      width: calc(100vw - 4rem);
+    }
+
+    button {
+      width: 100%;
+    }
   }
 }
 
 // Quill style
+:global(.add-paper-quill-content) {
+  width: 72rem;
+
+  @include responsive('T') {
+    width: calc(100vw - 4.8rem);
+  }
+
+  @include responsive('M') {
+    width: calc(100vw - 4rem);
+  }
+}
+
 :global(#toolbar) {
   border-radius: 0.6rem 0.6rem 0 0;
+  width: 100%;
+
+  @include responsive('T') {
+    width: calc(100vw - 4.8rem);
+  }
+
+  @include responsive('M') {
+    width: calc(100vw - 4rem);
+  }
 }
 
 :global(svg) {
-  filter: invert(16%) sepia(89%) saturate(6054%) hue-rotate(358deg)
-    brightness(97%) contrast(113%);
+  filter: invert(59%) sepia(16%) saturate(15%) hue-rotate(358deg)
+    brightness(102%) contrast(84%);
 }
 
 :global(.ql-picker-label)::before {
-  color: red;
+  color: $gray-900;
 }
 
-:global(.ql-container) {
+:global(.ql-container.ql-snow) {
+  width: 100%;
+  height: 26rem;
   border-radius: 0 0 0.6rem 0.6rem;
-  color: $white;
+  color: $text-white;
 }
 
-:global(.add-paper-quill-error .ql-container.ql-snow) {
-  border-right: 0.1rem solid $system-error;
-  border-bottom: 0.1rem solid $system-error;
-  border-left: 0.1rem solid $system-error;
+:global(.add-paper-quill .ql-toolbar.ql-snow) {
+  border-top: 0.1rem solid $border;
+  border-right: 0.1rem solid $border;
+  border-bottom: none;
+  border-left: 0.1rem solid $border;
+  background-color: $card;
+}
+
+:global(.add-paper-quill .ql-container.ql-snow) {
+  border-top: none;
+  border-right: 0.1rem solid $border;
+  border-bottom: 0.1rem solid $border;
+  border-left: 0.1rem solid $border;
 }
 
 :global(.add-paper-quill-error .ql-toolbar.ql-snow) {
   border-top: 0.1rem solid $system-error;
   border-right: 0.1rem solid $system-error;
+  border-left: 0.1rem solid $system-error;
+}
+
+:global(.add-paper-quill-error .ql-container.ql-snow) {
+  border-right: 0.1rem solid $system-error;
+  border-bottom: 0.1rem solid $system-error;
   border-left: 0.1rem solid $system-error;
 }
