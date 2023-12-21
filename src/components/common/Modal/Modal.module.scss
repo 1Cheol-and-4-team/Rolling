@@ -7,6 +7,10 @@
   bottom: 0;
   background: rgba(0, 0, 0, 0.4);
   z-index: $overlay-level;
+
+  @include responsive('M') {
+    padding: 0 2.4rem;
+  }
 }
 
 @keyframes showModal {
