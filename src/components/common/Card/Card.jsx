@@ -92,6 +92,7 @@ export function Card({
         <footer className={cx('card-date')}>
           <span>{formatDate(createdAt)}</span>
         </footer>
+        <div className={cx('gradient-box')}></div>
       </div>
       {isModalOpen && (
         <Overlay>
