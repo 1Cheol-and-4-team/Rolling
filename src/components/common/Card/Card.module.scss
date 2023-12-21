@@ -1,4 +1,6 @@
 .card {
+  @include column-flexbox(start, between);
+
   width: 100%;
   min-width: 30rem;
   height: 28rem;
@@ -9,9 +11,37 @@
   transition: all ease-in-out 0.3s;
   cursor: pointer;
 
+  position: relative;
+
   &:hover {
     transform: translateY(-1rem);
-    box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: $card-shadow;
+  }
+
+  .gradient-box {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &:hover .gradient-box {
+    @include pos-center();
+
+    opacity: 1;
+    visibility: visible;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    border: 0.1rem solid transparent;
+    border-radius: 2.4rem;
+    background-image: linear-gradient(#191a1e, #191a1e),
+      linear-gradient(
+        180deg,
+        rgba(25, 26, 30, 0) 0%,
+        rgba(255, 107, 0, 0.5) 52.08%,
+        #7100e3 100%
+      );
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    z-index: -1;
   }
 
   &-header {
@@ -31,6 +61,8 @@
 
   &-content {
     padding: 2.4rem 0 2.6rem;
+    flex-grow: 1;
+    flex-shrink: 0;
 
     .sender-info {
       @include flexbox(start);
@@ -58,9 +90,8 @@
   }
 
   &-textbox {
-    @include text-style(18, 400, $gray-900);
-    max-width: 33.6rem;
-    height: 88px;
+    @include text-style(18, 400, $baanertext);
+    width: 100%;
     overflow: hidden;
     white-space: pre-line;
     text-overflow: ellipsis;

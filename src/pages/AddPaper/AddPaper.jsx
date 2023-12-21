@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import styles from './AddPaper.module.scss';
 import classNames from 'classnames/bind';
@@ -16,6 +17,7 @@ import { Dropdown } from '@/components/common/Dropdown';
 import { Button } from '@/components/common/Button';
 import { PROFILE_EMOJI, RELATIONSHIP_LIST } from '@/stores';
 import { getRandomColor } from '@/utils';
+import defaultProfile from '@/assets/images/default-profile.svg';
 
 import {
   INITIAL_POST_MESSAGE_TYPE,
@@ -101,114 +103,132 @@ export function AddPaper() {
 
   return (
     <>
-      <Header />
+      <Helmet>
+        <title>메세지 작성하기 | Rolling </title>
+      </Helmet>
+      <div className={cx('header')}>
+        <Header />
+      </div>
       <form className={cx('add-paper')}>
-        <fieldset className={cx('add-paper-sender')}>
-          <label>From.</label>
-          <Input
-            ref={inputRef}
-            placeholder='이름을 입력해 주세요.'
-            name='sender'
-            state={error.sender}
-            errorMessage='이름을 입력해 주세요.'
-            onChange={handleValueChange}
-            onBlur={() => handleValueValid('sender')}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault();
-              }
-            }}
-          />
-        </fieldset>
-        <fieldset className={cx('add-paper-profile')}>
-          <label>프로필 이미지</label>
-          <div className={cx('add-paper-profile-img')}>
-            {!values.profileImageURL ? (
-              <div
-                className={cx(
-                  'add-paper-profile-default',
-                  `${error.profileImageURL}`
-                )}
-              >
-                <img
-                  src='https://i.ibb.co/T0R4zhW/default-emoji.png'
-                  alt='기본 프로필 이미지'
-                />
-              </div>
-            ) : (
-              <div
-                className={cx('add-paper-profile-img-wrapper')}
-                style={{ '--color': randomColor }}
-              >
-                <img src={values.profileImageURL} alt='선택한 프로필 이미지' />
-              </div>
-            )}
-            <div className={cx('add-paper-profile-img-select')}>
-              <p className={cx(`${error.profileImageURL}`)}>
-                프로필 이미지를 선택해주세요!
-              </p>
-              <ul>
-                {PROFILE_EMOJI.map((item) => (
-                  <li key={item.id} onClick={handleRandomColor}>
-                    <button
-                      ref={profileRef}
-                      name='profileImageURL'
-                      value={item.imgUrl}
-                      onClick={handleValueChange}
-                    >
-                      <img src={item.imgUrl} alt={item.alt} />
-                    </button>
-                  </li>
-                ))}
-              </ul>
+        <div className={cx('add-paper-wrapper')}>
+          <fieldset className={cx('add-paper-sender')}>
+            <div
+              className={cx(
+                'add-paper-sender-title',
+                `add-paper-sender-title-${error.sender}`
+              )}
+            >
+              <label>From.</label>
+              <p>입력하지 않으면 전달할 수 없어요!</p>
             </div>
-          </div>
-        </fieldset>
-        <fieldset>
-          <label>상대와의 관계</label>
-          <Dropdown
-            sortList={RELATIONSHIP_LIST}
-            size='lg'
-            onClick={(e) => {
-              handleValueChange(e);
-              handleValueValid('profileImageURL');
-            }}
-          />
-        </fieldset>
-        <fieldset
-          className={cx('add-paper-quill', `add-paper-quill-${error.content}`)}
-        >
-          <div
+            <Input
+              ref={inputRef}
+              placeholder='이름을 입력해 주세요.'
+              name='sender'
+              state={error.sender}
+              onChange={handleValueChange}
+              onBlur={() => handleValueValid('sender')}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                }
+              }}
+            />
+          </fieldset>
+          <fieldset className={cx('add-paper-profile')}>
+            <label>프로필 이미지</label>
+            <div className={cx('add-paper-profile-img')}>
+              {!values.profileImageURL ? (
+                <div
+                  className={cx(
+                    'add-paper-profile-default',
+                    `${error.profileImageURL}`
+                  )}
+                >
+                  <img src={defaultProfile} alt='기본 프로필 이미지' />
+                </div>
+              ) : (
+                <div
+                  className={cx('add-paper-profile-img-wrapper')}
+                  style={{ '--color': randomColor }}
+                >
+                  <img
+                    src={values.profileImageURL}
+                    alt='선택한 프로필 이미지'
+                  />
+                </div>
+              )}
+              <div className={cx('add-paper-profile-img-select')}>
+                <p className={cx(`${error.profileImageURL}`)}>
+                  프로필 이미지를 선택해주세요!
+                </p>
+                <ul>
+                  {PROFILE_EMOJI.map((item) => (
+                    <li key={item.id} onClick={handleRandomColor}>
+                      <button
+                        ref={profileRef}
+                        name='profileImageURL'
+                        value={item.imgUrl}
+                        onClick={handleValueChange}
+                      >
+                        <img src={item.imgUrl} alt={item.alt} />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset className={cx('add-paper-relationship')}>
+            <label>상대와의 관계</label>
+            <Dropdown
+              sortList={RELATIONSHIP_LIST}
+              size='lg'
+              onClick={(e) => {
+                handleValueChange(e);
+                handleValueValid('profileImageURL');
+              }}
+            />
+          </fieldset>
+          <fieldset
             className={cx(
-              'add-paper-quill-title',
-              `add-paper-quill-title-${error.content}`
+              'add-paper-quill',
+              `add-paper-quill-${error.content}`
             )}
           >
-            <label>마음을 전달해 주세요</label>
-            <p>내용을 입력해 주세요</p>
+            <div
+              className={cx(
+                'add-paper-quill-title',
+                `add-paper-quill-title-${error.content}`
+              )}
+            >
+              <label>마음을 전달해 주세요</label>
+              <p>내용을 입력해 주세요!</p>
+            </div>
+            <div className={cx('add-paper-quill-content')}>
+              <QuillToolbar />
+              <ReactQuill
+                className={cx('add-paper-quill-content')}
+                theme='snow'
+                ref={quillRef}
+                value={values.content}
+                onChange={handleQuillChange}
+                onBlur={() => handleValueValid('content')}
+                modules={{ toolbar: modules.toolbar }}
+              />
+            </div>
+          </fieldset>
+          <div className={cx('add-paper-button')}>
+            <Button
+              variant='primary'
+              size={56}
+              type='submit'
+              name='submit'
+              onClick={handleSubmit}
+            >
+              생성하기
+            </Button>
           </div>
-          <QuillToolbar />
-          <ReactQuill
-            className={cx('add-paper-quill-content')}
-            theme='snow'
-            ref={quillRef}
-            value={values.content}
-            onChange={handleQuillChange}
-            onBlur={() => handleValueValid('content')}
-            modules={{ toolbar: modules.toolbar }}
-            style={{ width: '72rem', height: '26rem' }}
-          />
-        </fieldset>
-        <div className={cx('add-paper-button')}>
-          <Button
-            variant='primary'
-            size={56}
-            type='submit'
-            name='submit'
-            onClick={handleSubmit}
-          >
-            생성하기
-          </Button>
         </div>
       </form>
     </>

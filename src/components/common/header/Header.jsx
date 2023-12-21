@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
+import styles from '@/components/common/Header/Header.module.scss';
 import { Button } from '@/components/common/Button';
 import { ROLLING_LOGO } from '@/components/common/Header/constant';
-import styles from '@/components/common/Header/Header.module.scss';
+import editIcon from '@/assets/images/icons/edit.svg';
 
 const cx = classNames.bind(styles);
 
-export const Header = ({ isLanding }) => {
+export const Header = ({ isLanding, isDetail, isEdit, id }) => {
   return (
     <header className={cx('main-header')}>
       <div className={cx('header-container')}>
@@ -19,10 +20,28 @@ export const Header = ({ isLanding }) => {
           <>
             <Link to={'/post'}>
               <Button variant='primary' size={42}>
-                Create paper
+                롤링 페이퍼 만들기
               </Button>
             </Link>
           </>
+        )}
+        {isDetail && (
+          <div className={cx('header-edit')}>
+            <Link to={`/post/${id}/edit`}>
+              <Button variant='outlined' size={42}>
+                <img src={editIcon} alt='편집하기 버튼' />
+              </Button>
+            </Link>
+          </div>
+        )}
+        {isEdit && (
+          <div className={cx('header-edit')}>
+            <Link to={`/post/${id}/`}>
+              <Button variant='primary' size={42}>
+                <img src={editIcon} alt='편집하기 버튼' />
+              </Button>
+            </Link>
+          </div>
         )}
       </div>
     </header>

@@ -1,6 +1,3 @@
-import { api, ENDPOINT } from '@/api';
-import { useAsync } from '@/hooks/useAsync';
-import { INITIAL_MESSAGE_TYPE } from '@/stores';
 // lib
 import classNames from 'classnames/bind';
 import styles from '@/pages/Edit/Edit.module.scss';
@@ -13,21 +10,21 @@ import { IMPORT_IMAGES } from '@/stores';
 const cx = classNames.bind(styles);
 const { EMPTY_CARD } = IMPORT_IMAGES;
 
-export const GridLayout = ({ id, tabName, sortOption }) => {
-  const {
-    data: { results },
-    execute,
-  } = useAsync(
-    () => api.get(`${ENDPOINT.RECIPIENTS}${id}/messages/`),
-    INITIAL_MESSAGE_TYPE
-  );
-  const isRollingPaperEmpty = results.every((item) => item.id === null);
+export const GridLayout = ({
+  tabName,
+  sortOption,
+  backgroundUrl,
+  backgroundColor,
+  getMessagesApi,
+  messageData,
+}) => {
+  const isRollingPaperEmpty = messageData.every((item) => item.id === null);
   const koreanTagName = relationshipToKorean(tabName);
 
   const filterData = (extractTagName) => {
     return extractTagName === 1
-      ? results
-      : results.filter((item) => item.relationship === extractTagName);
+      ? messageData
+      : messageData.filter((item) => item.relationship === extractTagName);
   };
   const filterResult = filterData(koreanTagName);
 
@@ -59,10 +56,12 @@ export const GridLayout = ({ id, tabName, sortOption }) => {
                 relationship={item.relationship}
                 sender={item.sender}
                 profileImageURL={item.profileImageURL}
+                backgroundUrl={backgroundUrl}
+                backgroundColor={backgroundColor}
                 content={item.content}
                 createdAt={item.createdAt}
                 isDelete={true}
-                execute={execute}
+                getMessageApi={getMessagesApi}
               />
             </li>
           ))}

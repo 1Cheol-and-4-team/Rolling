@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 import classNames from 'classnames/bind';
 import styles from './HomePage.module.scss';
+import { Helmet } from 'react-helmet';
 
 const cx = classNames.bind(styles);
 
@@ -29,21 +30,31 @@ const content2 = {
 function HomePage() {
   return (
     <>
-      <ul className={cx('guideline-list', 'display-block')}>
-        <li className={cx('guideline-list-item')}>
-          <div>
-            <Header isLanding={true} />
-          </div>
-        </li>
-      </ul>
+      <Helmet>
+        <title>Rolling</title>
+      </Helmet>
+      <Header isLanding={true} />
       <div className={cx('home')}>
-        <HomeCard content={content1} />
-        <HomeCard content={content2} style={{ '--reverse': 'row-reverse' }} />
-        <Link to={'/list'} className={cx('home-button')}>
-          <Button variant='primary' size={100}>
-            구경해보기
-          </Button>
-        </Link>
+        <div>
+          <HomeCard content={content1} />
+          <HomeCard
+            content={content2}
+            style={{
+              '--reverse': 'row-reverse',
+              'padding-bottom': 0,
+              '--end': 'flex-end',
+              '--padding': `4.8rem`,
+              gap: 0,
+            }}
+          />
+          <div className={cx('button-area')}>
+            <Link to={'/list'} className={cx('home-button')}>
+              <Button variant='primary' size={100}>
+                구경해보기
+              </Button>
+            </Link>
+          </div>
+        </div>
       </div>
     </>
   );

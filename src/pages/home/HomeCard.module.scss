@@ -1,5 +1,15 @@
 :root {
   --reverse: flex-start;
+  --end: flex-start;
+  --padding: 0rem;
+}
+@keyframes slideIn {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .home-card {
@@ -8,32 +18,78 @@
   align-items: flex-start;
   flex-direction: var(--reverse);
   width: 116rem;
+  height: 32.4rem;
   padding: 6rem 0px;
-  margin-bottom: 5.2rem;
+  margin-bottom: 3rem;
   gap: 8.8rem;
-
   border-radius: 1.6rem;
-  background: $surface;
+  background: $border;
+  @include responsive('T') {
+    width: calc(100vw - 4.8rem);
+    height: auto;
+    @include column-flexbox(start, start);
+    padding: 4rem;
+    gap: 4rem;
+  }
+  @include responsive('M') {
+    padding: 2.4rem 0 5.1rem;
+    overflow: hidden;
+  }
+
+  &-wrap {
+    @include responsive('T') {
+      width: 72rem;
+      padding-left: 4rem;
+    }
+    @include responsive('M') {
+      width: calc(100% - 4.8rem);
+    }
+  }
+
   &-point {
     padding: 0.6rem 1.2rem;
     display: inline-block;
     border-radius: 5rem;
-    background: $purple-600;
+    background: $purple;
   }
+
   &-text {
-    @include text-style(14, 'normal', $white);
+    @include text-style(14, 'normal', $text-white);
   }
+
   &-title {
-    @include text-style(24, bold);
+    @include text-style(24, 700, $text-white);
     margin-top: 1.6rem;
   }
 
+  &-br {
+    @include responsive('T') {
+      display: none;
+    }
+    @include responsive('M') {
+      display: none;
+    }
+  }
+
   &-des {
-    @include text-style(18, 'normal');
+    @include text-style(18, 'normal', $baanertext);
     margin-top: 0.8rem;
   }
   img {
+    animation: slideIn 1s forwards;
+    align-self: var(--end);
+
     width: 72rem;
-    height: 20.4rem;
+    height: 100%;
+
+    @include responsive('T') {
+      padding-top: var(--padding);
+      width: 100%;
+      height: auto;
+    }
+    @include responsive('M') {
+      width: 100%;
+      height: auto;
+    }
   }
 }

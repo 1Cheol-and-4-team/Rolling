@@ -13,4 +13,10 @@
       @include text-style(14, 500, $gray-700);
     }
   }
+
+  @include responsive('D') {
+    h1 {
+      @include text-style(30, 700, $text-white);
+    }
+  }
 }

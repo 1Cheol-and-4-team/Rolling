@@ -10,8 +10,8 @@ const cx = classNames.bind(styles);
 function PaperListCards({ data }) {
   const [scroll, setScroll] = useState(0);
   const [currentCardIndex, setcurrentCardIndex] = useState(4);
-
   const dataCount = data.length;
+
   const handleClick = () => {
     setScroll(scroll - 29.5);
     if (currentCardIndex <= dataCount - 1) {
@@ -33,9 +33,9 @@ function PaperListCards({ data }) {
               onClick={handleClickReverse}
               variant='outlined'
               style='arrow'
-              icon='ic-arrow'
+              icon='ic-arrow-left'
               iconSize='16'
-              iconColor='gray900'
+              iconColor='white'
             />
           )}
           <div
@@ -55,7 +55,7 @@ function PaperListCards({ data }) {
               style='arrowRight'
               icon='ic-arrow-right'
               iconSize='16'
-              iconColor='gray900'
+              iconColor='white'
             />
           )}
         </ul>

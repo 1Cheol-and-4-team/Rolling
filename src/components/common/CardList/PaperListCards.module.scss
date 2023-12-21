@@ -5,14 +5,20 @@
 .cardList {
   @include column-flexbox(center, center);
   position: relative;
+  @include responsive('T') {
+    width: 100%;
+  }
   &-wrap {
+    @include responsive('T') {
+      width: 100%;
+    }
     max-width: 116rem;
-    overflow: hidden;
+    overflow: scroll;
+    @include scrollbar_hide();
   }
 
   &-card {
     @include flexbox(start, center);
-
     width: 100%;
     gap: 2rem;
     transition: transform 0.3s ease-in-out;

@@ -23,7 +23,9 @@
   color: $text-white;
   background-color: $purple;
   transition: all ease-in-out 0.2s;
-
+  @include responsive('T') {
+    width: 100%;
+  }
   &:not(:disabled):hover {
     background-color: $purple-600;
   }
@@ -203,6 +205,11 @@
 
 /* ------- Icon Button Style ------- */
 %icon-btn-base {
+  background-color: linear-gradient(
+    180deg,
+    rgba(19, 20, 24, 0.51) 0%,
+    rgba(19, 20, 24, 0.6) 100%
+  );
   &:disabled {
     cursor: not-allowed;
     color: $text-gray;
@@ -211,12 +218,9 @@
     opacity: 0.4;
 
     i {
-      color: $gray-300;
+      color: $text-white;
     }
   }
-}
-
-.ic-btn-normal {
 }
 
 .ic-btn-add-card {
@@ -234,11 +238,13 @@
 
 .ic-btn-arrow {
   @extend %icon-btn-base;
+  border: 0.1rem solid #6b6b6d;
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
   box-shadow: $arrow-button-shadow;
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(12px);
+
   // 추가
   z-index: 1;
   position: absolute;
@@ -249,11 +255,13 @@
 
 .ic-btn-arrowRight {
   @extend %icon-btn-base;
+  border: 0.1rem solid #6b6b6d;
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
   box-shadow: $arrow-button-shadow;
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(12px);
+
   // 추가
   z-index: 1;
   position: absolute;
@@ -274,7 +282,6 @@
 
 .ic-btn-delete {
   display: block;
-
   &:not(:disabled):hover {
     border: 1px solid $system-error;
     i {
