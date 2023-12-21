@@ -21,9 +21,9 @@ const content1 = {
 
 const content2 = {
   point: 'Point. 02',
-  title1: '서로에게 이모지로 감정을 ',
-  title2: '표현해보세요',
-  explain: '롤링 페이퍼에 이모지를 추가할 수 있어요.',
+  title1: '대시보드로 롤링 페이퍼를',
+  title2: '관리해 보세요',
+  explain: '나만의 대시보드로 롤링 페이퍼를 공유할 수 있어요.',
   image: point2_img,
 };
 
