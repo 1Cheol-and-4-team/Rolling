@@ -12,6 +12,7 @@ import styles from './CreatePage.module.scss';
 import { api } from '@/api';
 import { INITIAL_POST_RECIPIENTS_TYPE } from '../../stores/dataType';
 import { useRef } from 'react';
+import { Helmet } from 'react-helmet';
 const cx = classNames.bind(styles);
 
 export function CreatePage() {
@@ -25,9 +26,9 @@ export function CreatePage() {
 
     const { value } = e.currentTarget;
     const name = e.currentTarget.getAttribute('name');
-    const selectedValue = value || e.currentTarget.getAttribute('value');
-    setValues((prevValues) => ({ ...prevValues, [name]: selectedValue }));
-    setError(!values.name ? 'error' : '');
+
+    setValues((prevValues) => ({ ...prevValues, [name]: value }));
+    setError(!value ? 'error' : '');
   };
 
   const [isActiveTab, setIsActiveTab] = useState(1);
@@ -63,63 +64,79 @@ export function CreatePage() {
   };
 
   return (
-    <form>
+    <div className={cx('create-page')}>
+      <Helmet>
+        <title> 메세지 생성하기님 페이지 | Rolling</title>
+      </Helmet>
       <div className={cx('header')}>
-        <Header></Header>
+        <Header />
       </div>
 
-      <div className={cx('section')}>
-        <fieldset className={cx('to-input')}>
-          <span className={cx('To')}>To.</span>
+      <main className={cx('form-wrapper')}>
+        <div className={cx('container')}>
+          <form className={cx('form')}>
+            <fieldset className={cx('input-group')}>
+              <label className={cx('input-group-label')}>
+                To.
+                <span className={cx(`${error}-message`)}>
+                  입력하지 않으면 전달할 수 없어요!
+                </span>
+              </label>
 
-          <Input
-            ref={inputRef}
-            state={error}
-            name='name'
-            onChange={handleInputChange}
-            onBlur={handleValueChange}
-            placeholder='받는 사람 이름을 입력해 주세요'
-            errorMessage='값을 입력해 주세요.'
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault();
-              }
-            }}
-          />
-        </fieldset>
+              <Input
+                ref={inputRef}
+                state={error}
+                name='name'
+                onChange={handleInputChange}
+                onBlur={handleValueChange}
+                placeholder='받는 사람 이름을 입력해 주세요'
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                  }
+                }}
+              />
+            </fieldset>
 
-        <fieldset className={cx('information')}>
-          <h1>배경화면을 선택해 주세요.</h1>
-          <p>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</p>
-        </fieldset>
+            <fieldset className={cx('information')}>
+              <h1>배경화면을 선택해 주세요.</h1>
+              <p>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</p>
+            </fieldset>
 
-        <fieldset className={cx('tab')}>
-          <Tab isActiveTab={isActiveTab} handleActiveTab={handleActiveTab} />
-          {isActiveTab === 1 ? (
-            <ColorOption
-              onClick={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault();
-                }
-              }}
-            />
-          ) : (
-            <Option onClick={handleInputChange} />
-          )}
-        </fieldset>
+            <fieldset className={cx('tab')}>
+              <Tab
+                isActiveTab={isActiveTab}
+                handleActiveTab={handleActiveTab}
+              />
 
-        <fieldset className={cx('button')}>
-          <Button
-            variant='primary'
-            type='submit'
-            size={56}
-            onClick={handleSubmitClick}
-          >
-            생성하기
-          </Button>
-        </fieldset>
-      </div>
-    </form>
+              {isActiveTab === 1 ? (
+                <ColorOption
+                  onClick={handleInputChange}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                    }
+                  }}
+                />
+              ) : (
+                <Option onClick={handleInputChange} />
+              )}
+            </fieldset>
+
+            <fieldset className={cx('button')}>
+              <Button
+                variant='primary'
+                type='submit'
+                size={56}
+                onClick={handleSubmitClick}
+              >
+                생성하기
+              </Button>
+            </fieldset>
+            {/* </div> */}
+          </form>
+        </div>
+      </main>
+    </div>
   );
 }

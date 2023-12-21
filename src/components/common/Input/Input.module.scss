@@ -1,13 +1,16 @@
+input {
+  position: relative;
+}
 .input-base {
   @include text-style(16, normal, $gray-500);
 
   width: 100%;
   padding: 1.2rem 1.6rem;
   color: $gray-900;
-  border: 0.1rem solid $gray-300;
+  border: 0.1rem solid $border;
   border-radius: 0.8rem;
-  background: $white;
-
+  background: $black;
+  position: relative;
   &::placeholder {
     color: $gray-500;
   }
@@ -43,11 +46,10 @@
   }
 }
 
-.error-message {
-  @include text-style(12, normal, $system-error);
-  margin-top: 0.4rem;
-}
+// .error-message {
+//   @include text-style(16, normal, $system-error);
+// }
 
-.error-message-hidden {
-  display: none;
-}
+// .error-message-hidden {
+//   display: none;
+// }
