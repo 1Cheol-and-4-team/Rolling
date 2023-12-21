@@ -7,11 +7,11 @@
     cursor: pointer;
 
     &-label {
-      @include text-style(16, 500, $text-white);
+      @include text-style(16, 500, $gray-500);
       width: 100%;
       padding: 0 4rem 0 1.6rem;
       text-align: start;
-      border: 0.1rem solid $border;
+      border: 0.2rem solid $border;
       border-radius: 0.6rem;
       transition: all ease-in-out 0.2s;
 
@@ -22,7 +22,7 @@
       &:focus,
       &:focus-visible {
         color: $text-white;
-        border: 0.1rem solid $purple;
+        border: 0.2rem solid $purple;
       }
 
       &:not(:disabled):not(:error):active {
@@ -50,7 +50,7 @@
 
     i {
       @include pos-center-y();
-      @include icon-style(16, $text-white);
+      @include icon-style(18, $text-white);
       right: 1.2rem;
     }
   }
@@ -61,7 +61,7 @@
     top: 4.8rem;
     left: 0;
     padding: 0.8rem;
-    border: 1px solid $border;
+    border: 0.2rem solid $border;
     background-color: $card;
     border-radius: 0.6rem;
     box-shadow: $sort-shadow;

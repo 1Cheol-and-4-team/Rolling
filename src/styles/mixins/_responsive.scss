@@ -1,7 +1,7 @@
 // 🚧 회의 진행 후 작업
-$desktop-breakpoint: 1600px;
-$tablet-breakpoint: 1200px;
-$mobile-breakpoint: 768px;
+$desktop-breakpoint: 1599px;
+$tablet-breakpoint: 1199px;
+$mobile-breakpoint: 767px;
 
 @mixin responsive($screen) {
   @if $screen == 'D' {
