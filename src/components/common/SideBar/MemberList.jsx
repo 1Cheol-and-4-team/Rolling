@@ -1,6 +1,3 @@
-import { api, ENDPOINT } from '@/api';
-import { useAsync } from '@/hooks/useAsync';
-
 import classNames from 'classnames/bind';
 import styles from '@/components/common/SideBar/MemberList.module.scss';
 
@@ -8,21 +5,16 @@ import { Member } from '@/components/common/SideBar/';
 import { Empty } from '@/components/common/Empty';
 import { MixButton } from '@/components/common/Button';
 
-import { INITIAL_MESSAGE_TYPE, IMPORT_IMAGES } from '@/stores';
+import { IMPORT_IMAGES } from '@/stores';
 
 const cx = classNames.bind(styles);
 const { EMPTY } = IMPORT_IMAGES;
 
-export function MemberList({ id }) {
-  const {
-    data: { results },
-  } = useAsync(
-    () => api.get(`${ENDPOINT.RECIPIENTS}${id}/messages/`),
-    INITIAL_MESSAGE_TYPE
-  );
-
-  const latestMembers = results.slice(0, 4);
-  const isMembersEmpty = results.every((item) => item.id === null);
+export function MemberList({ messageData }) {
+  const membersCount = new Set(messageData.map((item) => item.sender)).size;
+  const AddMembersCount = Number(membersCount - 4);
+  const isMembersEmpty = messageData.every((item) => item.id === null);
+  const latestMembers = messageData.slice(0, 4);
 
   return (
     <div className={cx('member-list')}>
@@ -40,17 +32,41 @@ export function MemberList({ id }) {
       {isMembersEmpty ? (
         <Empty importImg={EMPTY} message={'No Members'} />
       ) : (
-        <ul className={cx('member-list-content')}>
-          {latestMembers.map((item) => (
-            <li key={item.id}>
-              <Member
-                image={item.profileImageURL}
-                member={item.sender}
-                relationship={item.relationship}
-              />
-            </li>
-          ))}
-        </ul>
+        <>
+          <div className={cx('lg-only')}>
+            <ul className={cx('member-list-content')}>
+              {latestMembers.map((item) => (
+                <li key={item.id}>
+                  <Member
+                    image={item.profileImageURL}
+                    member={item.sender}
+                    relationship={item.relationship}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className={cx('lg-hidden')}>
+            <ul className={cx('member-list-content')}>
+              {latestMembers.map((item) => (
+                <li key={item.id} className={cx('member-list-content-item')}>
+                  <img
+                    src={item.profileImageURL}
+                    alt='최신 등록 프로필 이미지'
+                  />
+                </li>
+              ))}
+              {membersCount > 4 && (
+                <li className={cx('member-list-content-count')}>
+                  <div>
+                    <span>+</span>
+                    <span>{AddMembersCount}</span>
+                  </div>
+                </li>
+              )}
+            </ul>
+          </div>
+        </>
       )}
     </div>
   );
