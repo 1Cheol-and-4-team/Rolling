@@ -4,8 +4,8 @@
     margin-top: $header-height;
   }
   .list-wrap {
-    @include column-flexbox(between);
     max-width: 116rem;
+    @include column-flexbox(between);
     margin: 0 auto 13.7rem;
     @include responsive('T') {
       width: calc(100vw - 4.8rem);

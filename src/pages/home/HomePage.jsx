@@ -37,7 +37,16 @@ function HomePage() {
       <div className={cx('home')}>
         <div>
           <HomeCard content={content1} />
-          <HomeCard content={content2} style={{ '--reverse': 'row-reverse' }} />
+          <HomeCard
+            content={content2}
+            style={{
+              '--reverse': 'row-reverse',
+              'padding-bottom': 0,
+              '--end': 'flex-end',
+              '--padding': `4.8rem`,
+              gap: 0,
+            }}
+          />
           <Link to={'/list'} className={cx('home-button')}>
             <Button variant='primary' size={100}>
               구경해보기

@@ -24,7 +24,9 @@ export function CardList(data) {
   return (
     <li
       style={{
-        backgroundImage: backgroundImageURL ? `url(${backgroundImageURL})` : '',
+        backgroundImage: backgroundImageURL
+          ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImageURL})`
+          : '',
       }}
       className={cx('card-list', `card-list-${backgroundColor}`)}
     >
