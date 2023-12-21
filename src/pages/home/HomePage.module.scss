@@ -1,6 +1,9 @@
 .home {
   @include column-flexbox(between, center);
-  margin-top: 12.4rem;
+  min-height: calc(100vh - $header-height);
+  margin: $header-height auto 0;
+  padding: 4.8rem 0;
+  position: relative;
 
   &-card {
     animation-name: my-animation;
@@ -9,5 +12,10 @@
     animation-delay: 0s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+  }
+
+  &-button {
+    position: fixed;
+    bottom: 2.4rem;
   }
 }

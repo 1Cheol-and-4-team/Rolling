@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import { imgChips } from '@/stores';
 import styles from './Option.module.scss';
 import classNames from 'classnames/bind';
 import { BACKGROUND_IMGURL } from '@/stores';
@@ -40,4 +39,3 @@ export function Option({ onClick }) {
     </ul>
   );
 }
-//background이미지를 배열로 받아와서 map함수로 펼쳐줘야해서 style속성을 사용했습니다. 혹시 문제시 알려주세요!(이 방법이 맞는지는 모르겠어요.)

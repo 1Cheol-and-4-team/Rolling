@@ -1,19 +1,20 @@
 .list-wrap {
   @include column-flexbox(between, center);
-  width: 116rem;
-  margin: auto;
-  margin-top: 16.6rem;
-  margin-bottom: 13.7rem;
+  gap: 4rem;
+  max-width: 116rem;
+  min-height: calc(100vh - $header-height);
+  margin: $header-height auto 0;
+  padding: 4.8rem 0;
 
   &-title {
     @include text-style(24, bold, $white);
     width: 100%;
-    margin: 5rem 0 1.6rem 0rem;
+    padding-bottom: 1.6rem;
   }
   &-btn {
     width: 28rem;
     position: fixed;
-    bottom: 4rem;
+    bottom: 2.4rem;
     left: 50%;
     transform: translateX(-50%);
   }

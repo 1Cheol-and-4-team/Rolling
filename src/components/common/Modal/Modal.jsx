@@ -7,7 +7,6 @@ import { Button } from '@/components/common/Button';
 import { fontToEnglish, onClickOutside } from '@/utils';
 
 import banner from '@/assets/images/modal-back.png';
-// import profile from '@/assets/images/modal-profile.png';
 
 const cx = classNames.bind(styles);
 

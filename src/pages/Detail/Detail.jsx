@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 // api
 import { api, ENDPOINT } from '@/api';
 import { useAsync } from '@/hooks/useAsync';
@@ -23,15 +24,14 @@ const cx = classNames.bind(styles);
 export const Detail = () => {
   const { id } = useParams();
   let url = window.location.href;
-
-  const { data } = useAsync(
-    () => api.get(`${ENDPOINT.RECIPIENTS}${id}/`),
-    INITIAL_RECIPIENTS_TYPE
-  );
-
   const [isActive, setIsActive] = useState(1);
   const [tabName, setTagName] = useState('All');
   const [sortOption, setSortOption] = useState('Latest');
+
+  const { data, execute } = useAsync(
+    () => api.get(`${ENDPOINT.RECIPIENTS}${id}/`),
+    INITIAL_RECIPIENTS_TYPE
+  );
 
   const handleActiveTabClick = (tabId, tabName) => {
     setIsActive(tabId);
@@ -53,10 +53,14 @@ export const Detail = () => {
     setSortOption(selectedValue);
   };
 
-  console.log(sortOption);
+  const userName = data.name;
 
   return (
     <div className={cx('detail')}>
+      <Helmet>
+        <title> {`${userName}님 페이지 | Rolling`}</title>
+      </Helmet>
+
       <Header />
       <ToastContainer
         position='top-center'
@@ -71,9 +75,17 @@ export const Detail = () => {
           <div className={cx('sidebar-content')}>
             <div className={cx('sidebar-header')}>
               <h2 className={cx('sidebar-title')}>{data.name}</h2>
-              <Count id={id} reactionCount={data.reactionCount} />
+              <Count
+                id={id}
+                getReactionCount={data.reactionCount}
+                getMessageCount={data.messageCount}
+              />
             </div>
-            <Emoji id={id} />
+            <Emoji
+              id={id}
+              getEmojiApi={execute}
+              getReactionCount={data.reactionCount}
+            />
             <MemberList id={id} />
           </div>
           <Banner />
@@ -113,7 +125,6 @@ export const Detail = () => {
                 <div className={cx('content-header-options')}>
                   <Dropdown
                     sortList={SORT_LIST}
-                    // setSortOption={setSortOption}
                     size='sm'
                     onClick={handleValueChange}
                   />
