@@ -25,6 +25,10 @@
     width: 100%;
     padding: 10.8rem 0;
 
+    @include responsive('M') {
+      padding: 4.8rem 0;
+    }
+
     fieldset {
       width: 100%;
       button {
@@ -44,7 +48,7 @@
           color: $system-error;
         }
         span {
-          @include text-style(16, 'nomarl', $gray-900);
+          @include text-style(16, 'nomarl', $text-gray);
         }
       }
     }
@@ -58,7 +62,7 @@
         margin-bottom: 0.4rem;
       }
       p {
-        @include text-style(16, 'nomarl', $gray-900);
+        @include text-style(16, 'nomarl', $text-gray);
       }
     }
     .button {

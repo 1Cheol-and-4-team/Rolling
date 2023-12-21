@@ -223,9 +223,6 @@
   }
 }
 
-.ic-btn-normal {
-}
-
 .ic-btn-add-card {
   @extend %icon-btn-base;
   width: 5.6rem;
@@ -241,7 +238,7 @@
 
 .ic-btn-arrow {
   @extend %icon-btn-base;
-  border: 0.1rem solid $gray-900;
+  border: 0.1rem solid #6b6b6d;
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
@@ -258,7 +255,7 @@
 
 .ic-btn-arrowRight {
   @extend %icon-btn-base;
-  border: 0.1rem solid $gray-900;
+  border: 0.1rem solid #6b6b6d;
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
@@ -285,7 +282,6 @@
 
 .ic-btn-delete {
   display: block;
-
   &:not(:disabled):hover {
     border: 1px solid $system-error;
     i {

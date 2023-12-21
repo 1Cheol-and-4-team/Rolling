@@ -71,7 +71,7 @@ export function Card({
               style='square'
               icon='ic-delete'
               iconSize='24'
-              iconColor='gray900'
+              iconColor='gray500'
               isDelete={isDelete}
               onClick={handleRemoveItem}
             />

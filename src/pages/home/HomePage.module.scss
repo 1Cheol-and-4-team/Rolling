@@ -12,15 +12,19 @@
   }
 
   &-button {
-    position: fixed;
-    left: 50%;
     transform: translateX(-50%);
     bottom: 2.4rem;
     @include responsive('T') {
       width: calc(100vw - 4.8rem);
+      position: fixed;
     }
     @include responsive('M') {
       width: calc(100vw - 4rem);
     }
   }
+}
+
+.button-area {
+  width: 100%;
+  text-align: center;
 }

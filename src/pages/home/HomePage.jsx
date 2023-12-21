@@ -47,11 +47,13 @@ function HomePage() {
               gap: 0,
             }}
           />
-          <Link to={'/list'} className={cx('home-button')}>
-            <Button variant='primary' size={100}>
-              구경해보기
-            </Button>
-          </Link>
+          <div className={cx('button-area')}>
+            <Link to={'/list'} className={cx('home-button')}>
+              <Button variant='primary' size={100}>
+                구경해보기
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </>
