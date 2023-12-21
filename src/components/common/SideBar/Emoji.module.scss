@@ -11,18 +11,18 @@
     &-title {
       @include text-style(16, 500, $white);
     }
-  }
 
-  .emoji-picker {
-    display: none;
-    position: absolute;
-    top: 54px;
-    right: -12px;
-    z-index: 10;
-  }
+    .emoji-picker {
+      display: none;
+      position: absolute;
+      top: 5.4rem;
+      right: -1.2rem;
+      z-index: $emoji-level;
+    }
 
-  .emoji-picker-block {
-    display: block;
+    .emoji-picker-block {
+      display: block;
+    }
   }
 
   &-empty {
@@ -45,5 +45,40 @@
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
     gap: 0.6rem;
+  }
+}
+
+.tablet-emoji {
+  @include flexbox();
+  gap: 0.8rem;
+  position: relative;
+
+  .emoji-picker {
+    right: 0;
+  }
+
+  &-list {
+    @include flexbox();
+    gap: 0.8rem;
+  }
+
+  .emoji-picker {
+    display: none;
+    position: absolute;
+    top: 4.8rem;
+    right: 0;
+    z-index: $emoji-level;
+  }
+
+  .emoji-picker-block {
+    display: block;
+  }
+
+  @include responsive('M') {
+    gap: 0.4rem;
+
+    &-list {
+      gap: 0.4rem;
+    }
   }
 }
