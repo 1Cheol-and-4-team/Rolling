@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/common/Button';
 import { ROLLING_LOGO } from '@/components/common/Header/constant';
-
 import classNames from 'classnames/bind';
 import styles from '@/components/common/Header/Header.module.scss';
 import editIcon from '@/assets/images/icons/edit.svg';
