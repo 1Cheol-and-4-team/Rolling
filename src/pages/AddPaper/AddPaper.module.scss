@@ -27,7 +27,7 @@
   }
 
   label {
-    @include text-style(24, bold, $text-white);
+    @include text-style(24, 700, $text-white);
     display: block;
     margin-bottom: 1.2rem;
   }
