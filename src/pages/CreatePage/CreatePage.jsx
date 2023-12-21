@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/common/Input';
-import { Header } from '@/Components/common/Header';
+import { Header } from '@/components/common/Header';
 import { Tab } from '@/components/common/Tab';
 import { ColorOption } from '@/components/common/ColorOption';
 import { Option } from '@/components/common/Option';

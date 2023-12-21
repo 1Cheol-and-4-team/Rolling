@@ -11,7 +11,7 @@ import 'react-quill/dist/quill.snow.css';
 import { api, ENDPOINT } from '@/api';
 import { useMutateAsync } from '@/hooks';
 
-import { Header } from '@/Components/common/Header';
+import { Header } from '@/components/common/Header';
 import { Input } from '@/components/common/Input';
 import { Dropdown } from '@/components/common/Dropdown';
 import { Button } from '@/components/common/Button';
