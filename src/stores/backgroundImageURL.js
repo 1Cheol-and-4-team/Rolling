@@ -1,18 +1,18 @@
 export const BACKGROUND_IMGURL = [
   {
     id: 1,
-    name: 'ponyo',
-    imgUrl: 'https://i.ibb.co/6s2Wd5w/ponyo.jpg',
+    name: 'chango',
+    imgUrl: 'https://i.ibb.co/khPsLpf/jang-goo.jpg',
   },
   {
     id: 2,
-    name: 'pink',
-    imgUrl: `https://i.ibb.co/vYHJ3sF/pink.jpg `,
+    name: 'bear',
+    imgUrl: 'https://i.ibb.co/kcZkc72/pinkbear.jpg',
   },
   {
     id: 3,
-    name: 'rabbitAndChick',
-    imgUrl: ' https://i.ibb.co/gJys1P1/rabbit-and-chick.jpg',
+    name: 'toystory',
+    imgUrl: ' https://i.ibb.co/kBhpRDf/toy-story.jpg',
   },
   {
     id: 4,
