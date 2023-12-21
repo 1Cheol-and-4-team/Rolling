@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 // api
 import { api, ENDPOINT } from '@/api';
@@ -10,6 +10,8 @@ import classNames from 'classnames/bind';
 import styles from '@/pages/Edit/Edit.module.scss';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import editIcon from '@/assets/images/icons/edit.svg';
+
 // component
 import { Header } from '@/components/common/Header';
 import { Banner, Count, Emoji, MemberList } from '@/components/common/SideBar';
@@ -89,7 +91,7 @@ export const Edit = () => {
         <title> {`롤링 페이퍼 편집하기 | Rolling`}</title>
       </Helmet>
 
-      <Header />
+      <Header isEdit={true} />
       <ToastContainer
         position='top-center'
         limit={1}
@@ -104,7 +106,14 @@ export const Edit = () => {
             <aside className={cx('sidebar')}>
               <div className={cx('sidebar-content')}>
                 <div className={cx('sidebar-header')}>
-                  <h2 className={cx('sidebar-title')}>{data.name}</h2>
+                  <div className={cx('sidebar-nav')}>
+                    <h2 className={cx('sidebar-title')}>{data.name}</h2>
+                    <Link to={`/post/${id}/`}>
+                      <Button variant='primary' size={42}>
+                        <img src={editIcon} alt='편집하기 버튼' />
+                      </Button>
+                    </Link>
+                  </div>
                   <Count id={id} countData={data} messageData={results} />
                 </div>
                 <Emoji

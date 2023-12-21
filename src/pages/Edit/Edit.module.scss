@@ -20,9 +20,13 @@
         border-right: 1px solid $border;
         background-color: $background;
 
+        &-nav {
+          @include flexbox(between);
+          margin-bottom: 2.4rem;
+        }
+
         &-title {
           @include text-style(32, 500, $text-white);
-          margin-bottom: 2.4rem;
           padding-left: 3.6rem;
           position: relative;
 
@@ -58,7 +62,6 @@
 
           &-title {
             @include text-style(24, 500, $text-white);
-            margin-bottom: 1.6rem;
           }
         }
       }
