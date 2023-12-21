@@ -91,7 +91,7 @@ export const Edit = () => {
         <title> {`롤링 페이퍼 편집하기 | Rolling`}</title>
       </Helmet>
 
-      <Header isEdit={true} />
+      <Header isEdit={true} id={id} />
       <ToastContainer
         position='top-center'
         limit={1}

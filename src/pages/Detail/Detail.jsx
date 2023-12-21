@@ -74,12 +74,12 @@ export const Detail = () => {
   const userName = data.name;
 
   return (
-    <div className={cx('detail')} id={id}>
+    <div className={cx('detail')}>
       <Helmet>
         <title> {`${userName}님 롤링 페이퍼 | Rolling`}</title>
       </Helmet>
 
-      <Header isDetail={true} />
+      <Header isDetail={true} id={id} />
       <ToastContainer
         position='top-center'
         limit={1}

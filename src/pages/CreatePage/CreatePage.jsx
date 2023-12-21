@@ -26,9 +26,10 @@ export function CreatePage() {
 
     const { value } = e.currentTarget;
     const name = e.currentTarget.getAttribute('name');
+    const selectedValue = value || e.currentTarget.getAttribute('value');
 
-    setValues((prevValues) => ({ ...prevValues, [name]: value }));
-    setError(!value ? 'error' : '');
+    setValues((prevValues) => ({ ...prevValues, [name]: selectedValue }));
+    setError(!selectedValue ? 'error' : '');
   };
 
   const [isActiveTab, setIsActiveTab] = useState(1);
