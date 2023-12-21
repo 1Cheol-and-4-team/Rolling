@@ -14,16 +14,16 @@
     padding: 3rem 2.2rem 2rem 2.4rem;
   }
   &-title {
-    @include text-style(24, 700, $gray-900);
+    @include text-style(24, 700, $card);
     @include responsive('M') {
-      @include text-style(18, 700, $gray-900);
+      @include text-style(18, 700, $card);
     }
   }
 
   &-count {
-    @include text-style(16, 'nomarl', $gray-700);
+    @include text-style(16, 'nomarl', $card);
     @include responsive('M') {
-      @include text-style(14, 'nomarl', $gray-700);
+      @include text-style(14, 'nomarl', $card);
     }
     span {
       @include text-style(16, 700);
@@ -40,6 +40,7 @@
     border-top: 0.1rem solid rgba(0, 0, 0, 0.12);
     gap: 0.8rem;
     @include responsive('M') {
+      width: 100%;
       gap: 0.4rem;
     }
   }

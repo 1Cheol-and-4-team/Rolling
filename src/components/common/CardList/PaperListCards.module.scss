@@ -5,7 +5,13 @@
 .cardList {
   @include column-flexbox(center, center);
   position: relative;
+  @include responsive('T') {
+    width: 100%;
+  }
   &-wrap {
+    @include responsive('T') {
+      width: 100%;
+    }
     max-width: 116rem;
     overflow: hidden;
   }

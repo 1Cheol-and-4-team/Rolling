@@ -1,6 +1,14 @@
 :root {
   --reverse: flex-start;
 }
+@keyframes slideIn {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
 
 .home-card {
   display: flex;
@@ -9,23 +17,58 @@
   flex-direction: var(--reverse);
   width: 116rem;
   padding: 6rem 0px;
-  margin-bottom: 5.2rem;
+  margin-bottom: 3rem;
   gap: 8.8rem;
-
   border-radius: 1.6rem;
   background: $surface;
+  @include responsive('T') {
+    width: calc(100vw - 4.8rem);
+    @include column-flexbox(start, start);
+    padding: 4rem;
+    gap: 4rem;
+  }
+  @include responsive('M') {
+    padding: 2.4rem 0 5.1rem;
+    overflow: hidden;
+  }
+
+  &-wrap {
+    @include responsive('T') {
+      width: 72rem;
+      padding-left: 4rem;
+    }
+    @include responsive('M') {
+      width: calc(100% - 4.8rem);
+    }
+  }
+
+  &-paused {
+    animation-play-state: paused;
+  }
+
   &-point {
     padding: 0.6rem 1.2rem;
     display: inline-block;
     border-radius: 5rem;
     background: $purple-600;
   }
+
   &-text {
     @include text-style(14, 'normal', $white);
   }
+
   &-title {
-    @include text-style(24, bold);
+    @include text-style(24, 700);
     margin-top: 1.6rem;
+  }
+
+  &-br {
+    @include responsive('T') {
+      display: none;
+    }
+    @include responsive('M') {
+      display: none;
+    }
   }
 
   &-des {
@@ -33,7 +76,18 @@
     margin-top: 0.8rem;
   }
   img {
+    animation: slideIn 1s forwards;
+
     width: 72rem;
     height: 20.4rem;
+
+    @include responsive('T') {
+      width: 100%;
+      height: auto;
+    }
+    @include responsive('M') {
+      width: 100%;
+      height: auto;
+    }
   }
 }

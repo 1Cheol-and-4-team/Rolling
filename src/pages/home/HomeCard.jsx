@@ -3,7 +3,7 @@ import styles from './HomeCard.module.scss';
 
 const cx = classNames.bind(styles);
 
-function KeyPointCard({ content, style }) {
+function HomeCard({ content, style }) {
   const { point, title1, title2, explain, image } = content;
 
   return (
@@ -14,7 +14,7 @@ function KeyPointCard({ content, style }) {
         </div>
         <h1 className={cx('home-card-title')}>
           {title1}
-          <br />
+          <br className={cx('home-card-title')} />
           {title2}
         </h1>
         <p className={cx('home-card-des')}>{explain}</p>
@@ -24,4 +24,4 @@ function KeyPointCard({ content, style }) {
   );
 }
 
-export default KeyPointCard;
+export default HomeCard;

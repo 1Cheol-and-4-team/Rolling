@@ -17,7 +17,10 @@ export function ProfileImg({ id, recentMessages }) {
   const {
     data: { results },
   } = useAsync(
-    () => api.get(`${ENDPOINT.RECIPIENTS}${id}/messages/`),
+    () =>
+      api.get(`${ENDPOINT.RECIPIENTS}${id}/messages/`, {
+        params: { limit: 100 },
+      }),
     INITIAL_MESSAGE_TYPE
   );
   //작성한 사람 수, (동일 이름은 제외)

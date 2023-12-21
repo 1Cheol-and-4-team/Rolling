@@ -4,18 +4,23 @@
   margin: $header-height auto 0;
   padding: 4.8rem 0;
   position: relative;
-
-  &-card {
-    animation-name: my-animation;
-    animation-duration: 2s;
-    animation-timing-function: ease;
-    animation-delay: 0s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  @include responsive('T') {
+    margin-bottom: 4rem;
+  }
+  @include responsive('M') {
+    margin-bottom: 4rem;
   }
 
   &-button {
     position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
     bottom: 2.4rem;
+    @include responsive('T') {
+      width: calc(100vw - 4.8rem);
+    }
+    @include responsive('M') {
+      width: calc(100vw - 4rem);
+    }
   }
 }
