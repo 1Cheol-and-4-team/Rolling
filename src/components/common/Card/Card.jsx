@@ -19,10 +19,12 @@ export function Card({
   relationship,
   sender,
   profileImageURL,
+  backgroundUrl,
+  backgroundColor,
   content,
   createdAt,
   isDelete,
-  execute,
+  getMessageApi,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data } = useAsync(
@@ -48,7 +50,7 @@ export function Card({
       const res = await api.delete(`${ENDPOINT.MESSAGES}${id}/`);
 
       if (!res.status) return console.error('[SERVER ERROR]', e);
-      execute();
+      await getMessageApi();
     } catch (e) {
       console.error('[API ERROR]', e);
     }
@@ -90,11 +92,14 @@ export function Card({
         <footer className={cx('card-date')}>
           <span>{formatDate(createdAt)}</span>
         </footer>
+        <div className={cx('gradient-box')}></div>
       </div>
       {isModalOpen && (
         <Overlay>
           <Modal
             profileImage={profileImageURL}
+            backgroundUrl={backgroundUrl}
+            backgroundColor={backgroundColor}
             messageData={data}
             handleModalClose={handleModalClose}
           />

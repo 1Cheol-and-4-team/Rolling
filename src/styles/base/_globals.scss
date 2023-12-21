@@ -37,3 +37,39 @@
     }
   }
 }
+
+.lg-hidden {
+  @media screen and (min-width: $desktop-breakpoint + 1) {
+    display: none;
+  }
+}
+
+.lg-only {
+  @media screen and (max-width: $desktop-breakpoint) {
+    display: none;
+  }
+}
+
+.md-hidden {
+  @media screen and (max-width: $tablet-breakpoint) {
+    display: none;
+  }
+}
+
+.md-only {
+  @media screen and (min-width: $tablet-breakpoint + 1) {
+    display: none;
+  }
+}
+
+.sm-only {
+  @media screen and (min-width: $mobile-breakpoint + 1) {
+    display: none;
+  }
+}
+
+.sm-hidden {
+  @media screen and (max-width: $mobile-breakpoint) {
+    display: none;
+  }
+}

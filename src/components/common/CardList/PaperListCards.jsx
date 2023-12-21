@@ -10,8 +10,8 @@ const cx = classNames.bind(styles);
 function PaperListCards({ data }) {
   const [scroll, setScroll] = useState(0);
   const [currentCardIndex, setcurrentCardIndex] = useState(4);
-
   const dataCount = data.length;
+
   const handleClick = () => {
     setScroll(scroll - 29.5);
     if (currentCardIndex <= dataCount - 1) {

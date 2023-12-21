@@ -6,11 +6,15 @@ import classNames from 'classnames/bind';
 import { Button } from '@/components/common/Button';
 import { fontToEnglish, onClickOutside } from '@/utils';
 
-import banner from '@/assets/images/modal-back.png';
-
 const cx = classNames.bind(styles);
 
-export function Modal({ profileImage, messageData, handleModalClose }) {
+export function Modal({
+  profileImage,
+  backgroundUrl,
+  backgroundColor,
+  messageData,
+  handleModalClose,
+}) {
   const modalRef = useRef();
 
   useEffect(() => {
@@ -38,14 +42,16 @@ export function Modal({ profileImage, messageData, handleModalClose }) {
     return { __html: html };
   }
 
-  // const formatedDate = formatDate(messageData.createdAt);
   const fontClassName = fontToEnglish(messageData.relationship);
 
   return (
     <div className={cx('modal')} ref={modalRef}>
-      <div className={cx('modal-banner')}>
-        <img src={banner} alt='글쓴이 링크 이미지' />
-      </div>
+      <div
+        className={cx('modal-banner', `modal-banner-${backgroundColor}`)}
+        style={{
+          backgroundImage: backgroundUrl ? `url(${backgroundUrl})` : '',
+        }}
+      ></div>
       <div className={cx('modal-content')}>
         <div className={cx('modal-content-profile')}>
           <img src={profileImage} alt='글쓴이 프로필 이미지' />

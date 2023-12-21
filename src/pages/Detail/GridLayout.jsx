@@ -13,7 +13,14 @@ import { IMPORT_IMAGES } from '@/stores';
 const cx = classNames.bind(styles);
 const { EMPTY_CARD } = IMPORT_IMAGES;
 
-export const GridLayout = ({ id, tabName, sortOption }) => {
+export const GridLayout = ({
+  id,
+  tabName,
+  sortOption,
+  backgroundUrl,
+  backgroundColor,
+  getMessagesApi,
+}) => {
   const {
     data: { results },
   } = useAsync(
@@ -62,8 +69,11 @@ export const GridLayout = ({ id, tabName, sortOption }) => {
                 relationship={item.relationship}
                 sender={item.sender}
                 profileImageURL={item.profileImageURL}
+                backgroundUrl={backgroundUrl}
+                backgroundColor={backgroundColor}
                 content={item.content}
                 createdAt={item.createdAt}
+                getMessageApi={getMessagesApi}
               />
             </li>
           ))}

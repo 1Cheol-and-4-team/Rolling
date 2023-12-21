@@ -1,22 +1,25 @@
 .badge {
   @include inline-flexbox();
 
-  padding: 0 1.2rem;
+  padding: 0 0.8rem;
   height: 2.4rem;
   border-radius: 0.4rem;
   background-color: $gray-200;
 
   &-Soulmate {
-    color: $orange;
+    color: $green;
   }
+
   &-Colleague {
     color: $blue;
   }
+
   &-Family {
-    color: $skyblue;
+    color: $orange;
   }
+
   &-Friend {
-    color: $green;
+    color: $skyblue;
   }
 
   &-type-sidebar {
@@ -24,6 +27,6 @@
   }
 
   span {
-    @include text-style(12, 400);
+    @include text-style(12, 500);
   }
 }

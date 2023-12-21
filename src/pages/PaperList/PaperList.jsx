@@ -22,6 +22,7 @@ export function PaperList() {
   );
 
   const like = data.results;
+
   return (
     <div className={cx('paper-list')}>
       <Helmet>

@@ -16,7 +16,7 @@ import { IMPORT_IMAGES } from '@/stores';
 const cx = classNames.bind(styles);
 const { EMPTY } = IMPORT_IMAGES;
 
-export function Emoji({ id, getEmojiApi, getReactionCount }) {
+export function Emoji({ id, getEmojiApi, getReactionCount, isDesktopHide }) {
   const emojiRef = useRef();
   const [isOpen, setOpen] = useState(false);
 
@@ -35,6 +35,8 @@ export function Emoji({ id, getEmojiApi, getReactionCount }) {
     () => api.get(`${ENDPOINT.RECIPIENTS}${id}/reactions/`),
     INITIAL_EMOJI_TYPE
   );
+
+  const showTabletEmoji = results.slice(0, 3);
 
   const isReactionsEmpty =
     getReactionCount === undefined || getReactionCount === 0;
@@ -66,53 +68,103 @@ export function Emoji({ id, getEmojiApi, getReactionCount }) {
   };
 
   return (
-    <div className={cx('emoji')}>
-      <div className={cx('emoji-header')}>
-        <h1 className={cx('emoji-header-title')}>Reactions</h1>
-        <div ref={emojiRef}>
-          <IconButton
-            variant='outlined'
-            style='square'
-            icon='ic-add-emoji'
-            iconSize='24'
-            iconColor='white'
-            active={isOpen}
-            onClick={handleToggleEmoji}
-          />
-          <div
-            className={cx('emoji-picker', {
-              'emoji-picker-block': isOpen,
-            })}
-          >
-            <EmojiPicker
-              width={280}
-              height={360}
-              searchPlaceHolder='Search...'
-              emojiStyle='apple'
-              searchDisabled={false}
-              lazyLoadEmojis={false}
-              theme='dark'
-              onEmojiClick={onEmojiClick}
-              previewConfig={{
-                showPreview: true,
-                defaultCaption: '[Rolling]Add your reaction!',
-              }}
+    <>
+      {isDesktopHide ? (
+        <div className={cx('tablet-emoji')}>
+          {isReactionsEmpty ? (
+            <Empty importImg={EMPTY} message={'No Reactions'} />
+          ) : (
+            <ul className={cx('tablet-emoji-list')}>
+              {showTabletEmoji.map((item) => (
+                <li key={item.id} className={cx('tablet-emoji-list-item')}>
+                  <BadgeEmoji emoji={item.emoji} count={item.count} />
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <div ref={emojiRef}>
+            <IconButton
+              variant='outlined'
+              style='square'
+              icon='ic-add-emoji'
+              iconSize='24'
+              iconColor='white'
+              active={isOpen}
+              onClick={handleToggleEmoji}
             />
+            <div
+              className={cx('emoji-picker', {
+                'emoji-picker-block': isOpen,
+              })}
+            >
+              <EmojiPicker
+                width={280}
+                height={360}
+                searchPlaceHolder='Search...'
+                emojiStyle='apple'
+                searchDisabled={false}
+                lazyLoadEmojis={false}
+                theme='dark'
+                onEmojiClick={onEmojiClick}
+                previewConfig={{
+                  showPreview: true,
+                  defaultCaption: '[Rolling]Add your reaction!',
+                }}
+              />
+            </div>
           </div>
         </div>
-      </div>
-
-      {isReactionsEmpty ? (
-        <Empty importImg={EMPTY} message={'No Reactions'} />
       ) : (
-        <ul className={cx('emoji-content')}>
-          {results.map((item) => (
-            <li key={item.id}>
-              <BadgeEmoji emoji={item.emoji} count={item.count} />
-            </li>
-          ))}
-        </ul>
+        <div className={cx('emoji')}>
+          <div className={cx('emoji-header')}>
+            <h1 className={cx('emoji-header-title')}>Reactions</h1>
+            <div ref={emojiRef}>
+              <IconButton
+                variant='outlined'
+                style='square'
+                icon='ic-add-emoji'
+                iconSize='24'
+                iconColor='white'
+                active={isOpen}
+                onClick={handleToggleEmoji}
+              />
+              <div
+                className={cx('emoji-picker', {
+                  'emoji-picker-block': isOpen,
+                })}
+              >
+                <EmojiPicker
+                  width={280}
+                  height={360}
+                  searchPlaceHolder='Search...'
+                  emojiStyle='apple'
+                  searchDisabled={false}
+                  lazyLoadEmojis={false}
+                  theme='dark'
+                  onEmojiClick={onEmojiClick}
+                  previewConfig={{
+                    showPreview: true,
+                    defaultCaption: '[Rolling]Add your reaction!',
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+
+          {isReactionsEmpty ? (
+            <Empty importImg={EMPTY} message={'No Reactions'} />
+          ) : (
+            <ul className={cx('emoji-content')}>
+              {results.map((item) => (
+                <li key={item.id}>
+                  <BadgeEmoji emoji={item.emoji} count={item.count} />
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 }

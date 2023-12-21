@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
+import styles from '@/components/common/Header/Header.module.scss';
 import { Button } from '@/components/common/Button';
 import { ROLLING_LOGO } from '@/components/common/Header/constant';
-import styles from '@/components/common/Header/Header.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -19,7 +19,7 @@ export const Header = ({ isLanding }) => {
           <>
             <Link to={'/post'}>
               <Button variant='primary' size={42}>
-                Create paper
+                롤링 페이퍼 만들기
               </Button>
             </Link>
           </>

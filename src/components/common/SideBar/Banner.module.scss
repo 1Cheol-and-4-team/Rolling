@@ -10,6 +10,7 @@
   background-image: url(../../../assets/images/banner-gardient.svg);
   background-position: bottom;
   background-repeat: no-repeat;
+  cursor: pointer;
 
   &-text {
     @include pos-center-y();
@@ -25,6 +26,7 @@
 
       span {
         @include text-style(14, 500, $purple);
+        line-height: normal;
       }
     }
 
@@ -39,5 +41,29 @@
     height: 8.5rem;
     bottom: 2.4rem;
     right: 2.4rem;
+  }
+
+  @include responsive('D') {
+    height: 7rem;
+
+    padding: 1.2rem 2rem;
+
+    &-text {
+      p {
+        img {
+          width: 1rem;
+          height: 1rem;
+        }
+      }
+
+      h1 {
+        @include text-style(14, bold, #e0e0e0);
+      }
+    }
+
+    .handImg {
+      width: 6.4rem;
+      height: auto;
+    }
   }
 }
