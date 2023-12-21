@@ -1,6 +1,3 @@
-import { api, ENDPOINT } from '@/api';
-import { useAsync } from '@/hooks/useAsync';
-import { INITIAL_MESSAGE_TYPE } from '@/stores';
 // lib
 import classNames from 'classnames/bind';
 import styles from '@/pages/Edit/Edit.module.scss';
@@ -14,30 +11,20 @@ const cx = classNames.bind(styles);
 const { EMPTY_CARD } = IMPORT_IMAGES;
 
 export const GridLayout = ({
-  id,
   tabName,
   sortOption,
   backgroundUrl,
   backgroundColor,
   getMessagesApi,
+  messageData,
 }) => {
-  const {
-    data: { results },
-  } = useAsync(
-    () =>
-      api.get(`${ENDPOINT.RECIPIENTS}${id}/messages/`, {
-        params: { limit: 100 },
-      }),
-    INITIAL_MESSAGE_TYPE
-  );
-
-  const isRollingPaperEmpty = results.every((item) => item.id === null);
+  const isRollingPaperEmpty = messageData.every((item) => item.id === null);
   const koreanTagName = relationshipToKorean(tabName);
 
   const filterData = (extractTagName) => {
     return extractTagName === 1
-      ? results
-      : results.filter((item) => item.relationship === extractTagName);
+      ? messageData
+      : messageData.filter((item) => item.relationship === extractTagName);
   };
   const filterResult = filterData(koreanTagName);
 
