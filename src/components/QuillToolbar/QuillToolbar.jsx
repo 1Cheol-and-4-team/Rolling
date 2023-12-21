@@ -34,7 +34,6 @@ export const QuillToolbar = () => (
       <select className='ql-font' defaultValue='arial'>
         <option value='Noto-sans'>Noto sans</option>
         <option value='Pretendard'>Pretendard</option>
-        <option value='Helvetica'>Helvetica</option>
         <option value='Nanum-Myeongjo'>나눔명조</option>
         <option value='Nanum-Pen-Script'>나눔손글씨 손편지체</option>
       </select>
