@@ -17,7 +17,7 @@ export function PaperList() {
   } = useAsync(() => api.get(ENDPOINT.RECIPIENTS), INITIAL_RECIPIENTS_TYPE);
 
   const { data } = useAsync(
-    () => api.get(ENDPOINT.RECIPIENTS, { params: { limit: 8, sort: 'like' } }),
+    () => api.get(ENDPOINT.RECIPIENTS, { params: { sort: 'like' } }),
     INITIAL_RECIPIENTS_TYPE
   );
 

@@ -13,12 +13,12 @@
       width: 100%;
     }
     max-width: 116rem;
-    overflow: hidden;
+    overflow: scroll;
+    @include scrollbar_hide();
   }
 
   &-card {
     @include flexbox(start, center);
-
     width: 100%;
     gap: 2rem;
     transition: transform 0.3s ease-in-out;
