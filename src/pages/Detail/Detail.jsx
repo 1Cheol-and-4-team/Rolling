@@ -10,12 +10,14 @@ import classNames from 'classnames/bind';
 import styles from '@/pages/Detail/Detail.module.scss';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import editIcon from '@/assets/images/icons/edit.svg';
 // component
 import { Header } from '@/components/common/Header';
 import { Banner, Count, Emoji, MemberList } from '@/components/common/SideBar';
 import { GridLayout } from '@/pages/Detail/GridLayout';
 import { IconButton, MixButton } from '@/components/common/Button';
 import { Dropdown } from '@/components/common/Dropdown';
+import { Button } from '@/components/common/Button';
 
 import { SORT_LIST, SENDER_TAB_LIST } from '@/stores';
 
@@ -72,12 +74,12 @@ export const Detail = () => {
   const userName = data.name;
 
   return (
-    <div className={cx('detail')}>
+    <div className={cx('detail')} id={id}>
       <Helmet>
         <title> {`${userName}님 롤링 페이퍼 | Rolling`}</title>
       </Helmet>
 
-      <Header />
+      <Header isDetail={true} />
       <ToastContainer
         position='top-center'
         limit={1}
@@ -92,7 +94,14 @@ export const Detail = () => {
             <aside className={cx('sidebar')}>
               <div className={cx('sidebar-content')}>
                 <div className={cx('sidebar-header')}>
-                  <h2 className={cx('sidebar-title')}>{data.name}</h2>
+                  <div className={cx('sidebar-nav')}>
+                    <h2 className={cx('sidebar-title')}>{data.name}</h2>
+                    <Link to={`/post/${id}/edit`}>
+                      <Button variant='outlined' size={42}>
+                        <img src={editIcon} alt='편집하기 버튼' />
+                      </Button>
+                    </Link>
+                  </div>
                   <Count id={id} countData={data} messageData={results} />
                 </div>
                 <Emoji
