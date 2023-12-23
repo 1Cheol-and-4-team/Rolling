@@ -79,7 +79,6 @@ export function CreatePage() {
           <img src={goMobile} alt='Go Mobile' />
         </Link>
       </div>
-
       <main className={cx('form-wrapper')}>
         <div className={cx('container')}>
           <form className={cx('form')}>
