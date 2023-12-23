@@ -32,6 +32,10 @@ export function Card({
     INITIAL_RECIPIENTS_TYPE
   );
 
+  const hexCodeRegex = /[?&]color=([^&]+)/;
+  const match = profileImageURL.match(hexCodeRegex);
+  const randomColor = match ? match[1] : '#24262B';
+
   function createMarkup(html) {
     return { __html: html };
   }
@@ -79,7 +83,10 @@ export function Card({
         </header>
         <main className={cx('card-content')}>
           <div className={cx('sender-info')}>
-            <div className={cx('sender-profile')}>
+            <div
+              className={cx('sender-profile')}
+              style={{ '--color': randomColor }}
+            >
               <img src={profileImageURL} alt='글쓴이 프로필 사진' />
             </div>
             <span className={cx('sender-name')}>{sender}</span>
@@ -98,6 +105,7 @@ export function Card({
         <Overlay>
           <Modal
             profileImage={profileImageURL}
+            randomColor={randomColor}
             backgroundUrl={backgroundUrl}
             backgroundColor={backgroundColor}
             messageData={data}

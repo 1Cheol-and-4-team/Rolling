@@ -15,7 +15,7 @@
       border-radius: 0.6rem;
       transition: all ease-in-out 0.2s;
 
-      &:focus:not(:focus-visible):not(:error) {
+      &:focus:not(:focus-visible) {
         outline: none;
       }
 
@@ -25,12 +25,12 @@
         border: 0.2rem solid $purple;
       }
 
-      &:not(:disabled):not(:error):active {
+      &:not(:disabled):active {
         color: $text-white;
         border: 0.1rem solid $purple;
       }
 
-      &:not(:disabled):not(:error):hover {
+      &:not(:disabled):hover {
         border: 0.1rem solid $purple;
       }
 
