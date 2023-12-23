@@ -67,7 +67,7 @@ export function CreatePage() {
   return (
     <div className={cx('create-page')}>
       <Helmet>
-        <title> 메세지 생성하기님 페이지 | Rolling</title>
+        <title> 메세지 생성하기 페이지 | Rolling</title>
       </Helmet>
       <div className={cx('header')}>
         <Header />
@@ -134,7 +134,6 @@ export function CreatePage() {
                 생성하기
               </Button>
             </fieldset>
-            {/* </div> */}
           </form>
         </div>
       </main>
