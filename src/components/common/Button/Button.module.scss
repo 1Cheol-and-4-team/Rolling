@@ -1,7 +1,7 @@
 %btn-base {
   @include inline-flexbox();
 
-  padding: 0 0.8rem;
+  padding: 0 1.6rem;
   border-radius: 0.6rem;
 
   &:disabled {
@@ -27,7 +27,7 @@
     width: 100%;
   }
   &:not(:disabled):hover {
-    background-color: $purple-600;
+    background-color: $purple-dark;
   }
 }
 
@@ -50,6 +50,10 @@
   border: 0.1rem solid $border;
   background-color: transparent;
   transition: all ease-in-out 0.2s;
+
+  i {
+    transition: all ease-in-out 0.2s;
+  }
 
   &:not(:disabled):hover {
     border-color: $purple;
@@ -74,13 +78,46 @@
   }
 }
 
+.btn-delete-fill {
+  @extend %btn-base;
+  color: $text-white;
+  background-color: $system-error;
+  transition: all ease-in-out 0.2s;
+
+  &:hover {
+    background-color: $red-dark;
+  }
+}
+
 .btn-delete {
   color: $system-error;
   border-color: $system-error;
+
   &:not(:disabled):hover {
     color: $text-white;
     border-color: $system-error;
     background-color: $system-error;
+  }
+}
+
+.btn-edit {
+  width: 4rem;
+  height: 4rem;
+  border: 0.1rem solid $border;
+  border-radius: 0.6rem;
+  transition: all ease-in-out 0.2s;
+
+  &:not(:disabled):hover {
+    border-color: $purple;
+  }
+
+  &-active {
+    background-color: $purple;
+    border: none;
+
+    &:not(:disabled):hover {
+      background-color: $purple-dark;
+    }
   }
 }
 
@@ -97,11 +134,10 @@
 
 /* ------- Button Size ------- */
 .btn--size {
-  //추가
   &-100 {
     height: 5.6rem;
     span {
-      @include text-style(18, bold);
+      @include text-style(18, 500);
       width: 26.4rem;
     }
   }
@@ -128,7 +164,6 @@
 
     span {
       @include text-style(16, 500);
-      width: 9rem;
     }
   }
 

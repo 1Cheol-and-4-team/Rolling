@@ -1,26 +1,33 @@
 import { Link } from 'react-router-dom';
-import { Button } from '@/components/common/Button';
+import { Button, LinkButton, EditButton } from '@/components/common/Button';
 import { ROLLING_LOGO } from '@/components/common/Header/constant';
 
 import classNames from 'classnames/bind';
 import styles from '@/components/common/Header/Header.module.scss';
-import editIcon from '@/assets/images/icons/edit.svg';
+import { IMPORT_IMAGES, ROUTER_PATH } from '@/stores';
 
 const cx = classNames.bind(styles);
+const { EDIT } = IMPORT_IMAGES;
+const { LANDING_PATH, POST_PATH } = ROUTER_PATH;
 
-export const Header = ({ isLanding, isDetail, isEdit, id }) => {
+export const Header = ({
+  id,
+  isLanding = false,
+  isDetail = false,
+  isEdit = false,
+}) => {
   return (
     <header className={cx('main-header')}>
       <div className={cx('header-container')}>
         <h1 className={cx('logo')}>
-          <Link to={'/'}>
+          <LinkButton path={LANDING_PATH}>
             <img src={ROLLING_LOGO.logo} alt={ROLLING_LOGO.alt} />
-          </Link>
+          </LinkButton>
         </h1>
         {isLanding && (
           <>
-            <Link to={'/post'}>
-              <Button variant='primary' size={42}>
+            <Link to={POST_PATH}>
+              <Button variant='primary' size={40}>
                 롤링 페이퍼 만들기
               </Button>
             </Link>
@@ -28,20 +35,16 @@ export const Header = ({ isLanding, isDetail, isEdit, id }) => {
         )}
         {isDetail && (
           <div className={cx('header-edit')}>
-            <Link to={`/post/${id}/edit`}>
-              <Button variant='outlined' size={42}>
-                <img src={editIcon} alt='편집하기 버튼' />
-              </Button>
-            </Link>
+            <LinkButton path={`/post/${id}/edit`}>
+              <EditButton src={EDIT.URL} alt={EDIT.ALT} />
+            </LinkButton>
           </div>
         )}
         {isEdit && (
           <div className={cx('header-edit')}>
-            <Link to={`/post/${id}/`}>
-              <Button variant='primary' size={42}>
-                <img src={editIcon} alt='편집하기 버튼' />
-              </Button>
-            </Link>
+            <LinkButton path={`/post/${id}`}>
+              <EditButton src={EDIT.URL} alt={EDIT.ALT} active={true} />
+            </LinkButton>
           </div>
         )}
       </div>

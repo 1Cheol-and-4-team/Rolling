@@ -3,7 +3,7 @@ import styles from './HomeCard.module.scss';
 
 const cx = classNames.bind(styles);
 
-function HomeCard({ content, style }) {
+export function HomeCard({ content, style }) {
   const { point, title1, title2, explain, image } = content;
 
   return (
@@ -23,5 +23,3 @@ function HomeCard({ content, style }) {
     </div>
   );
 }
-
-export default HomeCard;

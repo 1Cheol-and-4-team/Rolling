@@ -1,15 +1,16 @@
 import { useState } from 'react';
-// api
+
 import { api, ENDPOINT } from '@/api';
 import { useAsync } from '@/hooks/useAsync';
-import { INITIAL_RECIPIENTS_TYPE } from '@/stores';
-// lib
+import { INITIAL_RECIPIENTS_TYPE, IMPORT_IMAGES } from '@/stores';
+
 import classNames from 'classnames/bind';
 import styles from './Card.module.scss';
-// component
+
 import { Badge } from '@/components/common/Badge';
 import { Overlay, Modal } from '@/components/common/Modal';
-import { IconButton } from '@/components/common/Button/IconButton';
+import { ConfirmModal } from '@/components/common/ConfirmModal';
+import { Button, IconButton } from '@/components/common/Button';
 import { formatDate } from '@/utils';
 
 const cx = classNames.bind(styles);
@@ -26,26 +27,43 @@ export function Card({
   isDelete,
   getMessageApi,
 }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const { CONFRIM_MODAL } = IMPORT_IMAGES;
+
   const { data } = useAsync(
     () => api.get(`${ENDPOINT.MESSAGES}${id}/`),
     INITIAL_RECIPIENTS_TYPE
   );
+
+  const hexCodeRegex = /[?&]color=([^&]+)/;
+  const match = profileImageURL.match(hexCodeRegex);
+  const randomColor = match ? match[1] : '#24262B';
 
   function createMarkup(html) {
     return { __html: html };
   }
 
   const handleModalOpen = () => {
-    setIsModalOpen(true);
+    setIsMessageModalOpen(true);
   };
 
   const handleModalClose = () => {
-    setIsModalOpen(false);
+    setIsMessageModalOpen(false);
+  };
+
+  const handleConfrimModalOpen = (e) => {
+    e.stopPropagation();
+    setIsConfirmModalOpen(true);
+  };
+
+  const handleConfrimModalClose = () => {
+    setIsConfirmModalOpen(false);
   };
 
   const handleRemoveItem = async (e) => {
     e.stopPropagation();
+
     try {
       const res = await api.delete(`${ENDPOINT.MESSAGES}${id}/`);
 
@@ -73,13 +91,16 @@ export function Card({
               iconSize='24'
               iconColor='gray500'
               isDelete={isDelete}
-              onClick={handleRemoveItem}
+              onClick={handleConfrimModalOpen}
             />
           </div>
         </header>
         <main className={cx('card-content')}>
           <div className={cx('sender-info')}>
-            <div className={cx('sender-profile')}>
+            <div
+              className={cx('sender-profile')}
+              style={{ '--color': randomColor }}
+            >
               <img src={profileImageURL} alt='글쓴이 프로필 사진' />
             </div>
             <span className={cx('sender-name')}>{sender}</span>
@@ -94,15 +115,45 @@ export function Card({
         </footer>
         <div className={cx('gradient-box')}></div>
       </div>
-      {isModalOpen && (
+      {isMessageModalOpen && (
         <Overlay>
           <Modal
             profileImage={profileImageURL}
+            randomColor={randomColor}
             backgroundUrl={backgroundUrl}
             backgroundColor={backgroundColor}
             messageData={data}
             handleModalClose={handleModalClose}
           />
+        </Overlay>
+      )}
+      {isConfirmModalOpen && (
+        <Overlay>
+          <ConfirmModal
+            info='롤링페이퍼를 삭제하시겠습니까?'
+            desc='삭제된 롤링페이퍼는 복구할 수 없습니다.'
+            iconUrl={CONFRIM_MODAL.DELETE.URL}
+            handleModalClose={handleConfrimModalClose}
+          >
+            {
+              <>
+                <Button
+                  variant='secondary'
+                  size={40}
+                  onClick={handleConfrimModalClose}
+                >
+                  취소
+                </Button>
+                <Button
+                  variant='delete-fill'
+                  size={40}
+                  onClick={handleRemoveItem}
+                >
+                  삭제
+                </Button>
+              </>
+            }
+          </ConfirmModal>
         </Overlay>
       )}
     </>

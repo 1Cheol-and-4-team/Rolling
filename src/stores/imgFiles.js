@@ -1,5 +1,12 @@
 import empty from '@/assets/images/icons/ic-emoji-empty.svg';
 import emptyCard from '@/assets/images/icons/ic-empty-paper.svg';
+import editIcon from '@/assets/images/icons/edit.svg';
+import banner01 from '@/assets/images/point1-img.svg';
+import banner02 from '@/assets/images/point2-img.svg';
+import checkIcon from '@/assets/images/icons/ic-check.svg';
+import deleteIcon from '@/assets/images/icons/ic-delete.svg';
+import symbol from '@/assets/images/icons/logo-symbol.svg';
+import clap from '@/assets/images/img-hand.png';
 
 export const IMPORT_IMAGES = {
   EMPTY: {
@@ -10,28 +17,60 @@ export const IMPORT_IMAGES = {
     URL: emptyCard,
     ALT: '롤링 페이퍼 없음',
   },
+  EDIT: {
+    URL: editIcon,
+    ALT: '수정하기 버튼',
+  },
+  LANDING_CONTENT: {
+    banner01: {
+      url: banner01,
+      alt: '랜딩페이지 배너 이미지 1',
+    },
+    banner02: {
+      url: banner02,
+      alt: '랜딩페이지 배너 이미지 2',
+    },
+  },
+  CONFRIM_MODAL: {
+    CHECK: {
+      URL: checkIcon,
+    },
+    DELETE: {
+      URL: deleteIcon,
+    },
+  },
+  INVITE_BANNER: {
+    LOGO_SYMBOL: {
+      URL: symbol,
+      ALT: '로고 심볼 아이콘',
+    },
+    CLAP: {
+      URL: clap,
+      ALT: '하이파이브 이미지',
+    },
+  },
 };
 
 export const BACKGROUND_IMGURL = [
   {
     id: 1,
-    name: 'chango',
-    imgUrl: 'https://i.ibb.co/khPsLpf/jang-goo.jpg',
+    name: 'kirby',
+    imgUrl: 'https://i.ibb.co/JpsL4hp/kirby.jpg',
   },
   {
     id: 2,
-    name: 'bear',
-    imgUrl: 'https://i.ibb.co/kcZkc72/pinkbear.jpg',
+    name: 'kitty',
+    imgUrl: 'https://i.ibb.co/3pJ5pD6/kitty.jpg',
   },
   {
     id: 3,
-    name: 'toystory',
-    imgUrl: ' https://i.ibb.co/kBhpRDf/toy-story.jpg',
+    name: 'quokka',
+    imgUrl: 'https://i.ibb.co/GdLKjSF/quokka.jpg',
   },
   {
     id: 4,
-    name: 'raccon',
-    imgUrl: 'https://i.ibb.co/Zz5H12h/raccon.jpg',
+    name: 'shinjang',
+    imgUrl: 'https://i.ibb.co/NCrmsXr/shinjangoo.jpg',
   },
 ];
 

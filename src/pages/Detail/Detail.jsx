@@ -1,42 +1,47 @@
 import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-// api
+
 import { api, ENDPOINT } from '@/api';
 import { useAsync } from '@/hooks/useAsync';
 import { INITIAL_RECIPIENTS_TYPE, INITIAL_MESSAGE_TYPE } from '@/stores';
-// lib
+
 import classNames from 'classnames/bind';
 import styles from '@/pages/Detail/Detail.module.scss';
-import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import editIcon from '@/assets/images/icons/edit.svg';
-// component
+
 import { Header } from '@/components/common/Header';
 import { Banner, Count, Emoji, MemberList } from '@/components/common/SideBar';
 import { GridLayout } from '@/pages/Detail/GridLayout';
-import { IconButton, MixButton } from '@/components/common/Button';
+import { Button, MixButton } from '@/components/common/Button';
 import { Dropdown } from '@/components/common/Dropdown';
-import { Button } from '@/components/common/Button';
+import { LinkButton, EditButton } from '@/components/common/Button';
+import { Share } from '@/components/Share';
+import { Overlay } from '@/components/common/Modal';
+import { ConfirmModal } from '@/components/common/ConfirmModal';
 
-import { SORT_LIST, SENDER_TAB_LIST } from '@/stores';
+import { SORT_LIST, SENDER_TAB_LIST, IMPORT_IMAGES } from '@/stores';
 
 const cx = classNames.bind(styles);
+const { EDIT } = IMPORT_IMAGES;
+const { CONFRIM_MODAL } = IMPORT_IMAGES;
 
-export const Detail = () => {
+export const Detail = ({ isEdit = false }) => {
   const { id } = useParams();
+  const navigate = useNavigate();
   let url = window.location.href;
   const [isActive, setIsActive] = useState(1);
   const [tabName, setTagName] = useState('All');
   const [sortOption, setSortOption] = useState('Latest');
+  const [isModal, setIsModal] = useState(false);
 
-  // 현재 대시보드의 대상의 정보 (backgroundColor/backgroundImageURL/reactionCount)
+  // Get Recipients Info (backgroundColor/backgroundImageURL/reactionCount)
   const { data, execute: getRecipientApi } = useAsync(
     () => api.get(`${ENDPOINT.RECIPIENTS}${id}/`),
     INITIAL_RECIPIENTS_TYPE
   );
 
-  // 대시보드에 올린 총 메시지 (message.length/sender)
+  // Get Messages Info (message.length/sender)
   const {
     data: { results },
     execute: getMessagesApi,
@@ -56,12 +61,16 @@ export const Detail = () => {
     setTagName(tabName);
   };
 
-  const handleCopyClipBoard = async (text) => {
+  const handleRemovePage = async () => {
     try {
-      await navigator.clipboard.writeText(text);
-      toast.success('URL이 복사되었습니다.');
+      const res = await api.delete(`${ENDPOINT.RECIPIENTS}${id}/`);
+
+      if (!res.status) return console.error('[SERVER ERROR]', res);
+
+      await getMessagesApi();
+      navigate(`/list/`, { replace: true });
     } catch (e) {
-      console.error('[LINK COPY ERROR]', e);
+      console.error('[API ERROR]', e);
     }
   };
 
@@ -71,23 +80,32 @@ export const Detail = () => {
     setSortOption(selectedValue);
   };
 
+  const handleModalOpen = () => {
+    setIsModal(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModal(false);
+  };
+
   const userName = data.name;
 
   return (
     <div className={cx('detail')}>
       <Helmet>
-        <title> {`${userName}님 롤링 페이퍼 | Rolling`}</title>
+        {isEdit ? (
+          <title> {`롤링 페이퍼 편집하기 | Rolling`}</title>
+        ) : (
+          <title> {`${userName}님 롤링 페이퍼 | Rolling`}</title>
+        )}
       </Helmet>
 
-      <Header isDetail={true} id={id} />
-      <ToastContainer
-        position='top-center'
-        limit={1}
-        closeButton={false}
-        autoClose={5000}
-        pauseOnHover={false}
-        theme='dark'
-      />
+      {isEdit ? (
+        <Header isEdit={true} id={id} />
+      ) : (
+        <Header isDetail={true} id={id} />
+      )}
+
       <main className={cx('content-wrapper')}>
         <ul>
           <li className={cx('md-hidden')}>
@@ -96,11 +114,19 @@ export const Detail = () => {
                 <div className={cx('sidebar-header')}>
                   <div className={cx('sidebar-nav')}>
                     <h2 className={cx('sidebar-title')}>{data.name}</h2>
-                    <Link to={`/post/${id}/edit`}>
-                      <Button variant='outlined' size={42}>
-                        <img src={editIcon} alt='편집하기 버튼' />
-                      </Button>
-                    </Link>
+                    {isEdit ? (
+                      <LinkButton path={`/post/${id}`}>
+                        <EditButton
+                          src={EDIT.URL}
+                          alt={EDIT.ALT}
+                          active={true}
+                        />
+                      </LinkButton>
+                    ) : (
+                      <LinkButton path={`/post/${id}/edit`}>
+                        <EditButton src={EDIT.URL} alt={EDIT.ALT} />
+                      </LinkButton>
+                    )}
                   </div>
                   <Count id={id} countData={data} messageData={results} />
                 </div>
@@ -139,16 +165,27 @@ export const Detail = () => {
                 <div className={cx('content-header')}>
                   <div className={cx('content-header-title')}>
                     <h3>Rolling Paper</h3>
-                    <Link to={`/post/${id}/message`}>
-                      <MixButton
+                    {isEdit ? (
+                      <Button
                         variant='outlined'
                         size={40}
-                        startIcon='ic-plus'
-                        iconSize={12}
-                        iconColor='white'
-                        text='Add'
-                      />
-                    </Link>
+                        isDelete={true}
+                        onClick={handleModalOpen}
+                      >
+                        Delete
+                      </Button>
+                    ) : (
+                      <LinkButton path={`/post/${id}/message`}>
+                        <MixButton
+                          variant='outlined'
+                          size={40}
+                          startIcon='ic-plus'
+                          iconSize={12}
+                          iconColor='white'
+                          text='Add'
+                        />
+                      </LinkButton>
+                    )}
                   </div>
                   <div className={cx('content-header-filter')}>
                     <ul className={cx('tab-list')}>
@@ -168,29 +205,34 @@ export const Detail = () => {
                       ))}
                     </ul>
                     <div className={cx('content-header-options')}>
-                      <Dropdown
-                        sortList={SORT_LIST}
-                        size='sm'
-                        onClick={handleValueChange}
-                      />
-                      <IconButton
-                        variant='outlined'
-                        style='square'
-                        icon='ic-share'
-                        iconSize='24'
-                        iconColor='white'
-                        onClick={() => handleCopyClipBoard(url)}
-                      />
+                      {isEdit ? (
+                        <Dropdown
+                          sortList={SORT_LIST}
+                          size='sm'
+                          onClick={handleValueChange}
+                        />
+                      ) : (
+                        <>
+                          <Dropdown
+                            sortList={SORT_LIST}
+                            size='sm'
+                            onClick={handleValueChange}
+                          />
+                          <Share url={url} />
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
                 <GridLayout
+                  isEdit={isEdit}
                   id={id}
                   tabName={tabName}
                   sortOption={sortOption}
                   backgroundUrl={backgroundUrl}
                   backgroundColor={backgroundColor}
                   getMessagesApi={getMessagesApi}
+                  messageData={results}
                 />
               </div>
             </div>
@@ -218,41 +260,57 @@ export const Detail = () => {
                       <div className={cx('content-header-title')}>
                         <h3>Rolling Paper</h3>
                         <div className={cx('content-header-option')}>
-                          <Link to={`/post/${id}/message`}>
-                            <MixButton
+                          {isEdit ? (
+                            <Button
                               variant='outlined'
                               size={40}
-                              startIcon='ic-plus'
-                              iconSize={12}
-                              iconColor='white'
-                              text='Add'
-                            />
-                          </Link>
+                              isDelete={true}
+                              onClick={handleModalOpen}
+                            >
+                              Delete
+                            </Button>
+                          ) : (
+                            <LinkButton path={`/post/${id}/message`}>
+                              <MixButton
+                                variant='outlined'
+                                size={40}
+                                startIcon='ic-plus'
+                                iconSize={12}
+                                iconColor='white'
+                                text='Add'
+                              />
+                            </LinkButton>
+                          )}
                           <div className={cx('content-header-options')}>
-                            <Dropdown
-                              sortList={SORT_LIST}
-                              size='sm'
-                              onClick={handleValueChange}
-                            />
-                            <IconButton
-                              variant='outlined'
-                              style='square'
-                              icon='ic-share'
-                              iconSize='24'
-                              iconColor='white'
-                              onClick={() => handleCopyClipBoard(url)}
-                            />
+                            {isEdit ? (
+                              <Dropdown
+                                sortList={SORT_LIST}
+                                size='sm'
+                                onClick={handleValueChange}
+                              />
+                            ) : (
+                              <>
+                                <Dropdown
+                                  sortList={SORT_LIST}
+                                  size='sm'
+                                  onClick={handleValueChange}
+                                />
+                                <Share url={url} />
+                              </>
+                            )}
                           </div>
                         </div>
                       </div>
                     </div>
                     <GridLayout
+                      isEdit={isEdit}
                       id={id}
                       tabName={tabName}
                       sortOption={sortOption}
                       backgroundUrl={backgroundUrl}
                       backgroundColor={backgroundColor}
                       getMessagesApi={getMessagesApi}
+                      messageData={results}
                     />
                   </div>
                 </main>
@@ -260,6 +318,35 @@ export const Detail = () => {
             </div>
           </li>
         </ul>
+        {isModal && (
+          <Overlay>
+            <ConfirmModal
+              info='페이지를 삭제하시겠습니까?'
+              desc='삭제한 페이지는 복구할 수 없습니다.'
+              iconUrl={CONFRIM_MODAL.DELETE.URL}
+              handleModalClose={handleModalClose}
+            >
+              {
+                <>
+                  <Button
+                    variant='secondary'
+                    size={40}
+                    onClick={handleModalClose}
+                  >
+                    취소
+                  </Button>
+                  <Button
+                    variant='delete-fill'
+                    size={40}
+                    onClick={handleRemovePage}
+                  >
+                    삭제
+                  </Button>
+                </>
+              }
+            </ConfirmModal>
+          </Overlay>
+        )}
       </main>
     </div>
   );

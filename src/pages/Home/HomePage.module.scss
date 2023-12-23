@@ -1,0 +1,30 @@
+.home {
+  @include column-flexbox(between, center);
+  min-height: calc(100vh - $header-height);
+
+  &-container {
+    position: relative;
+    max-width: 120rem;
+    margin: $header-height auto 0;
+    padding: 6rem 0;
+
+    .button-area {
+      width: 100%;
+      text-align: center;
+
+      @include responsive(T) {
+        position: fixed;
+        width: calc(100vw - 4.8rem);
+        bottom: 2.4rem;
+      }
+    }
+
+    @include responsive(T) {
+      padding: 4.8rem 0 8rem;
+    }
+
+    @include responsive(M) {
+      max-width: 72rem;
+    }
+  }
+}

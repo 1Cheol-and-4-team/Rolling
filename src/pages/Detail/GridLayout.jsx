@@ -1,10 +1,6 @@
-import { api, ENDPOINT } from '@/api';
-import { useAsync } from '@/hooks/useAsync';
-import { INITIAL_MESSAGE_TYPE } from '@/stores';
-// lib
 import classNames from 'classnames/bind';
 import styles from '@/pages/Detail/Detail.module.scss';
-// component
+
 import { EmptyCard } from '@/components/common/Empty';
 import { Card } from '@/components/common/Card';
 import { relationshipToKorean } from '@/utils';
@@ -14,31 +10,23 @@ const cx = classNames.bind(styles);
 const { EMPTY_CARD } = IMPORT_IMAGES;
 
 export const GridLayout = ({
-  id,
+  isEdit,
   tabName,
   sortOption,
   backgroundUrl,
   backgroundColor,
   getMessagesApi,
+  messageData,
 }) => {
-  const {
-    data: { results },
-  } = useAsync(
-    () =>
-      api.get(`${ENDPOINT.RECIPIENTS}${id}/messages/`, {
-        params: { limit: 100 },
-      }),
-    INITIAL_MESSAGE_TYPE
-  );
-
-  const isRollingPaperEmpty = results.every((item) => item.id === null);
+  const isRollingPaperEmpty = messageData.every((item) => item.id === null);
   const koreanTagName = relationshipToKorean(tabName);
 
   const filterData = (extractTagName) => {
     return extractTagName === 1
-      ? results
-      : results.filter((item) => item.relationship === extractTagName);
+      ? messageData
+      : messageData.filter((item) => item.relationship === extractTagName);
   };
+
   const filterResult = filterData(koreanTagName);
 
   const sortData = (sortOption) => {
@@ -64,17 +52,32 @@ export const GridLayout = ({
         <ul className={cx('grid-layout')}>
           {sortData(sortOption).map((item) => (
             <li key={item.id}>
-              <Card
-                id={item.id}
-                relationship={item.relationship}
-                sender={item.sender}
-                profileImageURL={item.profileImageURL}
-                backgroundUrl={backgroundUrl}
-                backgroundColor={backgroundColor}
-                content={item.content}
-                createdAt={item.createdAt}
-                getMessageApi={getMessagesApi}
-              />
+              {isEdit ? (
+                <Card
+                  id={item.id}
+                  relationship={item.relationship}
+                  sender={item.sender}
+                  profileImageURL={item.profileImageURL}
+                  backgroundUrl={backgroundUrl}
+                  backgroundColor={backgroundColor}
+                  content={item.content}
+                  createdAt={item.createdAt}
+                  isDelete={true}
+                  getMessageApi={getMessagesApi}
+                />
+              ) : (
+                <Card
+                  id={item.id}
+                  relationship={item.relationship}
+                  sender={item.sender}
+                  profileImageURL={item.profileImageURL}
+                  backgroundUrl={backgroundUrl}
+                  backgroundColor={backgroundColor}
+                  content={item.content}
+                  createdAt={item.createdAt}
+                  getMessageApi={getMessagesApi}
+                />
+              )}
             </li>
           ))}
         </ul>
