@@ -34,8 +34,11 @@ export function CreatePage() {
     setError(!selectedValue ? 'error' : '');
   };
 
+  const onClickBack = () => {
+    navigate(-1);
+  };
+
   const [isActiveTab, setIsActiveTab] = useState(1);
-  const { LIST_PATH } = ROUTER_PATH;
   const handleActiveTab = (targetId) => {
     setIsActiveTab(targetId);
   };
@@ -75,9 +78,7 @@ export function CreatePage() {
         <Header />
       </div>
       <div className={cx('go-mobile')}>
-        <Link to={LIST_PATH}>
-          <img src={goMobile} alt='Go Mobile' />
-        </Link>
+        <img src={goMobile} alt='Go Mobile' onClick={onClickBack} />
       </div>
       <main className={cx('form-wrapper')}>
         <div className={cx('container')}>
