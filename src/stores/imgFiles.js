@@ -54,23 +54,23 @@ export const IMPORT_IMAGES = {
 export const BACKGROUND_IMGURL = [
   {
     id: 1,
-    name: 'chango',
-    imgUrl: 'https://i.ibb.co/khPsLpf/jang-goo.jpg',
+    name: 'kirby',
+    imgUrl: 'https://i.ibb.co/JpsL4hp/kirby.jpg',
   },
   {
     id: 2,
-    name: 'bear',
-    imgUrl: 'https://i.ibb.co/kcZkc72/pinkbear.jpg',
+    name: 'kitty',
+    imgUrl: 'https://i.ibb.co/3pJ5pD6/kitty.jpg',
   },
   {
     id: 3,
-    name: 'toystory',
-    imgUrl: ' https://i.ibb.co/kBhpRDf/toy-story.jpg',
+    name: 'quokka',
+    imgUrl: 'https://i.ibb.co/GdLKjSF/quokka.jpg',
   },
   {
     id: 4,
-    name: 'raccon',
-    imgUrl: 'https://i.ibb.co/Zz5H12h/raccon.jpg',
+    name: 'shinjang',
+    imgUrl: 'https://i.ibb.co/NCrmsXr/shinjangoo.jpg',
   },
 ];
 

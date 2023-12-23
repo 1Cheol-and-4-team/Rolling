@@ -2,10 +2,10 @@ import shareKakao2 from '@/assets/images/icons/ic-share-kakao-active.svg';
 import sharelink2 from '@/assets/images/icons/ic-share-link-active.svg';
 
 export const COLOR_CHIPS = [
-  { id: 1, option: 'beige' },
-  { id: 2, option: 'purple' },
+  { id: 1, option: 'green' },
+  { id: 2, option: 'skyblue' },
   { id: 3, option: 'blue' },
-  { id: 4, option: 'green' },
+  { id: 4, option: 'orange' },
 ];
 
 export const SORT_LIST = [

@@ -6,7 +6,7 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 export function ColorOption({ onClick }) {
-  const [selectedColor, setSelectedColor] = useState('beige');
+  const [selectedColor, setSelectedColor] = useState('green');
   const handleColorClick = (color) => {
     setSelectedColor(color);
   };
