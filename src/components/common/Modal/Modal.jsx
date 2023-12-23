@@ -10,6 +10,7 @@ const cx = classNames.bind(styles);
 
 export function Modal({
   profileImage,
+  randomColor,
   backgroundUrl,
   backgroundColor,
   messageData,
@@ -53,7 +54,10 @@ export function Modal({
         }}
       ></div>
       <div className={cx('modal-content')}>
-        <div className={cx('modal-content-profile')}>
+        <div
+          className={cx('modal-content-profile')}
+          style={{ '--color': randomColor }}
+        >
           <img src={profileImage} alt='글쓴이 프로필 이미지' />
         </div>
         <div className={cx('modal-content-textbox')}>

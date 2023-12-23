@@ -87,7 +87,7 @@
       width: 12rem;
       height: 12rem;
       border-radius: 50%;
-      background-color: $background;
+      background-color: var(--color);
       overflow: hidden;
 
       img {

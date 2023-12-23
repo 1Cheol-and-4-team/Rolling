@@ -17,6 +17,10 @@ Font.whitelist = [
 ];
 Quill.register(Font, true);
 
+const Size = Quill.import('formats/size');
+Size.whitelist = ['small', 'medium', 'large'];
+Quill.register(Size, true);
+
 export const QuillToolbar = () => (
   <div id='toolbar'>
     <span className='ql-formats'>
@@ -31,13 +35,13 @@ export const QuillToolbar = () => (
       <select className='ql-background' />
     </span>
     <span className='ql-formats'>
-      <select className='ql-font' defaultValue='arial'>
+      <select className='ql-font' defaultValue='Noto sans'>
         <option value='Noto-sans'>Noto sans</option>
         <option value='Pretendard'>Pretendard</option>
         <option value='Nanum-Myeongjo'>나눔명조</option>
         <option value='Nanum-Pen-Script'>나눔손글씨 손편지체</option>
       </select>
-      <select className='ql-size' defaultValue='medium'>
+      <select className='ql-size' defaultValue='small'>
         <option value='small'>small</option>
         <option value='medium'>medium</option>
         <option value='large'>large</option>

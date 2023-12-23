@@ -55,6 +55,24 @@ export function AddPaper() {
     }));
   };
 
+  const handleProfileChange = (e) => {
+    e.preventDefault();
+
+    const selectedValue = e.currentTarget.getAttribute('value');
+
+    const pickColor = getRandomColor();
+    setRandomColor(pickColor);
+
+    setValues((prevValues) => ({
+      ...prevValues,
+      profileImageURL: `${selectedValue}?color=${pickColor}`,
+    }));
+    setError((prevValues) => ({
+      ...prevValues,
+      profileImageURL: !selectedValue ? 'error' : '',
+    }));
+  };
+
   const handleQuillChange = (content) => {
     setValues((prevValues) => ({
       ...prevValues,
@@ -95,10 +113,6 @@ export function AddPaper() {
       await execute();
       navigate(`/post/${id}/`, { replace: true });
     }
-  };
-
-  const handleRandomColor = () => {
-    setRandomColor(getRandomColor());
   };
 
   return (
@@ -164,15 +178,15 @@ export function AddPaper() {
                 </p>
                 <ul>
                   {PROFILE_EMOJI.map((item) => (
-                    <li key={item.id} onClick={handleRandomColor}>
+                    <li key={item.id}>
                       <button
                         ref={profileRef}
-                        name='profileImageURL'
                         value={item.imgUrl}
-                        onClick={handleValueChange}
+                        onClick={handleProfileChange}
                       >
                         <img src={item.imgUrl} alt={item.alt} />
                       </button>
+                      <div className={cx('gradient-box')}></div>
                     </li>
                   ))}
                 </ul>
