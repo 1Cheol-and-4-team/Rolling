@@ -11,26 +11,26 @@
       width: 100%;
       padding: 0 4rem 0 1.6rem;
       text-align: start;
-      border: 0.2rem solid $border;
+      border: 0.1rem solid $border;
       border-radius: 0.6rem;
       transition: all ease-in-out 0.2s;
 
-      &:focus:not(:focus-visible):not(:error) {
+      &:focus:not(:focus-visible) {
         outline: none;
       }
 
       &:focus,
       &:focus-visible {
         color: $text-white;
-        border: 0.2rem solid $purple;
+        border: 0.1rem solid $purple;
       }
 
-      &:not(:disabled):not(:error):active {
+      &:not(:disabled):active {
         color: $text-white;
         border: 0.1rem solid $purple;
       }
 
-      &:not(:disabled):not(:error):hover {
+      &:not(:disabled):hover {
         border: 0.1rem solid $purple;
       }
 
@@ -42,10 +42,28 @@
 
     .label-sm {
       height: 4rem;
+      min-width: 12.2rem;
     }
 
     .label-lg {
       height: 5rem;
+      min-width: 32rem;
+      border: 0.2rem solid $border;
+
+      &:focus,
+      &:focus-visible {
+        color: $text-white;
+        border: 0.2rem solid $purple;
+      }
+
+      &:not(:disabled):active {
+        color: $text-white;
+        border: 0.2rem solid $purple;
+      }
+
+      &:not(:disabled):hover {
+        border: 0.2rem solid $purple;
+      }
     }
 
     i {
@@ -61,7 +79,7 @@
     top: 4.8rem;
     left: 0;
     padding: 0.8rem;
-    border: 0.2rem solid $border;
+    border: 0.1rem solid $border;
     background-color: $card;
     border-radius: 0.6rem;
     box-shadow: $sort-shadow;
@@ -82,16 +100,9 @@
   }
 }
 
-.dropdown-size-sm {
-  min-width: 12.2rem;
-}
-
-.dropdown-size-lg {
-  min-width: 32rem;
-}
-
 .option-lg {
   top: 5.8rem;
+  border-width: 0.2rem;
 
   li {
     @include text-style(16);

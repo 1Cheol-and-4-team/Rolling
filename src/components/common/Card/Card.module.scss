@@ -41,7 +41,14 @@
       );
     background-origin: border-box;
     background-clip: content-box, border-box;
-    z-index: -1;
+    z-index: $behind-gradient-level;
+  }
+
+  @include responsive(M) {
+    &:hover .gradient-box {
+      opacity: 0;
+      visibility: hidden;
+    }
   }
 
   &-header {
@@ -90,7 +97,7 @@
   }
 
   &-textbox {
-    @include text-style(18, 400, $baanertext);
+    @include text-style(18, 400, $baaner-text);
     width: 100%;
     overflow: hidden;
     white-space: pre-line;

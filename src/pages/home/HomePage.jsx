@@ -1,44 +1,27 @@
-import { Button } from '@/components/common/Button';
-import point1_img from '@/assets/images/point1-img.svg';
-import point2_img from '@/assets/images/point2-img.svg';
-import HomeCard from './HomeCard';
-import { Header } from '@/components/common/Header';
-import { Link } from 'react-router-dom';
-
+import { Helmet } from 'react-helmet';
 import classNames from 'classnames/bind';
 import styles from './HomePage.module.scss';
-import { Helmet } from 'react-helmet';
+
+import { HomeCard } from '@/pages/home';
+import { Header } from '@/components/common/Header';
+import { LinkButton, Button } from '@/components/common/Button';
+import { ROUTER_PATH, CONTENT_1, CONTENT_2 } from '@/stores';
 
 const cx = classNames.bind(styles);
 
-const content1 = {
-  point: 'Point. 01',
-  title1: '누구나 손쉽게, 온라인 ',
-  title2: '롤링 페이퍼를 만들 수 있어요',
-  explain: '로그인 없이 자유롭게 만들어요.',
-  image: point1_img,
-};
-
-const content2 = {
-  point: 'Point. 02',
-  title1: '대시보드로 롤링 페이퍼를',
-  title2: '관리해 보세요',
-  explain: '나만의 대시보드로 롤링 페이퍼를 공유할 수 있어요.',
-  image: point2_img,
-};
-
-function HomePage() {
+export function HomePage() {
   return (
     <>
       <Helmet>
-        <title>Rolling</title>
+        <title>Rolling | 소중한 사람에게 마음을 전달해 보세요</title>
       </Helmet>
+
       <Header isLanding={true} />
       <div className={cx('home')}>
-        <div>
-          <HomeCard content={content1} />
+        <div className={cx('home-container')}>
+          <HomeCard content={CONTENT_1} />
           <HomeCard
-            content={content2}
+            content={CONTENT_2}
             style={{
               '--reverse': 'row-reverse',
               'padding-bottom': 0,
@@ -48,16 +31,14 @@ function HomePage() {
             }}
           />
           <div className={cx('button-area')}>
-            <Link to={'/list'} className={cx('home-button')}>
+            <LinkButton path={ROUTER_PATH.LIST_PATH}>
               <Button variant='primary' size={100}>
                 구경해보기
               </Button>
-            </Link>
+            </LinkButton>
           </div>
         </div>
       </div>
     </>
   );
 }
-
-export default HomePage;

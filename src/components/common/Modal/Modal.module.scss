@@ -33,7 +33,7 @@
     rgba(19, 20, 24, 0.51) 0%,
     rgba(19, 20, 24, 0.6) 100%
   );
-  box-shadow: 0px 12px 32px 0px rgba(0, 0, 0, 0.24);
+  box-shadow: $modal-shadow;
   backdrop-filter: blur(12px);
   animation: showModal ease-in-out 0.4s;
 
@@ -110,7 +110,7 @@
     }
 
     &-textArea {
-      @include text-style(18, 400, $baanertext);
+      @include text-style(18, 400, $baaner-text);
       width: 100%;
       max-height: 14rem;
       text-align: start;

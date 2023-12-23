@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import styles from './Modal.module.scss';
+import styles from '@/components/common/Modal/Modal.module.scss';
 import classNames from 'classnames/bind';
 
 import { Button } from '@/components/common/Button';
