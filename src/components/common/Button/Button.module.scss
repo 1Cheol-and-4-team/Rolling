@@ -279,13 +279,17 @@
   border-radius: 50%;
   box-shadow: $arrow-button-shadow;
   backdrop-filter: blur(12px);
-
   // 추가
+  margin: 0 0.5rem;
+
   z-index: 1;
   position: absolute;
   bottom: 9rem;
   transform: translateY(-50%);
   left: -2rem;
+  @include responsive('T') {
+    display: none;
+  }
 }
 
 .ic-btn-arrowRight {
@@ -298,11 +302,15 @@
   backdrop-filter: blur(12px);
 
   // 추가
+  margin: 0 0.5rem;
   z-index: 1;
   position: absolute;
   bottom: 9rem;
   transform: translateY(-50%);
   right: -2rem;
+  @include responsive('T') {
+    display: none;
+  }
 }
 
 .ic-btn-square {

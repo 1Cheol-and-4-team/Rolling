@@ -9,6 +9,7 @@
 }
 
 .modal {
+  min-width: 36rem;
   padding: 3.2rem 6rem;
   border-radius: 2.4rem;
   overflow: hidden;
@@ -29,11 +30,11 @@
 
       &-info {
         @include text-style(18, 700, $text-white);
-        padding-bottom: 0.4rem;
       }
 
       &-desc {
         @include text-style(12, 500, $gray-700);
+        margin-top: 0.4rem;
       }
     }
 

@@ -1,0 +1,46 @@
+.wrap {
+  @include flexbox(center, center);
+  .search {
+    width: 70rem;
+    position: relative;
+    margin-top: 3.2rem;
+    @include flexbox(center, center);
+    @include responsive('T') {
+      width: 100%;
+    }
+    &-input {
+      width: 100%;
+      padding: 1rem 1rem 1rem 2.4rem;
+      border: 0.1rem solid $gray-600;
+      border-radius: 1.2rem;
+      box-shadow: 0 1.2rem 3.2rem 0 rgba(0, 0, 0, 0.3);
+      color: $text-white;
+      @include text-style(16, 'normar', $text-white);
+    }
+    &-input:focus {
+      outline: 0.15rem solid $purple-700;
+    }
+    &-wrap {
+      @include flexbox(between, center);
+      width: calc(100% - 1.6rem);
+      pointer-events: none;
+      position: absolute;
+      height: 5.6rem;
+      &-img {
+        width: 1.6rem;
+        height: 1.6rem;
+      }
+      &-button {
+        pointer-events: all;
+        padding: 0.8rem 0.8rem;
+        border: 0;
+        border-radius: 0.8rem;
+        background-color: $purple-700;
+        img {
+          width: 2.4rem;
+          height: 2.4rem;
+        }
+      }
+    }
+  }
+}
