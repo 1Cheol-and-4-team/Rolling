@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './pages/home/HomePage';
+import { HomePage } from '@/pages/Home';
 import { PaperList } from '@/pages/PaperList';
 import { Detail } from '@/pages/Detail';
-import { Edit } from '@/pages/Edit';
+import { Edit } from '@/pages/Detail';
 import { CreatePage } from '@/pages/CreatePage';
 import { AddPaper } from '@/pages/AddPaper';
 import { NotFound } from '@/pages/NotFound';

@@ -1,5 +1,12 @@
 import empty from '@/assets/images/icons/ic-emoji-empty.svg';
 import emptyCard from '@/assets/images/icons/ic-empty-paper.svg';
+import editIcon from '@/assets/images/icons/edit.svg';
+import banner01 from '@/assets/images/point1-img.svg';
+import banner02 from '@/assets/images/point2-img.svg';
+import checkIcon from '@/assets/images/icons/ic-check.svg';
+import deleteIcon from '@/assets/images/icons/ic-delete.svg';
+import symbol from '@/assets/images/icons/logo-symbol.svg';
+import clap from '@/assets/images/img-hand.png';
 
 export const IMPORT_IMAGES = {
   EMPTY: {
@@ -9,6 +16,38 @@ export const IMPORT_IMAGES = {
   EMPTY_CARD: {
     URL: emptyCard,
     ALT: '롤링 페이퍼 없음',
+  },
+  EDIT: {
+    URL: editIcon,
+    ALT: '수정하기 버튼',
+  },
+  LANDING_CONTENT: {
+    banner01: {
+      url: banner01,
+      alt: '랜딩페이지 배너 이미지 1',
+    },
+    banner02: {
+      url: banner02,
+      alt: '랜딩페이지 배너 이미지 2',
+    },
+  },
+  CONFRIM_MODAL: {
+    CHECK: {
+      URL: checkIcon,
+    },
+    DELETE: {
+      URL: deleteIcon,
+    },
+  },
+  INVITE_BANNER: {
+    LOGO_SYMBOL: {
+      URL: symbol,
+      ALT: '로고 심볼 아이콘',
+    },
+    CLAP: {
+      URL: clap,
+      ALT: '하이파이브 이미지',
+    },
   },
 };
 

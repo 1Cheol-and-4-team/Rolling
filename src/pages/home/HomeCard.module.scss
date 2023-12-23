@@ -3,7 +3,8 @@
   --end: flex-start;
   --padding: 0rem;
 }
-@keyframes slideIn {
+
+@keyframes sideIn {
   0% {
     transform: translateY(-100%);
   }
@@ -23,7 +24,8 @@
   margin-bottom: 3rem;
   gap: 8.8rem;
   border-radius: 1.6rem;
-  background: $border;
+  background: $banner-back;
+
   @include responsive('T') {
     width: calc(100vw - 4.8rem);
     height: auto;
@@ -50,7 +52,7 @@
     padding: 0.6rem 1.2rem;
     display: inline-block;
     border-radius: 5rem;
-    background: $purple;
+    background: $card;
   }
 
   &-text {
@@ -72,11 +74,12 @@
   }
 
   &-des {
-    @include text-style(18, 'normal', $baanertext);
+    @include text-style(18, 'normal', $baaner-text);
     margin-top: 0.8rem;
   }
+
   img {
-    animation: slideIn 1s forwards;
+    animation: sideIn 1s forwards;
     align-self: var(--end);
 
     width: 72rem;

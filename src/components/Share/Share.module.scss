@@ -1,0 +1,48 @@
+.share-dropdown {
+  position: relative;
+
+  .share-list-active {
+    button {
+      border-color: $purple;
+    }
+  }
+
+  .share-list {
+    position: absolute;
+    top: 4.8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: $dropdown-level;
+
+    &-item {
+      &:first-child {
+        margin-bottom: 0.8rem;
+      }
+
+      &-button {
+        @include inline-flexbox();
+        width: 3.6rem;
+        height: 3.6rem;
+        border: 0.1rem solid $border;
+        border-radius: 50%;
+        background-color: $card;
+        box-shadow: $sort-shadow;
+        transition: all ease-in-out 0.2s;
+
+        &:hover {
+          border-color: $gray-500;
+          background-color: $border;
+
+          img {
+            opacity: 1;
+          }
+        }
+
+        img {
+          opacity: 0.4;
+          transition: all ease-in-out 0.2s;
+        }
+      }
+    }
+  }
+}

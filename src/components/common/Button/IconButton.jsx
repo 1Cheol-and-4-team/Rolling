@@ -37,3 +37,11 @@ export const IconButton = ({
     </button>
   );
 };
+
+export const EditButton = ({ src, url, active = false }) => {
+  return (
+    <button className={cx('btn-edit', { 'btn-edit-active': active })}>
+      <img src={src} alt={url} />
+    </button>
+  );
+};
