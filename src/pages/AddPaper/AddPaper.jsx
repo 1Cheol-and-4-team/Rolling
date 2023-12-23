@@ -14,10 +14,11 @@ import { useMutateAsync } from '@/hooks';
 import { Header } from '@/components/common/Header';
 import { Input } from '@/components/common/Input';
 import { Dropdown } from '@/components/common/Dropdown';
-import { Button } from '@/components/common/Button';
-import { PROFILE_EMOJI, RELATIONSHIP_LIST } from '@/stores';
+import { Button, LinkButton } from '@/components/common/Button';
+import { PROFILE_EMOJI, RELATIONSHIP_LIST, ROUTER_PATH } from '@/stores';
 import { getRandomColor } from '@/utils';
 import defaultProfile from '@/assets/images/default-profile.svg';
+import arrowLeftIcon from '@/assets/images/icons/ic-arrow-left.svg';
 
 import {
   INITIAL_POST_MESSAGE_TYPE,
@@ -36,6 +37,7 @@ export function AddPaper() {
   const [values, setValues] = useState(INITIAL_POST_MESSAGE_TYPE);
   const [error, setError] = useState(INITIAL_POST_MESSAGE_ERROR);
   const [randomColor, setRandomColor] = useState('#000000');
+  const [currentProfile, setCurrentProfile] = useState();
 
   const postApi = () =>
     api.post(`${ENDPOINT.RECIPIENTS}${id}/messages/`, values);
@@ -55,8 +57,10 @@ export function AddPaper() {
     }));
   };
 
-  const handleProfileChange = (e) => {
+  const handleProfileChange = (e, profileId) => {
     e.preventDefault();
+
+    setCurrentProfile(profileId);
 
     const selectedValue = e.currentTarget.getAttribute('value');
 
@@ -123,6 +127,11 @@ export function AddPaper() {
       <div className={cx('header')}>
         <Header />
       </div>
+      <div className={cx('ic-arrow-left')}>
+        <LinkButton path={ROUTER_PATH.DETAIL_PATH}>
+          <img src={arrowLeftIcon} alt='뒤로가기 아이콘' />
+        </LinkButton>
+      </div>
       <form className={cx('add-paper')}>
         <div className={cx('add-paper-wrapper')}>
           <fieldset className={cx('add-paper-sender')}>
@@ -182,11 +191,16 @@ export function AddPaper() {
                       <button
                         ref={profileRef}
                         value={item.imgUrl}
-                        onClick={handleProfileChange}
+                        onClick={(e) => handleProfileChange(e, item.id)}
                       >
                         <img src={item.imgUrl} alt={item.alt} />
                       </button>
-                      <div className={cx('gradient-box')}></div>
+                      <div
+                        className={cx(
+                          'gradient-box',
+                          currentProfile === item.id ? 'selected' : ''
+                        )}
+                      ></div>
                     </li>
                   ))}
                 </ul>
