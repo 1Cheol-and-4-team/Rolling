@@ -7,6 +7,14 @@
     display: none;
   }
 }
+.go-mobile {
+  display: none;
+
+  @include responsive('M') {
+    display: block;
+    padding: 1.5rem 33.5rem 1.5rem 2rem;
+  }
+}
 .form-wrapper {
   width: 100%;
   height: calc(100vh - $header-height);
@@ -52,6 +60,7 @@
         }
       }
     }
+
     .information {
       gap: 0.4rem;
       margin-top: 5rem;

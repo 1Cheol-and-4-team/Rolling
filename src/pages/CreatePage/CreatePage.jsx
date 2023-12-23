@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Input } from '@/components/common/Input';
 import { Header } from '@/components/common/Header';
 import { Tab } from '@/components/common/Tab';
@@ -13,6 +13,8 @@ import { api } from '@/api';
 import { INITIAL_POST_RECIPIENTS_TYPE } from '../../stores/dataType';
 import { useRef } from 'react';
 import { Helmet } from 'react-helmet';
+import goMobile from '../../assets/images/goto-mobile.svg';
+import { ROUTER_PATH } from '@/stores';
 const cx = classNames.bind(styles);
 
 export function CreatePage() {
@@ -33,7 +35,7 @@ export function CreatePage() {
   };
 
   const [isActiveTab, setIsActiveTab] = useState(1);
-
+  const { LIST_PATH } = ROUTER_PATH;
   const handleActiveTab = (targetId) => {
     setIsActiveTab(targetId);
   };
@@ -72,7 +74,11 @@ export function CreatePage() {
       <div className={cx('header')}>
         <Header />
       </div>
-
+      <div className={cx('go-mobile')}>
+        <Link to={LIST_PATH}>
+          <img src={goMobile} alt='Go Mobile' />
+        </Link>
+      </div>
       <main className={cx('form-wrapper')}>
         <div className={cx('container')}>
           <form className={cx('form')}>
