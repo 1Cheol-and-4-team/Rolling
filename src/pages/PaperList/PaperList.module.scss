@@ -3,6 +3,14 @@
     min-height: calc(100vh - $header-height);
     margin-top: $header-height;
   }
+  &-title {
+    @include text-style(32, 'normal', $text-gray);
+    @include flexbox(center);
+    padding-top: 4rem;
+    span {
+      @include text-style(32, bold, $text-gray);
+    }
+  }
   .list-wrap {
     max-width: 116rem;
     @include column-flexbox(between);
@@ -12,6 +20,25 @@
     }
     @include responsive('M') {
       width: calc(100vw - 4rem);
+    }
+
+    &-notFound {
+      @include column-flexbox(center, center);
+      margin-top: 4.8rem;
+      width: 116rem;
+      height: 66.4rem;
+      background-color: $background;
+      border-radius: 1.2rem;
+      border: 0.2rem solid $border;
+      @include responsive('T') {
+        width: calc(100vw - 4.8rem);
+      }
+      @include responsive('M') {
+        width: calc(100vw - 4rem);
+      }
+      p {
+        @include text-style(18, 'normal', $text-gray);
+      }
     }
 
     &-title {
@@ -25,6 +52,7 @@
       bottom: 2.4rem;
       left: 50%;
       transform: translateX(-50%);
+      z-index: 1;
       @include responsive('T') {
         width: calc(100vw - 4.8rem);
       }
