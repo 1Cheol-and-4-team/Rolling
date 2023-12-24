@@ -4,7 +4,7 @@
     margin-top: $header-height;
   }
   &-title {
-    @include text-style(32, 'normal', $text-gray);
+    @include text-style(32, 400, $text-gray);
     @include flexbox(center);
     padding-top: 4rem;
     span {
@@ -37,7 +37,7 @@
         width: calc(100vw - 4rem);
       }
       p {
-        @include text-style(18, 'normal', $text-gray);
+        @include text-style(18, 400, $text-gray);
       }
     }
 

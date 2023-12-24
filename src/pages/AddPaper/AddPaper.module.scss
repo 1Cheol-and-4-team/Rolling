@@ -56,37 +56,25 @@
       gap: 1rem;
 
       p {
-        @include text-style(16, 'normal', $gray-500);
+        @include text-style(16, 400, $gray-500);
       }
 
       &-error {
         p {
-          @include text-style(16, 'normal', $system-error);
+          @include text-style(16, 400, $system-error);
         }
       }
     }
   }
 
   &-profile {
-    &-default {
-      width: 9rem;
-      height: 9rem;
-      border-radius: 50%;
-
-      &.error {
-        border: 0.3rem solid $system-error;
-      }
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-
     &-img {
       @include flexbox();
       gap: 3.2rem;
+
+      input {
+        display: none;
+      }
 
       &-wrapper {
         @include flexbox();
@@ -96,11 +84,54 @@
         background-color: $gray-200;
         background: var(--color);
         overflow: hidden;
+        cursor: pointer;
+
+        &.error {
+          border: 0.3rem solid $system-error;
+        }
 
         img {
           width: 100%;
           height: 100%;
           object-fit: cover;
+        }
+
+        .ldio div {
+          @include pos-center;
+          width: 25%;
+          height: 25%;
+          border: 4px solid #999999;
+          border-top-color: transparent;
+          border-radius: 50%;
+        }
+        .ldio div {
+          animation: ldio 1s linear infinite;
+        }
+        .loadingio-spinner {
+          width: 100%;
+          height: 100%;
+          display: inline-block;
+          background: #24262b;
+        }
+        .ldio {
+          width: 100%;
+          height: 100%;
+          position: relative;
+          transform: translateZ(0) scale(1);
+          backface-visibility: hidden;
+          transform-origin: 0 0;
+        }
+        .ldio div {
+          box-sizing: content-box;
+        }
+
+        @keyframes ldio {
+          0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+          }
+          100% {
+            transform: translate(-50%, -50%) rotate(360deg);
+          }
         }
       }
 
@@ -109,10 +140,10 @@
         gap: 1.6rem;
 
         p {
-          @include text-style(16, 'normal', $gray-500);
+          @include text-style(16, 400, $gray-500);
 
           &.error {
-            @include text-style(16, 'normal', $system-error);
+            @include text-style(16, 400, $system-error);
           }
         }
 
@@ -252,12 +283,12 @@
       }
 
       p {
-        @include text-style(16, 'normal', $gray-500);
+        @include text-style(16, 400, $gray-500);
       }
 
       &-error {
         p {
-          @include text-style(16, 'normal', $system-error);
+          @include text-style(16, 400, $system-error);
         }
       }
     }
