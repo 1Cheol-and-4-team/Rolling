@@ -32,7 +32,7 @@
     gap: 1.2rem;
 
     &-item {
-      background-color: $card;
+      background-color: var(--color);
     }
 
     li {
