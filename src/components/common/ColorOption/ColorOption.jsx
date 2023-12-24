@@ -30,9 +30,11 @@ export function ColorOption({ onClick }) {
               aria-label='컬러 옵션 버튼'
             >
               {selectedColor === item.option && (
-                <span>
-                  <i className={cx('ic-check')}></i>
-                </span>
+                <div className={cx('color-option-chip-select')}>
+                  <span>
+                    <i className={cx('ic-check')}></i>
+                  </span>
+                </div>
               )}
             </button>
           </li>
