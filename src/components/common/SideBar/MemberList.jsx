@@ -62,14 +62,23 @@ export function MemberList({ messageData }) {
           </div>
           <div className={cx('lg-hidden')}>
             <ul className={cx('member-list-content')}>
-              {latestMembers.map((item) => (
-                <li key={item.id} className={cx('member-list-content-item')}>
-                  <img
-                    src={item.profileImageURL}
-                    alt='최신 등록 프로필 이미지'
-                  />
-                </li>
-              ))}
+              {latestMembers.map((item) => {
+                const hexCodeRegex = /[?&]color=([^&]+)/;
+                const match = item.profileImageURL.match(hexCodeRegex);
+                const randomColor = match ? match[1] : '#24262B';
+                return (
+                  <li
+                    key={item.id}
+                    className={cx('member-list-content-item')}
+                    style={{ '--color': randomColor }}
+                  >
+                    <img
+                      src={item.profileImageURL}
+                      alt='최신 등록 프로필 이미지'
+                    />
+                  </li>
+                );
+              })}
               {membersCount > 4 && (
                 <li className={cx('member-list-content-count')}>
                   <div>

@@ -11,7 +11,7 @@
       height: 3.2rem;
       border-radius: 50%;
       overflow: hidden;
-      background-color: $gray-300;
+      background-color: var(--color);
 
       img {
         width: 100%;
@@ -20,7 +20,7 @@
     }
 
     &-name {
-      @include text-style(14, 'normal', #e0e0e0);
+      @include text-style(14, 400, #e0e0e0);
     }
   }
 }

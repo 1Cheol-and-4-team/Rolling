@@ -32,11 +32,11 @@
     gap: 1.2rem;
 
     &-item {
-      background-color: $card;
+      background-color: var(--color);
     }
 
     li {
-      border-radius: 0.6rem;
+      border-radius: 50%;
       height: 4rem;
       overflow: hidden;
 
