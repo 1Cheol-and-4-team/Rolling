@@ -1,4 +1,4 @@
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/common/Input';
 import { Header } from '@/components/common/Header';
 import { Tab } from '@/components/common/Tab';
@@ -14,7 +14,7 @@ import { INITIAL_POST_RECIPIENTS_TYPE } from '../../stores/dataType';
 import { useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import goMobile from '../../assets/images/goto-mobile.svg';
-import { ROUTER_PATH } from '@/stores';
+
 const cx = classNames.bind(styles);
 
 export function CreatePage() {
@@ -127,7 +127,7 @@ export function CreatePage() {
                   }}
                 />
               ) : (
-                <Option onClick={handleInputChange} />
+                <Option onClick={handleInputChange} setValues={setValues} />
               )}
             </fieldset>
 
