@@ -32,6 +32,7 @@ export function AddPaper() {
   const profileRef = useRef(null);
   const quillRef = useRef(null);
   const profileInputRef = useRef(null);
+  const uploadCount = useRef(0);
   const navigate = useNavigate();
 
   const [values, setValues] = useState(INITIAL_POST_MESSAGE_TYPE);
@@ -103,6 +104,12 @@ export function AddPaper() {
             ...prevValues,
             profileImageURL: imageUrl,
           }));
+          PROFILE_EMOJI.unshift({
+            id: `upload-${uploadCount.current++}`,
+            name: `upload-${uploadCount.current}`,
+            imgUrl: imageUrl,
+          });
+          setCurrentProfile(PROFILE_EMOJI[0].id);
         } else {
           setIsProfileLoading(false);
           throw new Error('이미지를 업로드하는 데 실패했습니다.');
@@ -212,17 +219,8 @@ export function AddPaper() {
                   `${error.profileImageURL}`
                 )}
                 style={{ '--color': randomColor }}
-                onClick={() => {
-                  profileInputRef.current.click();
-                }}
               >
-                {isProfileLoading ? (
-                  <div className={cx('loadingio-spinner')}>
-                    <div className={cx('ldio')}>
-                      <div></div>
-                    </div>
-                  </div>
-                ) : !values.profileImageURL ? (
+                {!values.profileImageURL ? (
                   <img src={defaultProfile} alt='기본 프로필 이미지' />
                 ) : (
                   <img
@@ -231,18 +229,38 @@ export function AddPaper() {
                   />
                 )}
               </div>
-              <input
-                type='file'
-                accept='.jpg, .png, .jpeg,'
-                name='profile_img'
-                onChange={handleUploadProfileChange}
-                ref={profileInputRef}
-              />
               <div className={cx('add-paper-profile-img-select')}>
                 <p className={cx(`${error.profileImageURL}`)}>
                   프로필 이미지를 선택해주세요!
                 </p>
                 <ul>
+                  <li>
+                    <div
+                      className={cx('add-paper-profile-img-select-wrapper')}
+                      onClick={() => {
+                        profileInputRef.current.click();
+                      }}
+                    >
+                      {isProfileLoading ? (
+                        <div className={cx('loadingio-spinner')}>
+                          <div className={cx('ldio')}>
+                            <div></div>
+                          </div>
+                        </div>
+                      ) : (
+                        <span>
+                          <i className={cx('ic-plus')}></i>
+                        </span>
+                      )}
+                    </div>
+                    <input
+                      type='file'
+                      accept='.jpg, .png, .jpeg,'
+                      name='profile_img'
+                      onChange={handleUploadProfileChange}
+                      ref={profileInputRef}
+                    />
+                  </li>
                   {PROFILE_EMOJI.map((item) => (
                     <li key={item.id}>
                       <button

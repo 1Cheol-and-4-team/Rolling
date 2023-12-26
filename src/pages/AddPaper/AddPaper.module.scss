@@ -84,7 +84,7 @@
         background-color: $gray-200;
         background: var(--color);
         overflow: hidden;
-        cursor: pointer;
+        flex-shrink: 0;
 
         &.error {
           border: 0.3rem solid $system-error;
@@ -94,48 +94,6 @@
           width: 100%;
           height: 100%;
           object-fit: cover;
-        }
-
-        .ldio div {
-          @include pos-center;
-          width: 25%;
-          height: 25%;
-          border: 4px solid #999999;
-          border-top-color: transparent;
-          border-radius: 50%;
-        }
-
-        .ldio div {
-          animation: ldio 1s linear infinite;
-        }
-
-        .loadingio-spinner {
-          width: 100%;
-          height: 100%;
-          display: inline-block;
-          background: #24262b;
-        }
-
-        .ldio {
-          width: 100%;
-          height: 100%;
-          position: relative;
-          transform: translateZ(0) scale(1);
-          backface-visibility: hidden;
-          transform-origin: 0 0;
-        }
-
-        .ldio div {
-          box-sizing: content-box;
-        }
-
-        @keyframes ldio {
-          0% {
-            transform: translate(-50%, -50%) rotate(0deg);
-          }
-          100% {
-            transform: translate(-50%, -50%) rotate(360deg);
-          }
         }
       }
 
@@ -151,9 +109,80 @@
           }
         }
 
-        ul {
+        &-wrapper {
           @include flexbox();
+          width: 100%;
+          height: 100%;
+          background-color: $card;
+          border-radius: 50%;
+          border: 0.1rem solid $border;
+          overflow: hidden;
+
+          .ldio div {
+            @include pos-center;
+            width: 25%;
+            height: 25%;
+            border: 3px solid #999999;
+            border-top-color: transparent;
+            border-radius: 50%;
+          }
+
+          .ldio div {
+            animation: ldio 1s linear infinite;
+          }
+
+          .loadingio-spinner {
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+          }
+
+          .ldio {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform: translateZ(0) scale(1);
+            backface-visibility: hidden;
+            transform-origin: 0 0;
+          }
+
+          .ldio div {
+            box-sizing: content-box;
+          }
+
+          @keyframes ldio {
+            0% {
+              transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+              transform: translate(-50%, -50%) rotate(360deg);
+            }
+          }
+
+          span {
+            @include flexbox();
+            padding: 1rem;
+            border-radius: 50%;
+            background-color: $gray-500;
+
+            @include responsive('M') {
+              padding: 0.5rem;
+            }
+
+            i {
+              @include icon-style(16, $white);
+
+              @include responsive('M') {
+                @include icon-style(12, $white);
+              }
+            }
+          }
+        }
+
+        ul {
+          @include flexbox(start);
           gap: 1.2rem;
+          flex-wrap: wrap;
 
           @include responsive('M') {
             display: grid;
@@ -168,7 +197,6 @@
           height: 5.6rem;
           border-radius: 50%;
           background-color: $border;
-          border: 0.1rem solid transparent;
           transition: all ease-in-out 0.3s;
           position: relative;
 
@@ -197,27 +225,6 @@
           & .selected,
           &:hover .gradient-box {
             @include pos-center();
-            opacity: 1;
-            visibility: visible;
-            width: calc(100% + 6px);
-            height: calc(100% + 6px);
-            border: 0.2rem solid transparent;
-            border-radius: 50%;
-            background-image: linear-gradient(#191a1e, #191a1e),
-              linear-gradient(
-                180deg,
-                rgba(25, 26, 30, 0.5) 0%,
-                rgba(255, 107, 0, 0.5) 52.08%,
-                #7100e3 100%
-              );
-            background-origin: border-box;
-            background-clip: content-box, border-box;
-            z-index: -1;
-          }
-
-          &:active .gradient-box {
-            @include pos-center();
-
             opacity: 1;
             visibility: visible;
             width: calc(100% + 6px);
