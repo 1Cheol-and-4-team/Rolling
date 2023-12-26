@@ -28,8 +28,8 @@
 
     opacity: 1;
     visibility: visible;
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
+    width: calc(100% + 0.4rem);
+    height: calc(100% + 0.4rem);
     border: 0.1rem solid transparent;
     border-radius: 2.4rem;
     background-image: linear-gradient(#191a1e, #191a1e),
@@ -110,5 +110,15 @@
 
   &-date {
     @include text-style(12, 400, $gray-500);
+  }
+}
+
+.dialog-confirm {
+  text-align: center;
+  margin-top: 2.4rem;
+  &-footer {
+    button:last-child {
+      margin-left: 0.8rem;
+    }
   }
 }

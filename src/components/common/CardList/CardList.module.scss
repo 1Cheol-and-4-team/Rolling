@@ -28,9 +28,9 @@
 
     width: 25.5rem;
     padding: 0.8rem 1.6rem;
-    border-radius: 12px;
+    border-radius: 1.2rem;
     background: rgba(0, 0, 0, 0.16);
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(1.6rem);
 
     &-name {
       @include text-style(24, 700, $text-white);
@@ -67,9 +67,9 @@
     &-empty {
       @include flexbox(between);
       min-height: 4rem;
-      border-radius: 20px;
+      border-radius: 2rem;
       background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(1.2rem);
 
       p {
         @include text-style(14, 500, $text-white);
