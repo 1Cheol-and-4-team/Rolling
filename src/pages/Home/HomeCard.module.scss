@@ -56,7 +56,7 @@
   }
 
   &-text {
-    @include text-style(14, 'normal', $text-white);
+    @include text-style(14, 500, $text-white);
   }
 
   &-title {
@@ -74,7 +74,7 @@
   }
 
   &-des {
-    @include text-style(18, 'normal', $banner-text);
+    @include text-style(18, 400, $banner-text);
     margin-top: 0.8rem;
   }
 
