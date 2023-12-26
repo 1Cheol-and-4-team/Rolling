@@ -47,7 +47,7 @@ export function PaperList() {
   return (
     <div className={cx('paper-list')}>
       <Helmet>
-        <title>카드 리스트 | Rolling</title>
+        <title>롤링 보드 | Rolling</title>
       </Helmet>
 
       <Header isLanding={false} />
