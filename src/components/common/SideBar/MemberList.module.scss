@@ -65,3 +65,43 @@
     }
   }
 }
+
+.dialog-members {
+  @include column-flexbox();
+  width: 100%;
+
+  &-list {
+    @include column-flexbox(start, between);
+    width: 100%;
+    gap: 0.6rem;
+    padding-right: 2rem;
+
+    height: 26.4rem;
+    overflow-y: scroll;
+    margin: 1.6rem 0 2.4rem;
+
+    &-item {
+      @include text-style(14, 700, $text-white);
+      position: relative;
+      padding: 0.8rem 0 0.8rem 0.8rem;
+    }
+
+    &::-webkit-scrollbar {
+      width: 0.4rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $gray-300;
+      border-radius: 0.4rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+  }
+
+  &-footer {
+    width: 100%;
+    text-align: center;
+  }
+}

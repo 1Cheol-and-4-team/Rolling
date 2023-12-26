@@ -4,9 +4,8 @@ import styles from '@/components/common/SideBar/MemberList.module.scss';
 
 import { Member } from '@/components/common/SideBar/';
 import { Empty } from '@/components/common/Empty';
-import { Overlay } from '@/components/common/Modal';
-import { MemberModal } from '@/components/common/Modal';
-import { MixButton } from '@/components/common/Button';
+import { Overlay, MyModal } from '@/components/common/Modal';
+import { MixButton, Button } from '@/components/common/Button';
 
 import { IMPORT_IMAGES } from '@/stores';
 
@@ -91,12 +90,33 @@ export function MemberList({ messageData }) {
           </div>
         </>
       )}
+
       {isModal && (
         <Overlay>
-          <MemberModal
-            memberData={messageData}
-            handleModalClose={handleModalClose}
-          />
+          <MyModal title='Members' handleModalClose={handleModalClose}>
+            <div className={cx('dialog-members')}>
+              <ul className={cx('dialog-members-list')}>
+                {messageData.map((item) => (
+                  <li key={item.id} className={cx('dialog-members-list-item')}>
+                    <Member
+                      image={item.profileImageURL}
+                      member={item.sender}
+                      relationship={item.relationship}
+                    />
+                  </li>
+                ))}
+              </ul>
+              <div className={cx('dialog-members-footer')}>
+                <Button
+                  variant='secondary'
+                  size={40}
+                  onClick={handleModalClose}
+                >
+                  닫기
+                </Button>
+              </div>
+            </div>
+          </MyModal>
         </Overlay>
       )}
     </div>

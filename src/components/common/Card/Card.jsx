@@ -8,9 +8,9 @@ import classNames from 'classnames/bind';
 import styles from './Card.module.scss';
 
 import { Badge, NewBadge } from '@/components/common/Badge';
-import { Overlay, Modal } from '@/components/common/Modal';
-import { ConfirmModal } from '@/components/common/ConfirmModal';
+import { Overlay, PaperModal, MyModal } from '@/components/common/Modal';
 import { Button, IconButton } from '@/components/common/Button';
+
 import { formatDate, getDateDiff } from '@/utils';
 
 const cx = classNames.bind(styles);
@@ -121,7 +121,7 @@ export function Card({
       </div>
       {isMessageModalOpen && (
         <Overlay>
-          <Modal
+          <PaperModal
             profileImage={profileImageURL}
             randomColor={randomColor}
             backgroundUrl={backgroundUrl}
@@ -133,14 +133,15 @@ export function Card({
       )}
       {isConfirmModalOpen && (
         <Overlay>
-          <ConfirmModal
-            info='롤링페이퍼를 삭제하시겠습니까?'
+          <MyModal
+            title='롤링페이퍼를 삭제하시겠습니까?'
             desc='삭제된 롤링페이퍼는 복구할 수 없습니다.'
             iconUrl={CONFRIM_MODAL.DELETE.URL}
+            iconAlt={CONFRIM_MODAL.DELETE.ALT}
             handleModalClose={handleConfrimModalClose}
           >
-            {
-              <>
+            <div className={cx('dialog-confirm')}>
+              <div className={cx('dialog-confirm-footer')}>
                 <Button
                   variant='secondary'
                   size={40}
@@ -155,9 +156,9 @@ export function Card({
                 >
                   삭제
                 </Button>
-              </>
-            }
-          </ConfirmModal>
+              </div>
+            </div>
+          </MyModal>
         </Overlay>
       )}
     </>
