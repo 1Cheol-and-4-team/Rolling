@@ -6,7 +6,7 @@ const cx = classNames.bind(styles);
 
 export function Member({ image, member, relationship }) {
   const hexCodeRegex = /[?&]color=([^&]+)/;
-  const match = image.match(hexCodeRegex);
+  const match = image?.match(hexCodeRegex);
   const randomColor = match ? match[1] : '#24262B';
 
   return (
