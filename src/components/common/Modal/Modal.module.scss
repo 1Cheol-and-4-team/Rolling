@@ -24,7 +24,7 @@
 }
 
 .modal {
-  width: 42rem;
+  width: 40rem;
   border-radius: 2.4rem;
   overflow: hidden;
   border: 0.2rem solid $border;
@@ -34,7 +34,7 @@
     rgba(19, 20, 24, 0.6) 100%
   );
   box-shadow: $modal-shadow;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(1.2rem);
   animation: showModal ease-in-out 0.4s;
 
   &-banner {
@@ -112,7 +112,7 @@
     &-textArea {
       @include text-style(18, 400, $banner-text);
       width: 100%;
-      max-height: 14rem;
+      max-height: 11rem;
       text-align: start;
       margin-bottom: 3.2rem;
       overflow-y: auto;
@@ -121,12 +121,12 @@
       padding-right: 1rem;
 
       &::-webkit-scrollbar {
-        width: 1rem;
+        width: 0.5rem;
       }
 
       &::-webkit-scrollbar-thumb {
         background-color: $gray-300;
-        border-radius: 1rem;
+        border-radius: 0.5rem;
       }
 
       &::-webkit-scrollbar-track {
@@ -134,44 +134,43 @@
       }
     }
   }
-}
 
-.member-modal {
-  @include column-flexbox();
-  max-width: 34rem;
-  padding: 3.2rem 1.6rem 3.2rem 2.4rem;
-
-  &-title {
-    @include text-style(18, 700, $text-white);
+  // dialog
+  &.my-modal {
+    min-width: 33rem;
+    max-width: 36rem;
   }
 
-  &-content {
-    @include column-flexbox(start, between);
-    gap: 0.6rem;
-    padding-right: 2rem;
+  &-dialog {
+    @include column-flexbox();
+    padding: 3.2rem 1.6rem 3.2rem 2.4rem;
 
-    li {
-      @include text-style(14, 700, $text-white);
-      position: relative;
-      padding: 0.8rem 0;
+    &-header {
+      @include column-flexbox();
+      width: 100%;
+
+      .hide {
+        display: none;
+      }
+
+      .hide.modal-dialog-header-icon {
+        display: block;
+        margin-bottom: 0.8rem;
+      }
+
+      &-title {
+        @include text-style(18, 700, $text-white);
+      }
+
+      .hide.modal-dialog-header-desc {
+        @include text-style(12, 500, $gray-700);
+        display: block;
+        margin-top: 0.4rem;
+      }
     }
 
-    width: 100%;
-    height: 26.4rem;
-    overflow-y: scroll;
-    margin: 1.6rem 0 2.4rem;
-
-    &::-webkit-scrollbar {
-      width: 0.4rem;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: $gray-300;
-      border-radius: 0.4rem;
-    }
-
-    &::-webkit-scrollbar-track {
-      background-color: transparent;
+    &-body {
+      width: 100%;
     }
   }
 }
