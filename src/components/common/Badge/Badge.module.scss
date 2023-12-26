@@ -22,6 +22,12 @@
     color: $skyblue;
   }
 
+  &-new {
+    color: $badge-new;
+    background-color: rgba(255, 0, 0, 0.1);
+    margin-right: 0.8rem;
+  }
+
   &-type-sidebar {
     width: 6.4rem;
   }

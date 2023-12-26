@@ -28,7 +28,7 @@ export const Header = ({
           <>
             <Link to={POST_PATH}>
               <Button variant='primary' size={40}>
-                롤링 페이퍼 만들기
+                Get Started
               </Button>
             </Link>
           </>

@@ -1,49 +1,93 @@
 .card-list {
-  @include column-flexbox(between, start);
   position: relative;
 
   width: 27.5rem;
   height: 26rem;
-  padding: 3rem 2.4rem 2rem;
+  padding: 1rem;
   border-radius: 1.6rem;
   box-shadow: $drop-shadow;
+  transition: all ease-in-out 0.3s;
+
+  &:hover {
+    transform: translateY(-1rem);
+    box-shadow: $card-shadow;
+  }
 
   @include responsive('M') {
     width: 20.8rem;
     height: 23.2rem;
-    padding: 3rem 2.2rem 2rem 2.4rem;
-  }
 
-  &-title {
-    @include text-style(24, 700, $card);
-    @include responsive('M') {
-      @include text-style(18, 700, $card);
+    &:hover {
+      transform: translateY(0);
     }
   }
 
-  &-count {
-    @include text-style(16, 'nomarl', $card);
-    @include responsive('M') {
-      @include text-style(14, 'nomarl', $card);
-    }
-    span {
-      @include text-style(16, 700);
+  &-content {
+    @include pos-center-x();
+    bottom: 1rem;
+
+    width: 25.5rem;
+    padding: 0.8rem 1.6rem;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.16);
+    backdrop-filter: blur(16px);
+
+    &-name {
+      @include text-style(24, 700, $text-white);
+
       @include responsive('M') {
-        @include text-style(14, 700);
+        @include text-style(18, 700, $card);
       }
     }
-  }
 
-  &-reaction {
-    @include flexbox(start, center);
-    padding-top: 1.6rem;
-    min-height: 5.3rem;
-    width: 100%;
-    border-top: 0.1rem solid rgba(0, 0, 0, 0.12);
-    gap: 0.8rem;
+    &-count {
+      @include text-style(16, 400, $text-white);
+      padding: 0.4rem 0 1.2rem 0;
+
+      span {
+        font-weight: 700;
+      }
+
+      @include responsive('M') {
+        font-size: 1.4rem;
+        padding: 0;
+      }
+    }
+
+    &-reaction {
+      @include flexbox(start);
+      gap: 0.8rem;
+      min-height: 4rem;
+
+      @include responsive('M') {
+        gap: 0.4rem;
+      }
+    }
+
+    &-empty {
+      @include flexbox(between);
+      min-height: 4rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+
+      p {
+        @include text-style(14, 500, $text-white);
+        opacity: 0.5;
+        text-align: center;
+        flex-grow: 1;
+      }
+
+      button {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        background-color: $card;
+      }
+    }
+
     @include responsive('M') {
-      width: 100%;
-      gap: 0.4rem;
+      width: 18.8rem;
     }
   }
 

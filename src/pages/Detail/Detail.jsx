@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet';
 
 import { api, ENDPOINT } from '@/api';
 import { useAsync } from '@/hooks/useAsync';
-import { INITIAL_RECIPIENTS_TYPE, INITIAL_MESSAGE_TYPE } from '@/stores';
 
 import classNames from 'classnames/bind';
 import styles from '@/pages/Detail/Detail.module.scss';
@@ -20,19 +19,25 @@ import { Share } from '@/components/Share';
 import { Overlay } from '@/components/common/Modal';
 import { ConfirmModal } from '@/components/common/ConfirmModal';
 
-import { SORT_LIST, SENDER_TAB_LIST, IMPORT_IMAGES } from '@/stores';
+import {
+  INITIAL_RECIPIENTS_TYPE,
+  INITIAL_MESSAGE_TYPE,
+  SORT_LIST,
+  SENDER_TAB_LIST,
+  IMPORT_IMAGES,
+} from '@/stores';
 
 const cx = classNames.bind(styles);
-const { EDIT } = IMPORT_IMAGES;
-const { CONFRIM_MODAL } = IMPORT_IMAGES;
+const { EDIT, CONFRIM_MODAL } = IMPORT_IMAGES;
 
 export const Detail = ({ isEdit = false }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   let url = window.location.href;
-  const [isActive, setIsActive] = useState(1);
+
   const [tabName, setTagName] = useState('All');
   const [sortOption, setSortOption] = useState('Latest');
+  const [isActive, setIsActive] = useState(1);
   const [isModal, setIsModal] = useState(false);
 
   // Get Recipients Info (backgroundColor/backgroundImageURL/reactionCount)

@@ -1,26 +1,20 @@
-import propTypes from 'prop-types';
-import { BadgeEmoji } from '@/components/common/Badge';
-import styles from './CardList.module.scss';
 import classNames from 'classnames/bind';
-import { ProfileImg } from './ProfileImg';
+import styles from './CardList.module.scss';
+import { BadgeEmoji } from '@/components/common/Badge';
 
 const cx = classNames.bind(styles);
-
-CardList.propTypes = {
-  response: propTypes.object,
-};
 
 export function CardList(data) {
   const results = data.data;
   const {
-    id,
     name,
     backgroundColor,
     backgroundImageURL,
     messageCount,
-    recentMessages,
     topReactions,
   } = results;
+
+  const isEmptyReaction = topReactions?.length === 0;
 
   return (
     <li
@@ -31,34 +25,40 @@ export function CardList(data) {
       }}
       className={cx('card-list', `card-list-${backgroundColor}`)}
     >
-      <article>
-        <div
+      <div className={cx('card-list-content')}>
+        <h1
           style={{
-            color: backgroundImageURL ? '#ffffff' : '',
+            color: backgroundImageURL ? '#ffffff' : '#191A1E',
           }}
-          className={cx('card-list-title')}
+          className={cx('card-list-content-name')}
         >
-          To. {name}
-        </div>
-        <ProfileImg id={id} recentMessages={recentMessages} />
-        <div
+          {name}
+        </h1>
+        <p
           style={{
-            color: backgroundImageURL ? '#ffffff' : '',
+            color: backgroundImageURL ? '#ffffff' : '#191A1E',
           }}
-          className={cx('card-list-count')}
+          className={cx('card-list-content-count')}
         >
-          <span>{messageCount < 1000 ? messageCount : '999+'}</span>
-          개의 메시지가 작성됐어요!
-        </div>
-      </article>
-      <ul className={cx('card-list-reaction')}>
-        {topReactions &&
-          topReactions.map((reaction) => (
-            <li key={reaction.id}>
-              <BadgeEmoji emoji={reaction.emoji} count={reaction.count} />
-            </li>
-          ))}
-      </ul>
+          <span>{messageCount < 1000 ? messageCount : '999+'}</span>개의
+          메시지가 작성됐어요!
+        </p>
+
+        {isEmptyReaction ? (
+          <div className={cx('card-list-content-empty')}>
+            <p>No Reactions</p>
+          </div>
+        ) : (
+          <ul className={cx('card-list-content-reaction')}>
+            {topReactions &&
+              topReactions.map((reaction) => (
+                <li key={reaction.id}>
+                  <BadgeEmoji emoji={reaction.emoji} count={reaction.count} />
+                </li>
+              ))}
+          </ul>
+        )}
+      </div>
     </li>
   );
 }

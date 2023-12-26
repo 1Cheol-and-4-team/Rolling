@@ -97,7 +97,7 @@
   }
 
   &-textbox {
-    @include text-style(18, 400, $baaner-text);
+    @include text-style(18, 400, $banner-text);
     width: 100%;
     overflow: hidden;
     white-space: pre-line;

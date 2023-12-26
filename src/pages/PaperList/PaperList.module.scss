@@ -3,65 +3,104 @@
     min-height: calc(100vh - $header-height);
     margin-top: $header-height;
   }
-  &-title {
-    @include text-style(32, 'normal', $text-gray);
-    @include flexbox(center);
-    padding-top: 4rem;
-    span {
-      @include text-style(32, bold, $text-gray);
-    }
-  }
-  .list-wrap {
+
+  &-container {
     max-width: 116rem;
-    @include column-flexbox(between);
-    margin: 0 auto 13.7rem;
+    margin: 0 auto 4rem;
+    padding: 8rem 0 4.8rem;
+
     @include responsive('T') {
       width: calc(100vw - 4.8rem);
     }
-    @include responsive('M') {
-      width: calc(100vw - 4rem);
-    }
 
-    &-notFound {
-      @include column-flexbox(center, center);
-      margin-top: 4.8rem;
-      width: 116rem;
-      height: 66.4rem;
-      background-color: $background;
-      border-radius: 1.2rem;
-      border: 0.2rem solid $border;
-      @include responsive('T') {
-        width: calc(100vw - 4.8rem);
-      }
-      @include responsive('M') {
-        width: calc(100vw - 4rem);
-      }
-      p {
-        @include text-style(18, 'normal', $text-gray);
-      }
+    @include responsive('M') {
+      padding: 4.8rem 0 7.2rem;
     }
+  }
+
+  &-header {
+    @include column-flexbox();
+    width: 100%;
+    margin-bottom: 4rem;
 
     &-title {
-      @include text-style(24, bold, $white);
-      width: 100%;
-      margin: 5rem 0 1.6rem 0rem;
+      @include text-style(32, 700, $text-white);
+      margin-bottom: 4rem;
     }
-    &-btn {
-      width: 28rem;
-      position: fixed;
-      bottom: 2.4rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1;
-      @include responsive('T') {
-        width: calc(100vw - 4.8rem);
+
+    @include responsive('M') {
+      margin-bottom: 1.6rem;
+
+      &-title {
+        font-size: 2.8rem;
+        margin-bottom: 2rem;
       }
-      @include responsive('M') {
-        width: calc(100vw - 4rem);
+    }
+  }
+
+  .list-wrapper {
+    @include column-flexbox(between, start);
+    width: 100%;
+
+    .list-content {
+      width: 100%;
+
+      &-title {
+        @include text-style(24, 400, $banner-text);
+        margin: 2rem 0 1.6rem;
+
+        &-white {
+          @include text-style(24, 700, $text-white);
+        }
+
+        &-purple {
+          @include text-style(24, 700, $purple-light);
+        }
+
+        &-orange {
+          @include text-style(24, 700, $orange);
+        }
+
+        @include responsive('M') {
+          @include text-style(18, 400, $banner-text);
+          margin: 3.6rem 0 0.8rem;
+
+          &-white,
+          &-purple,
+          &-orange {
+            font-size: $font-size-18;
+          }
+        }
       }
-      button {
+
+      &-notFound {
+        @include column-flexbox();
+
         width: 100%;
+        min-height: 26rem;
+        background-color: $card;
+        border: 0.2rem solid $border;
+        border-radius: 1.6rem;
+
+        p {
+          @include text-style(18, 500, $text-gray);
+        }
       }
+    }
+  }
+
+  &-footer {
+    position: fixed;
+    width: 100%;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    padding: 2.4rem 0;
+    text-align: center;
+    z-index: $fixed-btn-level;
+
+    @include responsive('T') {
+      width: calc(100vw - 4.8rem);
     }
   }
 }

@@ -17,3 +17,11 @@ export function Badge({ relationship, type = '' }) {
     </div>
   );
 }
+
+export const NewBadge = () => {
+  return (
+    <div className={cx('badge', 'badge-new')}>
+      <span>New</span>
+    </div>
+  );
+};

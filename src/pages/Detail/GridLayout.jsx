@@ -3,6 +3,7 @@ import styles from '@/pages/Detail/Detail.module.scss';
 
 import { EmptyCard } from '@/components/common/Empty';
 import { Card } from '@/components/common/Card';
+
 import { relationshipToKorean } from '@/utils';
 import { IMPORT_IMAGES } from '@/stores';
 

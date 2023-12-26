@@ -5,7 +5,10 @@ import banner01 from '@/assets/images/point1-img.svg';
 import banner02 from '@/assets/images/point2-img.svg';
 import checkIcon from '@/assets/images/icons/ic-check.svg';
 import deleteIcon from '@/assets/images/icons/ic-delete.svg';
-import symbol from '@/assets/images/icons/logo-symbol.svg';
+import symbolPurple from '@/assets/images/icons/logo-symbol.svg';
+import symbolWhite from '@/assets/images/icons/logo-symbol-white.svg';
+import search from '@/assets/images/icons/ic-search.svg';
+import more from '@/assets/images/icons/ic-arrow-reaction.svg';
 import clap from '@/assets/images/img-hand.png';
 
 export const IMPORT_IMAGES = {
@@ -41,12 +44,26 @@ export const IMPORT_IMAGES = {
   },
   INVITE_BANNER: {
     LOGO_SYMBOL: {
-      URL: symbol,
+      URL: symbolPurple,
       ALT: '로고 심볼 아이콘',
     },
     CLAP: {
       URL: clap,
       ALT: '하이파이브 이미지',
+    },
+  },
+  CARD_LIST: {
+    LOGO_SYMBOL: {
+      URL: symbolWhite,
+      ALT: '로고 심볼 아이콘',
+    },
+    SEARCH: {
+      URL: search,
+      ALT: '검색 아이콘',
+    },
+    MORE: {
+      URL: more,
+      ALT: '리액션 추가하러 가기 아이콘',
     },
   },
 };

@@ -7,11 +7,11 @@ import { INITIAL_RECIPIENTS_TYPE, IMPORT_IMAGES } from '@/stores';
 import classNames from 'classnames/bind';
 import styles from './Card.module.scss';
 
-import { Badge } from '@/components/common/Badge';
+import { Badge, NewBadge } from '@/components/common/Badge';
 import { Overlay, Modal } from '@/components/common/Modal';
 import { ConfirmModal } from '@/components/common/ConfirmModal';
 import { Button, IconButton } from '@/components/common/Button';
-import { formatDate } from '@/utils';
+import { formatDate, getDateDiff } from '@/utils';
 
 const cx = classNames.bind(styles);
 
@@ -35,6 +35,9 @@ export function Card({
     () => api.get(`${ENDPOINT.MESSAGES}${id}/`),
     INITIAL_RECIPIENTS_TYPE
   );
+
+  const getFormatDays = getDateDiff(createdAt);
+  const isNewest = getFormatDays < 2;
 
   const hexCodeRegex = /[?&]color=([^&]+)/;
   const match = profileImageURL.match(hexCodeRegex);
@@ -78,6 +81,7 @@ export function Card({
     <>
       <div className={cx('card')} onClick={handleModalOpen}>
         <header className={cx('card-header')}>
+          {isNewest && <NewBadge />}
           <Badge relationship={relationship} />
           <div
             className={cx('card-header-btn-delete', {

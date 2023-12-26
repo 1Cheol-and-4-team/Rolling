@@ -3,25 +3,34 @@
 }
 
 .cardList {
-  @include column-flexbox(center, center);
+  @include column-flexbox(center, start);
   position: relative;
+
   @include responsive('T') {
     width: 100%;
   }
+
   &-wrap {
+    @include scrollbar_hide();
+    max-width: 116rem;
+    overflow: scroll;
+
     @include responsive('T') {
       width: 100%;
     }
-    max-width: 116rem;
-    overflow: scroll;
-    @include scrollbar_hide();
   }
 
   &-card {
     @include flexbox(start, center);
-    width: 100%;
     gap: 2rem;
+
+    width: 100%;
+    padding: 1rem 0 4rem;
     transition: transform 0.3s ease-in-out;
     transform: translateX(var(--scroll));
+
+    @include responsive('M') {
+      padding: 0;
+    }
   }
 }

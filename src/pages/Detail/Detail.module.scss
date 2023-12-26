@@ -123,11 +123,12 @@
 
     .content {
       height: 100%;
-      padding: 10.5rem 0 9.5rem;
+      padding: 10rem 0;
       margin-left: 32rem;
 
       @include responsive('T') {
         margin-left: 0;
+        padding: 12rem 0 6rem;
       }
 
       .container {

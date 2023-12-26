@@ -164,6 +164,7 @@
 
     span {
       @include text-style(16, 500);
+      width: 9rem;
     }
   }
 
@@ -260,6 +261,7 @@
 
 .ic-btn-add-card {
   @extend %icon-btn-base;
+
   width: 5.6rem;
   height: 5.6rem;
   border-radius: 50%;
@@ -273,20 +275,20 @@
 
 .ic-btn-arrow {
   @extend %icon-btn-base;
-  border: 0.1rem solid #6b6b6d;
+
+  position: absolute;
+  top: 50%;
+  left: -2rem;
+  transform: translateY(-50%);
+
   width: 4rem;
   height: 4rem;
+  background-color: $border;
+  border: none;
   border-radius: 50%;
   box-shadow: $arrow-button-shadow;
-  backdrop-filter: blur(12px);
-  // 추가
-  margin: 0 0.5rem;
+  z-index: $carousel-btn-level;
 
-  z-index: 1;
-  position: absolute;
-  bottom: 9rem;
-  transform: translateY(-50%);
-  left: -2rem;
   @include responsive('T') {
     display: none;
   }
@@ -294,20 +296,20 @@
 
 .ic-btn-arrowRight {
   @extend %icon-btn-base;
-  border: 0.1rem solid #6b6b6d;
+
+  position: absolute;
+  top: 50%;
+  right: -2rem;
+  transform: translateY(-50%);
+
   width: 4rem;
   height: 4rem;
+  background-color: $border;
+  border: none;
   border-radius: 50%;
   box-shadow: $arrow-button-shadow;
-  backdrop-filter: blur(12px);
+  z-index: $carousel-btn-level;
 
-  // 추가
-  margin: 0 0.5rem;
-  z-index: 1;
-  position: absolute;
-  bottom: 9rem;
-  transform: translateY(-50%);
-  right: -2rem;
   @include responsive('T') {
     display: none;
   }
@@ -325,6 +327,7 @@
 
 .ic-btn-delete {
   display: block;
+
   &:not(:disabled):hover {
     border: 1px solid $system-error;
     i {

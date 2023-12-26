@@ -1,39 +1,47 @@
+import { useMemo, useState } from 'react';
+
 import { api, ENDPOINT } from '@/api';
 import { useAsync } from '@/hooks/useAsync';
-import { INITIAL_RECIPIENTS_TYPE } from '@/stores';
-import { Header } from '@/components/common/Header';
-import { Button } from '@/components/common/Button';
-import { Link } from 'react-router-dom';
-import PaperListCards from '../../components/common/CardList/PaperListCards';
-import styles from './PaperList.module.scss';
+
 import classNames from 'classnames/bind';
+import styles from './PaperList.module.scss';
 import { Helmet } from 'react-helmet';
-import { useMemo, useState } from 'react';
+
+import { Header } from '@/components/common/Header';
+import { Button, LinkButton } from '@/components/common/Button';
+import PaperListCards from '../../components/common/CardList/PaperListCards';
 import Search from '../../components/common/CardList/Search';
-import notFound from '@/assets/images/icons/not-found.svg';
+
+import { INITIAL_RECIPIENTS_TYPE, ROUTER_PATH, IMPORT_IMAGES } from '@/stores';
 
 const cx = classNames.bind(styles);
+const { EMPTY_CARD } = IMPORT_IMAGES;
 
 export function PaperList() {
-  const [keyword, setKeyword] = useState('');
+  const [isKeyword, setKeyword] = useState('');
 
   const {
     data: { results },
-  } = useAsync(() => api.get(ENDPOINT.RECIPIENTS), INITIAL_RECIPIENTS_TYPE);
+  } = useAsync(
+    () => api.get(ENDPOINT.RECIPIENTS, { params: { limit: 100 } }),
+    INITIAL_RECIPIENTS_TYPE
+  );
 
-  const { data } = useAsync(
+  const { data: popular } = useAsync(
     () => api.get(ENDPOINT.RECIPIENTS, { params: { sort: 'like' } }),
     INITIAL_RECIPIENTS_TYPE
   );
 
-  const like = data.results;
-  const SearchCards = useMemo(
+  const popularCardData = popular.results;
+  const latestCardData = results.slice(0, 8);
+
+  const searchCards = useMemo(
     () =>
-      keyword &&
+      isKeyword &&
       results.filter(({ name }) =>
-        name.toLowerCase().includes(keyword.toLowerCase())
+        name.toLowerCase().includes(isKeyword.toLowerCase())
       ),
-    [keyword]
+    [isKeyword]
   );
 
   return (
@@ -41,72 +49,103 @@ export function PaperList() {
       <Helmet>
         <title>카드 리스트 | Rolling</title>
       </Helmet>
-      <Header isLanding={true} />
+
+      <Header isLanding={false} />
+
       <main className={cx('paper-list-content')}>
         <div className={cx('paper-list-container')}>
-          <div>
-            <h1 className={cx('paper-list-title')}>
-              Find your <span>&nbsp;Rolling Paper</span>
-            </h1>
+          <div className={cx('paper-list-header')}>
+            <h1 className={cx('paper-list-header-title')}>ROLLING BOARD</h1>
             <Search setKeyword={setKeyword} />
           </div>
-          <div className={cx('list-wrap')}>
-            {keyword ? (
+          <section className={cx('list-wrapper')}>
+            {isKeyword ? (
               <>
-                {SearchCards.length > 0 ? (
-                  <>
-                    <p className={cx('list-wrap-title')}>
-                      검색된 롤링 페이퍼🔍
-                    </p>
-                    <PaperListCards data={SearchCards} />
-                  </>
+                {searchCards.length > 0 ? (
+                  <section className={cx('list-content')}>
+                    <h2 className={cx('list-content-title')}>
+                      <span className={cx('list-content-title-white')}>
+                        FOUND
+                      </span>{' '}
+                      ROLLING
+                    </h2>
+                    <PaperListCards data={searchCards} />
+                  </section>
                 ) : (
-                  <div className={cx('list-wrap-notFound')}>
-                    <img src={notFound} />
-                    <p>No maches found</p>
-                  </div>
+                  <section className={cx('list-content')}>
+                    <h2 className={cx('list-content-title')}>
+                      <span className={cx('list-content-title-white')}>
+                        FOUND
+                      </span>{' '}
+                      ROLLING
+                    </h2>
+                    <div className={cx('list-content-notFound')}>
+                      <img src={EMPTY_CARD.URL} alt={EMPTY_CARD.ALT} />
+                      <p>No maches found</p>
+                    </div>
+                  </section>
                 )}
               </>
             ) : (
               <>
                 {results.length > 0 ? (
-                  <>
-                    <p className={cx('list-wrap-title')}>인기 롤링 페이퍼 🔥</p>
-                    <PaperListCards data={like} />
-                    <p className={cx('list-wrap-title')}>
-                      최근에 만든 롤링 페이퍼 ⭐️️
-                    </p>
-                    <PaperListCards data={results} />
-                  </>
+                  <section className={cx('list-content')}>
+                    <h2 className={cx('list-content-title')}>
+                      <span className={cx('list-content-title-purple')}>
+                        POPULAR
+                      </span>{' '}
+                      ROLLING
+                    </h2>
+                    <PaperListCards data={popularCardData} />
+
+                    <h2 className={cx('list-content-title')}>
+                      <span className={cx('list-content-title-orange')}>
+                        LATEST
+                      </span>{' '}
+                      ROLLING
+                    </h2>
+                    <PaperListCards data={latestCardData} />
+                  </section>
                 ) : (
-                  <>
-                    <p className={cx('list-wrap-title')}>인기 롤링 페이퍼 🔥</p>
+                  <section className={cx('list-content')}>
+                    <h2 className={cx('list-content-title')}>
+                      <span className={cx('list-content-title-purple')}>
+                        POPULAR
+                      </span>{' '}
+                      ROLLING
+                    </h2>
                     <div
                       style={{ height: '26rem' }}
-                      className={cx('list-wrap-notFound')}
+                      className={cx('list-content-notFound')}
                     >
-                      <img src={notFound} />
-                      <p>No maches found</p>
+                      <img src={EMPTY_CARD.URL} alt={EMPTY_CARD.ALT} />
+                      <p>Rolling paper not found</p>
                     </div>
-                    <p className={cx('list-wrap-title')}>
-                      최근에 만든 롤링 페이퍼 ⭐️️
-                    </p>
+
+                    <h2 className={cx('list-content-title')}>
+                      <span className={cx('list-content-title-orange')}>
+                        LATEST
+                      </span>{' '}
+                      ROLLING
+                    </h2>
                     <div
                       style={{ height: '26rem' }}
-                      className={cx('list-wrap-notFound')}
+                      className={cx('list-content-notFound')}
                     >
-                      <img src={notFound} />
-                      <p>No maches found</p>
+                      <img src={EMPTY_CARD.URL} alt={EMPTY_CARD.ALT} />
+                      <p>Rolling paper not found</p>
                     </div>
-                  </>
+                  </section>
                 )}
               </>
             )}
-            <Link to={`/post`} className={cx('list-wrap-btn')}>
+          </section>
+          <div className={cx('paper-list-footer')}>
+            <LinkButton path={ROUTER_PATH.POST_PATH}>
               <Button variant='primary' size={100}>
                 나도 만들어보기
               </Button>
-            </Link>
+            </LinkButton>
           </div>
         </div>
       </main>
