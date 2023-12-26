@@ -21,7 +21,6 @@ export function CardList(data) {
     recentMessages,
     topReactions,
   } = results;
-
   return (
     <li
       style={{

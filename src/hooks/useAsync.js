@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 
-export const useAsync = (asyncFunction, initialData) => {
+export const useAsync = (
+  asyncFunction,
+  initialData,
+  initialExecution = true
+) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [error, setError] = useState();
@@ -23,6 +27,7 @@ export const useAsync = (asyncFunction, initialData) => {
   };
 
   useEffect(() => {
+    if (!initialExecution) return;
     execute();
   }, []);
 

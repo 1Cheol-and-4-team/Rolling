@@ -4,12 +4,12 @@ import { INITIAL_RECIPIENTS_TYPE } from '@/stores';
 import { Header } from '@/components/common/Header';
 import { Button } from '@/components/common/Button';
 import { Link } from 'react-router-dom';
-import PaperListCards from '../../components/common/CardList/PaperListCards';
+import PaperListCards from '@/components/common/CardList/PaperListCards';
 import styles from './PaperList.module.scss';
 import classNames from 'classnames/bind';
 import { Helmet } from 'react-helmet';
-import { useMemo, useState } from 'react';
-import Search from '../../components/common/CardList/Search';
+import { useEffect, useMemo, useState } from 'react';
+import Search from '@/components/common/CardList/Search';
 import notFound from '@/assets/images/icons/not-found.svg';
 
 const cx = classNames.bind(styles);
@@ -19,14 +19,29 @@ export function PaperList() {
 
   const {
     data: { results },
-  } = useAsync(() => api.get(ENDPOINT.RECIPIENTS), INITIAL_RECIPIENTS_TYPE);
-
-  const { data } = useAsync(
-    () => api.get(ENDPOINT.RECIPIENTS, { params: { sort: 'like' } }),
-    INITIAL_RECIPIENTS_TYPE
+    execute,
+  } = useAsync(
+    () => api.get(ENDPOINT.RECIPIENTS),
+    INITIAL_RECIPIENTS_TYPE,
+    false
   );
 
+  useEffect(() => {
+    execute();
+  }, []);
+
+  const { data, execute: likeCads } = useAsync(
+    () => api.get(ENDPOINT.RECIPIENTS, { params: { sort: 'like' } }),
+    INITIAL_RECIPIENTS_TYPE,
+    false
+  );
+  useEffect(() => {
+    likeCads();
+  }, []);
+
   const like = data.results;
+  console.log(like);
+
   const SearchCards = useMemo(
     () =>
       keyword &&
