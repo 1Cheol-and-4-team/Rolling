@@ -199,6 +199,7 @@
           background-color: $border;
           transition: all ease-in-out 0.3s;
           position: relative;
+          cursor: pointer;
 
           @include responsive('M') {
             width: 4rem;
