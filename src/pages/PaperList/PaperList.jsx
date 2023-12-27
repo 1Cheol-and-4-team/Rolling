@@ -1,8 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { api, ENDPOINT } from '@/api';
 import { useAsync } from '@/hooks/useAsync';
-
 import classNames from 'classnames/bind';
 import styles from './PaperList.module.scss';
 import { Helmet } from 'react-helmet';
@@ -10,7 +9,7 @@ import { Helmet } from 'react-helmet';
 import { Header } from '@/components/common/Header';
 import { Button, LinkButton } from '@/components/common/Button';
 import PaperListCards from '../../components/common/CardList/PaperListCards';
-import Search from '../../components/common/CardList/Search';
+import Search from '@/components/common/CardList/Search';
 
 import { INITIAL_RECIPIENTS_TYPE, ROUTER_PATH, IMPORT_IMAGES } from '@/stores';
 
@@ -22,15 +21,25 @@ export function PaperList() {
 
   const {
     data: { results },
+    execute,
   } = useAsync(
     () => api.get(ENDPOINT.RECIPIENTS, { params: { limit: 100 } }),
-    INITIAL_RECIPIENTS_TYPE
+    INITIAL_RECIPIENTS_TYPE,
+    false
   );
 
-  const { data: popular } = useAsync(
+  useEffect(() => {
+    execute();
+  }, []);
+
+  const { data: popular, execute: likeCads } = useAsync(
     () => api.get(ENDPOINT.RECIPIENTS, { params: { sort: 'like' } }),
-    INITIAL_RECIPIENTS_TYPE
+    INITIAL_RECIPIENTS_TYPE,
+    false
   );
+  useEffect(() => {
+    likeCads();
+  }, []);
 
   const popularCardData = popular.results;
   const latestCardData = results.slice(0, 8);
@@ -47,7 +56,7 @@ export function PaperList() {
   return (
     <div className={cx('paper-list')}>
       <Helmet>
-        <title>카드 리스트 | Rolling</title>
+        <title>롤링 보드 | Rolling</title>
       </Helmet>
 
       <Header isLanding={false} />

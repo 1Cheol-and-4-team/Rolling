@@ -9,6 +9,7 @@ import { IconButton } from '@/components/common/Button';
 
 import { onClickOutside } from '@/utils';
 import { SHARE_LIST } from '@/stores';
+import { shareKakaoLink } from '@/utils/shareKakaoLink';
 
 const cx = classNames.bind(styles);
 
@@ -43,9 +44,19 @@ export const Share = ({ url }) => {
     }
   };
 
-  const handleOptionClick = (targetId) => {
+  // 카카오톡 공유 기능
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js';
+
+    script.async = true;
+    document.body.appendChild(script);
+    return () => document.body.removeChild(script);
+  }, []);
+
+  const handleOptionClick = (targetId, image) => {
     if (targetId === 1) {
-      alert('카카오 링크 복사 함수 넣어주세요');
+      shareKakaoLink(url, image);
     }
     if (targetId === 2) {
       handleCopyClipBoard(url);
@@ -82,7 +93,7 @@ export const Share = ({ url }) => {
               <li key={item.id} className={cx('share-list-item')}>
                 <button
                   className={cx('share-list-item-button')}
-                  onClick={() => handleOptionClick(item.id)}
+                  onClick={() => handleOptionClick(item.id, item.url)}
                 >
                   <img src={item.url} alt={item.alt} />
                 </button>

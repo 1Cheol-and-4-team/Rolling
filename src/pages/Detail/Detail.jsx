@@ -16,8 +16,7 @@ import { Button, MixButton } from '@/components/common/Button';
 import { Dropdown } from '@/components/common/Dropdown';
 import { LinkButton, EditButton } from '@/components/common/Button';
 import { Share } from '@/components/Share';
-import { Overlay } from '@/components/common/Modal';
-import { ConfirmModal } from '@/components/common/ConfirmModal';
+import { Overlay, MyModal } from '@/components/common/Modal';
 
 import {
   INITIAL_RECIPIENTS_TYPE,
@@ -323,16 +322,18 @@ export const Detail = ({ isEdit = false }) => {
             </div>
           </li>
         </ul>
+
         {isModal && (
           <Overlay>
-            <ConfirmModal
-              info='페이지를 삭제하시겠습니까?'
+            <MyModal
+              title='페이지를 삭제하시겠습니까?'
               desc='삭제한 페이지는 복구할 수 없습니다.'
               iconUrl={CONFRIM_MODAL.DELETE.URL}
+              iconAlt={CONFRIM_MODAL.DELETE.ALT}
               handleModalClose={handleModalClose}
             >
-              {
-                <>
+              <div className={cx('dialog-confirm')}>
+                <div className={cx('dialog-confirm-footer')}>
                   <Button
                     variant='secondary'
                     size={40}
@@ -347,9 +348,9 @@ export const Detail = ({ isEdit = false }) => {
                   >
                     삭제
                   </Button>
-                </>
-              }
-            </ConfirmModal>
+                </div>
+              </div>
+            </MyModal>
           </Overlay>
         )}
       </main>

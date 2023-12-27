@@ -5,6 +5,7 @@ import { INITIAL_MESSAGE_TYPE } from '@/stores';
 import PropTypes from 'prop-types';
 import styles from './ProfileImg.module.scss';
 import classNames from 'classnames/bind';
+import { useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -16,13 +17,21 @@ ProfileImg.propTypes = {
 export function ProfileImg({ id, recentMessages }) {
   const {
     data: { results },
+    execute: profileData,
   } = useAsync(
     () =>
       api.get(`${ENDPOINT.RECIPIENTS}${id}/messages/`, {
         params: { limit: 100 },
       }),
-    INITIAL_MESSAGE_TYPE
+    INITIAL_MESSAGE_TYPE,
+    false
   );
+
+  useEffect(() => {
+    if (!id) return;
+    profileData();
+  }, [id]);
+
   //작성한 사람 수, (동일 이름은 제외)
   const member = new Set(results.map((item) => item.sender)).size;
   // 3개의 프로필을 뺀 수

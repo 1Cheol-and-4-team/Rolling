@@ -24,7 +24,7 @@ export function HomePage() {
             content={CONTENT_2}
             style={{
               '--reverse': 'row-reverse',
-              'padding-bottom': 0,
+              paddingBottom: 0,
               '--end': 'flex-end',
               '--padding': `4.8rem`,
               gap: 0,
