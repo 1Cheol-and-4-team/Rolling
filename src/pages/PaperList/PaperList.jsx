@@ -40,7 +40,6 @@ export function PaperList() {
   }, []);
 
   const like = data.results;
-  console.log(like);
 
   const SearchCards = useMemo(
     () =>
