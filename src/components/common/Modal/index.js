@@ -1,3 +1,3 @@
-export * from './Modal';
 export * from './Overlay';
-export * from './MemberModal';
+export * from './MyModal';
+export * from './PaperModal';

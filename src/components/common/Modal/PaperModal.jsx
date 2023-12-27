@@ -8,14 +8,14 @@ import { fontToEnglish, onClickOutside } from '@/utils';
 
 const cx = classNames.bind(styles);
 
-export function Modal({
+export const PaperModal = ({
   profileImage,
   randomColor,
   backgroundUrl,
   backgroundColor,
   messageData,
   handleModalClose,
-}) {
+}) => {
   const modalRef = useRef();
 
   useEffect(() => {
@@ -76,4 +76,4 @@ export function Modal({
       </div>
     </div>
   );
-}
+};

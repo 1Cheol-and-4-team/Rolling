@@ -1,22 +1,21 @@
-import { useEffect, useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
-import styles from '@/components/common/ConfirmModal/ConfirmModal.module.scss';
 import classNames from 'classnames/bind';
+import styles from '@/components/common/Modal/Modal.module.scss';
 
 import { onClickOutside } from '@/utils';
 
 const cx = classNames.bind(styles);
 
-export const ConfirmModal = ({
-  info,
+export const MyModal = ({
+  title,
   desc,
   children,
-  iconUrl,
   handleModalClose,
-  footerType = 'double',
+  iconUrl = null,
+  iconAlt = null,
 }) => {
   const modalRef = useRef();
-  const isDoubleFooter = footerType === 'double';
 
   useEffect(() => {
     document.body.style.cssText = `
@@ -40,22 +39,18 @@ export const ConfirmModal = ({
   }, [handleModalClose]);
 
   return (
-    <div className={cx('modal')} ref={modalRef}>
-      <div className={cx('modal-content')}>
-        <div>
-          <img src={iconUrl} alt='모달창 확인 아이콘' />
+    <div className={cx('modal', 'my-modal')} ref={modalRef}>
+      <div className={cx('modal-dialog')}>
+        <div className={cx('modal-dialog-header')}>
+          <span className={cx('hide', { 'modal-dialog-header-icon': iconUrl })}>
+            <img src={iconUrl} alt={iconAlt} />
+          </span>
+          <h1 className={cx('modal-dialog-header-title')}>{title}</h1>
+          <p className={cx('hide', { 'modal-dialog-header-desc': desc })}>
+            {desc}
+          </p>
         </div>
-        <div className={cx('modal-content-message')}>
-          <p className={cx('modal-content-message-info')}>{info}</p>
-          <p className={cx('modal-content-message-desc')}>{desc}</p>
-        </div>
-        <div className={cx('modal-content-footer')}>
-          {isDoubleFooter ? (
-            <div className={cx('modal-content-footer-inner')}>{children}</div>
-          ) : (
-            children
-          )}
-        </div>
+        <div className={cx('modal-dialog-body')}>{children}</div>
       </div>
     </div>
   );
