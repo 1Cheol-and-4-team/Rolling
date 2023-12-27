@@ -2,7 +2,7 @@
 <img width="1920" alt="cover" src="https://github.com/1Cheol-and-4-team/Rolling/assets/77719310/3ab8e1b7-407e-4d98-9cb2-1be94a51a8e3">
 
 ## 🔗 배포링크
-https://b5376374.rolling-3df.pages.dev/
+https://rolling-3df.pages.dev/
 
 ## 👩‍💻팀 소개🧑‍💻
 <table>

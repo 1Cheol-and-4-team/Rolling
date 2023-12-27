@@ -7,8 +7,8 @@ const cx = classNames.bind(styles);
 export function Option({ onClick, setValues }) {
   const [selectedImg, setSelectedImg] = useState('');
   const [isBackgroundLoading, setIsBackgroundLoading] = useState(false);
-  const [uploadImg, setUploadImg] = useState('');
   const backgroundInputRef = useRef(null);
+  const uploadCount = useRef(0);
 
   const handleImgClick = (img) => {
     setSelectedImg(img);
@@ -36,12 +36,16 @@ export function Option({ onClick, setValues }) {
           const imageUrl = data.data.url;
 
           setIsBackgroundLoading(false);
-          setUploadImg(imageUrl);
           setValues((prevValues) => ({
             ...prevValues,
             backgroundImageURL: imageUrl,
           }));
-          setSelectedImg('');
+          BACKGROUND_IMGURL.unshift({
+            id: `upload-${uploadCount.current++}`,
+            name: `upload-${uploadCount.current}`,
+            imgUrl: imageUrl,
+          });
+          setSelectedImg(BACKGROUND_IMGURL[0]);
         } else {
           setIsBackgroundLoading(false);
           throw new Error('이미지를 업로드하는 데 실패했습니다.');
@@ -71,26 +75,10 @@ export function Option({ onClick, setValues }) {
                 <div></div>
               </div>
             </div>
-          ) : !uploadImg ? (
+          ) : (
             <span>
               <i className={cx('ic-plus')}></i>
             </span>
-          ) : (
-            <button
-              className={cx('img-option-chip')}
-              style={{ backgroundImage: `url(${uploadImg})` }}
-              onClick={(e) => {
-                e.preventDefault();
-              }}
-            >
-              {!selectedImg && (
-                <div className={cx('img-option-chip-select')}>
-                  <span>
-                    <i className={cx('ic-check')}></i>
-                  </span>
-                </div>
-              )}
-            </button>
           )}
         </div>
         <input
