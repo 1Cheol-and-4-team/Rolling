@@ -1,15 +1,13 @@
+import { useEffect, useState } from 'react';
+
 import { BadgeEmoji } from '@/components/common/Badge';
 
 import classNames from 'classnames/bind';
 import styles from './CardList.module.scss';
 
-
-import { BadgeEmoji } from '@/components/common/Badge';
-//soeun
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import '@/components/common/Skeleton/skeleton.css';
-import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 

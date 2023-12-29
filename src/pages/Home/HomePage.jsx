@@ -26,7 +26,7 @@ export function HomePage() {
           <HomeCard
             content={CONTENT_2}
             style={{
-              'flex-direction': 'row-reverse',
+              '--reverse': 'row-reverse',
               paddingBottom: 0,
               '--end': 'flex-end',
               '--padding': `4.8rem`,

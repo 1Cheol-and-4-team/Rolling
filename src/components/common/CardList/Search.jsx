@@ -1,7 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
 
-import { IMPORT_IMAGES } from '@/stores';
-
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 
@@ -18,8 +16,14 @@ const {
 
 export function Search({ setIsKeyword }) {
   const [value, setValue] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   const input = useRef();
   const isFocus = value.length > 0;
+
+  useEffect(() => {
+    const loadingTimer = setTimeout(() => setIsLoading(false), 1500);
+    return () => clearTimeout(loadingTimer);
+  }, []);
 
   const handleChange = () => {
     const newValue = input.current.value;
@@ -30,10 +34,7 @@ export function Search({ setIsKeyword }) {
     event.preventDefault();
     setIsKeyword(value);
   };
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    setIsLoading(false);
-  }, 5000);
+
   return isLoading ? (
     <Skeleton className={cx('search', { active: isFocus })} />
   ) : (
