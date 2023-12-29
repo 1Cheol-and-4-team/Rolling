@@ -86,8 +86,7 @@
     background-color: $gray-500;
 
     i {
-      font-size: 2.4rem;
-      color: $white;
+      @include icon-style(24, $white);
     }
   }
 }

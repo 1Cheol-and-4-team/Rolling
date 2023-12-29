@@ -36,7 +36,11 @@ export function CreatePage() {
     const name = e.currentTarget.getAttribute('name');
     const selectedValue = value || e.currentTarget.getAttribute('value');
 
-    setValues(() => ({ name: values.name, [name]: selectedValue }));
+    setValues(() => ({
+      name: values.name,
+      backgroundColor: 'beige',
+      [name]: selectedValue,
+    }));
     setError(!values.name ? 'error' : '');
   };
 

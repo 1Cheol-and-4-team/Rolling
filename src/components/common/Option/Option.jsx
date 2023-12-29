@@ -1,61 +1,68 @@
 import { useState, useRef } from 'react';
+
 import styles from './Option.module.scss';
 import classNames from 'classnames/bind';
-import { BACKGROUND_IMGURL } from '@/stores';
+import { v4 as uuidv4 } from 'uuid';
+
+import { BACKGROUND_IMGURL, IMGBB_URL } from '@/stores';
+
 const cx = classNames.bind(styles);
 
 export function Option({ onClick, setValues }) {
   const [selectedImg, setSelectedImg] = useState('');
   const [isBackgroundLoading, setIsBackgroundLoading] = useState(false);
-  const backgroundInputRef = useRef(null);
-  const uploadCount = useRef(0);
+  const [backgroundList, setBackgroundList] = useState(BACKGROUND_IMGURL);
 
-  const handleImgClick = (img) => {
-    setSelectedImg(img);
+  const backgroundInputRef = useRef(null);
+
+  const handleImgClick = (backgroundId) => {
+    setSelectedImg(backgroundId);
   };
 
   const handleUploadBackgourndChange = async (e) => {
     setIsBackgroundLoading(true);
 
     const file = e.target.files[0];
+    const fileId = uuidv4();
 
-    if (file) {
-      const formData = new FormData();
-      formData.append('image', file);
-      try {
-        const response = await fetch(
-          'https://api.imgbb.com/1/upload?key=9b44d68d4291f77e1ddd2b63d2ce5b03',
-          {
-            method: 'POST',
-            body: formData,
-          }
-        );
+    if (!file) {
+      setIsBackgroundLoading(false);
+      return;
+    }
 
-        if (response.ok) {
-          const data = await response.json();
-          const imageUrl = data.data.url;
+    const formData = new FormData();
+    formData.append('image', file);
+    try {
+      const response = await fetch(IMGBB_URL, {
+        method: 'POST',
+        body: formData,
+      });
 
-          setIsBackgroundLoading(false);
-          setValues((prevValues) => ({
-            ...prevValues,
-            backgroundImageURL: imageUrl,
-          }));
-          BACKGROUND_IMGURL.unshift({
-            id: `upload-${uploadCount.current++}`,
-            name: `upload-${uploadCount.current}`,
-            imgUrl: imageUrl,
-          });
-          setSelectedImg(BACKGROUND_IMGURL[0]);
-        } else {
-          setIsBackgroundLoading(false);
-          throw new Error('이미지를 업로드하는 데 실패했습니다.');
-        }
-      } catch (e) {
-        console.error('[API ERROR] NOT FOUND FETCH DATA', e);
-      } finally {
+      if (response.ok) {
+        const data = await response.json();
+        const imageUrl = data.data.url;
+
         setIsBackgroundLoading(false);
+        setValues((prevValues) => ({
+          ...prevValues,
+          backgroundImageURL: imageUrl,
+        }));
+        setBackgroundList([
+          {
+            id: fileId,
+            alt: 'uploaded background',
+            imgUrl: imageUrl,
+          },
+          ...backgroundList,
+        ]);
+        setSelectedImg(fileId);
+      } else {
+        setIsBackgroundLoading(false);
+        throw new Error('이미지를 업로드하는 데 실패했습니다.');
       }
-    } else {
+    } catch (e) {
+      console.error('[API ERROR] NOT FOUND FETCH DATA', e);
+    } finally {
       setIsBackgroundLoading(false);
     }
   };
@@ -89,7 +96,7 @@ export function Option({ onClick, setValues }) {
           ref={backgroundInputRef}
         />
       </li>
-      {BACKGROUND_IMGURL.map((item) => {
+      {backgroundList.map((item) => {
         return (
           <li
             key={item.id}
@@ -100,10 +107,10 @@ export function Option({ onClick, setValues }) {
             <button
               style={{ backgroundImage: `url(${item.imgUrl})` }}
               className={cx('img-option-chip', `img-option-chip-${item.name}`)}
-              onClick={() => handleImgClick(item)}
+              onClick={() => handleImgClick(item.id)}
               aria-label='이미지 옵션 버튼'
             >
-              {selectedImg === item && (
+              {selectedImg === item.id && (
                 <div className={cx('img-option-chip-select')}>
                   <span>
                     <i className={cx('ic-check')}></i>
