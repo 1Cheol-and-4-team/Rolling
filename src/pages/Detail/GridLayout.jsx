@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from '@/pages/Detail/Detail.module.scss';
 
@@ -39,6 +40,11 @@ export const GridLayout = ({
           (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
         );
   };
+
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setIsLoading(true);
+  }, 5000);
 
   return (
     <>
