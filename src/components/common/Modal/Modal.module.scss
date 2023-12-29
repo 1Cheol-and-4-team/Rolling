@@ -106,6 +106,7 @@
         display: block;
         padding: 6.4rem 0 1.6rem;
         text-align: center;
+        word-break: keep-all;
       }
     }
 
@@ -135,7 +136,6 @@
     }
   }
 
-  // dialog
   &.my-modal {
     min-width: 33rem;
     max-width: 36rem;
