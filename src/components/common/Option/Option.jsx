@@ -1,7 +1,10 @@
 import { useState, useRef } from 'react';
-import styles from './Option.module.scss';
+
 import classNames from 'classnames/bind';
+import styles from '@/components/common/Option/Option.module.scss';
+
 import { BACKGROUND_IMGURL } from '@/stores';
+
 const cx = classNames.bind(styles);
 
 export function Option({ onClick, setValues }) {
