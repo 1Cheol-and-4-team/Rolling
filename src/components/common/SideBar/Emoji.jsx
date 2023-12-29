@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
+
 import { api, ENDPOINT } from '@/api';
 import { useAsync } from '@/hooks/useAsync';
-import { INITIAL_EMOJI_TYPE } from '@/stores';
 
 import classNames from 'classnames/bind';
 import styles from '@/components/common/SideBar/Emoji.module.scss';
@@ -10,15 +10,21 @@ import EmojiPicker from 'emoji-picker-react';
 import { Empty } from '@/components/common/Empty';
 import { BadgeEmoji } from '@/components/common/Badge';
 import { IconButton } from '@/components/common/Button';
+
 import { onClickOutside } from '@/utils';
-import { IMPORT_IMAGES } from '@/stores';
+import { INITIAL_EMOJI_TYPE, IMPORT_IMAGES } from '@/stores';
 
 const cx = classNames.bind(styles);
 const { EMPTY } = IMPORT_IMAGES;
 
-export function Emoji({ id, getEmojiApi, getReactionCount, isDesktopHide }) {
+export function Emoji({
+  id,
+  getRecipientApi,
+  getReactionCount,
+  isDesktopHide,
+}) {
   const emojiRef = useRef();
-  const [isOpen, setOpen] = useState(false);
+  const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
 
   useEffect(() => {
     const handleOutsideClick = (e) => {
@@ -29,24 +35,24 @@ export function Emoji({ id, getEmojiApi, getReactionCount, isDesktopHide }) {
   }, []);
 
   const {
-    data: { results },
-    execute,
+    data: { results: emojiData },
+    execute: getEmojiApi,
   } = useAsync(
     () => api.get(`${ENDPOINT.RECIPIENTS}${id}/reactions/`),
     INITIAL_EMOJI_TYPE
   );
 
-  const showTabletEmoji = results.slice(0, 3);
+  const showTabletEmoji = emojiData.slice(0, 3);
 
   const isReactionsEmpty =
     getReactionCount === undefined || getReactionCount === 0;
 
   const handleClose = () => {
-    setOpen(false);
+    setIsEmojiPickerOpen(false);
   };
 
   const handleToggleEmoji = () => {
-    setOpen((prev) => !prev);
+    setIsEmojiPickerOpen((prev) => !prev);
   };
 
   const onEmojiClick = async (e) => {
@@ -58,13 +64,13 @@ export function Emoji({ id, getEmojiApi, getReactionCount, isDesktopHide }) {
 
       if (!res.status) return console.error('[SERVER ERROR]', res);
 
-      await execute();
       await getEmojiApi();
+      await getRecipientApi();
     } catch (e) {
       console.error('[API ERROR]', e);
     }
 
-    setOpen(false);
+    setIsEmojiPickerOpen(false);
   };
 
   return (
@@ -90,12 +96,12 @@ export function Emoji({ id, getEmojiApi, getReactionCount, isDesktopHide }) {
               icon='ic-add-emoji'
               iconSize='24'
               iconColor='white'
-              active={isOpen}
+              active={isEmojiPickerOpen}
               onClick={handleToggleEmoji}
             />
             <div
               className={cx('emoji-picker', {
-                'emoji-picker-block': isOpen,
+                'emoji-picker-block': isEmojiPickerOpen,
               })}
             >
               <EmojiPicker
@@ -126,12 +132,12 @@ export function Emoji({ id, getEmojiApi, getReactionCount, isDesktopHide }) {
                 icon='ic-add-emoji'
                 iconSize='24'
                 iconColor='white'
-                active={isOpen}
+                active={isEmojiPickerOpen}
                 onClick={handleToggleEmoji}
               />
               <div
                 className={cx('emoji-picker', {
-                  'emoji-picker-block': isOpen,
+                  'emoji-picker-block': isEmojiPickerOpen,
                 })}
               >
                 <EmojiPicker
@@ -156,7 +162,7 @@ export function Emoji({ id, getEmojiApi, getReactionCount, isDesktopHide }) {
             <Empty importImg={EMPTY} message={'No Reactions'} />
           ) : (
             <ul className={cx('emoji-content')}>
-              {results.map((item) => (
+              {emojiData.map((item) => (
                 <li key={item.id}>
                   <BadgeEmoji emoji={item.emoji} count={item.count} />
                 </li>
