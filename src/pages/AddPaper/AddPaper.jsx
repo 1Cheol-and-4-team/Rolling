@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
@@ -7,6 +7,10 @@ import classNames from 'classnames/bind';
 import ReactQuill from 'react-quill';
 import { QuillToolbar, modules } from '@/components/QuillToolbar';
 import 'react-quill/dist/quill.snow.css';
+
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import '@/components/common/Skeleton/skeleton.css';
 
 import { api, ENDPOINT } from '@/api';
 import { useMutateAsync } from '@/hooks';
@@ -40,10 +44,16 @@ export function AddPaper() {
   const [randomColor, setRandomColor] = useState('#24262B');
   const [currentProfile, setCurrentProfile] = useState(0);
   const [isProfileLoading, setIsProfileLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const postApi = () =>
     api.post(`${ENDPOINT.RECIPIENTS}${id}/messages/`, values);
   const { execute } = useMutateAsync(postApi, INITIAL_POST_MESSAGE_TYPE);
+
+  useEffect(() => {
+    const loadingTimer = setTimeout(() => setIsLoading(false), 1500);
+    return () => clearTimeout(loadingTimer);
+  }, []);
 
   const handleValueChange = (e) => {
     e.preventDefault();
@@ -210,8 +220,10 @@ export function AddPaper() {
               }}
             />
           </fieldset>
+
           <fieldset className={cx('add-paper-profile')}>
             <label>프로필 이미지</label>
+
             <div className={cx('add-paper-profile-img')}>
               <div
                 className={cx(
@@ -220,8 +232,22 @@ export function AddPaper() {
                 )}
                 style={{ '--color': randomColor }}
               >
-                {!values.profileImageURL ? (
-                  <img src={defaultProfile} alt='기본 프로필 이미지' />
+                {isProfileLoading ? (
+                  <div className={cx('loadingio-spinner')}>
+                    <div className={cx('ldio')}>
+                      <div></div>
+                    </div>
+                  </div>
+                ) : !values.profileImageURL ? (
+                  isLoading ? (
+                    <Skeleton
+                      width={'9rem'}
+                      height={'9rem'}
+                      className={cx('add-paper-profile-img-wrapper')}
+                    />
+                  ) : (
+                    <img src={defaultProfile} alt='기본 프로필 이미지' />
+                  )
                 ) : (
                   <img
                     src={values.profileImageURL}
@@ -229,6 +255,13 @@ export function AddPaper() {
                   />
                 )}
               </div>
+              <input
+                type='file'
+                accept='.jpg, .png, .jpeg,'
+                name='profile_img'
+                onChange={handleUploadProfileChange}
+                ref={profileInputRef}
+              />
               <div className={cx('add-paper-profile-img-select')}>
                 <p className={cx(`${error.profileImageURL}`)}>
                   프로필 이미지를 선택해주세요!
@@ -268,7 +301,11 @@ export function AddPaper() {
                         value={item.imgUrl}
                         onClick={(e) => handleProfileChange(e, item.id)}
                       >
-                        <img src={item.imgUrl} alt={item.alt} />
+                        {isLoading ? (
+                          <Skeleton width={'100%'} height={'100%'} />
+                        ) : (
+                          <img src={item.imgUrl} alt={item.alt} />
+                        )}
                       </button>
                       <div
                         className={cx(

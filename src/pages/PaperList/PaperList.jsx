@@ -8,7 +8,7 @@ import { Helmet } from 'react-helmet';
 
 import { Header } from '@/components/common/Header';
 import { Button, LinkButton } from '@/components/common/Button';
-import PaperListCards from '../../components/common/CardList/PaperListCards';
+import { PaperListCards } from '../../components/common/CardList/PaperListCards';
 import Search from '@/components/common/CardList/Search';
 
 import { INITIAL_RECIPIENTS_TYPE, ROUTER_PATH, IMPORT_IMAGES } from '@/stores';

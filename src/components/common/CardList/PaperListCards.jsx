@@ -7,7 +7,7 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
-function PaperListCards({ data }) {
+export function PaperListCards({ data }) {
   const [scroll, setScroll] = useState(0);
   const [currentCardIndex, setcurrentCardIndex] = useState(4);
   const dataCount = data.length;
@@ -63,5 +63,3 @@ function PaperListCards({ data }) {
     </>
   );
 }
-
-export default PaperListCards;

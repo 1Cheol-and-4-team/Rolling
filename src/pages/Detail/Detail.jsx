@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
@@ -17,6 +17,10 @@ import { Dropdown } from '@/components/common/Dropdown';
 import { LinkButton, EditButton } from '@/components/common/Button';
 import { Share } from '@/components/Share';
 import { Overlay, MyModal } from '@/components/common/Modal';
+
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import '@/components/common/Skeleton/skeleton.css';
 
 import {
   INITIAL_RECIPIENTS_TYPE,
@@ -93,6 +97,11 @@ export const Detail = ({ isEdit = false }) => {
   };
 
   const userName = data.name;
+
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setIsLoading(true);
+  }, 5000);
 
   return (
     <div className={cx('detail')}>
@@ -306,6 +315,7 @@ export const Detail = ({ isEdit = false }) => {
                         </div>
                       </div>
                     </div>
+
                     <GridLayout
                       isEdit={isEdit}
                       id={id}

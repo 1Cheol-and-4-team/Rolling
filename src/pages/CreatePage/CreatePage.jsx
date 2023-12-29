@@ -20,6 +20,7 @@ const cx = classNames.bind(styles);
 export function CreatePage() {
   const [values, setValues] = useState(INITIAL_POST_RECIPIENTS_TYPE);
   const [error, setError] = useState('');
+
   const inputRef = useRef(null);
   const navigate = useNavigate();
 
