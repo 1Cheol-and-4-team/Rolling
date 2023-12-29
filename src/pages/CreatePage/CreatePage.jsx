@@ -36,12 +36,14 @@ export function CreatePage() {
     const name = e.currentTarget.getAttribute('name');
     const selectedValue = value || e.currentTarget.getAttribute('value');
 
-    setValues(() => ({
-      name: values.name,
-      backgroundColor: 'beige',
-      [name]: selectedValue,
-    }));
-    setError(!values.name ? 'error' : '');
+    setValues((prevValues) => ({ ...prevValues, [name]: selectedValue }));
+
+    name === 'backgroundColor' &&
+      setValues((prevValues) => ({
+        ...prevValues,
+        backgroundImageURL: null,
+      }));
+    name === 'name' && setError(!selectedValue ? 'error' : '');
   };
 
   const onClickBack = () => {
