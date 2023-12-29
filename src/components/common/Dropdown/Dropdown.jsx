@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
+
 import classNames from 'classnames/bind';
 import styles from '@/components/common/Dropdown/Dropdown.module.scss';
+
 import { onClickOutside } from '@/utils';
 
 const cx = classNames.bind(styles);
@@ -8,7 +10,8 @@ const cx = classNames.bind(styles);
 export const Dropdown = ({ sortList, size, onClick }) => {
   const dropdownRef = useRef();
   const defaultOption = sortList[0].option;
-  const [isOpen, setOpen] = useState(false);
+
+  const [isDropdownMenuOpen, setIsDropdownMenuOpen] = useState(false);
   const [currentValue, setCurrentValue] = useState(defaultOption);
   const [iconContent, setIconContent] = useState('ic-arrow-down');
 
@@ -21,15 +24,15 @@ export const Dropdown = ({ sortList, size, onClick }) => {
   }, []);
 
   const handleClose = () => {
-    setOpen(false);
+    setIsDropdownMenuOpen(false);
     setIconContent('ic-arrow-down');
   };
 
   const handleToggleDropdown = (e) => {
     e.preventDefault();
 
-    setOpen((prev) => !prev);
-    setIconContent(isOpen ? 'ic-arrow-down' : 'ic-arrow-up');
+    setIsDropdownMenuOpen((prev) => !prev);
+    setIconContent(isDropdownMenuOpen ? 'ic-arrow-down' : 'ic-arrow-up');
   };
 
   const handleOptionClick = (e, selectedOption) => {
@@ -47,7 +50,7 @@ export const Dropdown = ({ sortList, size, onClick }) => {
         <i className={cx(iconContent)} aria-hidden></i>
       </div>
 
-      {isOpen && (
+      {isDropdownMenuOpen && (
         <ul className={cx('dropdown-option-list', `option-${size}`)}>
           {sortList.map((item) => (
             <li

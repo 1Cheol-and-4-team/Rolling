@@ -2,19 +2,28 @@
   width: 100%;
   height: 100%;
 }
+
 .header {
   @include responsive('M') {
     display: none;
   }
 }
-.go-mobile {
+
+.sm-only {
   display: none;
 
   @include responsive('M') {
     display: block;
-    padding: 1.5rem 33.5rem 1.5rem 2rem;
+    height: 5rem;
+    padding-left: 2rem;
+    position: relative;
+
+    .btn-go-back {
+      @include pos-center-y();
+    }
   }
 }
+
 .form-wrapper {
   width: 100%;
   height: calc(100vh - $header-height);
@@ -44,7 +53,7 @@
       }
     }
 
-    .input-group {
+    .username-input {
       &-label {
         @include flexbox(start, center);
         @include text-style(24, 700, $text-white);
@@ -61,7 +70,7 @@
       }
     }
 
-    .information {
+    .background-information {
       gap: 0.4rem;
       margin-top: 5rem;
       margin-bottom: 2.4rem;
@@ -74,7 +83,8 @@
         @include text-style(16, 'nomarl', $text-gray);
       }
     }
-    .button {
+
+    .submit-button {
       margin-top: 6.9rem;
       @include responsive('T') {
         margin-top: 5.2rem;

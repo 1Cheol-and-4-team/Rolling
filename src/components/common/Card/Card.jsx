@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import { api, ENDPOINT } from '@/api';
 import { useAsync } from '@/hooks/useAsync';
-import { INITIAL_RECIPIENTS_TYPE, IMPORT_IMAGES } from '@/stores';
 
 import classNames from 'classnames/bind';
 import styles from './Card.module.scss';
@@ -12,6 +11,7 @@ import { Overlay, PaperModal, MyModal } from '@/components/common/Modal';
 import { Button, IconButton } from '@/components/common/Button';
 
 import { formatDate, getDateDiff } from '@/utils';
+import { INITIAL_RECIPIENTS_TYPE, IMPORT_IMAGES } from '@/stores';
 
 const cx = classNames.bind(styles);
 
