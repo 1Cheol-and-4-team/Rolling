@@ -1,5 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 
+import { IMPORT_IMAGES } from '@/stores';
+
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 
@@ -7,12 +9,14 @@ import { IMPORT_IMAGES } from '@/stores';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import '@/components/common/Skeleton/skeleton.css';
+
 const cx = classNames.bind(styles);
+
 const {
   CARD_LIST: { LOGO_SYMBOL, SEARCH },
 } = IMPORT_IMAGES;
 
-function Search({ setKeyword }) {
+export function Search({ setIsKeyword }) {
   const [value, setValue] = useState('');
   const input = useRef();
   const isFocus = value.length > 0;
@@ -24,7 +28,7 @@ function Search({ setKeyword }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setKeyword(value);
+    setIsKeyword(value);
   };
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -51,5 +55,3 @@ function Search({ setKeyword }) {
     </form>
   );
 }
-
-export default Search;
