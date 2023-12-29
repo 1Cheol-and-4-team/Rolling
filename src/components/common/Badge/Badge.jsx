@@ -9,7 +9,7 @@ export function Badge({ relationship, type = '' }) {
     <div
       className={cx(
         'badge',
-        `badge-${relationshipToEnglish(relationship)}`,
+        { [`badge-${relationshipToEnglish(relationship)}`]: relationship },
         type && `badge-type-${type}`
       )}
     >

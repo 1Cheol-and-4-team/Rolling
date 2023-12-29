@@ -1,6 +1,7 @@
-import { Badge } from '@/components/common/Badge';
 import styles from './Member.module.scss';
 import classNames from 'classnames/bind';
+
+import { Badge } from '@/components/common/Badge';
 
 const cx = classNames.bind(styles);
 

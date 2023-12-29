@@ -1,49 +1,51 @@
 import { useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 
+import { api, ENDPOINT } from '@/api';
+import { useMutateAsync } from '@/hooks';
+import {
+  INITIAL_POST_MESSAGE_TYPE,
+  INITIAL_POST_MESSAGE_ERROR,
+} from '@/stores';
+
+import { Helmet } from 'react-helmet';
 import styles from './AddPaper.module.scss';
 import classNames from 'classnames/bind';
 import ReactQuill from 'react-quill';
 import { QuillToolbar, modules } from '@/components/QuillToolbar';
 import 'react-quill/dist/quill.snow.css';
 
-import { api, ENDPOINT } from '@/api';
-import { useMutateAsync } from '@/hooks';
-
 import { Header } from '@/components/common/Header';
 import { Input } from '@/components/common/Input';
 import { Dropdown } from '@/components/common/Dropdown';
 import { Button, LinkButton } from '@/components/common/Button';
-import { PROFILE_EMOJI, RELATIONSHIP_LIST, ROUTER_PATH } from '@/stores';
-import {
-  INITIAL_POST_MESSAGE_TYPE,
-  INITIAL_POST_MESSAGE_ERROR,
-} from '@/stores';
+
+import { PROFILE_EMOJI, RELATIONSHIP_LIST, IMPORT_IMAGES } from '@/stores';
 import { getRandomColor } from '@/utils';
-import defaultProfile from '@/assets/images/default-profile.svg';
-import arrowLeftIcon from '@/assets/images/icons/ic-arrow-left.svg';
 
 const cx = classNames.bind(styles);
 
 export function AddPaper() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const inputRef = useRef(null);
   const profileRef = useRef(null);
   const quillRef = useRef(null);
   const profileInputRef = useRef(null);
   const uploadCount = useRef(0);
-  const navigate = useNavigate();
 
   const [values, setValues] = useState(INITIAL_POST_MESSAGE_TYPE);
-  const [error, setError] = useState(INITIAL_POST_MESSAGE_ERROR);
+  const [isError, setIsError] = useState(INITIAL_POST_MESSAGE_ERROR);
   const [randomColor, setRandomColor] = useState('#24262B');
   const [currentProfile, setCurrentProfile] = useState(0);
   const [isProfileLoading, setIsProfileLoading] = useState(false);
 
   const postApi = () =>
     api.post(`${ENDPOINT.RECIPIENTS}${id}/messages/`, values);
-  const { execute } = useMutateAsync(postApi, INITIAL_POST_MESSAGE_TYPE);
+  const { execute: postMessagesApi } = useMutateAsync(
+    postApi,
+    INITIAL_POST_MESSAGE_TYPE
+  );
 
   const handleValueChange = (e) => {
     e.preventDefault();
@@ -53,9 +55,9 @@ export function AddPaper() {
     const selectedValue = value || e.currentTarget.getAttribute('value');
 
     setValues((prevValues) => ({ ...prevValues, [name]: selectedValue }));
-    setError((prevValues) => ({
+    setIsError((prevValues) => ({
       ...prevValues,
-      [name]: !selectedValue ? 'error' : '',
+      [name]: !selectedValue ? true : false,
     }));
   };
 
@@ -70,9 +72,9 @@ export function AddPaper() {
       ...prevValues,
       profileImageURL: `${selectedValue}?color=${pickColor}`,
     }));
-    setError((prevValues) => ({
+    setIsError((prevValues) => ({
       ...prevValues,
-      profileImageURL: !selectedValue ? 'error' : '',
+      profileImageURL: !selectedValue ? true : false,
     }));
   };
 
@@ -123,9 +125,9 @@ export function AddPaper() {
       setIsProfileLoading(false);
     }
 
-    setError((prevValues) => ({
+    setIsError((prevValues) => ({
       ...prevValues,
-      profileImageURL: !(file || values.profileImageURL) ? 'error' : '',
+      profileImageURL: !(file || values.profileImageURL) ? true : false,
     }));
   };
 
@@ -134,24 +136,24 @@ export function AddPaper() {
       ...prevValues,
       content: content,
     }));
-    setError((prevValues) => ({
+    setIsError((prevValues) => ({
       ...prevValues,
-      content: !content ? 'error' : '',
+      content: !content ? true : false,
     }));
   };
 
   const handleValueValid = (name) => {
     if (name === 'submit') {
-      setError((prevValues) => ({
+      setIsError((prevValues) => ({
         ...prevValues,
-        sender: !values.sender ? 'error' : '',
-        profileImageURL: !values.profileImageURL ? 'error' : '',
-        content: !values.content ? 'error' : '',
+        sender: !values.sender ? true : false,
+        profileImageURL: !values.profileImageURL ? true : false,
+        content: !values.content ? true : false,
       }));
     } else {
-      setError((prevValues) => ({
+      setIsError((prevValues) => ({
         ...prevValues,
-        [name]: !values[name] ? 'error' : '',
+        [name]: !values[name] ? true : false,
       }));
     }
   };
@@ -166,7 +168,7 @@ export function AddPaper() {
       !values.sender && inputRef.current.focus();
       return;
     } else {
-      await execute();
+      await postMessagesApi();
       navigate(`/post/${id}/`, { replace: true });
     }
   };
@@ -180,19 +182,21 @@ export function AddPaper() {
         <Header />
       </div>
       <div className={cx('ic-arrow-left')}>
-        <LinkButton path={ROUTER_PATH.DETAIL_PATH}>
-          <img src={arrowLeftIcon} alt='뒤로가기 아이콘' />
+        <LinkButton path={-1}>
+          <img
+            src={IMPORT_IMAGES.MOBILE_BACK.URL}
+            alt={IMPORT_IMAGES.MOBILE_BACK.ALT}
+          />
         </LinkButton>
       </div>
       <form className={cx('add-paper')}>
         <div className={cx('add-paper-wrapper')}>
-          <fieldset className={cx('add-paper-sender')}>
-            <div
-              className={cx(
-                'add-paper-sender-title',
-                `add-paper-sender-title-${error.sender}`
-              )}
-            >
+          <fieldset
+            className={cx('add-paper-sender', {
+              'add-paper-sender-error': isError.sender,
+            })}
+          >
+            <div className={cx('add-paper-sender-title')}>
               <label>From.</label>
               <p>입력하지 않으면 전달할 수 없어요!</p>
             </div>
@@ -200,7 +204,7 @@ export function AddPaper() {
               ref={inputRef}
               placeholder='이름을 입력해 주세요.'
               name='sender'
-              state={error.sender}
+              state={isError.sender && 'error'}
               onChange={handleValueChange}
               onBlur={() => handleValueValid('sender')}
               onKeyDown={(e) => {
@@ -210,18 +214,22 @@ export function AddPaper() {
               }}
             />
           </fieldset>
-          <fieldset className={cx('add-paper-profile')}>
+          <fieldset
+            className={cx('add-paper-profile', {
+              'add-paper-profile-error': isError.profileImageURL,
+            })}
+          >
             <label>프로필 이미지</label>
             <div className={cx('add-paper-profile-img')}>
               <div
-                className={cx(
-                  'add-paper-profile-img-wrapper',
-                  `${error.profileImageURL}`
-                )}
+                className={cx('add-paper-profile-img-wrapper')}
                 style={{ '--color': randomColor }}
               >
                 {!values.profileImageURL ? (
-                  <img src={defaultProfile} alt='기본 프로필 이미지' />
+                  <img
+                    src={IMPORT_IMAGES.PROFILE.URL}
+                    alt={IMPORT_IMAGES.PROFILE.ALT}
+                  />
                 ) : (
                   <img
                     src={values.profileImageURL}
@@ -230,9 +238,7 @@ export function AddPaper() {
                 )}
               </div>
               <div className={cx('add-paper-profile-img-select')}>
-                <p className={cx(`${error.profileImageURL}`)}>
-                  프로필 이미지를 선택해주세요!
-                </p>
+                <p>프로필 이미지를 선택해주세요!</p>
                 <ul>
                   <li>
                     <div
@@ -271,10 +277,9 @@ export function AddPaper() {
                         <img src={item.imgUrl} alt={item.alt} />
                       </button>
                       <div
-                        className={cx(
-                          'gradient-box',
-                          currentProfile === item.id ? 'selected' : ''
-                        )}
+                        className={cx('gradient-box', {
+                          selected: currentProfile === item.id,
+                        })}
                       ></div>
                     </li>
                   ))}
@@ -294,21 +299,20 @@ export function AddPaper() {
             />
           </fieldset>
           <fieldset
-            className={cx(
-              'add-paper-quill',
-              `add-paper-quill-${error.content}`
-            )}
+            className={cx('add-paper-quill', {
+              'add-paper-quill-error': isError.content,
+            })}
           >
-            <div
-              className={cx(
-                'add-paper-quill-title',
-                `add-paper-quill-title-${error.content}`
-              )}
-            >
+            <div className={cx('add-paper-quill-title')}>
               <label>마음을 전달해 주세요</label>
               <p>내용을 입력해 주세요!</p>
             </div>
-            <div className={cx('add-paper-quill-content')}>
+            <div
+              className={
+                'add-paper-quill-content' +
+                (isError.content ? ' add-paper-quill-content-error' : '')
+              }
+            >
               <QuillToolbar />
               <ReactQuill
                 className={cx('add-paper-quill-content')}
