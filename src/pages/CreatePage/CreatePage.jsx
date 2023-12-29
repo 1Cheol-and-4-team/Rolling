@@ -36,7 +36,7 @@ export function CreatePage() {
     const name = e.currentTarget.getAttribute('name');
     const selectedValue = value || e.currentTarget.getAttribute('value');
 
-    setValues((prevValues) => ({ ...prevValues, [name]: selectedValue }));
+    setValues(() => ({ name: values.name, [name]: selectedValue }));
     setError(!values.name ? 'error' : '');
   };
 
