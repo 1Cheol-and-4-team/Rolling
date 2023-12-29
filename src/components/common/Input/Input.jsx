@@ -1,6 +1,7 @@
+import { forwardRef } from 'react';
+
 import classNames from 'classnames/bind';
 import styles from '@/components/common/Input/Input.module.scss';
-import { forwardRef } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -13,7 +14,7 @@ export const Input = forwardRef(function Input(
       <input
         ref={ref}
         type={type}
-        className={cx('input-base', state && `input-state-${state}`)}
+        className={cx('input-base', { [`input-state-${state}`]: state })}
         placeholder={placeholder}
         {...props}
       />

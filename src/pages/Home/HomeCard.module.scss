@@ -12,7 +12,9 @@
     transform: translateY(0);
   }
 }
-
+.CSSProperties {
+  --base-color: #red;
+}
 .home-card {
   @include flexbox(end, start);
   width: 116rem;

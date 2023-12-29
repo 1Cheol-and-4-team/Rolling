@@ -26,7 +26,7 @@ export const MixButton = ({
     <button className={buttonClassName} {...mixButtonProps}>
       <div>
         {startIcon && <i className={iconCalssName}></i>}
-        <span className={cx(startIcon && 'mg-left', endIcon && 'mg-right')}>
+        <span className={cx({ 'mg-left': startIcon }, { 'mg-right': endIcon })}>
           {text}
         </span>
         {endIcon && <i className={iconCalssName}></i>}

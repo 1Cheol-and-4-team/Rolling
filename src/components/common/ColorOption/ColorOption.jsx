@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { COLOR_CHIPS } from '@/stores';
+
 import styles from './ColorOption.module.scss';
 import classNames from 'classnames/bind';
+
+import { COLOR_CHIPS } from '@/stores';
 
 const cx = classNames.bind(styles);
 
@@ -22,10 +24,9 @@ export function ColorOption({ onClick }) {
             onClick={(e) => onClick(e)}
           >
             <button
-              className={cx(
-                'color-option-chip',
-                `color-option-chip-${item.option}`
-              )}
+              className={cx('color-option-chip', {
+                [`color-option-chip-${item.option}`]: item.option,
+              })}
               onClick={() => handleColorClick(item.option)}
               aria-label='컬러 옵션 버튼'
             >

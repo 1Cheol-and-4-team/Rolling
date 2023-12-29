@@ -27,7 +27,7 @@
       @include flexbox();
       width: 100%;
       height: 100%;
-      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+      background: rgba(0, 0, 0, 0.4);
     }
 
     span {
@@ -35,11 +35,10 @@
 
       padding: 1rem;
       border-radius: 50%;
-      background-color: $gray-500;
+      background-color: $background;
 
       i {
-        font-size: 2.4rem;
-        color: $white;
+        @include icon-style(24, $white);
       }
     }
   }

@@ -40,8 +40,9 @@ export function ProfileImg({ id, recentMessages }) {
   if (!recentMessages) {
     return null;
   }
+
   return (
-    <div className={cx('wrap')}>
+    <div>
       {recentMessages[0] && <img src={recentMessages[0].profileImageURL} />}
       {recentMessages[1] && (
         <img className={cx('img1')} src={recentMessages[1].profileImageURL} />

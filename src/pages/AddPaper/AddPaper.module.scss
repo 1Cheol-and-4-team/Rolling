@@ -51,6 +51,12 @@
   &-sender {
     width: 100%;
 
+    &-error &-title {
+      p {
+        @include text-style(16, 400, $system-error);
+      }
+    }
+
     &-title {
       @include flexbox(start);
       gap: 1rem;
@@ -58,216 +64,7 @@
       p {
         @include text-style(16, 400, $gray-500);
       }
-
-      &-error {
-        p {
-          @include text-style(16, 400, $system-error);
-        }
-      }
     }
-  }
-
-  &-profile {
-    &-img {
-      @include flexbox();
-      gap: 3.2rem;
-
-      input {
-        display: none;
-      }
-
-      &-wrapper {
-        @include flexbox();
-        width: 9rem;
-        height: 9rem;
-        border-radius: 50%;
-        background-color: $gray-200;
-        background: var(--color);
-        overflow: hidden;
-        flex-shrink: 0;
-
-        &.error {
-          border: 0.3rem solid $system-error;
-        }
-
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-      }
-
-      &-select {
-        @include column-flexbox(center, start);
-        gap: 1.6rem;
-
-        p {
-          @include text-style(16, 400, $gray-500);
-
-          &.error {
-            @include text-style(16, 400, $system-error);
-          }
-        }
-
-        &-wrapper {
-          @include flexbox();
-          width: 100%;
-          height: 100%;
-          background-color: $card;
-          border-radius: 50%;
-          border: 0.1rem solid $border;
-          overflow: hidden;
-
-          .ldio div {
-            @include pos-center;
-            width: 25%;
-            height: 25%;
-            border: 3px solid #999999;
-            border-top-color: transparent;
-            border-radius: 50%;
-          }
-
-          .ldio div {
-            animation: ldio 1s linear infinite;
-          }
-
-          .loadingio-spinner {
-            width: 100%;
-            height: 100%;
-            display: inline-block;
-          }
-
-          .ldio {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform: translateZ(0) scale(1);
-            backface-visibility: hidden;
-            transform-origin: 0 0;
-          }
-
-          .ldio div {
-            box-sizing: content-box;
-          }
-
-          @keyframes ldio {
-            0% {
-              transform: translate(-50%, -50%) rotate(0deg);
-            }
-            100% {
-              transform: translate(-50%, -50%) rotate(360deg);
-            }
-          }
-
-          span {
-            @include flexbox();
-            padding: 1rem;
-            border-radius: 50%;
-            background-color: $gray-500;
-
-            @include responsive('M') {
-              padding: 0.5rem;
-            }
-
-            i {
-              @include icon-style(16, $white);
-
-              @include responsive('M') {
-                @include icon-style(12, $white);
-              }
-            }
-          }
-        }
-
-        ul {
-          @include flexbox(start);
-          gap: 1.2rem;
-          flex-wrap: wrap;
-
-          @include responsive('M') {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1.2rem;
-          }
-        }
-
-        li {
-          @include flexbox();
-          width: 5.6rem;
-          height: 5.6rem;
-          border-radius: 50%;
-          background-color: $border;
-          transition: all ease-in-out 0.3s;
-          position: relative;
-          cursor: pointer;
-
-          @include responsive('M') {
-            width: 4rem;
-            height: 4rem;
-          }
-
-          &:hover {
-            transform: translateY(-1rem);
-            box-shadow: $card-shadow;
-          }
-
-          @include responsive('T') {
-            &:hover {
-              transform: none;
-              box-shadow: none;
-            }
-          }
-
-          .gradient-box {
-            opacity: 0;
-            visibility: hidden;
-          }
-
-          & .selected,
-          &:hover .gradient-box {
-            @include pos-center();
-            opacity: 1;
-            visibility: visible;
-            width: calc(100% + 6px);
-            height: calc(100% + 6px);
-            border: 0.2rem solid transparent;
-            border-radius: 50%;
-            background-image: linear-gradient(#191a1e, #191a1e),
-              linear-gradient(
-                180deg,
-                rgba(25, 26, 30, 0.5) 0%,
-                rgba(255, 107, 0, 0.5) 52.08%,
-                #7100e3 100%
-              );
-            background-origin: border-box;
-            background-clip: content-box, border-box;
-            z-index: -1;
-          }
-
-          button {
-            width: 5.6rem;
-            height: 5.6rem;
-            border-radius: 50%;
-            overflow: hidden;
-
-            @include responsive('M') {
-              width: 4rem;
-              height: 4rem;
-            }
-          }
-
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-          }
-        }
-      }
-    }
-  }
-
-  .selected {
-    background-color: red;
   }
 
   &-relationship {
@@ -277,9 +74,19 @@
   }
 
   &-quill {
+    &-error &-title {
+      p {
+        @include text-style(16, 400, $system-error);
+      }
+    }
+
     &-title {
       @include flexbox(start);
       gap: 1rem;
+
+      p {
+        @include text-style(16, 400, $gray-500);
+      }
 
       @include responsive('M') {
         @include column-flexbox(center, start);
@@ -291,16 +98,6 @@
 
         p {
           margin-bottom: 1.2rem;
-        }
-      }
-
-      p {
-        @include text-style(16, 400, $gray-500);
-      }
-
-      &-error {
-        p {
-          @include text-style(16, 400, $system-error);
         }
       }
     }
@@ -366,7 +163,7 @@
   color: $text-white;
 }
 
-:global(.add-paper-quill .ql-toolbar.ql-snow) {
+:global(.add-paper-quill-content .ql-toolbar.ql-snow) {
   border-top: 0.1rem solid $border;
   border-right: 0.1rem solid $border;
   border-bottom: none;
@@ -374,20 +171,20 @@
   background-color: $card;
 }
 
-:global(.add-paper-quill .ql-container.ql-snow) {
+:global(.add-paper-quill-content .ql-container.ql-snow) {
   border-top: none;
   border-right: 0.1rem solid $border;
   border-bottom: 0.1rem solid $border;
   border-left: 0.1rem solid $border;
 }
 
-:global(.add-paper-quill-error .ql-toolbar.ql-snow) {
+:global(.add-paper-quill-content-error .ql-toolbar.ql-snow) {
   border-top: 0.1rem solid $system-error;
   border-right: 0.1rem solid $system-error;
   border-left: 0.1rem solid $system-error;
 }
 
-:global(.add-paper-quill-error .ql-container.ql-snow) {
+:global(.add-paper-quill-content-error .ql-container.ql-snow) {
   border-right: 0.1rem solid $system-error;
   border-bottom: 0.1rem solid $system-error;
   border-left: 0.1rem solid $system-error;

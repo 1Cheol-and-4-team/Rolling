@@ -3,6 +3,14 @@ import { BadgeEmoji } from '@/components/common/Badge';
 import classNames from 'classnames/bind';
 import styles from './CardList.module.scss';
 
+
+import { BadgeEmoji } from '@/components/common/Badge';
+//soeun
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import '@/components/common/Skeleton/skeleton.css';
+import { useEffect, useState } from 'react';
+
 const cx = classNames.bind(styles);
 
 export function CardList(data) {
@@ -14,10 +22,25 @@ export function CardList(data) {
     messageCount,
     topReactions,
   } = results;
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadingTimer = setTimeout(() => setIsLoading(false), 1500);
+    return () => clearTimeout(loadingTimer);
+  }, []);
 
   const isEmptyReaction = topReactions?.length === 0;
 
-  return (
+  return isLoading ? (
+    <div
+      style={{
+        width: ' 27.5rem',
+        height: ' 26rem',
+      }}
+    >
+      <Skeleton className={cx('card-list')} />
+    </div>
+  ) : (
     <li
       style={{
         backgroundImage: backgroundImageURL

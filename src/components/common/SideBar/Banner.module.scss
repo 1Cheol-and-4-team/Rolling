@@ -6,7 +6,7 @@
   height: 8rem;
   padding: 1.4rem 2.4rem;
   border-radius: 1.6rem;
-  background-color: #191a1e;
+  background-color: $card;
   background-image: url(../../../assets/images/banner-gardient.svg);
   background-position: bottom;
   background-repeat: no-repeat;
@@ -33,7 +33,7 @@
     }
 
     h1 {
-      @include text-style(18, bold, #e0e0e0);
+      @include text-style(18, bold, $text-white);
     }
   }
 
@@ -59,7 +59,7 @@
       }
 
       h1 {
-        @include text-style(14, bold, #e0e0e0);
+        @include text-style(14, bold, $text-white);
       }
     }
 
