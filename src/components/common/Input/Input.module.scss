@@ -2,7 +2,7 @@ input {
   position: relative;
 }
 .input-base {
-  @include text-style(16, normal, $gray-500);
+  @include text-style(16, 500, $gray-500);
 
   width: 100%;
   padding: 1.2rem 1.6rem;

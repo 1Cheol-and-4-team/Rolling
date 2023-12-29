@@ -61,11 +61,10 @@
         margin-bottom: 1.2rem;
         gap: 1rem;
         .error-message {
-          @include text-style-16;
-          color: $system-error;
+          @include text-style(16, 500, $system-error);
         }
         span {
-          @include text-style(16, 'nomarl', $text-gray);
+          @include text-style(16, 500, $text-gray);
         }
       }
     }
@@ -75,12 +74,12 @@
       margin-top: 5rem;
       margin-bottom: 2.4rem;
       h1 {
-        @include text-style(24, 'bold', $text-white);
+        @include text-style(24, 700, $text-white);
         font-weight: 700;
         margin-bottom: 0.4rem;
       }
       p {
-        @include text-style(16, 'nomarl', $text-gray);
+        @include text-style(16, 500, $text-gray);
       }
     }
 
