@@ -11,16 +11,13 @@ import symbolWhite from '@/assets/images/icons/logo-symbol-white.svg';
 import search from '@/assets/images/icons/ic-search.svg';
 import more from '@/assets/images/icons/ic-arrow-reaction.svg';
 import clap from '@/assets/images/img-hand.png';
-import goBackIcon from '@/assets/images/goto-mobile.svg';
+import defaultProfile from '@/assets/images/default-profile.svg';
+import arrowLeftIcon from '@/assets/images/icons/ic-arrow-left.svg';
 
 export const IMPORT_IMAGES = {
   ROLLING_LOGO: {
     URL: logo,
     ALT: '롤링 로고 이미지',
-  },
-  GO_BACK: {
-    URL: goBackIcon,
-    ALT: '모바일 뒤로가기 아이콘',
   },
   EMPTY: {
     URL: empty,
@@ -75,6 +72,14 @@ export const IMPORT_IMAGES = {
       URL: more,
       ALT: '리액션 추가하러 가기 아이콘',
     },
+  },
+  PROFILE: {
+    URL: defaultProfile,
+    ALT: '기본 프로필 이미지',
+  },
+  MOBILE_BACK: {
+    URL: arrowLeftIcon,
+    ALT: '뒤로가기 아이콘',
   },
 };
 

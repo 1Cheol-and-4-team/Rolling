@@ -20,7 +20,7 @@
     }
 
     &-name {
-      @include text-style(14, 400, #e0e0e0);
+      @include text-style(14, 400, $text-white);
     }
   }
 }

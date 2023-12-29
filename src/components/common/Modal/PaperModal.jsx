@@ -4,7 +4,7 @@ import styles from '@/components/common/Modal/Modal.module.scss';
 import classNames from 'classnames/bind';
 
 import { Button } from '@/components/common/Button';
-import { fontToEnglish, onClickOutside } from '@/utils';
+import { onClickOutside } from '@/utils';
 
 const cx = classNames.bind(styles);
 
@@ -43,12 +43,12 @@ export const PaperModal = ({
     return { __html: html };
   }
 
-  const fontClassName = fontToEnglish(messageData.relationship);
-
   return (
     <div className={cx('modal')} ref={modalRef}>
       <div
-        className={cx('modal-banner', `modal-banner-${backgroundColor}`)}
+        className={cx('modal-banner', {
+          [`modal-banner-${backgroundColor}`]: backgroundColor,
+        })}
         style={{
           backgroundImage: backgroundUrl ? `url(${backgroundUrl})` : '',
         }}
@@ -63,10 +63,7 @@ export const PaperModal = ({
         <div className={cx('modal-content-textbox')}>
           <strong>{messageData.sender}</strong>
           <div
-            className={cx(
-              'modal-content-textArea',
-              `modal-content-textArea-${fontClassName}`
-            )}
+            className={cx('modal-content-textArea')}
             dangerouslySetInnerHTML={createMarkup(messageData.content)}
           ></div>
         </div>

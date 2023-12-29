@@ -17,7 +17,7 @@ import { Button } from '@/components/common/Button';
 import { INITIAL_POST_RECIPIENTS_TYPE, IMPORT_IMAGES } from '@/stores';
 
 const cx = classNames.bind(styles);
-const { GO_BACK } = IMPORT_IMAGES;
+const { MOBILE_BACK } = IMPORT_IMAGES;
 
 export function CreatePage() {
   const inputRef = useRef(null);
@@ -90,7 +90,7 @@ export function CreatePage() {
           onClick={onClickBack}
           aria-label='뒤로가기 버튼'
         >
-          <img src={GO_BACK.URL} alt={GO_BACK.ALT} />
+          <img src={MOBILE_BACK.URL} alt={GO_BACK.ALT} />
         </button>
       </div>
       <main className={cx('form-wrapper')}>
