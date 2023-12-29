@@ -17,11 +17,11 @@ import 'react-quill/dist/quill.snow.css';
 
 import { Header } from '@/components/common/Header';
 import { Input } from '@/components/common/Input';
+import { Profile } from '@/components/Profile/Profile';
 import { Dropdown } from '@/components/common/Dropdown';
 import { Button, LinkButton } from '@/components/common/Button';
 
-import { PROFILE_EMOJI, RELATIONSHIP_LIST, IMPORT_IMAGES } from '@/stores';
-import { getRandomColor } from '@/utils';
+import { RELATIONSHIP_LIST, IMPORT_IMAGES } from '@/stores';
 
 const cx = classNames.bind(styles);
 
@@ -31,14 +31,9 @@ export function AddPaper() {
   const inputRef = useRef(null);
   const profileRef = useRef(null);
   const quillRef = useRef(null);
-  const profileInputRef = useRef(null);
-  const uploadCount = useRef(0);
 
   const [values, setValues] = useState(INITIAL_POST_MESSAGE_TYPE);
   const [isError, setIsError] = useState(INITIAL_POST_MESSAGE_ERROR);
-  const [randomColor, setRandomColor] = useState('#24262B');
-  const [currentProfile, setCurrentProfile] = useState(0);
-  const [isProfileLoading, setIsProfileLoading] = useState(false);
 
   const postApi = () =>
     api.post(`${ENDPOINT.RECIPIENTS}${id}/messages/`, values);
@@ -58,76 +53,6 @@ export function AddPaper() {
     setIsError((prevValues) => ({
       ...prevValues,
       [name]: !selectedValue ? true : false,
-    }));
-  };
-
-  const handleProfileChange = (e, profileId) => {
-    e.preventDefault();
-    setCurrentProfile(profileId);
-    const selectedValue = e.currentTarget.getAttribute('value');
-    const pickColor = getRandomColor();
-    setRandomColor(pickColor);
-
-    setValues((prevValues) => ({
-      ...prevValues,
-      profileImageURL: `${selectedValue}?color=${pickColor}`,
-    }));
-    setIsError((prevValues) => ({
-      ...prevValues,
-      profileImageURL: !selectedValue ? true : false,
-    }));
-  };
-
-  const handleUploadProfileChange = async (e) => {
-    setIsProfileLoading(true);
-    setCurrentProfile(0);
-    setRandomColor('#24262B');
-
-    const file = e.target.files[0];
-
-    if (file) {
-      const formData = new FormData();
-      formData.append('image', file);
-      try {
-        const response = await fetch(
-          'https://api.imgbb.com/1/upload?key=9b44d68d4291f77e1ddd2b63d2ce5b03',
-          {
-            method: 'POST',
-            body: formData,
-          }
-        );
-
-        if (response.ok) {
-          const data = await response.json();
-          const imageUrl = data.data.url;
-
-          setIsProfileLoading(false);
-          setValues((prevValues) => ({
-            ...prevValues,
-            profileImageURL: imageUrl,
-          }));
-          PROFILE_EMOJI.unshift({
-            id: `upload-${uploadCount.current++}`,
-            name: `upload-${uploadCount.current}`,
-            imgUrl: imageUrl,
-          });
-          setCurrentProfile(PROFILE_EMOJI[0].id);
-        } else {
-          setIsProfileLoading(false);
-          throw new Error('이미지를 업로드하는 데 실패했습니다.');
-        }
-      } catch (e) {
-        console.error('[API ERROR] NOT FOUND FETCH DATA', e);
-      } finally {
-        setIsProfileLoading(false);
-      }
-    } else {
-      setIsProfileLoading(false);
-    }
-
-    setIsError((prevValues) => ({
-      ...prevValues,
-      profileImageURL: !(file || values.profileImageURL) ? true : false,
     }));
   };
 
@@ -214,79 +139,13 @@ export function AddPaper() {
               }}
             />
           </fieldset>
-          <fieldset
-            className={cx('add-paper-profile', {
-              'add-paper-profile-error': isError.profileImageURL,
-            })}
-          >
-            <label>프로필 이미지</label>
-            <div className={cx('add-paper-profile-img')}>
-              <div
-                className={cx('add-paper-profile-img-wrapper')}
-                style={{ '--color': randomColor }}
-              >
-                {!values.profileImageURL ? (
-                  <img
-                    src={IMPORT_IMAGES.PROFILE.URL}
-                    alt={IMPORT_IMAGES.PROFILE.ALT}
-                  />
-                ) : (
-                  <img
-                    src={values.profileImageURL}
-                    alt='선택한 프로필 이미지'
-                  />
-                )}
-              </div>
-              <div className={cx('add-paper-profile-img-select')}>
-                <p>프로필 이미지를 선택해주세요!</p>
-                <ul>
-                  <li>
-                    <div
-                      className={cx('add-paper-profile-img-select-wrapper')}
-                      onClick={() => {
-                        profileInputRef.current.click();
-                      }}
-                    >
-                      {isProfileLoading ? (
-                        <div className={cx('loadingio-spinner')}>
-                          <div className={cx('ldio')}>
-                            <div></div>
-                          </div>
-                        </div>
-                      ) : (
-                        <span>
-                          <i className={cx('ic-plus')}></i>
-                        </span>
-                      )}
-                    </div>
-                    <input
-                      type='file'
-                      accept='.jpg, .png, .jpeg,'
-                      name='profile_img'
-                      onChange={handleUploadProfileChange}
-                      ref={profileInputRef}
-                    />
-                  </li>
-                  {PROFILE_EMOJI.map((item) => (
-                    <li key={item.id}>
-                      <button
-                        ref={profileRef}
-                        value={item.imgUrl}
-                        onClick={(e) => handleProfileChange(e, item.id)}
-                      >
-                        <img src={item.imgUrl} alt={item.alt} />
-                      </button>
-                      <div
-                        className={cx('gradient-box', {
-                          selected: currentProfile === item.id,
-                        })}
-                      ></div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </fieldset>
+          <Profile
+            values={values}
+            setValues={setValues}
+            isError={isError}
+            setIsError={setIsError}
+            profileRef={profileRef}
+          />
           <fieldset className={cx('add-paper-relationship')}>
             <label>상대와의 관계</label>
             <Dropdown
