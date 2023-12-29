@@ -90,7 +90,7 @@ export function CreatePage() {
           onClick={onClickBack}
           aria-label='뒤로가기 버튼'
         >
-          <img src={MOBILE_BACK.URL} alt={GO_BACK.ALT} />
+          <img src={MOBILE_BACK.URL} alt={MOBILE_BACK.ALT} />
         </button>
       </div>
       <main className={cx('form-wrapper')}>

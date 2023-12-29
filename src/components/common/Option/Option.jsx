@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import styles from './Option.module.scss';
 import classNames from 'classnames/bind';
 import { BACKGROUND_IMGURL } from '@/stores';
