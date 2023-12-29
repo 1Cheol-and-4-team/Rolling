@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import classNames from 'classnames/bind';
 import styles from './HomePage.module.scss';
@@ -30,6 +31,7 @@ export function HomePage() {
               gap: 0,
             }}
           />
+
           <div className={cx('button-area')}>
             <LinkButton path={ROUTER_PATH.LIST_PATH}>
               <Button variant='primary' size={100}>

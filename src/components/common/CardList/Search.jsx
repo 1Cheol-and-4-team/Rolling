@@ -1,10 +1,12 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 
 import { IMPORT_IMAGES } from '@/stores';
-
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import '@/components/common/Skeleton/skeleton.css';
 const cx = classNames.bind(styles);
 const {
   CARD_LIST: { LOGO_SYMBOL, SEARCH },
@@ -24,8 +26,13 @@ function Search({ setKeyword }) {
     event.preventDefault();
     setKeyword(value);
   };
-
-  return (
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setIsLoading(false);
+  }, 5000);
+  return isLoading ? (
+    <Skeleton className={cx('search', { active: isFocus })} />
+  ) : (
     <form onSubmit={handleSubmit} className={cx('search', { active: isFocus })}>
       <div className={cx('search-group')}>
         <img src={SEARCH.URL} alt={SEARCH.ALT} aria-hidden />

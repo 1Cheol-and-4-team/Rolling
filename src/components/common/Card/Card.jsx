@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { api, ENDPOINT } from '@/api';
 import { useAsync } from '@/hooks/useAsync';
@@ -13,6 +13,9 @@ import { ConfirmModal } from '@/components/common/ConfirmModal';
 import { Button, IconButton } from '@/components/common/Button';
 import { formatDate, getDateDiff } from '@/utils';
 
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import '@/components/common/Skeleton/skeleton.css';
 const cx = classNames.bind(styles);
 
 export function Card({
@@ -76,8 +79,13 @@ export function Card({
       console.error('[API ERROR]', e);
     }
   };
-
-  return (
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setIsLoading(false);
+  }, 5000);
+  return isLoading ? (
+    <Skeleton className={cx('card')} />
+  ) : (
     <>
       <div className={cx('card')} onClick={handleModalOpen}>
         <header className={cx('card-header')}>

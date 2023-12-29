@@ -31,8 +31,9 @@ export function ProfileImg({ id, recentMessages }) {
     return null;
     // 또는 오류 처리를 위한 다른 JSX 코드를 반환할 수도 있습니다.
   }
+
   return (
-    <div className={cx('wrap')}>
+    <div>
       {recentMessages[0] && <img src={recentMessages[0].profileImageURL} />}
       {recentMessages[1] && (
         <img className={cx('img1')} src={recentMessages[1].profileImageURL} />

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from '@/pages/Detail/Detail.module.scss';
 
@@ -6,6 +7,10 @@ import { Card } from '@/components/common/Card';
 
 import { relationshipToKorean } from '@/utils';
 import { IMPORT_IMAGES } from '@/stores';
+
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import '@/components/common/Skeleton/skeleton.css';
 
 const cx = classNames.bind(styles);
 const { EMPTY_CARD } = IMPORT_IMAGES;
@@ -39,6 +44,11 @@ export const GridLayout = ({
           (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
         );
   };
+
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setIsLoading(true);
+  }, 5000);
 
   return (
     <>
