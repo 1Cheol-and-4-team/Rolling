@@ -1,6 +1,7 @@
+import { BadgeEmoji } from '@/components/common/Badge';
+
 import classNames from 'classnames/bind';
 import styles from './CardList.module.scss';
-import { BadgeEmoji } from '@/components/common/Badge';
 
 const cx = classNames.bind(styles);
 
@@ -23,7 +24,9 @@ export function CardList(data) {
           ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImageURL})`
           : '',
       }}
-      className={cx('card-list', `card-list-${backgroundColor}`)}
+      className={cx('card-list', {
+        [`card-list-${backgroundColor}`]: backgroundColor,
+      })}
     >
       <div className={cx('card-list-content')}>
         <h1

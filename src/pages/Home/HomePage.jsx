@@ -1,11 +1,13 @@
 import { Helmet } from 'react-helmet';
-import classNames from 'classnames/bind';
-import styles from './HomePage.module.scss';
 
 import { HomeCard } from '@/pages/Home';
 import { Header } from '@/components/common/Header';
 import { LinkButton, Button } from '@/components/common/Button';
+
 import { ROUTER_PATH, CONTENT_1, CONTENT_2 } from '@/stores';
+
+import styles from './HomePage.module.scss';
+import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
@@ -23,7 +25,7 @@ export function HomePage() {
           <HomeCard
             content={CONTENT_2}
             style={{
-              '--reverse': 'row-reverse',
+              'flex-direction': 'row-reverse',
               paddingBottom: 0,
               '--end': 'flex-end',
               '--padding': `4.8rem`,

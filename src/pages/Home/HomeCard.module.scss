@@ -14,10 +14,7 @@
 }
 
 .home-card {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  flex-direction: var(--reverse);
+  @include flexbox(end, start);
   width: 116rem;
   height: 32.4rem;
   padding: 6rem 0;

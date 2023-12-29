@@ -1,15 +1,16 @@
 import { useEffect, useMemo, useState } from 'react';
+import { Helmet } from 'react-helmet';
 
 import { api, ENDPOINT } from '@/api';
 import { useAsync } from '@/hooks/useAsync';
-import classNames from 'classnames/bind';
-import styles from './PaperList.module.scss';
-import { Helmet } from 'react-helmet';
 
 import { Header } from '@/components/common/Header';
 import { Button, LinkButton } from '@/components/common/Button';
-import PaperListCards from '../../components/common/CardList/PaperListCards';
-import Search from '@/components/common/CardList/Search';
+import { PaperListCards } from '@/components/common/CardList';
+import { Search } from '@/components/common/CardList';
+
+import styles from './PaperList.module.scss';
+import classNames from 'classnames/bind';
 
 import { INITIAL_RECIPIENTS_TYPE, ROUTER_PATH, IMPORT_IMAGES } from '@/stores';
 
@@ -17,7 +18,7 @@ const cx = classNames.bind(styles);
 const { EMPTY_CARD } = IMPORT_IMAGES;
 
 export function PaperList() {
-  const [isKeyword, setKeyword] = useState('');
+  const [isKeyword, setIsKeyword] = useState('');
 
   const {
     data: { results },
@@ -65,7 +66,7 @@ export function PaperList() {
         <div className={cx('paper-list-container')}>
           <div className={cx('paper-list-header')}>
             <h1 className={cx('paper-list-header-title')}>ROLLING BOARD</h1>
-            <Search setKeyword={setKeyword} />
+            <Search setIsKeyword={setIsKeyword} />
           </div>
           <section className={cx('list-wrapper')}>
             {isKeyword ? (
