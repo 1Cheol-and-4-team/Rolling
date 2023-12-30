@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
-import { Button, LinkButton, EditButton } from '@/components/common/Button';
-import { ROLLING_LOGO } from '@/components/common/Header/constant';
 
 import classNames from 'classnames/bind';
 import styles from '@/components/common/Header/Header.module.scss';
+
+import { Button, LinkButton, EditButton } from '@/components/common/Button';
 import { IMPORT_IMAGES, ROUTER_PATH } from '@/stores';
 
 const cx = classNames.bind(styles);
-const { EDIT } = IMPORT_IMAGES;
+const { ROLLING_LOGO, EDIT } = IMPORT_IMAGES;
 const { LANDING_PATH, POST_PATH } = ROUTER_PATH;
 
 export const Header = ({
@@ -21,7 +21,7 @@ export const Header = ({
       <div className={cx('header-container')}>
         <h1 className={cx('logo')}>
           <LinkButton path={LANDING_PATH}>
-            <img src={ROLLING_LOGO.logo} alt={ROLLING_LOGO.alt} />
+            <img src={ROLLING_LOGO.URL} alt={ROLLING_LOGO.ALT} />
           </LinkButton>
         </h1>
         {isLanding && (
@@ -54,4 +54,6 @@ export const Header = ({
 
 Header.defaultProps = {
   isLanding: false,
+  isDetail: false,
+  isEdit: false,
 };

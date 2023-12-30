@@ -41,7 +41,7 @@
       @include pos-center;
       width: 3rem;
       height: 3rem;
-      border: 0.4rem solid #999999;
+      border: 0.4rem solid $banner-text;
       border-top-color: transparent;
       border-radius: 50%;
     }
@@ -86,8 +86,7 @@
     background-color: $gray-500;
 
     i {
-      font-size: 2.4rem;
-      color: $white;
+      @include icon-style(24, $white);
     }
   }
 }

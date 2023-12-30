@@ -16,9 +16,9 @@ export const INITIAL_POST_MESSAGE_TYPE = {
 };
 
 export const INITIAL_POST_MESSAGE_ERROR = {
-  sender: '',
-  profileImageURL: '',
-  content: '',
+  sender: false,
+  profileImageURL: false,
+  content: false,
 };
 
 export const INITIAL_RECIPIENTS_TYPE = {

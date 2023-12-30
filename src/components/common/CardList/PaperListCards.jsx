@@ -1,13 +1,15 @@
-import { CardList } from '../CardList';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import { CardList } from '@/components/common/CardList';
 import { IconButton } from '@/components/common/Button';
+
 import styles from './PaperListCards.module.scss';
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
-function PaperListCards({ data }) {
+export function PaperListCards({ data }) {
   const [scroll, setScroll] = useState(0);
   const [currentCardIndex, setcurrentCardIndex] = useState(4);
   const dataCount = data.length;
@@ -40,7 +42,7 @@ function PaperListCards({ data }) {
           )}
           <div
             className={cx('cardList-card')}
-            style={{ '--scroll': `${scroll}rem` }}
+            style={{ transform: `translateX(${scroll}rem)` }}
           >
             {data.map((item) => (
               <Link to={`/post/${item.id}`} key={item.id}>
@@ -63,5 +65,3 @@ function PaperListCards({ data }) {
     </>
   );
 }
-
-export default PaperListCards;

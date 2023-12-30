@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
@@ -12,11 +12,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Header } from '@/components/common/Header';
 import { Banner, Count, Emoji, MemberList } from '@/components/common/SideBar';
 import { GridLayout } from '@/pages/Detail/GridLayout';
-import { Button, MixButton } from '@/components/common/Button';
+
 import { Dropdown } from '@/components/common/Dropdown';
-import { LinkButton, EditButton } from '@/components/common/Button';
 import { Share } from '@/components/Share';
 import { Overlay, MyModal } from '@/components/common/Modal';
+import {
+  Button,
+  MixButton,
+  LinkButton,
+  EditButton,
+} from '@/components/common/Button';
 
 import {
   INITIAL_RECIPIENTS_TYPE,
@@ -40,14 +45,14 @@ export const Detail = ({ isEdit = false }) => {
   const [isModal, setIsModal] = useState(false);
 
   // Get Recipients Info (backgroundColor/backgroundImageURL/reactionCount)
-  const { data, execute: getRecipientApi } = useAsync(
+  const { data: recipientData, execute: getRecipientApi } = useAsync(
     () => api.get(`${ENDPOINT.RECIPIENTS}${id}/`),
     INITIAL_RECIPIENTS_TYPE
   );
 
   // Get Messages Info (message.length/sender)
   const {
-    data: { results },
+    data: { results: messageData },
     execute: getMessagesApi,
   } = useAsync(
     () =>
@@ -57,8 +62,8 @@ export const Detail = ({ isEdit = false }) => {
     INITIAL_MESSAGE_TYPE
   );
 
-  const backgroundUrl = data?.backgroundImageURL;
-  const backgroundColor = data?.backgroundColor;
+  const backgroundUrl = recipientData?.backgroundImageURL;
+  const backgroundColor = recipientData?.backgroundColor;
 
   const handleActiveTabClick = (tabId, tabName) => {
     setIsActive(tabId);
@@ -92,7 +97,7 @@ export const Detail = ({ isEdit = false }) => {
     setIsModal(false);
   };
 
-  const userName = data.name;
+  const userName = recipientData.name;
 
   return (
     <div className={cx('detail')}>
@@ -117,7 +122,9 @@ export const Detail = ({ isEdit = false }) => {
               <div className={cx('sidebar-content')}>
                 <div className={cx('sidebar-header')}>
                   <div className={cx('sidebar-nav')}>
-                    <h2 className={cx('sidebar-title')}>{data.name}</h2>
+                    <h2 className={cx('sidebar-title')}>
+                      {recipientData.name}
+                    </h2>
                     {isEdit ? (
                       <LinkButton path={`/post/${id}`}>
                         <EditButton
@@ -132,15 +139,19 @@ export const Detail = ({ isEdit = false }) => {
                       </LinkButton>
                     )}
                   </div>
-                  <Count id={id} countData={data} messageData={results} />
+                  <Count
+                    id={id}
+                    recipientData={recipientData}
+                    messageData={messageData}
+                  />
                 </div>
                 <Emoji
                   id={id}
-                  getEmojiApi={getRecipientApi}
-                  getReactionCount={data.reactionCount}
+                  getRecipientApi={getRecipientApi}
+                  getReactionCount={recipientData.reactionCount}
                   isDesktopHide={false}
                 />
-                <MemberList messageData={results} />
+                <MemberList messageData={messageData} />
               </div>
               <Banner />
             </aside>
@@ -148,12 +159,12 @@ export const Detail = ({ isEdit = false }) => {
           <li className={cx('md-only')}>
             <aside className={cx('sidebar')}>
               <div className={cx('sidebar-content')}>
-                <h2 className={cx('sidebar-title')}>{data.name}</h2>
+                <h2 className={cx('sidebar-title')}>{recipientData.name}</h2>
                 <div className={cx('sidebar-info')}>
                   <Emoji
                     id={id}
-                    getEmojiApi={getRecipientApi}
-                    getReactionCount={data.reactionCount}
+                    getRecipientApi={getRecipientApi}
+                    getReactionCount={recipientData.reactionCount}
                     isDesktopHide={true}
                   />
                 </div>
@@ -199,10 +210,9 @@ export const Detail = ({ isEdit = false }) => {
                           onClick={() =>
                             handleActiveTabClick(item.id, item.option)
                           }
-                          className={cx(
-                            'tab-list-item',
-                            isActive === item.id && 'tab-active'
-                          )}
+                          className={cx('tab-list-item', {
+                            'tab-active': isActive === item.id,
+                          })}
                         >
                           <button>{item.option}</button>
                         </li>
@@ -236,7 +246,7 @@ export const Detail = ({ isEdit = false }) => {
                   backgroundUrl={backgroundUrl}
                   backgroundColor={backgroundColor}
                   getMessagesApi={getMessagesApi}
-                  messageData={results}
+                  messageData={messageData}
                 />
               </div>
             </div>
@@ -249,10 +259,9 @@ export const Detail = ({ isEdit = false }) => {
                     <li
                       key={item.id}
                       onClick={() => handleActiveTabClick(item.id, item.option)}
-                      className={cx(
-                        'tab-list-item',
-                        isActive === item.id && 'tab-active'
-                      )}
+                      className={cx('tab-list-item', {
+                        'tab-active': isActive === item.id,
+                      })}
                     >
                       <button>{item.option}</button>
                     </li>
@@ -306,6 +315,7 @@ export const Detail = ({ isEdit = false }) => {
                         </div>
                       </div>
                     </div>
+
                     <GridLayout
                       isEdit={isEdit}
                       id={id}
@@ -314,7 +324,7 @@ export const Detail = ({ isEdit = false }) => {
                       backgroundUrl={backgroundUrl}
                       backgroundColor={backgroundColor}
                       getMessagesApi={getMessagesApi}
-                      messageData={results}
+                      messageData={messageData}
                     />
                   </div>
                 </main>

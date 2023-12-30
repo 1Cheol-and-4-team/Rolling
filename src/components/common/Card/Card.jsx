@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { api, ENDPOINT } from '@/api';
 import { useAsync } from '@/hooks/useAsync';
-import { INITIAL_RECIPIENTS_TYPE, IMPORT_IMAGES } from '@/stores';
 
 import classNames from 'classnames/bind';
 import styles from './Card.module.scss';
@@ -12,7 +11,11 @@ import { Overlay, PaperModal, MyModal } from '@/components/common/Modal';
 import { Button, IconButton } from '@/components/common/Button';
 
 import { formatDate, getDateDiff } from '@/utils';
+import { INITIAL_RECIPIENTS_TYPE, IMPORT_IMAGES } from '@/stores';
 
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import '@/components/common/Skeleton/skeleton.css';
 const cx = classNames.bind(styles);
 
 export function Card({
@@ -29,6 +32,8 @@ export function Card({
 }) {
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
   const { CONFRIM_MODAL } = IMPORT_IMAGES;
 
   const { data } = useAsync(
@@ -42,6 +47,11 @@ export function Card({
   const hexCodeRegex = /[?&]color=([^&]+)/;
   const match = profileImageURL.match(hexCodeRegex);
   const randomColor = match ? match[1] : '#24262B';
+
+  useEffect(() => {
+    const loadingTimer = setTimeout(() => setIsLoading(false), 1500);
+    return () => clearTimeout(loadingTimer);
+  }, []);
 
   function createMarkup(html) {
     return { __html: html };
@@ -77,7 +87,9 @@ export function Card({
     }
   };
 
-  return (
+  return isLoading ? (
+    <Skeleton className={cx('card')} />
+  ) : (
     <>
       <div className={cx('card')} onClick={handleModalOpen}>
         <header className={cx('card-header')}>

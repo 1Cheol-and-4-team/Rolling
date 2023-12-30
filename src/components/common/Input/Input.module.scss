@@ -1,8 +1,9 @@
 input {
   position: relative;
 }
+
 .input-base {
-  @include text-style(16, normal, $gray-500);
+  @include text-style(16, 500, $gray-500);
 
   width: 100%;
   padding: 1.2rem 1.6rem;
@@ -15,18 +16,16 @@ input {
     color: $gray-500;
   }
 
-  &:not(:error):focus {
-    color: $gray-900;
-    border: 0.1rem solid $gray-500;
+  &:focus {
+    border: 0.1rem solid $purple;
   }
 
-  &:not(:error):active {
-    color: $gray-900;
-    border: 0.1rem solid $gray-700;
+  &:active {
+    border: 0.1rem solid $purple;
   }
 
-  &:not(:disabled):not(:error):hover {
-    border: 0.1rem solid $gray-500;
+  &:not(:disabled):hover {
+    border: 0.1rem solid $purple;
   }
 
   &:disabled {
@@ -38,18 +37,12 @@ input {
       color: $gray-400;
     }
   }
-}
 
-.input-state {
-  &-error {
+  &.input-state-error {
     border: 0.1rem solid $system-error;
+
+    &:hover {
+      border: 0.1rem solid $system-error;
+    }
   }
 }
-
-// .error-message {
-//   @include text-style(16, normal, $system-error);
-// }
-
-// .error-message-hidden {
-//   display: none;
-// }

@@ -48,19 +48,19 @@
       background-position: 0 -6rem;
     }
     &-green {
-      background-image: url('@/assets/images/background-blue.svg');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: 0 -6rem;
-    }
-    &-beige {
       background-image: url('@/assets/images/background-green.svg');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: 0 -6rem;
     }
-    &-blue {
+    &-beige {
       background-image: url('@/assets/images/background-orange.svg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: 0 -6rem;
+    }
+    &-blue {
+      background-image: url('@/assets/images/background-blue.svg');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: 0 -6rem;
@@ -106,6 +106,7 @@
         display: block;
         padding: 6.4rem 0 1.6rem;
         text-align: center;
+        word-break: keep-all;
       }
     }
 
@@ -135,7 +136,6 @@
     }
   }
 
-  // dialog
   &.my-modal {
     min-width: 33rem;
     max-width: 36rem;

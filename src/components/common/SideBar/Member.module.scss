@@ -4,6 +4,7 @@
   &-profile {
     @include flexbox();
     gap: 1.2rem;
+    flex-shrink: 0;
 
     &-img {
       @include flexbox();
@@ -15,12 +16,15 @@
 
       img {
         width: 100%;
+        height: 100%;
         object-fit: cover;
       }
     }
 
     &-name {
-      @include text-style(14, 400, #e0e0e0);
+      @include text-style(14, 400, $text-white);
+      max-width: 13rem;
+      line-height: 1.8rem;
     }
   }
 }

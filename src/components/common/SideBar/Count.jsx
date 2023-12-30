@@ -1,10 +1,10 @@
-import styles from './Count.module.scss';
 import classNames from 'classnames/bind';
+import styles from '@/components/common/SideBar/Count.module.scss';
 
 const cx = classNames.bind(styles);
 
-export function Count({ countData, messageData }) {
-  const { reactionCount } = countData;
+export function Count({ recipientData, messageData }) {
+  const { reactionCount } = recipientData;
 
   const initialCountInfo = () => {
     const memberCount = new Set(messageData.map((item) => item.sender)).size;

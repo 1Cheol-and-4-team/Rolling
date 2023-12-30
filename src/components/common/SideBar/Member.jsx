@@ -1,6 +1,13 @@
-import { Badge } from '@/components/common/Badge';
-import styles from './Member.module.scss';
+import { useState, useEffect } from 'react';
+
 import classNames from 'classnames/bind';
+import styles from '@/components/common/SideBar/Member.module.scss';
+
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import '@/components/common/Skeleton/skeleton.css';
+
+import { Badge } from '@/components/common/Badge';
 
 const cx = classNames.bind(styles);
 
@@ -9,19 +16,31 @@ export function Member({ image, member, relationship }) {
   const match = image?.match(hexCodeRegex);
   const randomColor = match ? match[1] : '#24262B';
 
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadingTimer = setTimeout(() => setIsLoading(false), 1500);
+    return () => clearTimeout(loadingTimer);
+  }, []);
+
   return (
     <div className={cx('member')}>
-      <div className={cx('member-profile')}>
-        <div
-          className={cx('member-profile-img')}
-          style={{ '--color': randomColor }}
-        >
-          <img src={image} alt='글쓴이 프로필 사진' />
+      {isLoading ? (
+        <Skeleton className={cx('member-profile-img')} />
+      ) : (
+        <div className={cx('member-profile')}>
+          <div
+            className={cx('member-profile-img')}
+            style={{ '--color': randomColor }}
+          >
+            <img src={image} alt='글쓴이 프로필 사진' />
+          </div>
+          <h1 className={cx('member-profile-name')}>
+            <span>{member}</span>
+          </h1>
         </div>
-        <h1 className={cx('member-profile-name')}>
-          <span>{member}</span>
-        </h1>
-      </div>
+      )}
+
       <Badge relationship={relationship} type='sidebar' />
     </div>
   );

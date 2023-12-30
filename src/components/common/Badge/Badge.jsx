@@ -1,17 +1,15 @@
-import styles from './Badge.module.scss';
 import classNames from 'classnames/bind';
+import styles from './Badge.module.scss';
 import { relationshipToEnglish } from '@/utils';
 
 const cx = classNames.bind(styles);
 
-export function Badge({ relationship, type = '' }) {
+export function Badge({ relationship, type }) {
   return (
     <div
-      className={cx(
-        'badge',
-        `badge-${relationshipToEnglish(relationship)}`,
-        type && `badge-type-${type}`
-      )}
+      className={cx('badge', `badge-${relationshipToEnglish(relationship)}`, {
+        [`badge-type-${type}`]: type,
+      })}
     >
       <span>{relationshipToEnglish(relationship)}</span>
     </div>
