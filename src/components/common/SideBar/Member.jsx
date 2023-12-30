@@ -1,17 +1,21 @@
 import { useState, useEffect } from 'react';
-import { Badge } from '@/components/common/Badge';
-import styles from './Member.module.scss';
+
 import classNames from 'classnames/bind';
+import styles from '@/components/common/SideBar/Member.module.scss';
 
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import '@/components/common/Skeleton/skeleton.css';
+
+import { Badge } from '@/components/common/Badge';
+
 const cx = classNames.bind(styles);
 
 export function Member({ image, member, relationship }) {
   const hexCodeRegex = /[?&]color=([^&]+)/;
   const match = image?.match(hexCodeRegex);
   const randomColor = match ? match[1] : '#24262B';
+
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

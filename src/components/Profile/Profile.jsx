@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 
-import styles from './Profile.module.scss';
 import classNames from 'classnames/bind';
+import styles from '@/components/Profile/Profile.module.scss';
 import { v4 as uuidv4 } from 'uuid';
 
 import Skeleton from 'react-loading-skeleton';

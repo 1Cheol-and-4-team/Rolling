@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 
-import styles from './Option.module.scss';
+import styles from '@/components/common/Option/Option.module.scss';
 import classNames from 'classnames/bind';
 import { v4 as uuidv4 } from 'uuid';
 

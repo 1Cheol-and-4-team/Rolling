@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import styles from './Count.module.scss';
+import styles from '@/components/common/SideBar/Count.module.scss';
 
 const cx = classNames.bind(styles);
 

@@ -1,8 +1,9 @@
 input {
   position: relative;
 }
+
 .input-base {
-  @include text-style(16, normal, $gray-500);
+  @include text-style(16, 500, $gray-500);
 
   width: 100%;
   padding: 1.2rem 1.6rem;
@@ -16,17 +17,15 @@ input {
   }
 
   &:focus {
-    color: $text-white;
-    border: 0.1rem solid $gray-500;
+    border: 0.1rem solid $purple;
   }
 
   &:active {
-    color: $text-white;
-    border: 0.1rem solid $gray-700;
+    border: 0.1rem solid $purple;
   }
 
   &:not(:disabled):hover {
-    border: 0.1rem solid $gray-500;
+    border: 0.1rem solid $purple;
   }
 
   &:disabled {
@@ -38,21 +37,12 @@ input {
       color: $gray-400;
     }
   }
-}
 
-.input-state {
-  &-error {
+  &.input-state-error {
     border: 0.1rem solid $system-error;
-    &:focus {
-      border: none;
-    }
-
-    &:active {
-      border: none;
-    }
 
     &:hover {
-      border: none;
+      border: 0.1rem solid $system-error;
     }
   }
 }

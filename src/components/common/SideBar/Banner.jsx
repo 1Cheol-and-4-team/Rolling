@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import sytles from '@/components/common/SideBar/Banner.module.scss';
 
 import { IMPORT_IMAGES } from '@/stores';
+
 const {
   INVITE_BANNER: { LOGO_SYMBOL, CLAP },
 } = IMPORT_IMAGES;

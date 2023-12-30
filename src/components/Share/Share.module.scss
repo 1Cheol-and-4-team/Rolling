@@ -8,10 +8,9 @@
   }
 
   .share-list {
+    @include pos-center-x();
     position: absolute;
     top: 4.8rem;
-    left: 50%;
-    transform: translateX(-50%);
     z-index: $dropdown-level;
 
     &-item {

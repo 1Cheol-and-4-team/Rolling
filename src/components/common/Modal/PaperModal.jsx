@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
-import styles from '@/components/common/Modal/Modal.module.scss';
 import classNames from 'classnames/bind';
+import styles from '@/components/common/Modal/Modal.module.scss';
 
 import { Button } from '@/components/common/Button';
 import { onClickOutside } from '@/utils';
