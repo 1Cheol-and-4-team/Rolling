@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 
 import styles from './Profile.module.scss';
 import classNames from 'classnames/bind';
+import { v4 as uuidv4 } from 'uuid';
 
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -20,12 +21,12 @@ export function Profile({
   profileRef,
 }) {
   const profileInputRef = useRef(null);
-  const uploadCount = useRef(0);
 
   const [randomColor, setRandomColor] = useState('#24262B');
   const [currentProfile, setCurrentProfile] = useState(0);
   const [isProfileLoading, setIsProfileLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [emojiList, setEmojiList] = useState(PROFILE_EMOJI);
 
   useEffect(() => {
     const loadingTimer = setTimeout(() => setIsLoading(false), 1500);
@@ -57,6 +58,7 @@ export function Profile({
     setRandomColor('#24262B');
 
     const file = e.target.files[0];
+    const fileId = uuidv4();
 
     if (!file) {
       setIsProfileLoading(false);
@@ -79,12 +81,15 @@ export function Profile({
           ...prevValues,
           profileImageURL: imageUrl,
         }));
-        PROFILE_EMOJI.unshift({
-          id: `upload-${uploadCount.current++}`,
-          name: `upload-${uploadCount.current}`,
-          imgUrl: imageUrl,
-        });
-        setCurrentProfile(PROFILE_EMOJI[0].id);
+        setEmojiList([
+          {
+            id: fileId,
+            alt: 'uploaded profile',
+            imgUrl: imageUrl,
+          },
+          ...emojiList,
+        ]);
+        setCurrentProfile(fileId);
       } else {
         setIsProfileLoading(false);
         throw new Error('이미지를 업로드하는 데 실패했습니다.');
@@ -160,7 +165,7 @@ export function Profile({
                 ref={profileInputRef}
               />
             </li>
-            {PROFILE_EMOJI.map((item) => (
+            {emojiList.map((item) => (
               <li key={item.id}>
                 <button
                   ref={profileRef}

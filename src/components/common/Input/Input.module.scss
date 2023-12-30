@@ -15,17 +15,17 @@ input {
     color: $gray-500;
   }
 
-  &:not(:error):focus {
-    color: $gray-900;
+  &:focus {
+    color: $text-white;
     border: 0.1rem solid $gray-500;
   }
 
-  &:not(:error):active {
-    color: $gray-900;
+  &:active {
+    color: $text-white;
     border: 0.1rem solid $gray-700;
   }
 
-  &:not(:disabled):not(:error):hover {
+  &:not(:disabled):hover {
     border: 0.1rem solid $gray-500;
   }
 
@@ -43,5 +43,16 @@ input {
 .input-state {
   &-error {
     border: 0.1rem solid $system-error;
+    &:focus {
+      border: none;
+    }
+
+    &:active {
+      border: none;
+    }
+
+    &:hover {
+      border: none;
+    }
   }
 }

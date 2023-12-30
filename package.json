@@ -23,7 +23,8 @@
     "react-native-toast-message": "^2.2.0",
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.20.1",
-    "react-toastify": "^9.1.3"
+    "react-toastify": "^9.1.3",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { api, ENDPOINT } from '@/api';
@@ -34,6 +34,8 @@ export function AddPaper() {
 
   const [values, setValues] = useState(INITIAL_POST_MESSAGE_TYPE);
   const [isError, setIsError] = useState(INITIAL_POST_MESSAGE_ERROR);
+
+  const isEmptyValues = Object.values(values).some((value) => value === '');
 
   const postApi = () =>
     api.post(`${ENDPOINT.RECIPIENTS}${id}/messages/`, values);
@@ -87,7 +89,7 @@ export function AddPaper() {
     e.preventDefault();
     handleValueValid('submit');
 
-    if (Object.values(values).some((value) => value === '')) {
+    if (isEmptyValues) {
       !values.content && quillRef.current.focus();
       !values.profileImageURL && profileRef.current.focus();
       !values.sender && inputRef.current.focus();
