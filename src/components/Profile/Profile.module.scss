@@ -170,12 +170,6 @@
             z-index: $behind-gradient-level;
           }
 
-          @include responsive('T') {
-            &:hover .gradient-box {
-              visibility: hidden;
-            }
-          }
-
           button {
             width: 5.6rem;
             height: 5.6rem;
